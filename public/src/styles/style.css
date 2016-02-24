@@ -3,15 +3,41 @@ html, body {
   margin: 0;
   padding: 0;
 }
-#map {
+#content {
+  height:100%;
+  width:100%;
+  position:relative;
+}
+#loading {
+  position: absolute;
+  width: 80%;
   height: 80%;
+  top: 45%;
+  left: 40%;
+}
+
+#map {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 15%;
+  left: 7px;
 }
 .filterBox {
+  position: absolute;
+  width: 15%;
+  right:7px;
+  top: 15%;
   background-color: grey;
 }
 .filter {
   display: flex;
   flex-direction: column;
+}
+.filterSelection {
+  position: absolute;
+  width: 100%;
+  background-color: grey;
 }
 .filterOn {
   background-color: yellow;

@@ -1,3 +1,5 @@
+var entireDataFile;
+
 var ClientUI = React.createClass({
   getInitialState: function() {
     return ({ filters: [
@@ -22,14 +24,13 @@ var ClientUI = React.createClass({
   
   render: function() {
     return (
-      <div>
+      <div id='UI'>
         <Map />
         <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
       </div>
       );
   }
 });
-
 var Map = React.createClass({
 	componentDidMount(){
 		this.componentDidUpdate();  // Makes sure we call update on first mount
@@ -50,15 +51,14 @@ var Map = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="map-holder">
-				<p>Loading...</p>
+			<div id="map-holder">
+				<p id='loading'>Loading map...</p>
 				<div id="map"></div>
 			</div>
 		);
 	}
 
 });
-
 var FilterBox = React.createClass({
   render: function() {
     //console.log("Rendering FilterBox, props:",this.props.filters);
@@ -73,7 +73,6 @@ var FilterBox = React.createClass({
     );
   }
 });
-
 var Filter = React.createClass({
   getInitialState: function() {
     return { showItems: false
@@ -108,12 +107,11 @@ var Filter = React.createClass({
     return (
       <div className='filter' filter={this.props.name} >
         <input placeholder={this.props.name} onClick={this._toggleShow} onChange={this._search} data-filter={this.props.name} />
-        {myItems}
+        <div className='filterSelection'> {myItems} </div>
       </div>
     );
   }
 });
-
 var FilterItem = React.createClass({
   getDefaultProps: function() {
     return { selected:true };
@@ -133,7 +131,29 @@ var FilterItem = React.createClass({
   }
 });
 
+
+function pullData(x)
+{
+  fileReturn = new XMLHttpRequest();
+  fileReturn.onreadystatechange = function()
+  {
+    if (fileReturn.readyState==4 && fileReturn.status==200)
+    {
+      entireDataFile = fileReturn.responseText;
+      lines = fileReturn.responseText.split("\n");
+      callback(lines);
+    }
+  }
+  fileReturn.open("GET", x, true);
+  fileReturn.send();
+}
+
+pullData('./json_data/lat_long_20160223.csv');
+//React to load after the initial data file is received
+console.log(entireDataFile);
 ReactDOM.render(
   <ClientUI />,
   document.getElementById('content')
 );
+
+

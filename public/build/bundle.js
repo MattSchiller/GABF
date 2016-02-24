@@ -74,15 +74,35 @@
 	  },
 
 	  render: function render() {
-	    return (//<Map />
-	      React.createElement('div', null, React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }))
-	    );
+	    return React.createElement('div', { id: 'UI' }, React.createElement(Map, null), React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }));
 	  }
 	});
-	/*
-	var Map = React.creatClass({
-	  
-	})*/
+
+	var Map = React.createClass({
+	  displayName: 'Map',
+	  componentDidMount: function componentDidMount() {
+	    this.componentDidUpdate(); // Makes sure we call update on first mount
+	  },
+	  componentDidUpdate: function componentDidUpdate() {
+	    var map = new GMaps({
+	      div: '#map',
+	      lat: -12.043333,
+	      lng: -77.028333
+	    });
+
+	    // Adding a marker to the location we are showing
+	    /*
+	    map.addMarker({
+	    	lat: this.props.lat,
+	    	lng: this.props.lng
+	    });*/
+	  },
+
+	  render: function render() {
+	    return React.createElement('div', { id: 'map-holder' }, React.createElement('p', { id: 'loading' }, 'Loading map...'), React.createElement('div', { id: 'map' }));
+	  }
+
+	});
 
 	var FilterBox = React.createClass({
 	  displayName: 'FilterBox',
@@ -128,7 +148,7 @@
 	        if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase())) return React.createElement(FilterItem, { key: i, value: value[0], selected: value[1], name: this.props.name, notify: this.props.notify });
 	      }.bind(this));
 	    }
-	    return React.createElement('div', { className: 'filter', filter: this.props.name }, React.createElement('input', { placeholder: this.props.name, onClick: this._toggleShow, onChange: this._search, 'data-filter': this.props.name }), myItems);
+	    return React.createElement('div', { className: 'filter', filter: this.props.name }, React.createElement('input', { placeholder: this.props.name, onClick: this._toggleShow, onChange: this._search, 'data-filter': this.props.name }), React.createElement('div', { className: 'filterSelection' }, ' ', myItems, ' '));
 	  }
 	});
 
@@ -138,9 +158,6 @@
 	  getDefaultProps: function getDefaultProps() {
 	    return { selected: true };
 	  },
-	  _haltBlur: function _haltBlur(e) {
-	    e.stopPropagation();
-	  },
 	  _handleSelection: function _handleSelection(e) {
 	    console.log('Toggling selected for', this.props.name, ':', this.props.value);
 	    this.props.notify(this.props.name, this.props.value);
@@ -148,7 +165,7 @@
 	  render: function render() {
 	    var selectionClass = '';
 	    if (this.props.selected) selectionClass = 'filterOn';
-	    return React.createElement('div', { onClick: this._handleSelection, className: selectionClass, onBlur: this._haltBlur, 'data-filter': this.props.name }, this.props.value);
+	    return React.createElement('div', { onClick: this._handleSelection, className: selectionClass, 'data-filter': this.props.name }, this.props.value);
 	  }
 	});
 

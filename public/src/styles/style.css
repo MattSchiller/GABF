@@ -1,0 +1,18 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 80%;
+}
+.filterBox {
+  background-color: grey;
+}
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+.filterOn {
+  background-color: yellow;
+}

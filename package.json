@@ -1,5 +1,5 @@
 {
-  "name": "ratscrew",
+  "name": "GABF",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Matt Schiller",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.5.1",
@@ -18,17 +18,7 @@
     "express": "^4.13.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "socket.io": "^1.4.4",
     "webpack": "^1.12.13"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-minify-css": "^1.2.3",
-    "gulp-react": "^3.1.0",
-    "socket.io-client": "^1.4.5"
   },
   "babel": {
     "presets": [

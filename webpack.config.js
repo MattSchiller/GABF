@@ -2,10 +2,10 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './src/scripts/main'
+    './public/src/scripts/main'
   ],
   output: {
-    path: __dirname + '/build',
+    path: __dirname + '/public/build',
     filename: 'bundle.js'
   },
   module: {
@@ -13,7 +13,7 @@ module.exports = {
       {
         test:/\.js?$/,
         loaders: ['babel-loader'],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.jsx?$/,

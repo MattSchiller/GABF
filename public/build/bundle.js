@@ -74,10 +74,9 @@
 	  },
 
 	  render: function render() {
-	    return React.createElement('div', { id: 'UI' }, React.createElement(Map, null), React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }));
+	    return React.createElement('div', { id: 'UI' }, React.createElement(Map, { locData: this.props.locData }), React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }));
 	  }
 	});
-
 	var Map = React.createClass({
 	  displayName: 'Map',
 	  componentDidMount: function componentDidMount() {
@@ -86,16 +85,26 @@
 	  componentDidUpdate: function componentDidUpdate() {
 	    var map = new GMaps({
 	      div: '#map',
-	      lat: -12.043333,
-	      lng: -77.028333
+	      lat: 37.09024,
+	      lng: -95.712891,
+	      zoom: 4
 	    });
 
 	    // Adding a marker to the location we are showing
-	    /*
-	    map.addMarker({
-	    	lat: this.props.lat,
-	    	lng: this.props.lng
-	    });*/
+	    var testMark = {
+	      lat: 37.09024,
+	      lng: -95.712891,
+	      infoWindow: {
+	        content: 'HOORAH'
+	      },
+	      mouseover: function mouseover(e) {
+	        this.infoWindow.open(this.map, this);
+	      },
+	      mouseout: function mouseout(e) {
+	        this.infoWindow.close();
+	      }
+	    };
+	    map.addMarker(testMark);
 	  },
 
 	  render: function render() {
@@ -103,7 +112,6 @@
 	  }
 
 	});
-
 	var FilterBox = React.createClass({
 	  displayName: 'FilterBox',
 
@@ -114,7 +122,6 @@
 	    }.bind(this)));
 	  }
 	});
-
 	var Filter = React.createClass({
 	  displayName: 'Filter',
 
@@ -151,7 +158,6 @@
 	    return React.createElement('div', { className: 'filter', filter: this.props.name }, React.createElement('input', { placeholder: this.props.name, onClick: this._toggleShow, onChange: this._search, 'data-filter': this.props.name }), React.createElement('div', { className: 'filterSelection' }, ' ', myItems, ' '));
 	  }
 	});
-
 	var FilterItem = React.createClass({
 	  displayName: 'FilterItem',
 
@@ -169,7 +175,23 @@
 	  }
 	});
 
-	ReactDOM.render(React.createElement(ClientUI, null), document.getElementById('content'));
+	function pullData(x) {
+	  var fileReturn = new XMLHttpRequest();
+	  fileReturn.onreadystatechange = function () {
+	    if (fileReturn.readyState == 4 && fileReturn.status == 200) {
+	      var entireDataFile = $.csv.toObjects(fileReturn.responseText);
+	      console.log(entireDataFile);
+
+	      ReactDOM.render( //Render page after underlying data has loaded
+	      React.createElement(ClientUI, { locData: entireDataFile }), document.getElementById('content'));
+	    }
+	  };
+	  fileReturn.open("GET", x, true);
+	  fileReturn.send();
+	}
+
+	//Page begin:
+	pullData('json_data/lat_long_20160223.csv');
 
 /***/ }
 /******/ ]);

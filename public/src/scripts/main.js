@@ -1,5 +1,3 @@
-var entireDataFile;
-
 var ClientUI = React.createClass({
   getInitialState: function() {
     return ({ filters: [
@@ -25,7 +23,7 @@ var ClientUI = React.createClass({
   render: function() {
     return (
       <div id='UI'>
-        <Map />
+        <Map locData={this.props.locData} />
         <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
       </div>
       );
@@ -38,16 +36,28 @@ var Map = React.createClass({
 	componentDidUpdate(){
 		var map = new GMaps({
 			div: '#map',
-			lat: -12.043333,
-      lng: -77.028333
+			lat: 37.09024,
+      lng: -95.712891,
+      zoom: 4
 		});
 
 		// Adding a marker to the location we are showing
-		/*
-		map.addMarker({
-			lat: this.props.lat,
-			lng: this.props.lng
-		});*/
+		var testMark = {
+		  lat: 37.09024,
+      lng: -95.712891,
+      infoWindow: {
+        content: 'HOORAH'
+      },
+      mouseover: function(e){
+        this.infoWindow.open(this.map, this);
+      },
+      mouseout: function(e){
+        this.infoWindow.close();
+      }
+		};
+		for (var z=0; z<this.props.locData.length; ++){
+		  map.addMarker(locData[z]);
+		}
 	},
 	render: function() {
 		return (
@@ -134,26 +144,25 @@ var FilterItem = React.createClass({
 
 function pullData(x)
 {
-  fileReturn = new XMLHttpRequest();
+  var fileReturn = new XMLHttpRequest();
   fileReturn.onreadystatechange = function()
   {
     if (fileReturn.readyState==4 && fileReturn.status==200)
     {
-      entireDataFile = fileReturn.responseText;
-      lines = fileReturn.responseText.split("\n");
-      callback(lines);
+      var entireDataFile = $.csv.toObjects(fileReturn.responseText);
+      console.log(entireDataFile);
+      
+      ReactDOM.render(  //Render page after underlying data has loaded
+        <ClientUI locData={entireDataFile} />,
+        document.getElementById('content')
+      );
     }
   }
   fileReturn.open("GET", x, true);
   fileReturn.send();
 }
 
-pullData('./json_data/lat_long_20160223.csv');
-//React to load after the initial data file is received
-console.log(entireDataFile);
-ReactDOM.render(
-  <ClientUI />,
-  document.getElementById('content')
-);
+//Page begin:
+pullData('json_data/lat_long_20160223.csv');
 
 

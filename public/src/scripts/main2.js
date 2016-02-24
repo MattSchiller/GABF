@@ -6,6 +6,9 @@ var ClientUI = React.createClass({
             ]
     });
   },
+  componentDidMount: function() {
+    this._pullData('json_data/lat_long_20160223.csv', this.setState());
+  },
   _applyFilter: function(name, value) {
     var nextFilters = this.state.filters;
     for(var z=0; z<nextFilters.length; z++) {
@@ -17,6 +20,33 @@ var ClientUI = React.createClass({
       }
     }
     this.setState({filters:nextFilters});
+  },
+  
+  _pullData: function(filepath, updateMe) {
+    var fileReturn = new XMLHttpRequest();
+    fileReturn.onreadystatechange = function()
+    {
+      if (fileReturn.readyState==4 && fileReturn.status==200)
+      {
+        var entireDataFile = $.csv.toObjects(fileReturn.responseText);
+        
+        //Data Massage
+        for (var z=0; z<entireDataFile.length; z++) {
+         entireDataFile[z].infoWindow = {
+            content: entireDataFile[z].location
+          };
+          entireDataFile[z].mouseover = function(e){
+            this.infoWindow.open(this.map, this);
+          };
+          entireDataFile[z].mouseout = function(){
+            this.infoWindow.close();
+          };
+        }
+        updateMe({})
+      }
+    }
+    fileReturn.open("GET", x, true);
+    fileReturn.send();
   },
   
   render: function() {
@@ -126,41 +156,8 @@ var FilterItem = React.createClass({
 });
 
 
-function pullData(x)
-{
-  var fileReturn = new XMLHttpRequest();
-  fileReturn.onreadystatechange = function()
-  {
-    if (fileReturn.readyState==4 && fileReturn.status==200)
-    {
-      var entireDataFile = $.csv.toObjects(fileReturn.responseText);
-      
-      //Data Massage
-      for (var z=0; z<entireDataFile.length; z++) {
-       entireDataFile[z].infoWindow = {
-          content: entireDataFile[z].location
-        };
-        entireDataFile[z].mouseover = function(e){
-          this.infoWindow.open(this.map, this);
-        };
-        entireDataFile[z].mouseout = function(){
-          this.infoWindow.close();
-        };
-      }
-      
-      console.log(entireDataFile);
-      
-      ReactDOM.render(  //Render page after underlying data has loaded
-        <ClientUI locData={entireDataFile} />,
-        document.getElementById('content')
-      );
-    }
-  }
-  fileReturn.open("GET", x, true);
-  fileReturn.send();
-}
-
-//Page begin:
-pullData('json_data/lat_long_20160223.csv');
-
+ReactDOM.render(  //Render page after underlying data has loaded
+  <ClientUI locData={entireDataFile} />,
+  document.getElementById('content')
+);
 

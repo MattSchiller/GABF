@@ -60,7 +60,6 @@
 	    return { filters: [{ name: 'year', values: [['2013', true], ['2014', true], ['2015', true]] }, { name: 'style', values: [['American Pale', true], ['Irish Stout', true], ['English Bitter', true], ['Hefewiezen', true]] }]
 	    };
 	  },
-
 	  _applyFilter: function _applyFilter(name, value) {
 	    var nextFilters = this.state.filters;
 	    for (var z = 0; z < nextFilters.length; z++) {
@@ -89,22 +88,9 @@
 	      lng: -95.712891,
 	      zoom: 4
 	    });
-
-	    // Adding a marker to the location we are showing
-	    var testMark = {
-	      lat: 37.09024,
-	      lng: -95.712891,
-	      infoWindow: {
-	        content: 'HOORAH'
-	      },
-	      mouseover: function mouseover(e) {
-	        this.infoWindow.open(this.map, this);
-	      },
-	      mouseout: function mouseout(e) {
-	        this.infoWindow.close();
-	      }
-	    };
-	    map.addMarker(testMark);
+	    for (var z = 0; z < this.props.locData.length; z++) {
+	      map.addMarker(this.props.locData[z]);
+	    }
 	  },
 
 	  render: function render() {
@@ -180,6 +166,19 @@
 	  fileReturn.onreadystatechange = function () {
 	    if (fileReturn.readyState == 4 && fileReturn.status == 200) {
 	      var entireDataFile = $.csv.toObjects(fileReturn.responseText);
+
+	      for (var z = 0; z < entireDataFile.length; z++) {
+	        entireDataFile[z].infoWindow = {
+	          content: entireDataFile[z].location
+	        };
+	        entireDataFile[z].mouseover = function (e) {
+	          this.infoWindow.open(this.map, this);
+	        };
+	        entireDataFile[z].mouseout = function () {
+	          this.infoWindow.close();
+	        };
+	      }
+
 	      console.log(entireDataFile);
 
 	      ReactDOM.render( //Render page after underlying data has loaded

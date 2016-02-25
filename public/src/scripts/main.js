@@ -6,6 +6,7 @@ var ClientUI = React.createClass({
             ]
     });
   },
+  
   _applyFilter: function(name, value) {
     var nextFilters = this.state.filters;
     for(var z=0; z<nextFilters.length; z++) {

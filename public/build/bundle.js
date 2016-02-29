@@ -53,6 +53,8 @@
 
 	'use strict';
 
+	var masterInfoWindow = new google.maps.InfoWindow();
+
 	var ClientUI = React.createClass({
 	  displayName: 'ClientUI',
 
@@ -63,46 +65,93 @@
 	    };
 	  },
 
-	  _applyFilter: function _applyFilter(name, value) {
-	    var nextFilters = this.state.filters;
-	    for (var z = 0; z < nextFilters.length; z++) {
-	      if (nextFilters[z].name === name) {
-	        for (var y = 0; y < nextFilters[z].values.length; y++) {
-	          if (nextFilters[z].values[y][0] === value) nextFilters[z].values[y][1] = !nextFilters[z].values[y][1];
-	        }
-	      }
-	    }
-	    this.setState({ filters: nextFilters, markers: this._filterMarkers(nextFilters) });
-	  },
+	  _applyFilter: function _applyFilter(name, value, asGroup) {
+	    //Value will be an array if multiple objects are sent at once
+	    var nextFilters = this.state.filters,
+	        nextMarkers,
+	        z,
+	        y,
+	        completed = false,
+	        added,
+	        nameIndex,
+	        valueIndex = false;
 
-	  _filterMarkers: function _filterMarkers(nextFilters) {
-	    var z,
-	        excluded,
-	        checked,
-	        nextMarkers = this.state.markers;
-	    for (var i = 0; i < nextMarkers.length; i++) {
-	      //Iterate through each beer award record
-	      z = 0;
-	      excluded = false;
-	      while (z < nextFilters.length && !excluded) {
-	        //Iterate through all of the filters (year, style, etc)
+	    value = [].concat(value); //If a single value, will turn it into a list of length 1
+
+	    z = 0;
+	    while (z < nextFilters.length && !completed) {
+	      //Iterate through each filter name to see if it's the one we changed
+	      if (nextFilters[z].name === name) {
+	        //This is our filter
+	        nameIndex = z;
 	        y = 0;
-	        checked = false;
-	        while (y < nextFilters[z].values.length && !excluded && !checked) {
-	          //Iterate through all of the items within the filter (2013, 2014, etc)
-	          if (nextFilters[z].values[y][0] === nextMarkers[i][nextFilters[z].name]) {
-	            //This is the filter + item for this record
-	            checked = true;
-	            if (nextFilters[z].values[y][1] === false) {
-	              excluded = true;
-	              nextMarkers[i]['show'] = false;
-	            } else nextMarkers[i]['show'] = true;
+	        while (y < nextFilters[z].values.length && !completed) {
+	          //Iterate though each value in the filter
+	          if (asGroup) {
+	            //Turn on all sent values (list), turn off the rest
+	            if (~value.indexOf(nextFilters[z].values[y][0])) //This value was sent
+	              nextFilters[z].values[y][1] = true;else //This value was not
+	              nextFilters[z].values[y][1] = false;
+	          } else {
+	            //Operate under the assumption of only a single value to toggle was sent
+	            if (nextFilters[z].values[y][0] === value[0]) {
+	              //This is our single value, toggle it
+	              nextFilters[z].values[y][1] = !nextFilters[z].values[y][1];
+	              valueIndex = y;
+	              completed = true;
+	            }
 	          }
 	          y++;
 	        }
-	        z++;
+	        completed = true;
+	      }
+	      z++;
+	    }
+
+	    nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
+	    this.setState({ filters: nextFilters, markers: nextMarkers });
+	  },
+
+	  _filterMarkers: function _filterMarkers(nextFilters, filterName, filterVal, nameIndex, valueIndex) {
+	    //Removes the markers that are no longer shown/adds those that are now shown
+	    //Weak to filtering on multiple values, extremely weak to filtering on multiple filters
+	    var j,
+	        k,
+	        potentialShow,
+	        nextMarkers = this.state.markers;
+
+	    for (var i = 0; i < nextMarkers.length; i++) {
+	      //Iterate through each beer award record
+	      //console.log( 'filterName:', filterName, 'nextMarkers[i][ filterName ]:', nextMarkers[i][ filterName ], 'filterVal:', filterVal);
+
+	      if (filterVal.length > 1) {
+	        //Was an array so we have to check prior show to .values[valueIndex][0]
+	        j = 0;
+	        potentialShow = true;
+	        while (potentialShow && j < nextFilters.length) {
+	          //Iterate through each filter (year, style, medal...)
+	          k = 0;
+	          while (potentialShow && k < nextFilters[j].values.length) {
+	            //Iterate through each filter item (2015, 2014, 2013...)
+	            if (nextFilters[j].values[k][0] === nextMarkers[i][nextFilters[j].name]) {
+	              //Filter and item for particular record, should I show it?
+	              potentialShow = nextFilters[j].values[k][1];
+	            }
+	            k++;
+	          }
+	          j++;
+	        }
+	        nextMarkers[i]['show'] = potentialShow;
+	      } else {
+	        //Was a single toggle, so we just need to see if this record had that value
+	        if (nextMarkers[i][filterName] === filterVal[0]) {
+	          //This is a record that was affected by the most recent filter change
+	          //console.log('_filterMarkers on:', nextMarkers[i]);
+	          nextMarkers[i]['show'] = nextFilters[nameIndex].values[valueIndex][1];
+	        }
 	      }
 	    }
+
 	    return nextMarkers;
 	  },
 
@@ -112,43 +161,131 @@
 	});
 	var Map = React.createClass({
 	  displayName: 'Map',
-	  componentDidMount: function componentDidMount() {
-	    this.componentDidUpdate(); // Makes sure we call update on first mount
+
+	  componentWillMount: function componentWillMount() {
+	    this.numMarkers = this.props.markers.length;
+	    console.log(this.numMarkers);
 	  },
-	  componentDidUpdate: function componentDidUpdate() {
-	    var map = new GMaps({
+
+	  componentDidMount: function componentDidMount() {
+	    this.componentWillUpdate(this.props);
+	  },
+
+	  componentWillUpdate: function componentWillUpdate(nextProps) {
+	    var myMarkers;
+	    this.map = new GMaps({
 	      div: '#map',
 	      lat: 37.09024,
 	      lng: -95.712891,
 	      zoom: 4
-	    }),
-	        myMarkers = this._massageMarkers();
+	    });
+
+	    myMarkers = this._massageMarkers(nextProps);
 
 	    for (var z = 0; z < myMarkers.length; z++) {
-	      map.addMarker(myMarkers[z]);
+	      this.map.addMarker(myMarkers[z]);
 	    }
+
+	    //console.log('In Map, myMarkers:', myMarkers);
 	  },
 
-	  _massageMarkers: function _massageMarkers() {
-	    var myMarkers; // = this.props.markers;
-	    for (var z = 0; z < this.props.markers.length; z++) {
-	      myMarkers[z] = {};
-	      myMarkers[z].lat = this.props.markers[z]['LL'].lat;
-	      myMarkers[z].lng = this.props.markers[z]['LL'].lng;
-	      myMarkers[z].infoWindow = {
-	        content: this.props.markers[z]['city'] + ', ' + this.props.markers[z]['state']
-	      };
-	      myMarkers[z].mouseover = function (e) {
-	        this.infoWindow.open(this.map, this);
-	      };
-	      myMarkers[z].mouseout = function () {
-	        this.infoWindow.close();
-	      };
+	  _massageMarkers: function _massageMarkers(nextProps) {
+	    var myMarkers = [],
+	        markerCount = [],
+	        y = 0,
+	        myLat,
+	        myLng,
+	        markerIndex;
+
+	    for (var z = 0; z < nextProps.markers.length; z++) {
+	      //Check each marker
+	      if (nextProps.markers[z]['show'] === false) continue; //Not showing, skip it
+	      myLat = nextProps.markers[z]['LL'].lat;
+	      myLng = nextProps.markers[z]['LL'].lng;
+	      if (markerCount[myLat + '-' + myLng] === undefined) {
+	        //First time this location has been seen in the list
+	        markerCount[myLat + '-' + myLng] = 1;
+	        myMarkers = this._writeMarker(myMarkers, nextProps.markers[z], true);
+	        y++;
+	      } else {
+	        //We've seen this location before
+	        markerIndex = this._findMarker(myMarkers, myLat, myLng);
+	        if (markerIndex > -1) {
+	          //We've found our former marker index
+	          this._writeMarker(myMarkers, nextProps.markers[z], false, markerIndex);
+	        }
+	      }
 	    }
+
+	    this.numMarkers = y;
+	    return myMarkers;
+	  },
+
+	  _findMarker: function _findMarker(myMarkers, lat, lng) {
+	    var z = 0;
+	    while (z < myMarkers.length) {
+	      if (myMarkers[z].lat === lat && myMarkers[z].lng === lng) return z;
+	      z++;
+	    }
+	    return -1;
+	  },
+
+	  _writeMarker: function _writeMarker(myMarkers, awardRecord, isNew, y) {
+	    //Handles converting data into the gMaps friendly marker data & maintains list of awards on a marker
+
+	    if (isNew) {
+	      myMarkers.push({});
+	      y = myMarkers.length - 1;
+
+	      myMarkers[y].lat = awardRecord['LL'].lat;
+	      myMarkers[y].lng = awardRecord['LL'].lng;
+
+	      myMarkers[y].myCount = 0;
+
+	      console.log('Just set infoWindow:', this.infoWindow);
+
+	      myMarkers[y].mouseover = function (e) {
+	        //On hover, show: (count) City, ST
+	        masterInfoWindow.close();
+	        masterInfoWindow.setContent(this.hoverContent);
+	        masterInfoWindow.open(this.map, this);
+	      };
+	      myMarkers[y].mouseout = function () {
+	        masterInfoWindow.close();
+	      };
+
+	      myMarkers[y].myAwards = '';
+	    }
+
+	    //Write to the marker some formatting and such
+	    myMarkers[y].myCount++;
+
+	    if (myMarkers[y].myCount > 9) myMarkers[y].label = '+';else myMarkers[y].label = String(myMarkers[y].myCount);
+
+	    myMarkers[y].hoverContent = '(' + myMarkers[y].myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
+
+	    myMarkers[y].myAwards += '<div id="awardView">' + 'Year: ' + awardRecord['year'] + ' Medal: ' + awardRecord['medal'] + ' Style: ' + awardRecord['style'] + /*
+	                                                                                                                                                               year:     awardRecord['year'],
+	                                                                                                                                                               medal:    awardRecord['medal'],
+	                                                                                                                                                               beer:     awardRecord['beer'],
+	                                                                                                                                                               brewery:  awardRecord['brewery'],
+	                                                                                                                                                               city:     awardRecord['city'],
+	                                                                                                                                                               state:    awardRecord['state'],
+	                                                                                                                                                               style:    */
+	    '</div>';
+
+	    myMarkers[y].click = function (e) {
+	      masterInfoWindow.close();
+	      masterInfoWindow.setContent(this.myAwards);
+	      masterInfoWindow.open(this.map, this);
+	    };
+
+	    return myMarkers;
 	  },
 
 	  render: function render() {
-	    return React.createElement('div', { id: 'map-holder' }, React.createElement('p', { id: 'loading' }, 'Loading map...'), React.createElement('div', { id: 'map' }));
+	    //console.log('rendering, numMarkers:',this.numMarkers);
+	    return React.createElement('div', { id: 'map-holder' }, React.createElement('p', { id: 'loading' }, 'Loading map...'), React.createElement('div', { id: 'map' }), React.createElement('div', { id: 'markerCounter' }, this.numMarkers));
 	  }
 
 	});
@@ -185,8 +322,21 @@
 	    this.setState({ showItems: !this.state.showItems });
 	  },
 	  _search: function _search(e) {
-	    var nextSearch = '';
-	    this.setState({ mySearch: e.target.value });
+	    e.stopPropagation();
+	    var keyCode = e.keyCode || e.which;
+
+	    if (keyCode !== 13) {
+	      //Something other than Enter
+	      this.setState({ mySearch: e.target.value });
+	    } else {
+	      //Enter
+	      var valsToSend = this.props.values.map(function (value, i) {
+
+	        if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase())) return value[0];
+	      }.bind(this));
+
+	      this.props.notify(this.props.name, valsToSend, true);
+	    }
 	  },
 	  render: function render() {
 	    var myItems = [];
@@ -195,7 +345,7 @@
 	        if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase())) return React.createElement(FilterItem, { key: i, value: value[0], selected: value[1], name: this.props.name, notify: this.props.notify });
 	      }.bind(this));
 	    }
-	    return React.createElement('div', { className: 'filter', filter: this.props.name }, React.createElement('input', { placeholder: this.props.name, onClick: this._toggleShow, onChange: this._search, 'data-filter': this.props.name }), React.createElement('div', { className: 'filterSelection' }, ' ', myItems, ' '));
+	    return React.createElement('div', { className: 'filter', filter: this.props.name }, React.createElement('input', { placeholder: this.props.name, onClick: this._toggleShow, onKeyUp: this._search, 'data-filter': this.props.name }), React.createElement('div', { className: 'filterSelection' }, ' ', myItems, ' '));
 	  }
 	});
 	var FilterItem = React.createClass({
@@ -206,7 +356,7 @@
 	  },
 	  _handleSelection: function _handleSelection(e) {
 	    console.log('Toggling selected for', this.props.name, ':', this.props.value);
-	    this.props.notify(this.props.name, this.props.value);
+	    this.props.notify(this.props.name, this.props.value, false);
 	  },
 	  render: function render() {
 	    var selectionClass = '';
@@ -264,7 +414,7 @@
 	    ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
 
 	    rI = 0;
-	    for (var i = 1; i < 100; i++) {
+	    for (var i = 1; i < awards.length; i++) {
 	      gold = false;silver = false;bronze = false;
 	      for (var j = 0; j < awards[0].length; j++) {
 	        switch (awards[0][j]) {
@@ -353,8 +503,8 @@
 	      });
 	    }
 
-	    console.log('filter data:', filterData);
-	    console.log('marker data:', beerData);
+	    //console.log('filter data:',filterData);
+	    //console.log('marker data:',beerData);
 	    runPage(beerData, filterData);
 	  };
 

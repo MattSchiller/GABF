@@ -30,6 +30,13 @@ body {
   top: 0px;
   left: 7px;
 }
+#markerCounter {
+  position: absolute;
+  z-index: 100;
+  top: 10%;
+  left: 7px;
+  background-color: orange;
+}
 .filterBox {
   position: absolute;
   width: 15%;

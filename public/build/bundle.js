@@ -242,17 +242,15 @@
 
 	      myMarkers[y].myCount = 0;
 
-	      console.log('Just set infoWindow:', this.infoWindow);
-
 	      myMarkers[y].mouseover = function (e) {
 	        //On hover, show: (count) City, ST
 	        masterInfoWindow.close();
 	        masterInfoWindow.setContent(this.hoverContent);
 	        masterInfoWindow.open(this.map, this);
 	      };
-	      myMarkers[y].mouseout = function () {
-	        masterInfoWindow.close();
-	      };
+	      //myMarkers[y].mouseout = function(){
+	      //  masterInfoWindow.close();
+	      //};
 
 	      myMarkers[y].myAwards = '';
 	    }
@@ -264,15 +262,7 @@
 
 	    myMarkers[y].hoverContent = '(' + myMarkers[y].myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
 
-	    myMarkers[y].myAwards += '<div id="awardView">' + 'Year: ' + awardRecord['year'] + ' Medal: ' + awardRecord['medal'] + ' Style: ' + awardRecord['style'] + /*
-	                                                                                                                                                               year:     awardRecord['year'],
-	                                                                                                                                                               medal:    awardRecord['medal'],
-	                                                                                                                                                               beer:     awardRecord['beer'],
-	                                                                                                                                                               brewery:  awardRecord['brewery'],
-	                                                                                                                                                               city:     awardRecord['city'],
-	                                                                                                                                                               state:    awardRecord['state'],
-	                                                                                                                                                               style:    */
-	    '</div>';
+	    myMarkers[y].myAwards += '<div id="awardView">' + '<b>Year:</b> ' + awardRecord['year'] + ' <b>Medal:</b> ' + awardRecord['medal'] + ' <b>Style:</b> ' + awardRecord['style'] + ' <b>Beer:</b> ' + awardRecord['beer'] + ' <b>Brewery:</b> ' + awardRecord['brewery'] + '</div>';
 
 	    myMarkers[y].click = function (e) {
 	      masterInfoWindow.close();

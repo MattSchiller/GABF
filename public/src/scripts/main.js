@@ -170,9 +170,9 @@ var Map = React.createClass({
         masterInfoWindow.setContent(this.hoverContent);
         masterInfoWindow.open(this.map, this);
       };
-      myMarkers[y].mouseout = function(){
-        masterInfoWindow.close();
-      };
+      //myMarkers[y].mouseout = function(){
+      //  masterInfoWindow.close();
+      //};
       
       myMarkers[y].myAwards = '';
 	  }
@@ -188,16 +188,11 @@ var Map = React.createClass({
     
     myMarkers[y].myAwards += (
       '<div id="awardView">' +
-        'Year: ' + awardRecord['year'] +
-        ' Medal: ' + awardRecord['medal'] +
-        ' Style: ' + awardRecord['style'] + /*
-      year:     awardRecord['year'],
-      medal:    awardRecord['medal'],
-      beer:     awardRecord['beer'],
-      brewery:  awardRecord['brewery'],
-      city:     awardRecord['city'],
-      state:    awardRecord['state'],
-      style:    */
+        '<b>Year:</b> ' + awardRecord['year'] +
+        ' <b>Medal:</b> ' + awardRecord['medal'] +
+        ' <b>Style:</b> ' + awardRecord['style'] +
+        ' <b>Beer:</b> ' + awardRecord['beer'] +
+        ' <b>Brewery:</b> ' + awardRecord['brewery'] +
       '</div>'
     );
     

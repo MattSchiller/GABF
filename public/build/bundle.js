@@ -190,9 +190,7 @@
 	  },
 
 	  _drawMap: function _drawMap() {
-	    this.margin = { top: 10, left: 10, bottom: 10, right: 10 };
 	    this.width = parseInt(d3.select('#map').style('width'));
-	    this.width = this.width - this.margin.left - this.margin.right;
 	    this.mapRatio = 0.5;
 	    this.height = this.width * this.mapRatio;
 
@@ -210,6 +208,7 @@
 	  _drawMarkers: function _drawMarkers() {
 	    console.log(this.myMarkers);
 
+	    var svg = this.svg;
 	    var projection = this.projection;
 
 	    //circles are too big!
@@ -222,7 +221,24 @@
 	        return 'translate(0, 0)';
 	      }
 	      return "translate(" + projection([d.lng, d.lat]) + ")";
-	    });
+	    }).on("click", showDetails).on("mouseover", showSummary).on("mouseout", hideSummary);
+
+	    function showDetails() {
+	      console.log('Showing details for "this":', this);
+	    };
+
+	    function showSummary() {
+	      console.log('Showing summary for "this":', this.__data__);
+	      var summary = svg.selectAll('.summary').data(this.__data__).enter().append('div').attr('class', 'summary').attr('transform', function (d) {
+	        return 'translate(' + projection([d.lng, d.lat]) + ")";
+	      }).attr('text', function (d) {
+	        return d.hoverContent;
+	      });
+	    };
+
+	    function hideSummary() {
+	      console.log('Hiding details for "this":', this);
+	    };
 	  },
 
 	  _massageMarkers: function _massageMarkers(myProps) {

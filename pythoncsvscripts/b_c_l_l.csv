@@ -1,0 +1,1143 @@
+location,lat,long
+"RAM Restaurant & Brewery, Indianapolis",0,1
+"Glacier Brewhouse, Anchorage",1,2
+"Florida Beer Co., Melbourne",2,3
+"Oggi's Pizza and Brewing, San Clemente",3,4
+"BridgePort Brewing, Portland",4,5
+"Diamond Bear Brewing Co., Little Rock",5,6
+"Moose’s Tooth Brewing Co., Anchorage",6,7
+"Western Reserve Brewing, Cleveland",7,8
+"Two Rows Restaurant & Brewery, Dallas",8,9
+"Pug Ryans Brewery, Dillon",9,10
+"Hangar 24 Craft Brewery, Redlands",10,11
+"Pabst Brewing, Los Angeles",11,12
+"Emmett’s Tavern & Brewing Co., West Dundee",12,13
+"Laurelwood Brewing, Portland",13,14
+"Gella's Diner, Hays",14,15
+"Flying Fish Brewing Co., Somerdale",15,16
+"Stewart’s Brewing Co., Bear",16,17
+"Papago Brewing Co., Scottsdale",17,18
+"Fat Head’s Brewery, North Olmsted",18,19
+"The Public House Brewing Co., Rolla",19,20
+"Gunnison Brewery, Gunnison",20,21
+"Olde Saratoga Brewing Co., Saratoga Springs",21,22
+"Basil T’s Brewery & Italian Grill, Red Bank",22,23
+"Walnut Brewery, Louisville",23,24
+"Calhoun's Restaurant, Harrisonburg",24,25
+"Big Time Brewery, Seattle",25,26
+"BJ's Restaurant & Brewery, Huntington Beach",26,27
+"Renegade Brewing Co., Denver",27,28
+"Spoetzl Brewery, Shiner",28,29
+"Chelsea Brewing, New York",29,30
+"Knee Deep Brewing Co., Lincoln",30,31
+"Lost Coast Brewery, Eureka",31,32
+"Iron Hill Brewery, Phoenixville",32,33
+"Full Sail Brewing, Hood River",33,34
+"Bonfire Brewing, Eagle",34,35
+"Six Rivers Brewery, McKinleyville",35,36
+"Central Waters Brewing Co., Amherst",36,37
+"Arch Rock Brewing Co., Gold Beach",37,38
+"Two Beers Brewing Co., Seattle",38,39
+"Social Kitchen & Brewery, San Francisco",39,40
+"Spellbound Brewing, Mount Holly",40,41
+"Tied House Cafe, Mountain View",41,42
+"RAM International/Humperdink's/Big Horn Brewing Co., Lakewood",42,43
+"Great Northern Brewing, Whitefi sh",43,44
+"Flossmoor Station, Flossmoor",44,45
+"Fat Head’s Brewery, Middleburg Heights",45,46
+"E.J. Phair Brewing Co., Concord",46,47
+"Christian Moerlein Brewing Co., Cincinnati",47,48
+"The Sand, LotDenver",48,49
+"Mayflower Brewing Co., Plymouth",49,50
+"Ahnapee Brewery, Algoma",50,51
+"High Falls Brewing, Rochester",51,52
+"Rainier Brewing, Tumwater",52,53
+"Del Norte Brewing Co., Denver",53,54
+"CB & Potts Restaurant & Brewery, Fort CollinsFort Collins",54,55
+"Stroh Brewery, Fogelsville",55,56
+"Noble Ale Works, Anaheim",56,57
+"Pete's Brewing, San Antonio",57,58
+"Island Brewing, Carpinteria",58,59
+"Thirsty Dog Brewing, Canton",59,60
+"Rockyard Brewing Co., Castle Rock",60,61
+"Summit Brewing, St Paul",61,62
+"The Cambridge House, Granby",62,63
+"Karl Strauss Brewing, San Diego",63,64
+"Great Basin Brewing, Sparks",64,65
+"Glenwood Canyon Brewing, Glenwood Springs",65,66
+"Free State Brewing Co., Lawrence",66,67
+"Boscos Brewing, Memphis/Nashville",67,68
+"Schaefer Brewing, San Antonio",68,69
+"Alvarado Street Brewery & Grill, Monterey",69,70
+"Old Dominion Brewing, Dover",70,71
+"Gordon Biersch Brewery, Annapolis",71,72
+"Michigan Brewing, Webberville",72,73
+"Snake River Brewing, Lander",73,74
+"Brew Moon, Brookline",74,75
+"903 Brewers, Sherman",75,76
+"Rock Bottom, Englewood",76,77
+"Redrock Brewery, Salt Lake City",77,78
+"Redhook Ale Brewery, Portland",78,79
+"Columbia River Brewing Co., Portland",79,80
+"Elevator Brewing, Columbus",80,81
+"Brooklyn Brewery, Brooklyn",81,82
+"BJ's Restaurant & Brewery, Boulder",82,83
+"Chama River Brewing, Albuquerque",83,84
+"Oggi's Pizza and Brewing, San Diego",84,85
+"Smiling Moose Brewpub & Grill, Greeley",85,86
+"Karbach Brewing Co., Houston",86,87
+"Third Street Ale Works, Santa Rosa",87,88
+"Ghostfish Brewing Co., Seattle",88,89
+"Atlanta Brewing Co., Atlanta",89,90
+"RAM Restaurant & Brewery, Salem",90,91
+"13 Virtues Brewing Co., Portland",91,92
+"Ortlieb's Brewery & Grille, Pottstown",92,93
+"AC Golden, Golden",93,94
+"Silver City Brewery, Bremerton",94,95
+"Jurupa Valley Brewing Co., Riverside",95,96
+"Pelican Pub, Pacifi c City",96,97
+"Deschutes Brewery, Bend",97,98
+"Hoppers Brooker Creek Grille and Tap Room, Palm Harbor",98,99
+"Armadillo Ale Works, Denton",99,100
+"Wicked Weed Brewing, Asheville",100,101
+"Fat Head’s Brewery - Portland, Portland",101,102
+"Temperance Beer Co., Evanston",102,103
+"Minnesota Brewing, St. Paul",103,104
+"J.T. Whitney's Pub & Brewery, Madison",104,105
+"Bluegrass Brewing Co., Louisville",105,106
+"St. Ides Brewing, Milwaukee",106,107
+"Sweetwater Brewing, Atlanta",107,108
+"Iron Hill Brewery, MediaMedia",108,109
+"Chicago Brewing, Las Vegas",109,110
+"Taps Fish House and Brewery, Brea",110,111
+"High Sierra Brewing Co., Carson City",111,112
+"Rock Bottom, West Des Moines",112,113
+"Ei8ht Ball Brewing, Newport",113,114
+"RAM Restaurant & Brewery, Tacoma",114,115
+"McCoy's Public House, Kansas City",115,116
+"Flat Tail Brewing Co., Corvallis",116,117
+"SandLot, Denver",117,118
+"10 Barrel Brewing Co., Bend",118,119
+"Hops Grillhouse and Brewery, Madison",119,120
+"Rock Bottom, Bethesda",120,121
+"The SandLot, Denver",121,122
+"St. Ides Brewing, San Antonio",122,123
+"Taxman Brewing Co., Bargersville",123,124
+"Rabbit Hole Brewing, Justin",124,125
+"The Lion Brewery, Wilkes-Barre",125,126
+"MobCraft Beer, Madison",126,127
+"Tröegs Brewing Co., Hershey",127,128
+"Flying Dog Brewery, Frederick",128,129
+"Buzzards Bay Brewing, Westport",129,130
+"BJ's Restaurant & Brewery, Roseville/Portland/Huntington Beach",130,131
+"Founders Brewing Co., Grand Rapids",131,132
+"Broken Tooth Brewing, Anchorage",132,133
+"Fort Point Beer Co., San Francisco",133,134
+"McCoys Public House, Kansas City",134,135
+"Terrapin Beer, Athens",135,136
+"Brewer’s Alley Restaurant and Brewery, Frederick",136,137
+"Summit Brewing, Saint Paul",137,138
+"Überbrew, Billings",138,139
+"General Lafayette Inn & Brewery, Lafayette Hill",139,140
+"Oaken Barrel Brewing Co., Greenwood",140,141
+"Garage Brewing Co. & Pizzeria, Temecula",141,142
+"Green Flash Brewing Co., Vista",142,143
+"Southampton Publick House, Southampton",143,144
+"Triumph Brewing, Princeton",144,145
+"The Post Brewing Co., Lafayette",145,146
+"Liquid Mechanics Brewing Co., Lafayette",146,147
+"CODA Brewing Co., Aurora",147,148
+"Abita Brewing Co., Abita Springs",148,149
+"Benchmark Brewing Co., San Diego",149,150
+"Flat Branch Pub and Brewery, Columbia",150,151
+"New Helvetia Brewing Co., Sacramento",151,152
+"Devils Backbone Brewing, BasecampRoseland",152,153
+"Shmaltz Brewing Co., San Francisco",153,154
+"Haymarket Pub & Brewery, Chicago",154,155
+"Prison City Brewing, Auburn",155,156
+"DESTIHL, Normal",156,157
+"Fonta Flora Brewery, Morganton",157,158
+"Pyramid Ales & Lagers, Seattle",158,159
+"Iron Hill Brewery, Philadelphia",159,160
+"Twin Peaks Brewery, Irving",160,161
+"Sand, LotDenver",161,162
+"Lone Star Brewing, San Antonio",162,163
+"Kane Brewing Co., Ocean",163,164
+"CooperSmith’s Pub & Brewing Co., Fort Collins",164,165
+"Neshaminy Creek Brewing, Croydon",165,166
+"Trap Rock Restaurant and Brewery, Berkeley Heights",166,167
+"Sixpoint Craft Ales, Brooklyn",167,168
+"C.H. Evans Brewing Company, Albany",168,169
+"Olde Hickory Brewery, Hickory",169,170
+"Morgan Territory Brewing, Tracy",170,171
+"C.B. & Potts, Fort Collins",171,172
+"Port Brewing and The Lost Abbey, San Marcos",172,173
+"Arizona Roadhouse and Brewery, Tempe",173,174
+"Fitzpatrick's, Iowa City",174,175
+"North Coast Brewing, Fort Bragg",175,176
+"Ybor City Brewing Company, Tampa",176,177
+"Alaskan Brewing, Juneau",177,178
+"5280 Roadhouse Brewery, Littleton",178,179
+"Cascade Brewery, Portland",179,180
+"Oasis Texas Brewing Co., Austin",180,181
+"The Grumpy Troll Restaurant & Brewery, Mount Horeb",181,182
+"Rock Bottom, Denver",182,183
+"RAM Restaurant & Brewery, IllinoisWheeling",183,184
+"Ithaca Beer Co., Ithaca",184,185
+"Two Brothers Brewing Co., Warrenville",185,186
+"Union Colony Brewery, Greeley",186,187
+"Wiseacre Brewing Co., Memphis",187,188
+"Triumph Brewing, New Hope",188,189
+"Dale Bros. Brewery, Upland",189,190
+"Fat Heads Brewery, North Olmsted",190,191
+"Russian River Brewing, Santa Rosa",191,192
+"College Street Brewhouse & Pub, Lake Havasu City",192,193
+"Devils Backbone Brewing, Lexington",193,194
+"Angelic Brewing, Madison",194,195
+"St. Ides Brewing, Fogelsville",195,196
+"AC Golden Brewing Co., Golden",196,197
+"Kona Brewing, Kailua-Kona",197,198
+"Lucky Envelope Brewing, Seattle",198,199
+"Devil’s Backbone Brewing Co., Roseland",199,200
+"The Bellows Brew Crew, Watertown",200,201
+"Brew Moon, Boston",201,202
+"23rd Street Brewery, Lawrence",202,203
+"BNS Brewing & Distilling Co., Santee",203,204
+"Lewis & Clark Brewing Co., Helena",204,205
+"Smartmouth Brewing Co., Norfolk",205,206
+"Pig’s Eye Brewing Co., St. Paul",206,207
+"Quincy Ships Brewing Company, Quincy",207,208
+"Rock Bottom, Westminster",208,209
+"Heavy Seas Beer, Baltimore",209,210
+"Gigantic Brewing Co., Portland",210,211
+"RAM Restaurant, Boise",211,212
+"Port City Brewing Co., Alexandria",212,213
+"G. Heileman Brewing, Fogelsville",213,214
+"Thirsty Dog Brewing, Independence",214,215
+"Jester King Brewery, Austin",215,216
+"Pelican Pub, Pacific City",216,217
+"Elk Mountain Brewing Co., Parker",217,218
+"Perennial Artisan Ales, Saint Louis",218,219
+"Boston Beer Co., Cincinnati",219,220
+"Moose's Tooth, Anchorage",220,221
+"Tequesta Brewing Co., Tequesta",221,222
+"Eel River Brewing, Fortuna",222,223
+"Duck-Rabbit Craft Brewery, Farmville",223,224
+"Dells Brewing Co., Wisconsin Dells",224,225
+"Red Eye Brewing Co., Wausau",225,226
+"Olde Peninsula Brewpub & Restaurant, Kalamazoo",226,227
+"Dogfish Head Brewery, Rehoboth Beach",227,228
+"Big Dog’s Brewing Co., Las Vegas",228,229
+"Oceanside Ale Works, Oceanside",229,230
+"Leinenkugel Brewing, Chippewa Falls",230,231
+"Union Craft Brewing, Baltimore",231,232
+"Rockford Brewing Co. - Rockford, Rockford",232,233
+"Heroes Restaurant and Brewery, Riverside",233,234
+"Bristol Brewing, Colorado Springs",234,235
+"Otter Creek Brewing, Middlebury",235,236
+"Three Magnets Brewing, Olympia",236,237
+"BJ's Grill & Brewery, Portland",237,238
+"The Spoetzl Brewery, San Antonio",238,239
+", ",239,240
+"Far West Ireland Brewing Co., Redmond",240,241
+"Fegley’s Allentown & Bethlehem Brew Works, Allentown",241,242
+"Anderson Valley Brewing, Booneville",242,243
+"Fox River Brewing, Oshkosh",243,244
+"Samuel Adams Brewing, Cincinnati",244,245
+"Desert Edge Brewery, Salt Lake City",245,246
+"21st Amendment, San Francisco",246,247
+"Listermann/Triple Digit Brewing Co., Cincinnati",247,248
+"Engine House #9 Restaurant & Brewery, Tacoma",248,249
+"Dillon Dam Brewery, Dillon",249,250
+"Watch City Brewing Company, Waltham",250,251
+"Thirsty Dog Brewing, N. Canton",251,252
+"Schlitz Brewing, Fogelsville",252,253
+"Firestone Walker, Paso Robles",253,254
+"Funkwerks, Fort Collins",254,255
+"75th Street Brewery, Lawrence",255,256
+"Herkimer Pub and Brewery, Minneapolis",256,257
+"Barley's Casino, Henderson",257,258
+"Baxter Brewing Co., Auburn",258,259
+"Cambridge Brewing, Cambridge",259,260
+"The Duck-Rabbit Craft Brewery, Farmville",260,261
+"America's Brewing Company, Aurora",261,262
+"Seabright Brewery, Santa Cruz",262,263
+"Durango Brewing Co., Durango",263,264
+"Michelob Brewing Co., St. Louis",264,265
+"Iron Springs Pub & Brewery, Fairfax",265,266
+"Rogue Ales, Newport",266,267
+"Steel Toe Brewing, St. Louis Park",267,268
+"Founders Restaurant & Brewing Company, Alexandria",268,269
+"Smoky Mountain Brewery, Knoxville",269,270
+"Big Rock Chop House, Birmingham",270,271
+"Trinity Brewing, Providence",271,272
+"Caldera Brewing Co., Ashland",272,273
+"Baker City Brewing Co., Baker City",273,274
+"Tustin Brewing Co., Tustin",274,275
+"Grimm Artisanal Ales, Brooklyn",275,276
+"Cisco Brewers, Nantucket",276,277
+"Northwoods Brewing Corp., Eau Claire",277,278
+"Coors Archive Brewery, Golden",278,279
+"On Tap Bistro & Brewery, San Diego",279,280
+"The Prodigal Brewery, Effingham",280,281
+"Moylan's Brewery, Novato",281,282
+"Rock Bottom, La Jolla",282,283
+"Santa Fe Brewing Co., Santa Fe",283,284
+"Boscos, Memphis",284,285
+"Trinity Brewing, Colorado Springs",285,286
+"Champion Brewing Co., Charlottesville",286,287
+"Black Tooth Brewing Co., Sheridan",287,288
+"Stone Brewing, San Diego",288,289
+"Eddyline Brewing, Buena Vista",289,290
+"American Brewing Co., Edmonds",290,291
+"Epic Brewing Co., Salt Lake City",291,292
+"Devils Backbone Brewing, OutpostLexington",292,293
+"Craftsman Brewing Co., Pasadena",293,294
+"Pennsylvania Brewing, Pittsburgh",294,295
+"MillerCoors, Milwaukee",295,296
+"Fish Brewing Co., Olympia",296,297
+"Cigar City Brewing, Tampa",297,298
+"Maui Brewing, Maui",298,299
+"Montana Brewing, Billings",299,300
+"Burnside Brewing Co., Portland",300,301
+"Breakside Brewery, Portland",301,302
+"Blue Moon Brewing Co., Denver",302,303
+"Magnolia Gastropub, San Francisco",303,304
+"Etna Brewing Co., Etna",304,305
+"Pabst Brewing, Woodridge",305,306
+"Dale Bros Brewery, Upland",306,307
+"Devils Backbone Brewing, Roseland",307,308
+"Fifty, Fifty Brewing Co.Truckee",308,309
+"TAPS Fish House & Brewery, Corona",309,310
+"Wilmington Brewing Company, Wilmington",310,311
+"Main Street Station, Las Vegas",311,312
+"Mickey Finn's Brewery, Libertyville",312,313
+"Coors Brewing, Golden",313,314
+"Rochester Mills Beer Co., Rochester",314,315
+"Revolution Brewing, Chicago",315,316
+"Samuel Adams Brewing, Boston",316,317
+"Gilded Otter Brewing Co., New Paltz",317,318
+"Dark Horse Brewing Co., Marshall",318,319
+"Emmett's Tavern, West Dundee",319,320
+"Right Brain Brewery, Traverse City",320,321
+"Barley Island Brewing Co., Fishers",321,322
+"Clipper City Brewing, Baltimore",322,323
+"The Detroit Beer Co., Detroit",323,324
+"Three Notch’d Brewing Co., Charlottesville",324,325
+"Oak Creek Brewing Co., Sedona",325,326
+"Full Sail Brewing, Portland",326,327
+"Bison Brewing Co., Berkeley",327,328
+"Ghost River Brewing, Memphis",328,329
+"Wolf Canyon Brewing Company, Santa Fe",329,330
+"Plank Road Brewery, Milwaukee",330,331
+"5 Rabbit Cerveceria, Chicago",331,332
+"KettleHouse Brewing Co., Missoula",332,333
+"High Water Brewing, Chico",333,334
+"Station Casinos Breweries / Barley’s Casino & Brewing Company, Henderson",334,335
+"Arcadia Brewing Co., Kalamazoo",335,336
+"The Brooklyn Brewery, Brookyln",336,337
+"Humboldt Brewery, Arcata",337,338
+"Bitter End, Austin",338,339
+"New Holland Brewing, Holland",339,340
+"Hailstorm Brewing Co., Tinley Park",340,341
+"Bulldog Brewing Co., Fresno",341,342
+"Dry Dock Brewing, Aurora",342,343
+"Blue Pants Brewery, Madison",343,344
+"Fort Collins Brewery, Fort Collins",344,345
+"The Mash House Restaurant & Brewing Company -, Fayetteville",345,346
+"New Belgium Brewing, Fort Collins",346,347
+"Monday Night Brewing, Atlanta",347,348
+"Heretic Brewing Co., Pittsburg",348,349
+"Black Forest Brew Haus LLC., Farmingdale",349,350
+"Fire, House Grill & BrewerySunnyvale",350,351
+"Altitude Chophouse and Brewery, Laramie",351,352
+"BJ's Pizza Grill & Brewery, Brea",352,353
+"Bear Republic Brewing, Cloverdale",353,354
+"Faction Brewing Co., Alameda",354,355
+"Zipline Brewing Co., Lincoln",355,356
+"Ballast Point Brewing, San Diego",356,357
+"Monkey Paw Brewing Co., San Diego",357,358
+"Powerhouse Brewing, Sebastopol",358,359
+"Alesmith Brewing Co., San Diego",359,360
+"Redwood Curtain Brewing Co., Arcata",360,361
+"Iron Hill Brewery, West Chester",361,362
+"Bull & Bush Brewery, Denver",362,363
+"Ham's Restaurant & Brewhouse, Greenville",363,364
+"Rock Bottom, Louisville",364,365
+"DuClaw Brewing Co., Bel Air",365,366
+"Gordon Biersch Brewery, Rockville/Broomfield",366,367
+"Bell’s Brewery, Galesburg",367,368
+"Marble Brewery, Albuquerque",368,369
+"Prescott Brewing, Prescott",369,370
+"Nectar Ales, Paso Robles",370,371
+"Former Future Brewing Co., Denver",371,372
+"Blue Corn Brewery, Santa Fe",372,373
+"Goose Island Beer Co., Chicago",373,374
+"Newport Beach Brewing, Newport Beach",374,375
+"Half Acre Beer Co., Chicago",375,376
+"Rohrbach Brewing Co., Rochester",376,377
+"Honolulu Brewing Company LLC, Honolulu",377,378
+"Societe Brewing Co., San Diego",378,379
+"Rock Bottom, Campbell",379,380
+"Fegley’s Brew Works, Allentown",380,381
+"Valhalla Microbrewery, Pittsburgh",381,382
+"The Austin Beer Garden Brewing Co., Austin",382,383
+"Snipes Mountain Brewing, Sunnyside",383,384
+"Panther Island Brewing Co., Fort Worth",384,385
+"John Harvard's Brew House, Springfield",385,386
+"WeldWerks Brewing Co., Greeley",386,387
+"Mammoth Brewing, Mammoth",387,388
+"Institution Ale Co., Camarillo",388,389
+"Allentown/Bethlehem Brew Works, Allentown",389,390
+"Platt Park Brewing Co., Denver",390,391
+"Lone Star Brewing, Milwaukee",391,392
+"Fargo Brewing Co., Fargo",392,393
+"Boise Brewing, Boise",393,394
+"Rock Bottom, Chicago",394,395
+"Offshore Ale Company, Oak Bluffs",395,396
+"Starr Hill Brewing, Charlottesville",396,397
+"SLO Brewing, San Luis Obispo",397,398
+"Native Brewing Company, Alexandria",398,399
+"Gella's Diner & Liquid Bread Brewing Co., Hays",399,400
+"Mazama Brewing Co., Corvallis",400,401
+"Alpine Beer, Alpine",401,402
+"Barley Brothers Brewery, Baker City",402,403
+"O’so Brewing, Plover",403,404
+"RAM Restaurant, Seattle",404,405
+"Lawson’s Finest Liquids, Warren",405,406
+"Wild Duck Brewery & Restaurant, Eugene",406,407
+"Far West Brewing Co., Redmond",407,408
+"5 Stones Artisan Brewery, Cibolo",408,409
+"Saranac/F., X. Matt Brewing Co.Utica",409,410
+"Carbondale Craft Beer, Carbondale",410,411
+"Bootstrap Brewing Co., Niwot",411,412
+"Summit Brewing, St. Paul",412,413
+"Empire Brewing Company of Syracuse, Syracuse",413,414
+"The Oyster Bar Bistro & Brewery, Fort Wayne",414,415
+"Marley’s Brewery & Grille, Bloomsburg",415,416
+"Unique Beers, Orlando",416,417
+"Captain Lawrence Brewing, Pleasantville",417,418
+"Carolina Brewery, Chapel Hill",418,419
+"Valley Brewing Co., Stockton",419,420
+"Fulton Beer, Minneapolis",420,421
+"Yellow Springs Brewery, Yellow Springs",421,422
+"Fremont Brewing Co., Seattle",422,423
+"Canteen Brewhouse, Albuquerque",423,424
+"The Brew Kettle, Strongsville",424,425
+"Bastone Brewery, Royal Oak",425,426
+"DOG Brewing Co., Westminster",426,427
+"Babe’s Bar-B-Que & Brewhouse, Rancho Mirage",427,428
+"Grand Teton Brewing, Victor",428,429
+"Ritual Brewing Co., Redlands",429,430
+"49th State Brewing Co., Denali National Park",430,431
+"Bend Brewing, Bend",431,432
+"Bier Brewery, Indianapolis",432,433
+"Boulevard Brewing, Kansas City",433,434
+"Black Diamond Brewing Co., Concord",434,435
+"Pumphouse Brewery, Longmont",435,436
+"Port Brewing Co., San Marcos",436,437
+"Anheuser-Busch, Fort Collins",437,438
+"Schlitz Brewing, San Antonio",438,439
+"Carter’s Brewing, Billings",439,440
+"SandLot Brewery at Coors Field, Denver",440,441
+"Jos. Schlitz Brewing Company, Fogelsville",441,442
+"Casco Bay Brewing Company, Portland",442,443
+"Pagosa Brewing, Pagosa Springs",443,444
+"CB & Potts Restaurant & Brewery, Highlands Ranch",444,445
+"Outer Banks Brewing Co., Kill Devil Hills",445,446
+"Fitger’s Brewhouse, Duluth",446,447
+"75th Street Brewery, Kansas City",447,448
+"The Rare Barrel, Berkeley",448,449
+"Santa Barbara Brewing, Santa Barbara",449,450
+"Rock Bottom, Braintree",450,451
+"Real Ale Brewing Co., Blanco",451,452
+"Starr Hill Brewing, Crozet",452,453
+"Columbus Brewing Co., Columbus",453,454
+"Wit’s End Brewing Co., Denver",454,455
+"Nebraska Brewing Co., Papillion",455,456
+"Airways Brewing Co., Kent",456,457
+"Holy City Brewing, North Charleston",457,458
+"Russian River Brewing, Guerneville",458,459
+"Hoppy Brewing, Sacramento",459,460
+"Badger Hill Brewing, St. Louis Park",460,461
+"Four Peaks Brewing, Tempe",461,462
+"Dogfish Head Brewery, Milton",462,463
+"Haverhill Brewery, Haverhill",463,464
+"Aftershock Brewing Co., Temecula",464,465
+"Joseph James Brewing Co., Henderson",465,466
+"BJ's Restaurant & Brewery, Reno/Chandler/Huntington Beach",466,467
+"Figueroa Mountain Brewing, Buellton",467,468
+"Holy City Brewing, Charleston",468,469
+"Stroh Brewery, San Antonio",469,470
+"Uncle Billy’s Brew & Que, Austin",470,471
+"Tenaya Creek Brewery, Las Vegas",471,472
+"Iron Hill Brewery, Lancaster",472,473
+"Smylie Brothers Brewing Co., Evanston",473,474
+"Pizza Port, Ocean Beach",474,475
+"Pug Ryan's Brewery, Dillon",475,476
+"Ground Breaker Brewing, Portland",476,477
+"Colorado Boy Brewing Co., Ridgway",477,478
+"Hale's Ales, Seattle",478,479
+"Dillon DAM Brewery, Dillon",479,480
+"Aardwolf Brewing Co., Jacksonville",480,481
+"Breckenridge Brewery, Denver",481,482
+"Peticolas Brewing Co., Dallas",482,483
+"Squatters, Salt Lake City",483,484
+"Blue Corn Brewery, Albuquerque",484,485
+"SweetWater Brewing Co., Atlanta",485,486
+"Great South Bay Brewery, Bay Shore",486,487
+"Denver Beer Company, Denver",487,488
+"Sly Fox Brewhouse, Phoenixville",488,489
+"Oskar Blues, Longmont",489,490
+"Weasel Boy Brewing Co., Zanesville",490,491
+"Bullfrog Brewery, Williamsport",491,492
+"Park Slope Brewing Company, Brooklyn",492,493
+"Max Lager’s Wood-Fired Grill & Brewery, Atlanta",493,494
+"Nodding Head Brewing, Philadelphia",494,495
+"Kootenai River Brewing Co., Bonners Ferry",495,496
+"Brugge Brasserie, Indianapolis",496,497
+"RAM Restaurant & Brewery, SeattleSeattle",497,498
+"Boscos Brewing, Memphis",498,499
+"Blackberry Farm Brewery, Walland",499,500
+"Elk Grove Brewery, Elk Grove",500,501
+"Hoppin’ Frog Brewing Co., Akron",501,502
+"Austin Beerworks, Austin",502,503
+"Bohemian Brewery, Midvale",503,504
+"HofbrauHaus Brewery and Biergarten at Station Casino, Kansas City",504,505
+"Rock Bottom, Phoenix",505,506
+"Huss Brewing, Tempe",506,507
+"Golden Valley Brewery and Pub, McMinnville",507,508
+"Diebolt Brewing Co., Denver",508,509
+"Thai Me Up Brewery, Jackson",509,510
+"Devils Backbone Brewing, Outpost",510,511
+"Short’s Brewing Co., Elk Rapids",511,512
+"Telluride Brewing Co., Telluride",512,513
+"Alameda Brewhouse, Portland",513,514
+"Pizza Port, San Diego",514,515
+"Jarre Creek Ranch Brewery, Castle Rock",515,516
+"Stoudt's Brewing, Adamstown",516,517
+"BJ's Restaurant & Brewery, Jantzen Beach/Lloyd Center/Clear Lake",517,518
+"Odell Brewing, Fort Collins",518,519
+"Big Horn Brewing, Tacoma",519,520
+"New River Brewing, Blacksburg",520,521
+"Thr3e Wise Men Brewing Co., Indianapolis",521,522
+"Rock Bottom, Seattle",522,523
+"The Lost Abbey, San Marcos",523,524
+"Brothers Craft Brewing, Harrisonburg",524,525
+"Rock Bottom, Arlington",525,526
+"Custom Brew Crafters, Honeoye Falls",526,527
+"Main Street Brewery, Corona",527,528
+"Big Horn Brewing, Addison",528,529
+"Eugene City Brewery, Eugene",529,530
+"Stormcloud Brewing Co., Frankfort",530,531
+"BJ's Restaurant & Brewery, ChandlerChandler",531,532
+"Dogwood Brewing Co., Atlanta",532,533
+"Big Horn Brewing, Lakewood",533,534
+"Rio Salado Brewing Company, Tempe",534,535
+"Black Project Spontaneous & Wild Ales, Denver",535,536
+"Mountain Sun Pub, Boulder",536,537
+"Wind River Brewing Co., Pinedale",537,538
+"Kern River Brewing, Kernville",538,539
+"The Covey Restaurant & Brewery, Fort Worth",539,540
+"Moon River Brewing Co., Savannah",540,541
+"Hopworks Urban Brewery, Portland",541,542
+"Pearl Brewing Co., Fort Worth",542,543
+"Steelhead Brewery, Eugene",543,544
+"Il Vicino Brewing, Albuquerque",544,545
+"Bagby Beer Co., Oceanside",545,546
+"Smog City Brewing, Torrance",546,547
+"Lakefront Brewery, Milwaukee",547,548
+"Rogue Ales, Portland",548,549
+"Glenwood Canyon Brewing, Glenwood",549,550
+"Castle Springs Brewing, Moultonborough",550,551
+"River’s Edge Brewing Co., Milford",551,552
+"RAM Restaurant, Schaumburg",552,553
+"Smugglers Brewpub, Telluride",553,554
+"Redhook Ale Brewery, Woodinville",554,555
+"Uinta Brewing, Salt Lake City",555,556
+"John Harvard's Brew House, Wayne",556,557
+"Old Town Brewing, Portland",557,558
+"Flyers Restaurant and Brewery, Oak Harbor",558,559
+"Horse Thief Hollow, Chicago",559,560
+"New River Brewing, Atlanta",560,561
+"Napa Smith Brewery, Napa",561,562
+"Peekskill Brewery, Peekskill",562,563
+"Central Waters Brewing Co., Junction City",563,564
+"C. H. Evans Brewing, Albany",564,565
+"Telegraph Brewing Co., Santa Barbara",565,566
+"Portland Brewing, Portland",566,567
+"Iron Hill Brewery, Newark",567,568
+"Steelhead Brewery, Burlingame",568,569
+"Gibb’s Hundred Brewing Co., Greensboro",569,570
+"Back Forty Beer Co., Gadsden",570,571
+"Dogfi sh Head Craft Brewery, Milton",571,572
+"Blitz-Weinhard Brewing, Tumwater",572,573
+"Bosque Brewing Co., Albuquerque",573,574
+"Harvester Brewing, Portland",574,575
+"von Trapp Brewing, Stowe",575,576
+"Wynkoop Brewing, Denver",576,577
+"Saint Archer Brewing Co., San Diego",577,578
+"Fat Heads Brewery, Middleburg Heights",578,579
+"Strange Brewing Co., Denver",579,580
+"Left Hand Brewing Co., Longmont",580,581
+"Holy Cow! Casino Café & Brewery, Las Vegas",581,582
+"Snow Goose Restaurant and Sleeping Lady Brewing Company, Anchorage",582,583
+"Oasis Brewery, Boulder",583,584
+"Salem Beer Works, Salem",584,585
+"Blue Moon Brewing Co., Golden",585,586
+"BJ's Restaurant & Brewery, Woodland Hills",586,587
+"Melvin Brewing, Jackson",587,588
+"Stewart's Brewing Co., Bear",588,589
+"Spanish Springs Brewing, The Villages",589,590
+"Kettlehouse Brewing Co., Missoula",590,591
+"The Bruery, Placentia",591,592
+"Fate Brewing Co., Scottsdale",592,593
+"New English Brewing Co., San Diego",593,594
+"FiftyFifty Brewing Co., Truckee",594,595
+"RAM International/Big Horn Brewing, Lakewood",595,596
+"Mammoth Brewing, Mammoth Lakes",596,597
+"Triple Rock Brewery, Berkeley",597,598
+"Beaver St. Brewery, Flagstaff",598,599
+"Delafield Brewhaus, Delafield",599,600
+"Pinthouse Pizza, Austin",600,601
+"Fat Head’s Brewery - N. Olmstead, North Olmsted",601,602
+"Redhook Ale Brewery, Portsmouth",602,603
+"Morgan Street Brewery, Saint Louis",603,604
+"Red Brick-Atlanta Brewing Co., Atlanta",604,605
+"Drake's Brewing, San Leandro",605,606
+"Twisted Pine Brewing Co., Boulder",606,607
+"Full Pint Brewing Co., North Versailles",607,608
+"Crow Hop Brewing Co., Loveland",608,609
+"Diamondback Brewery, Cleveland",609,610
+"BJ's Restaurant & Brewery, AZ/Boulder",610,611
+"RJ Rockers Brewing Co., Spartanburg",611,612
+"New Road Brew House, Collegeville",612,613
+"Colorado Brewery & Trading Co., Danbury",613,614
+"Port Brewing & The Lost Abbey, San Marcos",614,615
+"Brickstone Brewery, Bourbonnais",615,616
+"Empire Brewing Co. of Rochester, Rochester",616,617
+"Colorado Brewing Co./Draft House, Boulder",617,618
+"Tapistry Brewing Co., Bridgman",618,619
+"5 Rabbit Cerveceria, Bedford Park",619,620
+"Foothills Brewing, Winston-Salem",620,621
+"Prost Brewing, Denver",621,622
+"Sly Fox Brewhouse, Pottstown",622,623
+"Big Horn Brewing, Indianapolis",623,624
+"New South Brewing, Myrtle Beach",624,625
+"El Toro Brewing Co., Morgan Hill",625,626
+"RedRock Brewing Co., Salt Lake City",626,627
+"Allagash Brewing Co., Portland",627,628
+"South Park Brewing - CA, San Diego",628,629
+"Logsdon Organic Farm Brewery, Hood River",629,630
+"La Cumbre Brewing Co., Albuquerque",630,631
+"New Bohemia Brewing Co., Santa Cruz",631,632
+"Humperdinks Big Horn Brewing, Dallas",632,633
+"Rocky River Brewing, Rocky River",633,634
+"URBN St. Brewing Co., El Cajon",634,635
+"Shine Brewing Co., Boulder",635,636
+"Stone Brewing, San Marcos",636,637
+"MacTarnahan's Brewing, Portland",637,638
+"Shorts Brewing Co., Bellaire",638,639
+"Moab Brewery, Moab",639,640
+"La Conner Brewing Company, La Conner",640,641
+"Schaefer Brewing, Fogelsville",641,642
+"Hoptown Brewing, Pleasanton",642,643
+"Thirsty Dog Brewing, Akron/Canton",643,644
+"The Sandlot, Denver",644,645
+"Lander Brewing Co., Lander",645,646
+"Broadway Brewing, Denver",646,647
+"The Bruery, Anaheim",647,648
+"Humperdinks Big Horn Brewing, Lakewood",648,649
+"Barren Hill Tavern and Brewery, Lafayette Hill",649,650
+"Utah Brewers, Salt Lake City",650,651
+"TAPS Fish House & Brewery, Brea",651,652
+"The Commons Brewery, Portland",652,653
+"BRU Handbuilt Ales & Eats, Boulder",653,654
+"Track 7 Brewing Co. - Natomas, Sacramento",654,655
+"Minneapolis Town Hall Brewery, Minneapolis",655,656
+"Stillmank Brewing Co., Green Bay",656,657
+"Copper Kettle Brewing Co., Denver",657,658
+"Rock Bottom, Bellevue",658,659
+"Dock Street Brewery, Philadelphia",659,660
+"Midnight Sun Brewing Co., Anchorage",660,661
+"Sierra Blanca Brewing Co., Moriarty",661,662
+"Willoughby Brewing, Willoughby",662,663
+"Portsmouth Brewery, Portsmouth",663,664
+"Amicas, Salida",664,665
+"Trout Creek Brewing Company, Boulder",665,666
+"Mother Earth Brewing, Kinston",666,667
+"pFriem Family Brewers, Hood River",667,668
+"Pizza Port, Solana Beach",668,669
+"Beaver Street Brewery, Flagstaff",669,670
+"Grapevine Craft Brewery, Grapevine",670,671
+"The Alchemist, Waterbury",671,672
+"City Star Brewing, Berthoud",672,673
+"Maui Brewing, Lahaina",673,674
+"Crooked River Brewing, Cleveland",674,675
+"Lexington Avenue Brewery, Asheville",675,676
+"NoDa Brewing Co., Charlotte",676,677
+"Steamworks Brewing, Durango/Bayfield",677,678
+"Steelhead Brewery, Irvine",678,679
+"Great Basin Brewing, Reno",679,680
+"Buoy Beer Co., Astoria",680,681
+"Upstream Brewing, Omaha",681,682
+"Anderson Valley Brewing, Boonville",682,683
+"Boxing Bear Brewing Co., Albuquerque",683,684
+"Sleeping Giant Brewing Company, Billings",684,685
+"Sun King Brewery, Indianapolis",685,686
+"Cascade Lakes Brewing Co., Redmond",686,687
+"Brewery Ommegang, Cooperstown",687,688
+"Wolf Pack Brewing, West Yellowstone",688,689
+"Brewzzi West Palm, West Palm Beach",689,690
+"Michelob Brewing Co., Saint Louis",690,691
+"Stoudt Brewery, Adamstown",691,692
+"Sockeye Brewing, Boise",692,693
+"Yak & Yeti Restaurant & Brewpub, Arvada",693,694
+"CB & Pott’s Restaurant & Brewery (Highlands Ranch), Highlands Ranch",694,695
+"Highland Brewing Co., Asheville",695,696
+"Fair Winds Brewing Co., Lorton",696,697
+"Saucony Creek Brewing Co., Kutztown",697,698
+"Bridge Port Brewing Company, Portland",698,699
+"Dostal Alley BrewPub, Central City",699,700
+"Pelican Brewing Co., Tillamook",700,701
+"Newburgh Brewing Co., Newburgh",701,702
+"Breakside Brewery, Milwaukie",702,703
+"Mission Brewery, San Diego",703,704
+"Red Rock Brewing, Salt Lake City",704,705
+"Fat Head’s Brewery & Saloon, North Olmsted",705,706
+"Walnut Brewery, Boulder",706,707
+"Empire Brewery of Rochester, Rochester",707,708
+"The Beer Co., Detroit",708,709
+"Community Beer Co., Dallas",709,710
+"C.B. & Potts, Englewood",710,711
+"Otto Brothers Brewing Co., Victor",711,712
+"Black Star Co-op, Austin",712,713
+"Rock Bottom, Milwaukee",713,714
+"Hoppers Grill & Brewery, Midvale",714,715
+"Rogue Brewery, Newport",715,716
+"Old Dominion Brewing, Ashburn",716,717
+"Gordon Biersch Brewery, Broomfield",717,718
+"Mad Fox Brewing Co., Falls Church",718,719
+"Roadhouse Brewing Co., Jackson",719,720
+"Perennial Artisan Ales, St. Louis",720,721
+"JAFB Wooster Brewery, Wooster",721,722
+"The Church Brew Works, Pittsburgh",722,723
+"The Olde Mecklenburg Brewery, Charlotte",723,724
+"Watson Brothers Brewhouse, Cincinnati",724,725
+"Mickey's Brewing, Milwaukee",725,726
+"Huntington Beach Beer Co., Huntington Beach",726,727
+"Yazoo Brewing, Nashville",727,728
+"Rhinegeist Brewing, Cincinnati",728,729
+"Gun Hill Brewing Co., Bronx",729,730
+"Hereford & Hops Brewpub, Wausau",730,731
+"Buckbean Brewing Co., Reno",731,732
+"New Glarus Brewing, New Glarus",732,733
+"Great Northern Brewing, Whitefish",733,734
+"Great American Restaurants, Centreville",734,735
+"Logsdon Farmhouse Ales, Hood River",735,736
+"Bear Republic Brewing, Healdsburg",736,737
+"Waterloo Brewing Company, Austin",737,738
+"Mill Creek Brewpub, Walla Walla",738,739
+"Heartland Brewery, New York",739,740
+"Brewzzi, West Palm Beach",740,741
+"Smuttynose Brewing, Portsmouth",741,742
+"Platform Beer Co., Cleveland",742,743
+"TAPS Fish House & Brewery, BreaBrea",743,744
+"Port Brewing Pizza Port Carlsbad, Carlsbad",744,745
+"SKA Brewing, Durango",745,746
+"Snake River Brewing, Jackson",746,747
+"North by Northwest, Austin",747,748
+"Springfield Brewing, Springfield",748,749
+"Big Horn Brewing, Denver",749,750
+"Detroit Beer Co., Detroit",750,751
+"Blitz-Weinhard Brewing, Hood River",751,752
+"Pale Fire Brewing Co., Harrisonburg",752,753
+"Redwood Brewing, Flint",753,754
+"Our Mutual Friend Malt & Brew, Denver",754,755
+"Spanish Peaks Brewing, Stamford",755,756
+"Port Brewing Co. Pizza Port Carlsbad, Carlsbad",756,757
+"Montgomery Brewing Co., Montgomery",757,758
+"Mad River Brewing Co., Blue Lake",758,759
+"Great Adirondack Brewing Co., Lake Placid",759,760
+"Propolis Brewing, Port Townsend",760,761
+"Pedernales Brewing Co., Fredericksburg",761,762
+"Sports City Café & Brewery, La Jolla",762,763
+"Stone Brewing, Escondido",763,764
+"Coda Brewing Co., Aurora",764,765
+"St. Florian’s Brewery, Windsor",765,766
+"Breakwater Brewing Co., Oceanside",766,767
+"Back Street Brewery, Vista",767,768
+"Natty Greene’s Brewing Co., Greensboro",768,769
+"Walking Man Brewing, Stevenson",769,770
+"Nebraska Brewing Co., La Vista",770,771
+"DESTIHL - Champaign, Champaign",771,772
+"Tahoe Mountain Brewing, Truckee",772,773
+"Sierra Nevada Brewing, Chico",773,774
+"Wander Brewing, Bellingham",774,775
+"21st Amendment, San Leandro",775,776
+"Gordon Biersch Brewery, Chattanooga",776,777
+"Lickinghole Creek Craft Brewery, Goochland",777,778
+"Sullivan’s Black Forest Brew Haus & Grill, Frankenmuth",778,779
+"Wagner Valley Brewing Co., Lodi",779,780
+"Boundary Bay Brewery, Bellingham",780,781
+"Flying Fish Brewing Co., Cherry Hill",781,782
+"Weyerbacher Brewing Co., Easton",782,783
+"Flix Brewhouse - Indy, Carmel",783,784
+"Rock Bottom, Long Beach",784,785
+"Minocqua Brewing Company, Minocqua",785,786
+"The Boston Beer Co., Boston",786,787
+"Rahr & Sons Brewing, Fort Worth",787,788
+"Baltimore Brewing, Baltimore",788,789
+"Karl Strauss Brewing, La Jolla",789,790
+"Adelbert’s Brewery, Austin",790,791
+"Charleville Vineyard & Microbrewery, Ste. Genevieve",791,792
+"Exile Brewing, Des Moines",792,793
+"Short’s Brewing Co., Bellaire",793,794
+"Kalamazoo Brewing, Kalamazoo",794,795
+"Colorado Belle, Laughlin",795,796
+"Erie Brewing, Erie",796,797
+"Lompoc Brewing - The 5th Quadrant, Portland",797,798
+"(512) Brewing Co., Austin",798,799
+"Flying Dog Brewery, Denver",799,800
+"Pizza Port, San Clemente",800,801
+"Alltech's Lexington Brewing Co., Lexington",801,802
+"Wynwood Brewing Co., Miami",802,803
+"Commonwealth Brewing, Boston",803,804
+"Tap It Brewing Co., San Luis Obispo",804,805
+"Spanish Peaks Brewing, King City",805,806
+"Tampa Bay Brewing Co., Tampa",806,807
+"Karl Strauss Brewing, Costa Mesa",807,808
+"Yards Brewing Co., Philadelphia",808,809
+"Brewery Rickoli, Wheat Ridge",809,810
+"Long Valley Pub, Long Valley",810,811
+"The Royal Oak Brewery, Royal Oak",811,812
+"O'Fallon Brewery, O'Fallon",812,813
+"Piece Brewery, Chicago",813,814
+"Bethlehem Brew Works, Bethlehem",814,815
+"Iron Hill Brewery, LancasterLancaster",815,816
+"BJ's Restaurant & Brewery, Chandler",816,817
+"Brewzzi, Boca Raton",817,818
+"Opa-Opa Brewing Co., Southampton",818,819
+"Mystic Brewery, Chelsea",819,820
+"West O Beer, West Okoboji",820,821
+"Elliott Bay Brewing, Seattle",821,822
+"Bob's House of Brews, Grand Rapids",822,823
+"Bottoms Up Brewing, Pinedale",823,824
+"Copper Tank Brewing Co., Dallas",824,825
+"CB and Potts Restaurant and Brewery, Fort Collins",825,826
+"Coastal Empire Beer Co., Savannah",826,827
+"Hollister Brewing Co., Goleta",827,828
+"Ram Production Brewery, Tacoma",828,829
+"Amherst Brewing, Amherst",829,830
+"Gordon Biersch Brewery, Rockville",830,831
+"Tommyknocker Brewery, Idaho Springs",831,832
+"The Civil Life Brewing Co., St. Louis",832,833
+"The Stroh Brewery Company, Fogelsville",833,834
+"Fitgers Brewhouse, Duluth",834,835
+"Spangalang Brewery, Denver",835,836
+"Bemidji Brewing Co., Bemidji",836,837
+"Three Floyds Brewing Co., Munster",837,838
+"Capital Brewery, Middleton",838,839
+"New Planet Beer Co., Boulder",839,840
+"James Page Brewing, Minneapolis",840,841
+"Headlands Brewing Co., Mill Valley",841,842
+"C.B. Potts Restaurant & Brewery (Fort Collins), Fort Collins",842,843
+"Mispillion River Brewing, Milford",843,844
+"Capitol City Brewing, Washington",844,845
+"August Schell Brewing, New Ulm",845,846
+"Hamm's Brewing Company, Milwaukee",846,847
+"Schooner’s Grille & Brewery, Antioch",847,848
+"Silver Moon Brewing, Bend",848,849
+"Il Vicino Brewing, Colorado Springs",849,850
+"John Harvard's Brew House, Framingham",850,851
+"Indeed Brewing Co., Minneapolis",851,852
+"J.J. Bitting Brewing Co., Woodbridge",852,853
+"Blackstone Brewing, Nashville",853,854
+"Blind Tiger Brewery, Topeka",854,855
+"EarthBread + Brewery, Philadelphia",855,856
+"The Great Dane Pub, Madison",856,857
+"Rock Bottom, Broomfield",857,858
+"New Mexico Brewers Guild, Santa Fe",858,859
+"Stuft Pizza & Brewing Co., San Diego",859,860
+"Blue Mountain Barrel House, Afton",860,861
+"Rockyard American Grill & Brewing Co., Castle Rock",861,862
+"Leinenkugel Brewing, Phoenix",862,863
+"Iron Hill Brewery, Media",863,864
+"Vino's Pizza Pub, Little Rock",864,865
+"DC Brau Brewing Co., Washington",865,866
+"Broken Compass Brewing, Breckenridge",866,867
+"Figueroa Mountain Brewing, Santa Barbara",867,868
+"H.C. Berger Brewing, Fort Collins",868,869
+"Bottle Logic Brewing, Anaheim",869,870
+"Equinox Brewing, Fort Collins",870,871
+"Dornbusch Brewing Co., Ipswich",871,872
+"Four Seasons Brewing Co., Latrobe",872,873
+"Voodoo Brewery, Meadville",873,874
+"Frederick Brewing Company, Frederick",874,875
+"Pabst Brewing, Fogelsville",875,876
+"Brew Moon, Needham",876,877
+"Fredericksburg Brewing, Fredericksburg",877,878
+"Sacramento Brewing Co., Sacramento",878,879
+"Marin Brewing, Larkspur",879,880
+"John Harvard's Brew House, Boston",880,881
+"T-Bonz Homegrown Ales, Myrtle Beach",881,882
+"RAM Restaurant, Indianapolis",882,883
+"Red Star Brewery, Greensburg",883,884
+"Cambridge Brewing, Torrington",884,885
+"Coast Brewing, Biloxi",885,886
+"Logboat Brewing Co., Columbia",886,887
+"Troegs Brewery, Harrisburg",887,888
+"LaConner Brewing Co., LaConner",888,889
+"Lumberyard Brewing Co., Flagstaff",889,890
+"Rainier Brewing, San Antonio",890,891
+"AleSmith Brewing, San Diego",891,892
+"Jolly Pumpkin Artisan Ales, Dexter",892,893
+"Rock Bottom, Bethseda",893,894
+"Echo Brewing Co., Frederick",894,895
+"Wasatch Brewery, Park City",895,896
+"Thunder Canyon Brewery, Tucson",896,897
+"Thirsty Dog Brewing, Akron",897,898
+"Carver Brewing, Durango",898,899
+"Bent River Brewing Co., Moline",899,900
+"Tröegs Brewing Co., Harrisburg",900,901
+"Great Divide Brewing, Denver",901,902
+"McHale’s Brewhouse, Chattanooga",902,903
+"John Harvard's Brew House, Cambridge",903,904
+"Speakeasy Ales & Lagers, San Francisco",904,905
+"Stoddard's Brewhouse and Eatery, Sunnyvale",905,906
+"Trumer Brauerei Berkeley, Berkeley",906,907
+"Rock Bottom, Broomfi eld",907,908
+"Wagner Brewing Company, Lodi",908,909
+"Pelican Brewing Co., Pacifi c City",909,910
+"White Bluffs Brewing, Richland",910,911
+"Big Bear Brewing Company, Coral Springs",911,912
+"Boulder Beer Co., Boulder",912,913
+"Iron Hill Brewery, Wilmington",913,914
+"Wiley Roots Brewing Co., Greeley",914,915
+"Olde Auburn Ale House, Auburn",915,916
+"Jailbreak Brewing Co., Laurel",916,917
+"Commonwealth Brewing, New York",917,918
+"SanTan Brewing Co., Chandler",918,919
+"Left Coast Brewing Co., San Clemente",919,920
+"Morgan Street Brewery, St. Louis",920,921
+"Kannah Creek Brewing Co., Grand Junction",921,922
+"Oskar Blues, Lyons",922,923
+"Sleeping Lady Brewing Company, Anchorage",923,924
+"Big Island Brewhaus, Kamuela",924,925
+"Blue Point Brewing Co., Patchogue",925,926
+"Steamworks Brewing, Durango",926,927
+"BJ's Restaurant & Brewery, Portland",927,928
+"Alcatraz Brewing Co., Littleton",928,929
+"Mad Anthony Brewing, Fort Wayne",929,930
+"Miller Brewing, Golden",930,931
+"Reuben's Brews, Seattle",931,932
+"Lone Tree Brewing Co., Lone Tree",932,933
+"Big River Grille, Chattanooga",933,934
+"Auburn Alehouse, Auburn",934,935
+"Sycamore Brewing, Charlotte",935,936
+"Butte Creek Brewing Co., Chico",936,937
+"Pete's Place, Krebs",937,938
+"Black Bottle Brewery, Fort Collins",938,939
+"Steelhead Brewery, San Francisco",939,940
+"Pig’s Eye Brewing Co., Woodbury",940,941
+"Barley Brothers Brewery, Lake Havasu City",941,942
+"Brew Moon, Braintree",942,943
+"Figueroa Mountain Brewing, Arroyo Grande",943,944
+"Great Basin Brewing, RenoReno",944,945
+"Tabernash Brewing, Longmont",945,946
+"Church Brew Works, Pittsburgh",946,947
+"IL Vicino Brewing Co., Albuquerque",947,948
+"Hardywood Park Craft Brewery, Richmond",948,949
+"Beachwood BBQ & Brewing, Long Beach",949,950
+"Oggi’s Pizza & Brewing Co., San Clemente",950,951
+"Issaquah Brewhouse, Issaquah",951,952
+"Silver City Brewery, Silverdale",952,953
+"Anheuser-Busch, Saint Louis",953,954
+"Paducah Beer Werks, Paducah",954,955
+"Alcatraz Brewing Co., Indianapolis",955,956
+"The Willoughby Brewing Co., Willoughby",956,957
+"Brasserie Saint James, Reno",957,958
+"Basil T's Brewery & Italian Grill, Red Bank",958,959
+"Widmer Brothers Brewing, Portland",959,960
+"The Beer Co., San Diego",960,961
+"Barrio Brewing Co., Tucson",961,962
+"Raleigh Brewing Co., Raleigh",962,963
+"Second Street Brewery, Santa Fe",963,964
+"San Diego Brewing Co., San Diego",964,965
+"Hub City Brewery, Lubbock",965,966
+"Discretion Brewing, Soquel",966,967
+"Grimm Brothers Brewhouse, Loveland",967,968
+"Capitol City Brewing, Arlington",968,969
+"Brew Bus Brewing, Tampa",969,970
+"Millstream Brewing, Amana",970,971
+"Victory Brewing Co., Downingtown",971,972
+"Mankato Brewery, Mankato",972,973
+"Atwater Block Brewery, Detroit",973,974
+"Station 26 Brewing Co., Denver",974,975
+"Sweetwater Brewing, Centreville",975,976
+"Aiken Brewing, Aiken",976,977
+"Jacob Leinenkugel Brewing, Chippewa Falls",977,978
+"Pabst Brewing, San Antonio",978,979
+"Firestone Walker, Buellton",979,980
+"Big Buck Brewery and Steakhouse, Auburn Hills",980,981
+"Carson’s Brewery, Evansville",981,982
+"Sound Brewery, Poulsbo",982,983
+"Hook & Ladder Brewing Company, Oakland",983,984
+"Kansas City Bier Co., Kansas City",984,985
+"Pump House Restaurant & Brewery, Longmont",985,986
+"Pony Express Brewing, Olathe",986,987
+"Motorworks Brewing, Bradenton",987,988
+"Water Street Brewery, Milwaukee",988,989
+"Comrade Brewing Co., Denver",989,990
+"The Cowboy Restaurant & Brewery, Scottsdale",990,991
+"Bent Paddle Brewing Co., Duluth",991,992
+"Upslope Brewing Co., Boulder",992,993
+"Kinetic Brewing Co., Lancaster",993,994
+"The Tap Beer Co., Bloomington",994,995
+"The Fort Collins Brewery, Fort Collins",995,996
+"Titanic Brewing, Coral Gables",996,997
+"Heileman Brewing Company, San Antonio",997,998
+"Big Sky Brewing Co., Missoula",998,999
+"Central Coast Brewing Co., San Luis Obispo",999,1000
+"The Powerhouse Brewing Co., Sebastopol",1000,1001
+"Drake’s Brewing Co., San Leandro",1001,1002
+"John Harvard's Brew House, Braintree",1002,1003
+"Saint Arnold Brewing, Houston",1003,1004
+"Piney River Brewing Co., Bucyrus",1004,1005
+"Blue Mountain Barrel House, Arrington",1005,1006
+"Uncle Billy’s Brew & Que, Lake TravisAustin",1006,1007
+"Calhoun's Restaurant, Knoxville",1007,1008
+"Brasserie Monx Ltd., Seattle",1008,1009
+"Great Lakes Brewing, Cleveland",1009,1010
+"Back Bay Brewing Company, Boston",1010,1011
+"Green Flash Brewing Co., San Diego",1011,1012
+"Crabtree Brewing Co., Greeley",1012,1013
+"Sly Fox Brewhouse, Royersford",1013,1014
+"Mystery Brewing Co., Hillsborough",1014,1015
+"Rocky River Brewing, Sevierville",1015,1016
+"Local Color Brewing Company, Novi",1016,1017
+"Craft Brew Alliance - Kona Brewery, Kailua Kona",1017,1018
+"Alltech’s Lexington Brewing Co., Lexington",1018,1019
+"Hyde Park Brewing Co., Hyde Park",1019,1020
+"Laughing Dog Brewing, Ponderay",1020,1021
+"Susquehanna Brewing Co., Pittston",1021,1022
+"McKenzie Brew House, Glen Mills",1022,1023
+"FATE Brewing Co., Boulder",1023,1024
+"Pisgah Brewing Co., Black Mountain",1024,1025
+"Surly Brewing Co., Brooklyn Center",1025,1026
+"Pyramid Breweries, Seattle",1026,1027
+"Sudwerk Privatbrauerei Hübsch, Davis",1027,1028
+"Stevens Point Brewery, Stevens Point",1028,1029
+"Carolina Brewery, Pittsboro",1029,1030
+"Harpoon Brewery, Boston",1030,1031
+"Liberty Street Brewing Company, Akron",1031,1032
+"P.H. Woods Restaurant, Moreno Valley",1032,1033
+"Cannonball Creek Brewing Co., Golden",1033,1034
+"Gordon Biersch Brewery, San Jose",1034,1035
+"Three Needs, Burlington",1035,1036
+"Chuckanut Brewery, Bellingham",1036,1037
+"Sprecher Brewing, Glendale",1037,1038
+"Lager Heads Brewing Co., Medina",1038,1039
+"Rock Bottom, Scottsdale",1039,1040
+"Upland Brewing, Bloomington",1040,1041
+"Rip Current Brewery, San Marcos",1041,1042
+"The Spoetzl Brewery, Shiner",1042,1043
+"Three Brothers Brewing, Harrisonburg",1043,1044
+"Ska Brewing, Durango",1044,1045
+"Creature Comforts Brewing Co., Athens",1045,1046
+"Empire Brewing Company of Rochester, Rochester",1046,1047
+"Barley Island Brewing Co., Noblesville",1047,1048
+"Rubicon Brewing Co., Sacramento",1048,1049
+"Boston Beer Co., Boston",1049,1050
+"CB & Potts Restaurant & Brewery, Broomfield",1050,1051
+"Market Garden Brewery, Cleveland",1051,1052
+"LowDown Brewery + Kitchen, Denver",1052,1053
+"Coronado Brewing Company Brewpub, Coronado",1053,1054
+"Triumph Brewing, Philadelphia",1054,1055
+"Madison River Brewing Co., Belgrade",1055,1056
+"LoneRider Brewing Co., Raleigh",1056,1057
+"Anheuser-Busch, St. Louis",1057,1058
+"Big Horn Brewing, Dallas",1058,1059
+"The Unlikely Cowboy Restaurant & Brewery, Scottsdale",1059,1060
+"Colorado Boy Pub & Brewery, Ridgway",1060,1061
+"Redfish New Orleans Brewhouse, Boulder",1061,1062
+"DuClaw Brewing Co., Rosedale",1062,1063
+"Nexus Brewery, Albuquerque",1063,1064
+"Narragansett Brewing Co., Providence",1064,1065
+"Lion Bridge Brewing Co., Cedar Rapids",1065,1066
+"Titletown Brewing Co., Green Bay",1066,1067
+"No-Li Brewhouse, Spokane",1067,1068
+"Block 15, Corvallis",1068,1069
+"Moosejaw Pizza and Brewing, Wisconsin Dells",1069,1070
+"Miller Brewing, Milwaukee",1070,1071
+"Cottonwood Brewery, Boone",1071,1072
+"Avery Brewing, Boulder",1072,1073
+"Emmett’s Brewing Co., West Dundee",1073,1074
+"Draught Works, Missoula",1074,1075
+"CJ's Brewery & Grill, La Jolla",1075,1076
+"Captain Lawrence Brewing, Elmsford",1076,1077
+"Ham’s Restaurant & Brewhouse, Greenville",1077,1078
+"Harmon Restaurant & Brewery, Tacoma",1078,1079
+"choc Beer Co., Krebs",1079,1080
+"Thirsty Planet Brewing, Austin",1080,1081
+"Big Horn Brewing, Wheeling",1081,1082
+"Arcadia Brewing Co., Battle Creek",1082,1083
+"Oakshire Brewing, Eugene",1083,1084
+"Springfi eld Brewing Co., Springfi eld",1084,1085
+"Rock Bottom, King of Prussia",1085,1086
+"Lost Rhino Brewing Co., Ashburn",1086,1087
+"Augusta Brewing Co., Washington",1087,1088
+"Choc Beer Co., Krebs",1088,1089
+"BJ's Restaurant & Brewery, Temple",1089,1090
+"Bitter Creek Brewing, Rock Springs",1090,1091
+"Harmon Pub & Brewery, Tacoma",1091,1092
+"Main Street Brewery Lamppost Pizza, Corona",1092,1093
+"Red Lodge Ales, Red Lodge",1093,1094
+"Rock Bottom, Portland",1094,1095
+"Stoudts Brewing Co., Adamstown",1095,1096
+"Mad Anthony Brewing, Ft. Wayne",1096,1097
+"Backcountry Brewery, Frisco",1097,1098
+"McKenzie Brew House, Malvern",1098,1099
+"Trout Brook Brewing Company, Hartford",1099,1100
+"Yak and Yeti Brewpub, Arvada",1100,1101
+"Redhook Brewery, Woodinville",1101,1102
+"Pizza Port, Carlsbad",1102,1103
+"Bill's Tavern & Brewhouse, Cannon Beach",1103,1104
+"West Brothers Brewery, Eugene",1104,1105
+"Triple C Brewing, Charlotte",1105,1106
+"Boscos Brewing, Little Rock",1106,1107
+"SLO Brewing, Paso Robles",1107,1108
+"Dry Dock Brewing, South Dock",1108,1109
+"The Brooklyn Brewery, Brooklyn",1109,1110
+"Kuhnhenn Brewing Co., Warren",1110,1111
+"Elysian Brewery, Seattle",1111,1112
+"Ninkasi Brewing Co., Eugene",1112,1113
+"Pig's Eye Brewing Co., St. Paul",1113,1114
+"Bootlegger’s Brewery, Fullerton",1114,1115
+"Cleveland ChopHouse and Brewery, Cleveland",1115,1116
+"Campbell Brewing Co., Campbell",1116,1117
+"Henry Weinhard's Brewing, Milwaukee",1117,1118
+"Buckhead Brewery & Grill, Stockbridge",1118,1119
+"Aspen Brewing Co., Aspen",1119,1120
+"Crooked Stave Artisan Beer Project, Denver",1120,1121
+"Sandlot Brewery, Denver",1121,1122
+"7th Settlement Brewery, Dover",1122,1123
+"Thomas Creek Brewery, Greenville",1123,1124
+"Namaste Brewing at the Whip In, Austin",1124,1125
+"Hops Restaurant Bar and Brewery, Tampa",1125,1126
+"West Bros Brewery, Eugene",1126,1127
+"Great Dane Pub, Madison",1127,1128
+"Crossroads Brewing Co., Athens",1128,1129
+"FireHouse Grill & Brewery, Sunnyvale",1129,1130
+"Cedar Creek Brewery, Seven Points",1130,1131
+"Schooner's Grille & Brewery, Antioch",1131,1132
+"Rock Bottom, Orland Park",1132,1133
+"BrickStone Brewery, Bourbonnais",1133,1134
+"Jack’s Abby Brewing, Framingham",1134,1135
+"Main Street Station 777 Brewpub, Las Vegas",1135,1136
+"Wicked Weed Brewing, Candler",1136,1137
+"Black Market Brewing Co., Temecula",1137,1138
+"Big Horn Brewing, Westminster",1138,1139
+"Smuggler's Brewpub, Telluride",1139,1140
+"Lavery Brewing Co., Erie",1140,1141
+"Vintage Brewing Co., Madison",1141,1142

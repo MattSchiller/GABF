@@ -84,109 +84,158 @@ var ClientUI = React.createClass({
   render: function() {
     return (
       <div id='UI'>
-        <Map markers={this.state.markers} />
+        <Map mapData={this.props.mapData} markers={this.state.markers} />
         <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
       </div>
       );
   }
 });
 var Map = React.createClass({
+  getInitialState: function() {
+    return ({ myID: 'map' });
+  },
+  
   componentWillMount: function() {
     this.numMarkers = this.props.markers.length;
-    console.log(this.numMarkers);
   },
   
   componentDidMount: function() {
-    this.componentWillUpdate( this.props );
+    this._drawMap();
+    this._massageMarkers(this.props)
+    this._drawMarkers();
+    window.addEventListener('resize', this._handleResize);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this._handleResize);
   },
   
-	componentWillUpdate: function(nextProps){
-		var myMarkers;
-		this.map = new GMaps({
-			div: '#map',
-			lat: 37.09024,
-      lng: -95.712891,
-      zoom: 4
-		});
-		
-		myMarkers = this._massageMarkers(nextProps);
-		
-		for (var z=0; z<myMarkers.length; z++){
-		  this.map.addMarker(myMarkers[z]);
-		}
-		
-		//console.log('In Map, myMarkers:', myMarkers);
-	},
-	
-	_massageMarkers: function(nextProps) {
-	  var myMarkers = [],
-	      markerCount = [],
+  componentWillUpdate: function(nextProps) {
+    this._massageMarkers(nextProps)
+    this._drawMarkers();
+  },
+  
+  _handleResize: function() {
+    console.log("I'll add the code for resizing later");
+  },
+  
+  _drawMap: function() {
+    this.margin = {top: 10, left: 10, bottom: 10, right: 10};
+    this.width = parseInt(d3.select('#map').style('width'));
+    this.width = this.width - this.margin.left - this.margin.right;
+    this.mapRatio = 0.5;
+    this.height = this.width * this.mapRatio;
+        
+    this.projection = d3.geo.albersUsa()
+        .scale(this.width)
+        .translate([this.width/2,this.height/2]);
+    
+    this.path = d3.geo.path()
+        .projection(this.projection);
+    
+    this.svg = d3.select("#"+this.state.myID).append("svg")
+        .attr("width", this.width)
+        .attr("height", this.height);
+        
+    var g = this.svg.append("g");
+    
+    g.selectAll("path")
+        .data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features)
+      .enter()
+        .append("path")
+        .attr("d", this.path)
+        .attr("class", "state")
+      ;
+  },
+
+  _drawMarkers: function() {
+    console.log(this.myMarkers);
+    
+    var projection = this.projection;
+    
+    //circles are too big!
+    
+    var markers = this.svg.selectAll(".mark")
+                    .data(this.myMarkers)
+                  .enter()
+                    .append("circle")
+                    .attr('class','mark')
+                    .attr('r', function(d) { return Math.min(d.myCount/2, 5) + 'px'; })
+                    .attr("transform", function(d) {
+                        if ( projection([ d.lng, d.lat ]) === null) {
+                          console.log('in a null circle, d:', d);
+                          return 'translate(0, 0)';
+                        }
+                        return "translate(" + projection([ d.lng, d.lat ]) + ")";
+                      });
+  },
+  
+	_massageMarkers: function(myProps) {
+    var markerCount = [],
 	      y = 0,
 	      myLat, myLng, markerIndex;
 	      
-	  for (var z=0; z<nextProps.markers.length; z++) {                //Check each marker
-	    if (nextProps.markers[z]['show']===false) continue;           //Not showing, skip it
-	    myLat = nextProps.markers[z]['LL'].lat;
-	    myLng = nextProps.markers[z]['LL'].lng;
+    this.myMarkers = [];
+	      
+	  for (var z=0; z<myProps.markers.length; z++) {                //Check each marker
+	    if (myProps.markers[z]['show']===false) continue;           //Not showing, skip it
+	    
+	    myLat = myProps.markers[z]['LL'].lat;
+	    myLng = myProps.markers[z]['LL'].lng;
+	    
 	    if (markerCount[ myLat +'-'+ myLng ] === undefined) {         //First time this location has been seen in the list
 	      markerCount[ myLat +'-'+ myLng ] = 1;
-	      myMarkers = this._writeMarker(myMarkers, nextProps.markers[z], true);
+	      this._writeMarker(myProps.markers[z], true);
         y++;
 	    } else {                                                      //We've seen this location before
-	      markerIndex = this._findMarker(myMarkers, myLat, myLng);
+	      markerIndex = this._findMarker(myLat, myLng);
 	      if (markerIndex > -1) {                                     //We've found our former marker index
-	        this._writeMarker(myMarkers, nextProps.markers[z], false, markerIndex);
+	        this._writeMarker(myProps.markers[z], false, markerIndex);
 	      }
 	    }
 	  }
 	  
 	  this.numMarkers = y;
-	  return myMarkers;
+	  this.myMarkers;
 	},
 	
-	_findMarker: function(myMarkers, lat, lng) {
+	_findMarker: function(lat, lng) {
 	  var z = 0;
-	  while (z<myMarkers.length) {
-	    if (myMarkers[z].lat === lat && myMarkers[z].lng === lng) return z;
+	  while (z<this.myMarkers.length) {
+	    if (this.myMarkers[z].lat === lat && this.myMarkers[z].lng === lng) return z;
 	    z++;
 	  }
 	  return -1;
 	},
-	
-	_writeMarker: function(myMarkers, awardRecord, isNew, y) {
-	  //Handles converting data into the gMaps friendly marker data & maintains list of awards on a marker
+
+	_writeMarker: function(awardRecord, isNew, y) {
+	  //Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
 	  
 	  if (isNew) {
-	    myMarkers.push( {} );
-	    y = myMarkers.length-1;
+	    this.myMarkers.push( {} );
+	    y = this.myMarkers.length-1;
 	    
-      myMarkers[y].lat = awardRecord['LL'].lat;
-      myMarkers[y].lng = awardRecord['LL'].lng;
+      this.myMarkers[y].lat = awardRecord['LL'].lat;
+      this.myMarkers[y].lng = awardRecord['LL'].lng;
       
-      myMarkers[y].myCount = 0;
+      this.myMarkers[y].myCount = 0;
  
-      myMarkers[y].mouseover = function(e){                                   //On hover, show: (count) City, ST
+      /*myMarkers[y].mouseover = function(e){                                   //On hover, show: (count) City, ST
         masterInfoWindow.close();
         masterInfoWindow.setContent(this.hoverContent);
         masterInfoWindow.open(this.map, this);
       };
-      //myMarkers[y].mouseout = function(){
-      //  masterInfoWindow.close();
-      //};
+      */
       
-      myMarkers[y].myAwards = '';
+      this.myMarkers[y].myAwards = '';
 	  }
 	  
 	  
 	  //Write to the marker some formatting and such
-	  myMarkers[y].myCount++;
-	    
-    if (myMarkers[y].myCount > 9) myMarkers[y].label = '+';
-    else myMarkers[y].label = String( myMarkers[y].myCount );
- 
-    myMarkers[y].hoverContent = '(' + myMarkers[y].myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
+	  this.myMarkers[y].myCount++;
+	  
+    this.myMarkers[y].hoverContent = '(' + this.myMarkers[y].myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
     
-    myMarkers[y].myAwards += (
+    this.myMarkers[y].myAwards += (
       '<div id="awardView">' +
         '<b>Year:</b> ' + awardRecord['year'] +
         ' <b>Medal:</b> ' + awardRecord['medal'] +
@@ -195,27 +244,18 @@ var Map = React.createClass({
         ' <b>Brewery:</b> ' + awardRecord['brewery'] +
       '</div>'
     );
-    
-    myMarkers[y].click = function(e) {
-      masterInfoWindow.close();
-      masterInfoWindow.setContent(this.myAwards);
-      masterInfoWindow.open(this.map, this);
-    };
-	    
-	  return myMarkers;
 	},
-	
-	render: function() {
-	  //console.log('rendering, numMarkers:',this.numMarkers);
-		return (
+	  
+  render: function() {
+    console.log('rendering Map');
+    return (
 			<div id="map-holder">
 				<p id='loading'>Loading map...</p>
-				<div id='map'></div>
+				<div id={this.state.myID}></div>
 				<div id='markerCounter'>{this.numMarkers}</div>
 			</div>
 		);
-	}
-
+  },
 });
 var FilterBox = React.createClass({
   render: function() {
@@ -302,11 +342,13 @@ var FilterItem = React.createClass({
   }
 });
 
-function pullData(dir, locFile, awardsFile) {
+function pullData(dir, locFile, awardsFile, mapFile) {
   var fileReturn = new XMLHttpRequest(),
       fileReturn2 = new XMLHttpRequest(),
+      mapReturn = new XMLHttpRequest(),
       myRequests = [];
       
+  myRequests.push(false);
   myRequests.push(false);
   myRequests.push(false);
 
@@ -314,14 +356,22 @@ function pullData(dir, locFile, awardsFile) {
     if (fileReturn.readyState==4 && fileReturn.status==200)
     {
       myRequests[0]=true;
-      if (myRequests[0]===myRequests[1]) massage();
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
     }
   }
   fileReturn2.onreadystatechange = function() {
     if (fileReturn2.readyState==4 && fileReturn2.status==200)
     {
       myRequests[1]=true;
-      if (myRequests[0]===myRequests[1]) massage();
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
+    }
+  }
+  mapReturn.onreadystatechange = function() {
+    if (mapReturn.readyState==4 && mapReturn.status==200)
+    {
+      myRequests[2]=true;
+      //console.log('just got mapData:', mapReturn.responseText);
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
     }
   }
   
@@ -329,17 +379,19 @@ function pullData(dir, locFile, awardsFile) {
   fileReturn.send();
   fileReturn2.open("GET", dir+awardsFile, true);
   fileReturn2.send();
+  mapReturn.open("GET", dir+mapFile, true);
+  mapReturn.send();
   
   var massage = function() {
   //Data Massage
     var latLongs = $.csv.toObjects(fileReturn.responseText),
         awards = $.csv.toArrays(fileReturn2.responseText),
+        map = JSON.parse(mapReturn.responseText),
         finalData = [], row = [], year, style, ttl = [],
         gold, silver, bronze,
-        rI;
-        
-    //console.log(awards);
-        
+        rI,
+        tempLL;
+    
     if (awards.length<2) {
       console.log('aborting due to length'); return;
     }
@@ -375,8 +427,11 @@ function pullData(dir, locFile, awardsFile) {
         row[rI]['brewery'] = awards[i][5];        //gold_brewery
         row[rI]['city'] = awards[i][6];           //gold_city
         row[rI]['state'] = awards[i][7];          //gold_state
-        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
-        rI++;
+        tempLL = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
+        if (tempLL !== false) {
+          row[rI]['LL'] = tempLL;
+          rI++;
+        } else row[rI] = [];
       }
       if (silver) {
         row[rI] = [];
@@ -405,10 +460,10 @@ function pullData(dir, locFile, awardsFile) {
         rI++;
       }
     }
-    makeFilters(row, ttl);
+    makeFilters(row, ttl, map);
   }
   
-  var makeFilters = function(beerData, ttl) {
+  var makeFilters = function(beerData, ttl, map) {
     var filterData = [],
         theseVals = [], myValues = [],
         temp;
@@ -437,13 +492,13 @@ function pullData(dir, locFile, awardsFile) {
     
     //console.log('filter data:',filterData);
     //console.log('marker data:',beerData);
-    runPage(beerData, filterData);
+    runPage(beerData, filterData, map);
   }
   
-  var runPage = function(beerData, filterData) {
+  var runPage = function(beerData, filterData, mapData) {
     //Entry into site view
     ReactDOM.render(  //Render page after underlying data has loaded
-      <ClientUI initBeerData={beerData} initFilters={filterData} />,
+      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} />,
       document.getElementById('content')
     );
   }
@@ -458,11 +513,12 @@ var findLL = function(latLongs, location) {
     }
     z++;
   }
-  return { lat: 0, lng: 0 };
+  //console.log('no lat long found for:',location);
+  return false;
 }
 
 //Page begin:
-pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv');
+pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv', 'US.json');
 
 
 

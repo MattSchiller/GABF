@@ -30,6 +30,17 @@ body {
   top: 0px;
   left: 7px;
 }
+.state {
+  fill: azure;
+  stroke: grey;
+  stroke-width: 1;
+}
+.mark {
+  fill: pink;
+  stroke: grey;
+  stroke-width: 1;
+  opacity: .9;
+}
 #markerCounter {
   position: absolute;
   z-index: 100;

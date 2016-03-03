@@ -9,7 +9,7 @@ import geocoder
 
 def get_lat_long(brewery_name, city_state):
     ''' Return lat long from Google Geocode API.'''
-    key = "AIzaSyAc-wKv_QrRrqzr8TJDB5yEioQzBg7lJhQ"
+    key = ""
     brewery = brewery_name.split(',', maxsplit=1)[0]
     search_query = brewery + city_state
     try:

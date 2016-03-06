@@ -33,13 +33,18 @@ body {
 .state {
   fill: azure;
   stroke: grey;
-  stroke-width: 1;
+  stroke-width: 1px;
 }
 .mark {
   fill: pink;
   stroke: grey;
-  stroke-width: 1;
+  stroke-width: 1px;
   opacity: .9;
+  cursor: pointer;
+}
+.summary {
+  background-color: green;
+  cursor: pointer;
 }
 #markerCounter {
   position: absolute;

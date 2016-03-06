@@ -115,50 +115,95 @@ var Map = React.createClass({
   },
   
   _handleResize: function() {
-    console.log("I'll add the code for resizing later");
+    //console.log("I'll add the code for resizing later");
+    d3.select('svg').remove();
+    this._drawMap();
+    this._drawMarkers();
   },
   
   _drawMap: function() {
-    this.width = parseInt(d3.select('#map').style('width'));
+    this.width = parseInt(d3.select("#"+this.state.myID).style('width'));
     this.mapRatio = 0.5;
     this.height = this.width * this.mapRatio;
         
     this.projection = d3.geo.albersUsa()
-        .scale(this.width)
-        .translate([this.width/2,this.height/2]);
+                      .scale(this.width)
+                      .translate([this.width/2,this.height/2]);
     
     this.path = d3.geo.path()
-        .projection(this.projection);
+                .projection(this.projection);
+        
+    this.zoom = d3.behavior.zoom()
+                .translate(this.projection.translate())
+                .scale(this.projection.scale())
+                .scaleExtent([this.width, 8*this.width])
+                //.on("zoom", this._zoom);
     
     this.svg = d3.select("#"+this.state.myID).append("svg")
-        .attr("width", this.width)
-        .attr("height", this.height);
-        
-    var g = this.svg.append("g");
+                .attr("width", this.width)
+                .attr("height", this.height);
     
-    g.selectAll("path")
+    this.g = this.svg.append("g")
+              .call(this.zoom);
+    
+    this.g.selectAll("path")
         .data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features)
       .enter()
         .append("path")
         .attr("d", this.path)
         .attr("class", "state")
       ;
+      
+    this.tooltip = d3.select("#"+this.state.myID)
+                  	.append("div")
+                  	.style("position", "absolute")
+                  	.style("z-index", "10")
+                  	.style("visibility", "hidden")
+                  	;
   },
-
+  
+  _zoom: function() {
+    //IGNORE THIS FUNCTION, IT BLOWS UP THE MARKERS LIKE A PIECE OF SHIT
+    this.projection.translate(d3.event.translate).scale(d3.event.scale);
+    console.log('d3.event.scale:',d3.event.scale);
+    this.g.selectAll("path")
+        .attr("d", this.path);
+    
+    
+    
+    this.g.selectAll(".mark")
+      .transition()
+        .duration(750)
+        .attr("transform", function(d) {
+          //var t = d3.transform(d3.select(this).attr("transform")).translate;//maintain aold marker translate
+          return "translate(" + 1/parseInt(d3.event.translate[0]) +','+ 1/parseInt(d3.event.translate[1]) + ")scale("+d3.event.scale +")";//inverse the scale of parent
+        });
+   
+    /*
+    this.g.selectAll(".mark")
+      .transition()
+        .duration(750)
+        .attr("transform", function(d) {
+          //var t = d3.transform(d3.select(this).attr("transform")).translate;
+          return "translate(" + d.lng +","+ d.lat// + ")scale("+ d3.event.scale
+            + ")";
+        });*/
+  },
+  
   _drawMarkers: function() {
     console.log(this.myMarkers);
     
     var svg = this.svg;
     var projection = this.projection;
+    var tooltip = this.tooltip;
     
-    //circles are too big!
-    
-    var markers = this.svg.selectAll(".mark")
+    var markers = this.g.selectAll(".mark")
                     .data(this.myMarkers)
                   .enter()
                     .append("circle")
                     .attr('class','mark')
-                    .attr('r', function(d) { return Math.min(d.myCount/2, 5) + 'px'; })
+                    .attr('r', function(d) { return Math.min(d.myCount/2, 5) + 'px';
+                    })
                     .attr("transform", function(d) {
                         if ( projection([ d.lng, d.lat ]) === null) {
                           console.log('in a null circle, d:', d);
@@ -170,27 +215,48 @@ var Map = React.createClass({
                     .on("mouseover", showSummary)
                     .on("mouseout", hideSummary);
                     
-    function showDetails() {
+    function showDetails(d) {
       console.log('Showing details for "this":', this);
-    };
-    
-    function showSummary() {
-      console.log('Showing summary for "this":', this.__data__);
-      var summary = svg.selectAll('.summary')
+      
+        /*
+      var summary = d3.select("#map")
                       .data(this.__data__)
                     .enter()
                       .append('div')
                       .attr('class', 'summary')
-                      .attr('transform', function(d) {
-                          return 'translate(' + projection([ d.lng, d.lat ]) + ")";
-                        })
+                      .style('z-index', '15')
+                      //.attr('transform', function(d) {
+                      //    return 'translate(' + projection([ d.lng, d.lat ]) + ")";
+                      //  })
                       .attr('text', function(d) { return d.hoverContent; })
                       ;
+                      */
+      
       
     };
     
-    function hideSummary() {
+    function showSummary(d) {
+      //console.log('Showing summary for "this":', this.__data__);
+      //console.log('svg:', svg);
+      //console.log('proj, etc:', projection([ this.__data__.lng, this.__data__.lat ])[0]);
+      
+      var showTT = tooltip
+                    .style("visibility", "visible")
+                    .attr('class', 'summary')
+                  	.text(d.hoverContent)
+                  	.style("top", ( projection([ d.lng, this.__data__.lat ])[1] ) + "px" )
+                  	.style("left", ( projection([ d.lng, this.__data__.lat ])[0] ) + "px" )
+                  	//.attr('transform', 'translate(' + projection([ this.__data__.lng, this.__data__.lat ]) + ")")
+                  	;
+    };
+    
+    function hideSummary(d) {
       console.log('Hiding details for "this":', this);
+      var hideTT = tooltip
+                    .style('visibility', 'hidden')
+                    .style("top", ( "0px" ) )
+                  	.style("left", ( "0px" ) )
+                  ;
     };
   },
   

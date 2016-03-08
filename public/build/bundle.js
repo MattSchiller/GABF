@@ -61,14 +61,15 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      filters: this.props.initFilters,
-	      markers: this.props.initBeerData
+	      markers: this.props.initBeerData,
+	      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+	      trimmedFilters: this.props.initFilters
 	    };
 	  },
 
 	  _applyFilter: function _applyFilter(name, value, asGroup) {
 	    //Value will be an array if multiple objects are sent at once
 	    var nextFilters = this.state.filters,
-	        nextMarkers,
 	        z,
 	        y,
 	        completed = false,
@@ -108,8 +109,91 @@
 	      z++;
 	    }
 
-	    nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
-	    this.setState({ filters: nextFilters, markers: nextMarkers });
+	    var nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
+	    var nextMapMarkers = this._cleanseMarkers(nextMarkers);
+	    //let trimmedFilters = this._trimFilters(nextFilters, nextMarkers);
+
+	    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers });
+	  },
+
+	  _trimFilters: function _trimFilters(nextFilters, nextMarkers) {
+	    var filters = [];
+	    var _iteratorNormalCompletion = true;
+	    var _didIteratorError = false;
+	    var _iteratorError = undefined;
+
+	    try {
+	      for (var _iterator = nextFilters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	        var filterName = _step.value;
+	        //Iterate through each filter (year, style, medal)
+	        filters.push(filterName);
+
+	        var _iteratorNormalCompletion2 = true;
+	        var _didIteratorError2 = false;
+	        var _iteratorError2 = undefined;
+
+	        try {
+	          for (var _iterator2 = nextMarkers[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	            var awardRecord = _step2.value;
+	            //Iterate though each award for possible values
+	            if (awardRecord['show'] === false) continue;
+
+	            //MAY WANT TO CONSOLIDATE THE TRANSVERSALS IN THE PREVIOUS FUNCTIONS FOR EFFICIENCY
+	          }
+	        } catch (err) {
+	          _didIteratorError2 = true;
+	          _iteratorError2 = err;
+	        } finally {
+	          try {
+	            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	              _iterator2.return();
+	            }
+	          } finally {
+	            if (_didIteratorError2) {
+	              throw _iteratorError2;
+	            }
+	          }
+	        }
+
+	        var _iteratorNormalCompletion3 = true;
+	        var _didIteratorError3 = false;
+	        var _iteratorError3 = undefined;
+
+	        try {
+	          for (var _iterator3 = filterName[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	            var filterItem = _step3.value;
+	          }
+	        } catch (err) {
+	          _didIteratorError3 = true;
+	          _iteratorError3 = err;
+	        } finally {
+	          try {
+	            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+	              _iterator3.return();
+	            }
+	          } finally {
+	            if (_didIteratorError3) {
+	              throw _iteratorError3;
+	            }
+	          }
+	        }
+	      }
+	    } catch (err) {
+	      _didIteratorError = true;
+	      _iteratorError = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion && _iterator.return) {
+	          _iterator.return();
+	        }
+	      } finally {
+	        if (_didIteratorError) {
+	          throw _iteratorError;
+	        }
+	      }
+	    }
+
+	    return;
 	  },
 
 	  _filterMarkers: function _filterMarkers(nextFilters, filterName, filterVal, nameIndex, valueIndex) {
@@ -155,8 +239,80 @@
 	    return nextMarkers;
 	  },
 
+	  _cleanseMarkers: function _cleanseMarkers(markerData) {
+	    //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
+	    var markerCount = [],
+	        myLat,
+	        myLng,
+	        cleansedMarkers = [],
+	        initMarker,
+	        cleansedIndex = 0;
+
+	    var _iteratorNormalCompletion4 = true;
+	    var _didIteratorError4 = false;
+	    var _iteratorError4 = undefined;
+
+	    try {
+	      for (var _iterator4 = markerData[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+	        var awardRecord = _step4.value;
+	        //Check each marker
+	        if (awardRecord['show'] === false) continue; //Not showing, skip it
+
+	        myLat = awardRecord['LL'].lat;
+	        myLng = awardRecord['LL'].lng;
+	        initMarker = false;
+
+	        if (markerCount[myLat + '-' + myLng] === undefined) {
+	          initMarker = true; //First time this location has been seen in the list
+	          markerCount[myLat + '-' + myLng] = cleansedIndex++;
+	        }
+
+	        var markerIndex = markerCount[myLat + '-' + myLng];
+	        var currMarker = cleansedMarkers[markerIndex]; //Grab existing marker info, could be undefined
+
+	        var newMarker = this._writeMarker(currMarker, awardRecord, initMarker, markerIndex);
+	        cleansedMarkers[markerIndex] = newMarker;
+	      }
+
+	      //console.log('cleansedMarkers:', cleansedMarkers);
+	    } catch (err) {
+	      _didIteratorError4 = true;
+	      _iteratorError4 = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+	          _iterator4.return();
+	        }
+	      } finally {
+	        if (_didIteratorError4) {
+	          throw _iteratorError4;
+	        }
+	      }
+	    }
+
+	    return cleansedMarkers;
+	  },
+
+	  _writeMarker: function _writeMarker(thisMarker, awardRecord, isNew, index) {
+	    //Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
+	    if (isNew) {
+	      thisMarker = {};
+	      thisMarker.lat = awardRecord['LL'].lat;
+	      thisMarker.lng = awardRecord['LL'].lng;
+	      thisMarker.myCount = 0;
+	      thisMarker.myAwards = '';
+	    }
+	    //Append/Update the marker to account for another award
+	    thisMarker.myCount++;
+	    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
+
+	    thisMarker.myAwards += '<div id="awardView">' + '<b>Year:</b> ' + awardRecord['year'] + ' <b>Medal:</b> ' + awardRecord['medal'] + ' <b>Style:</b> ' + awardRecord['style'] + ' <b>Beer:</b> ' + awardRecord['beer'] + ' <b>Brewery:</b> ' + awardRecord['brewery'] + '</div>';
+
+	    return thisMarker;
+	  },
+
 	  render: function render() {
-	    return React.createElement('div', { id: 'UI' }, React.createElement(Map, { mapData: this.props.mapData, markers: this.state.markers }), React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }));
+	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers }), React.createElement(FilterBox, { filters: this.state.filters, notify: this._applyFilter }));
 	  }
 	});
 	var Map = React.createClass({
@@ -166,13 +322,8 @@
 	    return { myID: 'map' };
 	  },
 
-	  componentWillMount: function componentWillMount() {
-	    this.numMarkers = this.props.markers.length;
-	  },
-
 	  componentDidMount: function componentDidMount() {
 	    this._drawMap();
-	    this._massageMarkers(this.props);
 	    this._drawMarkers();
 	    window.addEventListener('resize', this._handleResize);
 	  },
@@ -180,8 +331,7 @@
 	    window.removeEventListener('resize', this._handleResize);
 	  },
 
-	  componentWillUpdate: function componentWillUpdate(nextProps) {
-	    this._massageMarkers(nextProps);
+	  componentDidUpdate: function componentDidUpdate() {
 	    this._drawMarkers();
 	  },
 
@@ -201,48 +351,52 @@
 
 	    this.path = d3.geo.path().projection(this.projection);
 
-	    this.zoom = d3.behavior.zoom().translate(this.projection.translate()).scale(this.projection.scale()).scaleExtent([this.width, 8 * this.width]);
-	    //.on("zoom", this._zoom);
+	    var zoom = d3.behavior.zoom().scale(1).scaleExtent([1, 8]).on("zoom", this._zoom);
 
 	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height);
 
-	    this.g = this.svg.append("g").call(this.zoom);
+	    this.g = this.svg.append("g").call(zoom);
 
-	    this.g.selectAll("path").data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features).enter().append("path").attr("d", this.path).attr("class", "state");
+	    this.g.selectAll("path").data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features).enter().append("path").attr("d", this.path).attr("class", "state").attr('stroke-width', '1px');
 
 	    this.tooltip = d3.select("#" + this.state.myID).append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden");
 	  },
 
 	  _zoom: function _zoom() {
-	    //IGNORE THIS FUNCTION, IT BLOWS UP THE MARKERS LIKE A PIECE OF SHIT
-	    this.projection.translate(d3.event.translate).scale(d3.event.scale);
-	    console.log('d3.event.scale:', d3.event.scale);
-	    this.g.selectAll("path").attr("d", this.path);
+	    this.g.transition().duration(750).attr("transform", function () {
+	      var t = d3.event.translate;
+	      return "translate(" + parseInt(t[0]) + ',' + parseInt(t[1]) + ")scale(" + d3.event.scale + ")";
+	    }.bind(this));
 
-	    this.g.selectAll(".mark").transition().duration(750).attr("transform", function (d) {
-	      //var t = d3.transform(d3.select(this).attr("transform")).translate;//maintain aold marker translate
-	      return "translate(" + 1 / parseInt(d3.event.translate[0]) + ',' + 1 / parseInt(d3.event.translate[1]) + ")scale(" + d3.event.scale + ")"; //inverse the scale of parent
+	    this.g.selectAll('.mark, .state').transition().duration(750).attr("stroke-width", function () {
+	      console.log('setting stroke width to:', (1 / d3.event.scale).toFixed(2));
+	      return (1 / d3.event.scale).toFixed(2) + "px";
 	    });
-
-	    /*
-	    this.g.selectAll(".mark")
-	      .transition()
-	        .duration(750)
-	        .attr("transform", function(d) {
-	          //var t = d3.transform(d3.select(this).attr("transform")).translate;
-	          return "translate(" + d.lng +","+ d.lat// + ")scale("+ d3.event.scale
-	            + ")";
-	        });*/
 	  },
 
 	  _drawMarkers: function _drawMarkers() {
-	    console.log(this.myMarkers);
-
 	    var svg = this.svg;
 	    var projection = this.projection;
 	    var tooltip = this.tooltip;
+	    var g = this.g;
 
-	    var markers = this.g.selectAll(".mark").data(this.myMarkers).enter().append("circle").attr('class', 'mark').attr('r', function (d) {
+	    var markers = this.g.selectAll(".mark").data(this.props.markers)
+	    //Update existing markers
+	    .attr('class', 'mark').attr('r', function (d) {
+	      return Math.max(2, Math.min(d.myCount / 2, 6)) + 'px';
+	    }).attr("transform", function (d) {
+	      if (projection([d.lng, d.lat]) === null) {
+	        console.log('in a null circle, d:', d);
+	        return 'translate(0, 0)';
+	      }
+	      return "translate(" + projection([d.lng, d.lat]) + ")";
+	    });
+
+	    //Delete old markers
+	    markers.exit().remove();
+
+	    //Create newly shown markers
+	    markers.enter().append("circle").attr('class', 'mark').attr('stroke-width', '1px').attr('r', function (d) {
 	      return Math.min(d.myCount / 2, 5) + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
@@ -250,9 +404,9 @@
 	        return 'translate(0, 0)';
 	      }
 	      return "translate(" + projection([d.lng, d.lat]) + ")";
-	    }).on("click", showDetails).on("mouseover", showSummary).on("mouseout", hideSummary);
+	    }).on("click", __showDetails).on("mouseover", __showSummary).on("mouseout", __hideSummary);
 
-	    function showDetails(d) {
+	    function __showDetails(d) {
 	      console.log('Showing details for "this":', this);
 
 	      /*
@@ -270,99 +424,49 @@
 	                    */
 	    };
 
-	    function showSummary(d) {
+	    function __showSummary(d) {
 	      //console.log('Showing summary for "this":', this.__data__);
 	      //console.log('svg:', svg);
 	      //console.log('proj, etc:', projection([ this.__data__.lng, this.__data__.lat ])[0]);
 
-	      var showTT = tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("top", projection([d.lng, this.__data__.lat])[1] + "px").style("left", projection([d.lng, this.__data__.lat])[0] + "px")
+	      var showTT = tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("top", projection([d.lng, this.__data__.lat])[1] - 10 + "px") //-10 so is above cursor
+	      .style("left", projection([d.lng, this.__data__.lat])[0] + 10 + "px")
 	      //.attr('transform', 'translate(' + projection([ this.__data__.lng, this.__data__.lat ]) + ")")
 	      ;
 	    };
 
-	    function hideSummary(d) {
-	      console.log('Hiding details for "this":', this);
+	    function __hideSummary(d) {
+	      console.log('Hiding summary for "this":', this);
 	      var hideTT = tooltip.style('visibility', 'hidden').style("top", "0px").style("left", "0px");
 	    };
 	  },
 
-	  _massageMarkers: function _massageMarkers(myProps) {
-	    var markerCount = [],
-	        y = 0,
-	        myLat,
-	        myLng,
-	        markerIndex;
+	  render: function render() {
+	    console.log('rendering Map');
+	    return React.createElement('div', { id: 'map-holder' }, React.createElement('div', { id: this.state.myID }), React.createElement('div', { id: 'markerCounter' }, this.props.markers.length));
+	  }
+	});
+	var MultiGraphBox = React.createClass({
+	  displayName: 'MultiGraphBox',
 
-	    this.myMarkers = [];
-
-	    for (var z = 0; z < myProps.markers.length; z++) {
-	      //Check each marker
-	      if (myProps.markers[z]['show'] === false) continue; //Not showing, skip it
-
-	      myLat = myProps.markers[z]['LL'].lat;
-	      myLng = myProps.markers[z]['LL'].lng;
-
-	      if (markerCount[myLat + '-' + myLng] === undefined) {
-	        //First time this location has been seen in the list
-	        markerCount[myLat + '-' + myLng] = 1;
-	        this._writeMarker(myProps.markers[z], true);
-	        y++;
-	      } else {
-	        //We've seen this location before
-	        markerIndex = this._findMarker(myLat, myLng);
-	        if (markerIndex > -1) {
-	          //We've found our former marker index
-	          this._writeMarker(myProps.markers[z], false, markerIndex);
-	        }
-	      }
-	    }
-
-	    this.numMarkers = y;
-	    this.myMarkers;
+	  getInitialState: function getInitialState() {
+	    return { supportedGraphs: ['Awards', 'Entries'],
+	      graphShowing: 'Awards' };
 	  },
 
-	  _findMarker: function _findMarker(lat, lng) {
-	    var z = 0;
-	    while (z < this.myMarkers.length) {
-	      if (this.myMarkers[z].lat === lat && this.myMarkers[z].lng === lng) return z;
-	      z++;
-	    }
-	    return -1;
-	  },
-
-	  _writeMarker: function _writeMarker(awardRecord, isNew, y) {
-	    //Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
-
-	    if (isNew) {
-	      this.myMarkers.push({});
-	      y = this.myMarkers.length - 1;
-
-	      this.myMarkers[y].lat = awardRecord['LL'].lat;
-	      this.myMarkers[y].lng = awardRecord['LL'].lng;
-
-	      this.myMarkers[y].myCount = 0;
-
-	      /*myMarkers[y].mouseover = function(e){                                   //On hover, show: (count) City, ST
-	        masterInfoWindow.close();
-	        masterInfoWindow.setContent(this.hoverContent);
-	        masterInfoWindow.open(this.map, this);
-	      };
-	      */
-
-	      this.myMarkers[y].myAwards = '';
-	    }
-
-	    //Write to the marker some formatting and such
-	    this.myMarkers[y].myCount++;
-
-	    this.myMarkers[y].hoverContent = '(' + this.myMarkers[y].myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
-
-	    this.myMarkers[y].myAwards += '<div id="awardView">' + '<b>Year:</b> ' + awardRecord['year'] + ' <b>Medal:</b> ' + awardRecord['medal'] + ' <b>Style:</b> ' + awardRecord['style'] + ' <b>Beer:</b> ' + awardRecord['beer'] + ' <b>Brewery:</b> ' + awardRecord['brewery'] + '</div>';
+	  _changeGraph: function _changeGraph(e) {
+	    var myGraph = e.target.getAttribute('data-name');
+	    this.setState({ graphShowing: myGraph });
 	  },
 
 	  render: function render() {
-	    console.log('rendering Map');
-	    return React.createElement('div', { id: 'map-holder' }, React.createElement('p', { id: 'loading' }, 'Loading map...'), React.createElement('div', { id: this.state.myID }), React.createElement('div', { id: 'markerCounter' }, this.numMarkers));
+	    var graphToShow = {};
+	    return React.createElement('div', { id: 'multiGraph' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, this.state.supportedGraphs.map(function (graph, i) {
+	      console.log('drawing tabs, state:', this.state);
+	      var tabClass = '';
+	      if (graph === this.state.graphShowing) tabClass = ' currTab';
+	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: this._changeGraph }, graph);
+	    }.bind(this))));
 	  }
 	});
 	var FilterBox = React.createClass({
@@ -399,12 +503,14 @@
 	  },
 	  _search: function _search(e) {
 	    e.stopPropagation();
+	    e.preventDefault();
 	    var keyCode = e.keyCode || e.which;
-
-	    if (keyCode !== 13) {
-	      //Something other than Enter
-	      this.setState({ mySearch: e.target.value });
-	    } else {
+	    var ENTERKEY = 13,
+	        TABKEY = 9; //Tab is ignored in the text boxes
+	    if (keyCode !== ENTERKEY && keyCode !== TABKEY) {
+	      //Something other than Enter/Tab
+	      this.setState({ mySearch: e.target.value, showItems: true });
+	    } else if (keyCode === ENTERKEY) {
 	      //Enter
 	      var valsToSend = this.props.values.map(function (value, i) {
 

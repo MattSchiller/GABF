@@ -26,6 +26,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
 #multiGraph {
   width: 100%;
   height: 100%;
@@ -38,7 +39,7 @@ body {
 }
 .graphTab {
   position: relative;
-  top: -18px;
+  top: 2px;
   padding: 5px;
   margin-left: 3px;
   border-radius: 0 0 9px 9px;
@@ -51,27 +52,40 @@ body {
 .currTab {
   background-color: lime;
 }
+#nonMapBoxes {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-right: 20px;
+}
 
 #detailsBox {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 50vh;
+}
+.detailBoxItem, #nonMapBoxes {
+  border-style: solid;
+  border-color: green;
+  border-width: 2px;
+  border-radius: 4px;
 }
 
 #map {
-  width: 90%;
   height: 100%;
   z-index: 20;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  transform: translate(0, -20px);   /*Not sure why the formatting is messed up by 20 pixels...*/
+  margin-right: 20px;
 }
 #markerCounter {
   position: relative;
   width: 50px;
   z-index: 100;
-  top: -100%;
-  right: -86%;
+  top: -105%;
+  left: 91%;
   background-color: orange;
 }
 .state {
@@ -89,23 +103,24 @@ body {
   cursor: pointer;
 }
 .filterBox {
-  width: 15%;
-  border-radius: 2px;
+  height: 30vh;
 }
 .filter {
   display: flex;
   flex-direction: column;
   font-size: 10pt;
   margin-top: 2px;
+  border-radius: 2px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .filterSelection {
   position: absolute;
   font-style: italic;
   background-color: grey;
   max-height: 70%;
-  width: 15%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  width: 30vh;
+  opacity: 0.8;
   cursor: pointer;
 }
 .filterOn {

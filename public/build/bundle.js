@@ -80,6 +80,8 @@
 	}();
 
 	var RESET = '_RESET';
+	var MAX_NODE_R = 8;
+	var MIN_NODE_R = 2;
 
 	var ClientUI = React.createClass({
 	  displayName: 'ClientUI',
@@ -356,13 +358,18 @@
 	      thisMarker.lat = awardRecord['LL'].lat;
 	      thisMarker.lng = awardRecord['LL'].lng;
 	      thisMarker.myCount = 0;
-	      thisMarker.myAwards = '';
+	      thisMarker.myAwards = [];
 	    }
 	    //Append/Update the marker to account for another award
 	    thisMarker.myCount++;
 	    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
 
-	    thisMarker.myAwards += '<div id="awardView">' + '<b>Year:</b> ' + awardRecord['year'] + ' <b>Medal:</b> ' + awardRecord['medal'] + ' <b>Style:</b> ' + awardRecord['style'] + ' <b>Beer:</b> ' + awardRecord['beer'] + ' <b>Brewery:</b> ' + awardRecord['brewery'] + '</div>';
+	    thisMarker.myAwards.push({ year: awardRecord['year'],
+	      medal: awardRecord['medal'],
+	      style: awardRecord['style'],
+	      beer: awardRecord['beer'],
+	      brewery: awardRecord['brewery']
+	    });
 
 	    return thisMarker;
 	  },
@@ -403,7 +410,7 @@
 	  _drawMap: function _drawMap() {
 	    this.width = parseInt(d3.select("#" + this.state.myID).style('width'));
 	    this.mapRatio = 0.5;
-	    this.height = this.width * this.mapRatio;
+	    this.height = parseInt(d3.select("#" + this.state.myID).style('height')); //this.width * this.mapRatio;
 
 	    this.projection = d3.geo.albersUsa().scale(this.width).translate([this.width / 2, this.height / 2]);
 
@@ -428,12 +435,17 @@
 	    this.g.transition().duration(750).attr("transform", function () {
 	      var t = d3.event.translate;
 	      return "translate(" + parseInt(t[0]) + ',' + parseInt(t[1]) + ")scale(" + d3.event.scale + ")";
-	    }.bind(this));
+	    });
 
 	    this.g.selectAll('.mark, .state').transition().duration(750).attr("stroke-width", function () {
 	      return (1 / d3.event.scale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
-	      return Math.max(2, Math.min(d.myCount / 2, 6)) / d3.event.scale + 'px';
+	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / d3.event.scale + 'px';
+	    });
+
+	    this.tooltip.attr('transform', function () {
+	      var t = d3.event.translate;
+	      return "translate(" + parseInt(t[0]) + ',' + parseInt(t[1]) + ")";
 	    });
 	  },
 
@@ -447,7 +459,7 @@
 	    var markers = this.g.selectAll(".mark").data(this.props.markers)
 	    //Update existing markers
 	    .attr('class', 'mark').attr('r', function (d) {
-	      return Math.max(2, Math.min(d.myCount / 2, 6)) / lastZoomScale + 'px';
+	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / lastZoomScale + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -465,7 +477,7 @@
 	    markers.enter().append("circle").attr('class', 'mark').attr("stroke-width", function () {
 	      return (1 / lastZoomScale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
-	      return Math.max(2, Math.min(d.myCount / 2, 6)) / lastZoomScale + 'px';
+	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / lastZoomScale + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -475,28 +487,12 @@
 	    }).on("click", __showDetails).on("mouseover", __showSummary).on("mouseout", __hideSummary);
 
 	    function __showDetails(d) {
-	      console.log('Showing details for "this":', this);
-
-	      /*
-	      var summary = d3.select("#map")
-	                    .data(this.__data__)
-	                  .enter()
-	                    .append('div')
-	                    .attr('class', 'summary')
-	                    .style('z-index', '15')
-	                    //.attr('transform', function(d) {
-	                    //    return 'translate(' + projection([ d.lng, d.lat ]) + ")";
-	                    //  })
-	                    .attr('text', function(d) { return d.hoverContent; })
-	                    ;
-	                    */
+	      console.log('Showing details for d:', d);
+	      var event = new CustomEvent('showDetails', { 'detail': d.myAwards }); //CHANGE THIS>>>>
+	      window.dispatchEvent(event);
 	    };
 
 	    function __showSummary(d) {
-	      //console.log('Showing summary for "this":', this.__data__);
-	      //console.log('svg:', svg);
-	      //console.log('proj, etc:', projection([ this.__data__.lng, this.__data__.lat ])[0]);
-
 	      var showTT = tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("top", projection([d.lng, this.__data__.lat])[1] - 10 + "px") //-10 so is above cursor
 	      .style("left", projection([d.lng, this.__data__.lat])[0] + 10 + "px");
 	    };
@@ -532,9 +528,35 @@
 	      var tabClass = '';
 	      if (graph === this.state.graphShowing) tabClass = ' currTab';
 	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: this._changeGraph }, graph);
-	    }.bind(this)))), React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }));
+	    }.bind(this)))), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
 	  }
 	});
+	var DetailsBox = React.createClass({
+	  displayName: 'DetailsBox',
+
+	  getInitialState: function getInitialState() {
+	    return { content: [] };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    window.addEventListener('showDetails', this._updateContent);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('showDetails', this._updateContent);
+	  },
+
+	  _updateContent: function _updateContent(e) {
+	    this.setState({ content: e.detail });
+	  },
+
+	  render: function render() {
+	    if (this.state.content === []) return React.createElement('div', null);
+	    return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
+	      return React.createElement('div', { key: i, className: 'detailBoxItem' }, 'Year:     ', award.year, ' ', React.createElement('br', null), 'Medal:    ', award.medal, ' ', React.createElement('br', null), 'Style:    ', award.style, ' ', React.createElement('br', null), 'Beer:     ', award.beer, ' ', React.createElement('br', null), 'Brewery:  ', award.brewery);
+	    }));
+	  }
+	});
+
 	var FilterBox = React.createClass({
 	  displayName: 'FilterBox',
 

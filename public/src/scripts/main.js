@@ -1,4 +1,6 @@
 var RESET = '_RESET';
+var MAX_NODE_R = 8;
+var MIN_NODE_R = 2;
 
 var ClientUI = React.createClass({
   getInitialState: function() {
@@ -176,20 +178,19 @@ var ClientUI = React.createClass({
       thisMarker.lat = awardRecord['LL'].lat;
       thisMarker.lng = awardRecord['LL'].lng;
       thisMarker.myCount = 0;
-      thisMarker.myAwards = '';
+      thisMarker.myAwards = [];
 	  }
 	  //Append/Update the marker to account for another award
 	  thisMarker.myCount++;
     thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
     
-    thisMarker.myAwards += (
-      '<div className="detailBoxItem">' +
-        '<b>Year:</b> ' + awardRecord['year'] +
-        ' <b>Medal:</b> ' + awardRecord['medal'] +
-        ' <b>Style:</b> ' + awardRecord['style'] +
-        ' <b>Beer:</b> ' + awardRecord['beer'] +
-        ' <b>Brewery:</b> ' + awardRecord['brewery'] +
-      '</div>'
+    thisMarker.myAwards.push (
+      { year: awardRecord['year'],
+        medal: awardRecord['medal'],
+        style: awardRecord['style'],
+        beer: awardRecord['beer'],
+        brewery: awardRecord['brewery']
+      }
     );
     
     return thisMarker;
@@ -224,7 +225,8 @@ var Map = React.createClass({
   },
   
   _handleResize: function() {
-    //console.log("I'll add the code for resizing later");
+    //ADD SOMETHING TO NOT SHIT BRICKS WHEN RESIZE WHILE ZOOM
+    
     d3.select('svg').remove();
     this._drawMap();
     this._drawMarkers();
@@ -233,7 +235,7 @@ var Map = React.createClass({
   _drawMap: function() {
     this.width = parseInt(d3.select("#"+this.state.myID).style('width'));
     this.mapRatio = 0.5;
-    this.height = this.width * this.mapRatio;
+    this.height = parseInt(d3.select("#"+this.state.myID).style('height'))//this.width * this.mapRatio;
         
     this.projection = d3.geo.albersUsa()
                       .scale(this.width)
@@ -281,7 +283,7 @@ var Map = React.createClass({
       .transition()
         .duration(750)
         .attr("transform", function() {
-          var t = d3.event.translate;
+          let t = d3.event.translate;
           return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")scale("+ d3.event.scale +")";
         })
         ;
@@ -293,7 +295,7 @@ var Map = React.createClass({
           return (1/d3.event.scale).toFixed(2) +"px";
         })
         .attr('r', function(d) {
-          return Math.max(2, Math.min(d.myCount/2, 6) )/d3.event.scale + 'px'; })
+          return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/d3.event.scale + 'px'; })
         ;
   },
   
@@ -309,7 +311,7 @@ var Map = React.createClass({
         //Update existing markers
                     .attr('class','mark')
                     .attr('r', function(d) {
-                      return Math.max(2, Math.min(d.myCount/2, 6) )/lastZoomScale + 'px'; })
+                      return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px'; })
                     .attr("transform", function(d) {
                         if ( projection([ d.lng, d.lat ]) === null) {
                           console.log('in a null circle, d:', d);
@@ -330,7 +332,7 @@ var Map = React.createClass({
                 .attr("stroke-width", function() {
                         return (1/lastZoomScale).toFixed(2) +"px";})
                 .attr('r', function(d) {
-                  return Math.max(2, Math.min(d.myCount/2, 6) )/lastZoomScale + 'px';
+                  return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
                 })
                 .attr("transform", function(d) {
                     if ( projection([ d.lng, d.lat ]) === null) {
@@ -345,23 +347,9 @@ var Map = React.createClass({
                 ;
 
     function __showDetails(d) {
-      console.log('Showing details for "this":', this);
-      
-        /*
-      var summary = d3.select("#map")
-                      .data(this.__data__)
-                    .enter()
-                      .append('div')
-                      .attr('class', 'summary')
-                      .style('z-index', '15')
-                      //.attr('transform', function(d) {
-                      //    return 'translate(' + projection([ d.lng, d.lat ]) + ")";
-                      //  })
-                      .attr('text', function(d) { return d.hoverContent; })
-                      ;
-                      */
-      
-      
+      console.log('Showing details for d:', d);
+      var event = new CustomEvent('showDetails', { 'detail': d.myAwards });  //CHANGE THIS>>>>
+      window.dispatchEvent(event);
     };
     
     function __showSummary(d) {
@@ -372,6 +360,17 @@ var Map = React.createClass({
                   	.style("top", ( projection([ d.lng, this.__data__.lat ])[1] -10) + "px" )   //-10 so is above cursor
                   	.style("left", ( projection([ d.lng, this.__data__.lat ])[0] +10) + "px" )
                   	;
+                  	
+                  	
+                  	/* INCLUDE SOME LOGIC TO REPOSITION TT OVER ZOOMED IN MARKERS:
+                  	    this.tooltip
+      .attr('transform', function() {
+        let t = d3.event.translate;
+          return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")"
+        })
+      ;
+      */
+                  	
     };
     
     function __hideSummary(d) {
@@ -425,22 +424,50 @@ var MultiGraphBox = React.createClass({
             }
           </div>
         </div>
-        <FilterBox filters={this.props.filters} notify={this.props.notify}/>
-        <DetailsBox content={} />
+        <div id='nonMapBoxes'>
+          <FilterBox filters={this.props.filters} notify={this.props.notify}/>
+          <DetailsBox />
+        </div>
       </div>
     );
   }
 })
-var DetailsBox - React.createClass({
+var DetailsBox = React.createClass({
+  getInitialState: function() {
+    return ({content: []})
+  },
+  
+  componentDidMount: function() {
+    window.addEventListener('showDetails', this._updateContent);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('showDetails', this._updateContent);
+  },
+  
+  _updateContent: function(e) {
+    this.setState({content: e.detail});
+  },
+  
   render: function() {
-    if (this.props.content === 'BLANK') return <div />
+    if (this.state.content === []) return <div />
     return (
       <div id={'detailsBox'} >
-        {this.props.content}
+        {
+          this.state.content.map(function(award, i) {
+            return (
+              <div key={i} className="detailBoxItem" >
+                Year:     {award.year} <br/>
+                Medal:    {award.medal} <br/>
+                Style:    {award.style} <br/>
+                Beer:     {award.beer} <br/>
+                Brewery:  {award.brewery}
+              </div>
+            );
+          })
+        }
       </div>
       );
   }
-  
 })
 
 var FilterBox = React.createClass({

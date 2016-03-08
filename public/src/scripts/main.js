@@ -1,4 +1,4 @@
-var masterInfoWindow = new google.maps.InfoWindow();
+var RESET = '_RESET';
 
 var ClientUI = React.createClass({
   getInitialState: function() {
@@ -16,7 +16,7 @@ var ClientUI = React.createClass({
         z, y, completed = false, added, nameIndex, valueIndex = false;
     
     value = [].concat(value);     //If a single value, will turn it into a list of length 1
-    
+    //console.log('_applyFilter, value:', value);
     z=0;
     while (z<nextFilters.length && !completed) {                    //Iterate through each filter name to see if it's the one we changed
       if (nextFilters[z].name===name) {                             //This is our filter
@@ -24,7 +24,7 @@ var ClientUI = React.createClass({
         y=0;
         while (y<nextFilters[z].values.length && !completed) {      //Iterate though each value in the filter
           if (asGroup) {                                            //Turn on all sent values (list), turn off the rest
-            if ( ~value.indexOf( nextFilters[z].values[y][0] ) )    //This value was sent
+            if ( ~value.indexOf( nextFilters[z].values[y][0] ) || value[0] === RESET)    //This value was sent / RESETING ALL
               nextFilters[z].values[y][1] = true;
             else                                                    //This value was not
               nextFilters[z].values[y][1] = false;
@@ -42,71 +42,102 @@ var ClientUI = React.createClass({
       z++;
     }
     
-    let nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
+    let [nextMarkers, trimmedFilters] = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
     let nextMapMarkers = this._cleanseMarkers(nextMarkers);
-    //let trimmedFilters = this._trimFilters(nextFilters, nextMarkers);
     
-    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers });
-  },
-  
-  _trimFilters: function(nextFilters, nextMarkers) {
-    var filters = [];
-    for (let filterName of nextFilters) {              //Iterate through each filter (year, style, medal)
-      filters.push(filterName);
-      
-      for (let awardRecord of nextMarkers) {           //Iterate though each award for possible values
-        if (awardRecord['show'] === false) continue;
-        
-        
-        
-        //MAY WANT TO CONSOLIDATE THE TRANSVERSALS IN THE PREVIOUS FUNCTIONS FOR EFFICIENCY
-        
-        
-        
-      }
-      
-      for(let filterItem of filterName) {
-        
-      }
-    }
+    /*console.log('About to update state, currFilter:', this.state.filters);
+    console.log('About to update state, nextFilters:', nextFilters);
+    console.log('About to update state, trimmedFilters:', trimmedFilters); */
     
-    return
+    
+    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers, trimmedFilters: trimmedFilters });
   },
   
   _filterMarkers: function(nextFilters, filterName, filterVal, nameIndex, valueIndex) {
     //Removes the markers that are no longer shown/adds those that are now shown
     //Weak to filtering on multiple values, extremely weak to filtering on multiple filters
     var j, k, potentialShow,
-        nextMarkers = this.state.markers;
-        
-    for (var i=0; i<nextMarkers.length; i++) {                        //Iterate through each beer award record
-      //console.log( 'filterName:', filterName, 'nextMarkers[i][ filterName ]:', nextMarkers[i][ filterName ], 'filterVal:', filterVal);
-      
-      if (filterVal.length > 1) {                               //Was an array so we have to check prior show to .values[valueIndex][0]
+        nextMarkers = this.state.markers,
+        filterName, awardFilterValue, trimmedFilters = [], potentialTrimmed =[], tempPT;
+    
+    //console.log('in _fMarkers, filterVal:', filterVal);
+    
+    for (let filter of nextFilters) {                       //Instantiate our trimmedFilters data structure
+      trimmedFilters.push({ name: filter.name, values: [] });
+      potentialTrimmed.push({ name: filter.name, values: [] });
+    }
+    
+    for (let awardRecord of nextMarkers) {                            //Iterate through each beer award record
+      if (filterVal.length > 1 || filterVal[0] == RESET) {      //Was an array so we have to check prior show to .values[valueIndex][0]
+        potentialTrimmed = [];
         j = 0;
         potentialShow = true;
+        
         while (potentialShow && j < nextFilters.length) {             //Iterate through each filter (year, style, medal...)
+          filterName = nextFilters[j].name;
+          awardFilterValue = awardRecord[ filterName ];
           k = 0;
+          
           while (potentialShow && k < nextFilters[j].values.length) { //Iterate through each filter item (2015, 2014, 2013...)
-            if (nextFilters[j].values[k][0] === nextMarkers[i][ nextFilters[j].name ]) {
-              //Filter and item for particular record, should I show it?
+            if (nextFilters[j].values[k][0] === awardFilterValue) {
+              //Filter and item for particular record, should app show it?
               potentialShow = nextFilters[j].values[k][1];
+              potentialTrimmed[j] = { name: filterName,
+                                      values: [ awardFilterValue, potentialShow ] };   //Double array to mimic data structure
+              //This creates pT[j] = { name: 'year', values: ['2013', true/false] }
             }
             k++;
           }
           j++;
         }
-        nextMarkers[i]['show'] = potentialShow;
+        awardRecord['show'] = potentialShow;
+        if (potentialShow) {                                          //This record is what we're showing, so we add its values to the filters
+          trimmedFilters = this._addToTrimmedFilters(trimmedFilters, potentialTrimmed);
+        }
         
       } else {                                                  //Was a single toggle, so we just need to see if this record had that value
-        if ( nextMarkers[i][ filterName ] === filterVal[0] ) {        //This is a record that was affected by the most recent filter change
+        
+        //console.log('filterVal:', filterVal);
+        if ( awardRecord[ filterName ] === filterVal[0] ) {        //This is a record that was affected by the most recent filter change
           //console.log('_filterMarkers on:', nextMarkers[i]);
-          nextMarkers[i]['show'] = nextFilters[ nameIndex ].values[ valueIndex ][1];
+          awardRecord['show'] = nextFilters[ nameIndex ].values[ valueIndex ][1];
+        }
+        if (awardRecord['show']) {
+          tempPT = JSON.parse(JSON.stringify(potentialTrimmed));  //Maintain PT as a header
+          for (var i=0; i<tempPT.length; i++) {                   //Scoop up all the values in this shown marker
+            //console.log('oh boy, awardRecord[ tempPT[i].name ]:', awardRecord[ tempPT[i].name ]);
+            tempPT[i].values.push( awardRecord[ tempPT[i].name ], true );
+          }
+          //console.log('about to run aTTF, tempPT:', tempPT); //debugger
+          trimmedFilters = this._addToTrimmedFilters(trimmedFilters, tempPT);
         }
       }
     }
-    
-   return nextMarkers;
+    //console.log('nextFilters:', nextFilters);
+   return [nextMarkers, trimmedFilters];
+  },
+  
+  _addToTrimmedFilters: function(tF, pT) {
+    var alreadyAdded, pTVal, j;
+    //console.log('in aTTF, tF:', tF, 'pT:', pT);
+    for (var i=0; i<tF.length; i++) {                             //Iterate through each filter ('year', 'style')
+      j = 0;
+      alreadyAdded = false;
+      //console.log('i', i, 'pT:',pT, 'tF:', tF);
+      pTVal = pT[i].values[0];
+      //console.log('pTVal:', pTVal);
+      while (!alreadyAdded && j < tF[i].values.length) {          //Iterate through each value ('2013', '2014')
+        //console.log('tF[i].values[j][0] === pTVal', tF[i].values[j][0],'===', pTVal);
+        if (tF[i].values[j][0] === pTVal) {
+          alreadyAdded = true;
+        }
+        j++;
+      }
+      if (!alreadyAdded) {
+        tF[i].values.push( pT[i].values );
+      }
+    }
+    return tF;
   },
   
   _cleanseMarkers: function(markerData) {
@@ -152,7 +183,7 @@ var ClientUI = React.createClass({
     thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
     
     thisMarker.myAwards += (
-      '<div id="awardView">' +
+      '<div className="detailBoxItem">' +
         '<b>Year:</b> ' + awardRecord['year'] +
         ' <b>Medal:</b> ' + awardRecord['medal'] +
         ' <b>Style:</b> ' + awardRecord['style'] +
@@ -167,8 +198,8 @@ var ClientUI = React.createClass({
   render: function() {
     return (
       <div id='UI'>
-        <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} />
-        <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
+        <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} filters={this.state.trimmedFilters}
+            notify={this._applyFilter}/>
       </div>
       );
   }
@@ -179,6 +210,7 @@ var Map = React.createClass({
   },
 
   componentDidMount: function() {
+    this.lastZoomScale = 1;
     this._drawMap();
     this._drawMarkers();
     window.addEventListener('resize', this._handleResize);
@@ -237,25 +269,32 @@ var Map = React.createClass({
                   	.style("z-index", "10")
                   	.style("visibility", "hidden")
                   	;
+                  	
+                  	
+                  	//INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
   },
   
   _zoom: function() {
+    this.lastZoomScale = d3.event.scale;
+    
     this.g
       .transition()
         .duration(750)
         .attr("transform", function() {
           var t = d3.event.translate;
           return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")scale("+ d3.event.scale +")";
-        }.bind(this) );
-    
+        })
+        ;
+        
     this.g.selectAll('.mark, .state')
       .transition()
         .duration(750)
         .attr("stroke-width", function() {
-          console.log('setting stroke width to:',(1/d3.event.scale).toFixed(2) );
           return (1/d3.event.scale).toFixed(2) +"px";
-        });
-
+        })
+        .attr('r', function(d) {
+          return Math.max(2, Math.min(d.myCount/2, 6) )/d3.event.scale + 'px'; })
+        ;
   },
   
   _drawMarkers: function() {
@@ -263,12 +302,14 @@ var Map = React.createClass({
     var projection = this.projection;
     var tooltip = this.tooltip;
     var g = this.g;
+    var lastZoomScale = this.lastZoomScale;
     
     var markers = this.g.selectAll(".mark")
                     .data(this.props.markers)
         //Update existing markers
                     .attr('class','mark')
-                    .attr('r', function(d) { return Math.max(2, Math.min(d.myCount/2, 6) ) + 'px'; })
+                    .attr('r', function(d) {
+                      return Math.max(2, Math.min(d.myCount/2, 6) )/lastZoomScale + 'px'; })
                     .attr("transform", function(d) {
                         if ( projection([ d.lng, d.lat ]) === null) {
                           console.log('in a null circle, d:', d);
@@ -276,6 +317,7 @@ var Map = React.createClass({
                         }
                         return "translate(" + projection([ d.lng, d.lat ]) + ")";
                       })
+                      //Stroke-Width handled in g zoom with states
                     ;
                     
         //Delete old markers
@@ -285,9 +327,10 @@ var Map = React.createClass({
         markers.enter()
                 .append("circle")
                 .attr('class','mark')
-                .attr('stroke-width', '1px')
+                .attr("stroke-width", function() {
+                        return (1/lastZoomScale).toFixed(2) +"px";})
                 .attr('r', function(d) {
-                  return Math.min(d.myCount/2, 5) + 'px';
+                  return Math.max(2, Math.min(d.myCount/2, 6) )/lastZoomScale + 'px';
                 })
                 .attr("transform", function(d) {
                     if ( projection([ d.lng, d.lat ]) === null) {
@@ -322,17 +365,12 @@ var Map = React.createClass({
     };
     
     function __showSummary(d) {
-      //console.log('Showing summary for "this":', this.__data__);
-      //console.log('svg:', svg);
-      //console.log('proj, etc:', projection([ this.__data__.lng, this.__data__.lat ])[0]);
-      
       var showTT = tooltip
                     .style("visibility", "visible")
                     .attr('class', 'summary')
                   	.text(d.hoverContent)
                   	.style("top", ( projection([ d.lng, this.__data__.lat ])[1] -10) + "px" )   //-10 so is above cursor
                   	.style("left", ( projection([ d.lng, this.__data__.lat ])[0] +10) + "px" )
-                  	//.attr('transform', 'translate(' + projection([ this.__data__.lng, this.__data__.lat ]) + ")")
                   	;
     };
     
@@ -347,7 +385,7 @@ var Map = React.createClass({
   },
 	  
   render: function() {
-    console.log('rendering Map');
+    //console.log('rendering Map');
     return (
 			<div id="map-holder">
 				<div id={this.state.myID} />
@@ -371,24 +409,40 @@ var MultiGraphBox = React.createClass({
     let graphToShow = {};
     return (
       <div id='multiGraph' >
-        <Map markers={this.props.markers} mapData={this.props.mapData} />
-        <div id='tabBox' >
-          {
-            this.state.supportedGraphs.map(function(graph, i) {
-              console.log('drawing tabs, state:', this.state);
-              let tabClass = '';
-              if (graph===this.state.graphShowing) tabClass = ' currTab';
-              return (
-                <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={this._changeGraph}>
-                  {graph}
-                </div> );
-            }.bind(this) )
-          }
+        <div id="map-frame">
+          <Map markers={this.props.markers} mapData={this.props.mapData} />
+          <div id='tabBox' >
+            {
+              this.state.supportedGraphs.map(function(graph, i) {
+                //console.log('drawing tabs, state:', this.state);
+                let tabClass = '';
+                if (graph===this.state.graphShowing) tabClass = ' currTab';
+                return (
+                  <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={this._changeGraph}>
+                    {graph}
+                  </div> );
+              }.bind(this) )
+            }
+          </div>
         </div>
+        <FilterBox filters={this.props.filters} notify={this.props.notify}/>
+        <DetailsBox content={} />
       </div>
     );
   }
 })
+var DetailsBox - React.createClass({
+  render: function() {
+    if (this.props.content === 'BLANK') return <div />
+    return (
+      <div id={'detailsBox'} >
+        {this.props.content}
+      </div>
+      );
+  }
+  
+})
+
 var FilterBox = React.createClass({
   render: function() {
     //console.log("Rendering FilterBox, props:",this.props.filters);
@@ -432,10 +486,15 @@ var Filter = React.createClass({
       
     } else if (keyCode===ENTERKEY) { //Enter
       var valsToSend = this.props.values.map(function(value, i) {
-        
         if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase() ) )
           return value[0];
       }.bind(this) );
+      
+      //ABILITY TO RESET FILTER
+      if (this.state.mySearch === '') {
+        console.log('valsToSend is NULL');
+        valsToSend = RESET;
+      }
       
       this.props.notify(this.props.name, valsToSend, true);
     }
@@ -443,7 +502,9 @@ var Filter = React.createClass({
   render: function() {
     var myItems=[];
     if (this.state.showItems) {
+      //console.log('in filter render, this.props.values:', this.props.values);
       myItems = this.props.values.map(function(value, i) {
+        //console.log('in filter render, value:', value); //debugger;
         if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase() ) )
           return <FilterItem key={i} value={ value[0] } selected={ value[1] } name={this.props.name} notify={this.props.notify} /> ;
       }.bind(this) );

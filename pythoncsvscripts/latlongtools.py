@@ -8,7 +8,7 @@ import geocoder
 
 def get_lat_long(address_string):
     ''' Return lat long from Google Geocode API.'''
-    key = "AIzaSyAc-wKv_QrRrqzr8TJDB5yEioQzBg7lJhQ"
+    key = ""
     g = geocoder.google(address_string, key = key)
     return g.latlng
 

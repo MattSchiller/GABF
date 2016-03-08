@@ -4,14 +4,15 @@ var ClientUI = React.createClass({
   getInitialState: function() {
     return ({
       filters: this.props.initFilters,
-      markers: this.props.initBeerData
+      markers: this.props.initBeerData,
+      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+      trimmedFilters: this.props.initFilters
     });
   },
   
   _applyFilter: function(name, value, asGroup) {
     //Value will be an array if multiple objects are sent at once
     var nextFilters = this.state.filters,
-        nextMarkers,
         z, y, completed = false, added, nameIndex, valueIndex = false;
     
     value = [].concat(value);     //If a single value, will turn it into a list of length 1
@@ -41,8 +42,35 @@ var ClientUI = React.createClass({
       z++;
     }
     
-    nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
-    this.setState({ filters: nextFilters, markers: nextMarkers });
+    let nextMarkers = this._filterMarkers(nextFilters, name, value, nameIndex, valueIndex);
+    let nextMapMarkers = this._cleanseMarkers(nextMarkers);
+    //let trimmedFilters = this._trimFilters(nextFilters, nextMarkers);
+    
+    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers });
+  },
+  
+  _trimFilters: function(nextFilters, nextMarkers) {
+    var filters = [];
+    for (let filterName of nextFilters) {              //Iterate through each filter (year, style, medal)
+      filters.push(filterName);
+      
+      for (let awardRecord of nextMarkers) {           //Iterate though each award for possible values
+        if (awardRecord['show'] === false) continue;
+        
+        
+        
+        //MAY WANT TO CONSOLIDATE THE TRANSVERSALS IN THE PREVIOUS FUNCTIONS FOR EFFICIENCY
+        
+        
+        
+      }
+      
+      for(let filterItem of filterName) {
+        
+      }
+    }
+    
+    return
   },
   
   _filterMarkers: function(nextFilters, filterName, filterVal, nameIndex, valueIndex) {
@@ -81,112 +109,49 @@ var ClientUI = React.createClass({
    return nextMarkers;
   },
   
-  render: function() {
-    return (
-      <div id='UI'>
-        <Map markers={this.state.markers} />
-        <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
-      </div>
-      );
-  }
-});
-var Map = React.createClass({
-  componentWillMount: function() {
-    this.numMarkers = this.props.markers.length;
-    console.log(this.numMarkers);
-  },
-  
-  componentDidMount: function() {
-    this.componentWillUpdate( this.props );
-  },
-  
-	componentWillUpdate: function(nextProps){
-		var myMarkers;
-		this.map = new GMaps({
-			div: '#map',
-			lat: 37.09024,
-      lng: -95.712891,
-      zoom: 4
-		});
-		
-		myMarkers = this._massageMarkers(nextProps);
-		
-		for (var z=0; z<myMarkers.length; z++){
-		  this.map.addMarker(myMarkers[z]);
-		}
-		
-		//console.log('In Map, myMarkers:', myMarkers);
-	},
-	
-	_massageMarkers: function(nextProps) {
-	  var myMarkers = [],
-	      markerCount = [],
-	      y = 0,
-	      myLat, myLng, markerIndex;
-	      
-	  for (var z=0; z<nextProps.markers.length; z++) {                //Check each marker
-	    if (nextProps.markers[z]['show']===false) continue;           //Not showing, skip it
-	    myLat = nextProps.markers[z]['LL'].lat;
-	    myLng = nextProps.markers[z]['LL'].lng;
-	    if (markerCount[ myLat +'-'+ myLng ] === undefined) {         //First time this location has been seen in the list
-	      markerCount[ myLat +'-'+ myLng ] = 1;
-	      myMarkers = this._writeMarker(myMarkers, nextProps.markers[z], true);
-        y++;
-	    } else {                                                      //We've seen this location before
-	      markerIndex = this._findMarker(myMarkers, myLat, myLng);
-	      if (markerIndex > -1) {                                     //We've found our former marker index
-	        this._writeMarker(myMarkers, nextProps.markers[z], false, markerIndex);
-	      }
+  _cleanseMarkers: function(markerData) {
+    //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
+    var markerCount = [],
+	      myLat, myLng, cleansedMarkers = [],
+	      initMarker, cleansedIndex = 0;
+	 
+    for (let awardRecord of markerData) {                //Check each marker
+	    if (awardRecord['show']===false) continue;           //Not showing, skip it
+	    
+	    myLat = awardRecord['LL'].lat;
+	    myLng = awardRecord['LL'].lng;
+	    initMarker = false;
+	    
+	    if (markerCount[ myLat +'-'+ myLng ] === undefined) {
+	      initMarker = true;        //First time this location has been seen in the list
+	      markerCount[ myLat +'-'+ myLng ] = cleansedIndex++;
 	    }
-	  }
+	    
+	    let markerIndex = markerCount[ myLat +'-'+ myLng ];
+	    let currMarker = cleansedMarkers[ markerIndex ];     //Grab existing marker info, could be undefined
+	    
+	    let newMarker = this._writeMarker(currMarker, awardRecord, initMarker, markerIndex);
+      cleansedMarkers[markerIndex] = newMarker;
+    }
 	  
-	  this.numMarkers = y;
-	  return myMarkers;
+	  //console.log('cleansedMarkers:', cleansedMarkers);
+	  return cleansedMarkers;
 	},
 	
-	_findMarker: function(myMarkers, lat, lng) {
-	  var z = 0;
-	  while (z<myMarkers.length) {
-	    if (myMarkers[z].lat === lat && myMarkers[z].lng === lng) return z;
-	    z++;
-	  }
-	  return -1;
-	},
-	
-	_writeMarker: function(myMarkers, awardRecord, isNew, y) {
-	  //Handles converting data into the gMaps friendly marker data & maintains list of awards on a marker
-	  
+	_writeMarker: function(thisMarker, awardRecord, isNew, index) {
+	//Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
 	  if (isNew) {
-	    myMarkers.push( {} );
-	    y = myMarkers.length-1;
-	    
-      myMarkers[y].lat = awardRecord['LL'].lat;
-      myMarkers[y].lng = awardRecord['LL'].lng;
-      
-      myMarkers[y].myCount = 0;
- 
-      myMarkers[y].mouseover = function(e){                                   //On hover, show: (count) City, ST
-        masterInfoWindow.close();
-        masterInfoWindow.setContent(this.hoverContent);
-        masterInfoWindow.open(this.map, this);
-      };
-      //myMarkers[y].mouseout = function(){
-      //  masterInfoWindow.close();
-      //};
-      
-      myMarkers[y].myAwards = '';
+	    thisMarker = {};
+      thisMarker.lat = awardRecord['LL'].lat;
+      thisMarker.lng = awardRecord['LL'].lng;
+      thisMarker.myCount = 0;
+      thisMarker.myAwards = '';
 	  }
-	  
-	  
-	  //Write to the marker some formatting and such
-	  myMarkers[y].myCount++;
-	    
-    if (myMarkers[y].myCount > 9) myMarkers[y].label = '+';
-    else myMarkers[y].label = String( myMarkers[y].myCount );
- 
-    myMarkers[y].hoverContent = '(' + myMarkers[y].myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
+	  //Append/Update the marker to account for another award
+	  thisMarker.myCount++;
+    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
     
-    myMarkers[y].myAwards += (
+    thisMarker.myAwards += (
       '<div id="awardView">' +
         '<b>Year:</b> ' + awardRecord['year'] +
         ' <b>Medal:</b> ' + awardRecord['medal'] +
@@ -196,27 +161,234 @@ var Map = React.createClass({
       '</div>'
     );
     
-    myMarkers[y].click = function(e) {
-      masterInfoWindow.close();
-      masterInfoWindow.setContent(this.myAwards);
-      masterInfoWindow.open(this.map, this);
-    };
-	    
-	  return myMarkers;
+    return thisMarker;
 	},
-	
-	render: function() {
-	  //console.log('rendering, numMarkers:',this.numMarkers);
-		return (
+  
+  render: function() {
+    return (
+      <div id='UI'>
+        <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} />
+        <FilterBox filters={this.state.filters} notify={this._applyFilter}/>
+      </div>
+      );
+  }
+});
+var Map = React.createClass({
+  getInitialState: function() {
+    return ({ myID: 'map' });
+  },
+
+  componentDidMount: function() {
+    this._drawMap();
+    this._drawMarkers();
+    window.addEventListener('resize', this._handleResize);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this._handleResize);
+  },
+  
+  componentDidUpdate: function() {
+    this._drawMarkers();
+  },
+  
+  _handleResize: function() {
+    //console.log("I'll add the code for resizing later");
+    d3.select('svg').remove();
+    this._drawMap();
+    this._drawMarkers();
+  },
+  
+  _drawMap: function() {
+    this.width = parseInt(d3.select("#"+this.state.myID).style('width'));
+    this.mapRatio = 0.5;
+    this.height = this.width * this.mapRatio;
+        
+    this.projection = d3.geo.albersUsa()
+                      .scale(this.width)
+                      .translate([this.width/2,this.height/2]);
+    
+    this.path = d3.geo.path()
+                .projection(this.projection);
+              
+    let zoom = d3.behavior.zoom()
+                .scale(1)
+                .scaleExtent([1, 8])
+                .on("zoom", this._zoom);
+    
+    this.svg = d3.select("#"+this.state.myID).append("svg")
+                .attr("width", this.width)
+                .attr("height", this.height);
+    
+    this.g = this.svg.append("g")
+              .call(zoom);
+              
+    this.g.selectAll("path")
+            .data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features)
+          .enter()
+            .append("path")
+            .attr("d", this.path)
+            .attr("class", "state")
+            .attr('stroke-width', '1px')
+          ;
+      
+    this.tooltip = d3.select("#"+this.state.myID)
+                  	.append("div")
+                  	.style("position", "absolute")
+                  	.style("z-index", "10")
+                  	.style("visibility", "hidden")
+                  	;
+  },
+  
+  _zoom: function() {
+    this.g
+      .transition()
+        .duration(750)
+        .attr("transform", function() {
+          var t = d3.event.translate;
+          return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")scale("+ d3.event.scale +")";
+        }.bind(this) );
+    
+    this.g.selectAll('.mark, .state')
+      .transition()
+        .duration(750)
+        .attr("stroke-width", function() {
+          console.log('setting stroke width to:',(1/d3.event.scale).toFixed(2) );
+          return (1/d3.event.scale).toFixed(2) +"px";
+        });
+
+  },
+  
+  _drawMarkers: function() {
+    var svg = this.svg;
+    var projection = this.projection;
+    var tooltip = this.tooltip;
+    var g = this.g;
+    
+    var markers = this.g.selectAll(".mark")
+                    .data(this.props.markers)
+        //Update existing markers
+                    .attr('class','mark')
+                    .attr('r', function(d) { return Math.max(2, Math.min(d.myCount/2, 6) ) + 'px'; })
+                    .attr("transform", function(d) {
+                        if ( projection([ d.lng, d.lat ]) === null) {
+                          console.log('in a null circle, d:', d);
+                          return 'translate(0, 0)';
+                        }
+                        return "translate(" + projection([ d.lng, d.lat ]) + ")";
+                      })
+                    ;
+                    
+        //Delete old markers
+        markers.exit().remove();
+         
+        //Create newly shown markers
+        markers.enter()
+                .append("circle")
+                .attr('class','mark')
+                .attr('stroke-width', '1px')
+                .attr('r', function(d) {
+                  return Math.min(d.myCount/2, 5) + 'px';
+                })
+                .attr("transform", function(d) {
+                    if ( projection([ d.lng, d.lat ]) === null) {
+                      console.log('in a null circle, d:', d);
+                      return 'translate(0, 0)';
+                    }
+                    return "translate(" + projection([ d.lng, d.lat ]) + ")";
+                  })
+                .on("click", __showDetails)
+                .on("mouseover", __showSummary)
+                .on("mouseout", __hideSummary)
+                ;
+
+    function __showDetails(d) {
+      console.log('Showing details for "this":', this);
+      
+        /*
+      var summary = d3.select("#map")
+                      .data(this.__data__)
+                    .enter()
+                      .append('div')
+                      .attr('class', 'summary')
+                      .style('z-index', '15')
+                      //.attr('transform', function(d) {
+                      //    return 'translate(' + projection([ d.lng, d.lat ]) + ")";
+                      //  })
+                      .attr('text', function(d) { return d.hoverContent; })
+                      ;
+                      */
+      
+      
+    };
+    
+    function __showSummary(d) {
+      //console.log('Showing summary for "this":', this.__data__);
+      //console.log('svg:', svg);
+      //console.log('proj, etc:', projection([ this.__data__.lng, this.__data__.lat ])[0]);
+      
+      var showTT = tooltip
+                    .style("visibility", "visible")
+                    .attr('class', 'summary')
+                  	.text(d.hoverContent)
+                  	.style("top", ( projection([ d.lng, this.__data__.lat ])[1] -10) + "px" )   //-10 so is above cursor
+                  	.style("left", ( projection([ d.lng, this.__data__.lat ])[0] +10) + "px" )
+                  	//.attr('transform', 'translate(' + projection([ this.__data__.lng, this.__data__.lat ]) + ")")
+                  	;
+    };
+    
+    function __hideSummary(d) {
+      console.log('Hiding summary for "this":', this);
+      var hideTT = tooltip
+                    .style('visibility', 'hidden')
+                    .style("top", ( "0px" ) )
+                  	.style("left", ( "0px" ) )
+                  ;
+    };
+  },
+	  
+  render: function() {
+    console.log('rendering Map');
+    return (
 			<div id="map-holder">
-				<p id='loading'>Loading map...</p>
-				<div id='map'></div>
-				<div id='markerCounter'>{this.numMarkers}</div>
+				<div id={this.state.myID} />
+				<div id='markerCounter'>{this.props.markers.length}</div>
 			</div>
 		);
-	}
-
+  },
 });
+var MultiGraphBox = React.createClass({
+  getInitialState: function() {
+    return { supportedGraphs: ['Awards', 'Entries'],
+             graphShowing: 'Awards' }
+  },
+  
+  _changeGraph: function(e) {
+    let myGraph = e.target.getAttribute('data-name');
+    this.setState({ graphShowing: myGraph });
+  },
+  
+  render: function() {
+    let graphToShow = {};
+    return (
+      <div id='multiGraph' >
+        <Map markers={this.props.markers} mapData={this.props.mapData} />
+        <div id='tabBox' >
+          {
+            this.state.supportedGraphs.map(function(graph, i) {
+              console.log('drawing tabs, state:', this.state);
+              let tabClass = '';
+              if (graph===this.state.graphShowing) tabClass = ' currTab';
+              return (
+                <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={this._changeGraph}>
+                  {graph}
+                </div> );
+            }.bind(this) )
+          }
+        </div>
+      </div>
+    );
+  }
+})
 var FilterBox = React.createClass({
   render: function() {
     //console.log("Rendering FilterBox, props:",this.props.filters);
@@ -252,12 +424,13 @@ var Filter = React.createClass({
   },
   _search: function(e) {
     e.stopPropagation();
+    e.preventDefault();
     var keyCode = e.keyCode || e.which;
-    
-    if (keyCode !==13) {  //Something other than Enter
-      this.setState({ mySearch: e.target.value });
+    let ENTERKEY = 13, TABKEY = 9;                    //Tab is ignored in the text boxes
+    if (keyCode !==ENTERKEY && keyCode !==TABKEY) {   //Something other than Enter/Tab
+      this.setState({ mySearch: e.target.value, showItems: true });
       
-    } else { //Enter
+    } else if (keyCode===ENTERKEY) { //Enter
       var valsToSend = this.props.values.map(function(value, i) {
         
         if (~value[0].toLowerCase().indexOf(this.state.mySearch.toLowerCase() ) )
@@ -302,11 +475,13 @@ var FilterItem = React.createClass({
   }
 });
 
-function pullData(dir, locFile, awardsFile) {
+function pullData(dir, locFile, awardsFile, mapFile) {
   var fileReturn = new XMLHttpRequest(),
       fileReturn2 = new XMLHttpRequest(),
+      mapReturn = new XMLHttpRequest(),
       myRequests = [];
       
+  myRequests.push(false);
   myRequests.push(false);
   myRequests.push(false);
 
@@ -314,14 +489,22 @@ function pullData(dir, locFile, awardsFile) {
     if (fileReturn.readyState==4 && fileReturn.status==200)
     {
       myRequests[0]=true;
-      if (myRequests[0]===myRequests[1]) massage();
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
     }
   }
   fileReturn2.onreadystatechange = function() {
     if (fileReturn2.readyState==4 && fileReturn2.status==200)
     {
       myRequests[1]=true;
-      if (myRequests[0]===myRequests[1]) massage();
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
+    }
+  }
+  mapReturn.onreadystatechange = function() {
+    if (mapReturn.readyState==4 && mapReturn.status==200)
+    {
+      myRequests[2]=true;
+      //console.log('just got mapData:', mapReturn.responseText);
+      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
     }
   }
   
@@ -329,17 +512,19 @@ function pullData(dir, locFile, awardsFile) {
   fileReturn.send();
   fileReturn2.open("GET", dir+awardsFile, true);
   fileReturn2.send();
+  mapReturn.open("GET", dir+mapFile, true);
+  mapReturn.send();
   
   var massage = function() {
   //Data Massage
     var latLongs = $.csv.toObjects(fileReturn.responseText),
         awards = $.csv.toArrays(fileReturn2.responseText),
+        map = JSON.parse(mapReturn.responseText),
         finalData = [], row = [], year, style, ttl = [],
         gold, silver, bronze,
-        rI;
-        
-    //console.log(awards);
-        
+        rI,
+        tempLL;
+    
     if (awards.length<2) {
       console.log('aborting due to length'); return;
     }
@@ -375,8 +560,11 @@ function pullData(dir, locFile, awardsFile) {
         row[rI]['brewery'] = awards[i][5];        //gold_brewery
         row[rI]['city'] = awards[i][6];           //gold_city
         row[rI]['state'] = awards[i][7];          //gold_state
-        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
-        rI++;
+        tempLL = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
+        if (tempLL !== false) {
+          row[rI]['LL'] = tempLL;
+          rI++;
+        } else row[rI] = [];
       }
       if (silver) {
         row[rI] = [];
@@ -405,10 +593,10 @@ function pullData(dir, locFile, awardsFile) {
         rI++;
       }
     }
-    makeFilters(row, ttl);
+    makeFilters(row, ttl, map);
   }
   
-  var makeFilters = function(beerData, ttl) {
+  var makeFilters = function(beerData, ttl, map) {
     var filterData = [],
         theseVals = [], myValues = [],
         temp;
@@ -437,13 +625,13 @@ function pullData(dir, locFile, awardsFile) {
     
     //console.log('filter data:',filterData);
     //console.log('marker data:',beerData);
-    runPage(beerData, filterData);
+    runPage(beerData, filterData, map);
   }
   
-  var runPage = function(beerData, filterData) {
+  var runPage = function(beerData, filterData, mapData) {
     //Entry into site view
     ReactDOM.render(  //Render page after underlying data has loaded
-      <ClientUI initBeerData={beerData} initFilters={filterData} />,
+      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} />,
       document.getElementById('content')
     );
   }
@@ -458,11 +646,12 @@ var findLL = function(latLongs, location) {
     }
     z++;
   }
-  return { lat: 0, lng: 0 };
+  //console.log('no lat long found for:',location);
+  return false;
 }
 
 //Page begin:
-pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv');
+pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv', 'US.json');
 
 
 

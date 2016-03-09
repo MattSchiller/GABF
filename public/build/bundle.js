@@ -49,7 +49,7 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -80,8 +80,11 @@
 	}();
 
 	var RESET = '_RESET';
-	var MAX_NODE_R = 8;
-	var MIN_NODE_R = 2;
+	var MAX_NODE_R = 9;
+	var MIN_NODE_R = 3;
+	var MAX_ZOOM = 20;
+
+	var GetData = __webpack_require__(2);
 
 	var ClientUI = React.createClass({
 	  displayName: 'ClientUI',
@@ -227,7 +230,7 @@
 	            }
 	            j++;
 	          }
-	          awardRecord['show'] = potentialShow;
+	          awardRecord.show = potentialShow;
 	          if (potentialShow) {
 	            //This record is what we're showing, so we add its values to the filters
 	            trimmedFilters = this._addToTrimmedFilters(trimmedFilters, potentialTrimmed);
@@ -239,9 +242,9 @@
 	          if (awardRecord[filterName] === filterVal[0]) {
 	            //This is a record that was affected by the most recent filter change
 	            //console.log('_filterMarkers on:', nextMarkers[i]);
-	            awardRecord['show'] = nextFilters[nameIndex].values[valueIndex][1];
+	            awardRecord.show = nextFilters[nameIndex].values[valueIndex][1];
 	          }
-	          if (awardRecord['show']) {
+	          if (awardRecord.show) {
 	            tempPT = JSON.parse(JSON.stringify(potentialTrimmed)); //Maintain PT as a header
 	            for (var i = 0; i < tempPT.length; i++) {
 	              //Scoop up all the values in this shown marker
@@ -314,10 +317,10 @@
 	      for (var _iterator3 = markerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var awardRecord = _step3.value;
 	        //Check each marker
-	        if (awardRecord['show'] === false) continue; //Not showing, skip it
+	        if (awardRecord.show === false) continue; //Not showing, skip it
 
-	        myLat = awardRecord['LL'].lat;
-	        myLng = awardRecord['LL'].lng;
+	        myLat = awardRecord.LL.lat;
+	        myLng = awardRecord.LL.lng;
 	        initMarker = false;
 
 	        if (markerCount[myLat + '-' + myLng] === undefined) {
@@ -355,21 +358,27 @@
 	    //Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
 	    if (isNew) {
 	      thisMarker = {};
-	      thisMarker.lat = awardRecord['LL'].lat;
-	      thisMarker.lng = awardRecord['LL'].lng;
+	      thisMarker.lat = awardRecord.LL.lat;
+	      thisMarker.lng = awardRecord.LL.lng;
 	      thisMarker.myCount = 0;
 	      thisMarker.myAwards = [];
+	      thisMarker.myBrewery = awardRecord.brewery;
+	      thisMarker.singleBrewery = true;
 	    }
+
+	    //INCLUDE LOGIC TO DISPLAY TOOLTIP WITH BREWERY NAME INSTEAD OF CITY IF APPROPRIATE
+
 	    //Append/Update the marker to account for another award
 	    thisMarker.myCount++;
-	    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] + ', ' + awardRecord['state'];
 
-	    thisMarker.myAwards.push({ year: awardRecord['year'],
-	      medal: awardRecord['medal'],
-	      style: awardRecord['style'],
-	      beer: awardRecord['beer'],
-	      brewery: awardRecord['brewery']
-	    });
+	    if (thisMarker.singleBrewery && thisMarker.myBrewery === awardRecord.brewery) {
+	      thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord.brewery + ' [' + awardRecord.city + ', ' + awardRecord.state + ']';
+	    } else {
+	      thisMarker.singleBrewery = false;
+	      thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord.city + ', ' + awardRecord.state;
+	    }
+
+	    thisMarker.myAwards.push(awardRecord);
 
 	    return thisMarker;
 	  },
@@ -401,7 +410,8 @@
 	  },
 
 	  _handleResize: function _handleResize() {
-	    //console.log("I'll add the code for resizing later");
+	    //ADD SOMETHING TO NOT SHIT BRICKS WHEN RESIZE WHILE ZOOM
+
 	    d3.select('svg').remove();
 	    this._drawMap();
 	    this._drawMarkers();
@@ -416,7 +426,7 @@
 
 	    this.path = d3.geo.path().projection(this.projection);
 
-	    var zoom = d3.behavior.zoom().scale(1).scaleExtent([1, 8]).on("zoom", this._zoom);
+	    var zoom = d3.behavior.zoom().scale(1).scaleExtent([1, MAX_ZOOM]).on("zoom", this._zoom);
 
 	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height);
 
@@ -427,6 +437,8 @@
 	    this.tooltip = d3.select("#" + this.state.myID).append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden");
 
 	    //INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
+
+	    //ADD CODE TO MAINTAIN TOOLTIP POS AFTER ZOOM
 	  },
 
 	  _zoom: function _zoom() {
@@ -441,11 +453,6 @@
 	      return (1 / d3.event.scale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
 	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / d3.event.scale + 'px';
-	    });
-
-	    this.tooltip.attr('transform', function () {
-	      var t = d3.event.translate;
-	      return "translate(" + parseInt(t[0]) + ',' + parseInt(t[1]) + ")";
 	    });
 	  },
 
@@ -493,8 +500,22 @@
 	    };
 
 	    function __showSummary(d) {
+	      //console.log('this:', this, 'd:', d);
 	      var showTT = tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("top", projection([d.lng, this.__data__.lat])[1] - 10 + "px") //-10 so is above cursor
-	      .style("left", projection([d.lng, this.__data__.lat])[0] + 10 + "px");
+	      .style("left", projection([d.lng, this.__data__.lat])[0] + 10 + "px").attr('transform', function () {
+	        return this.transform;
+	      }.bind(this));
+
+	      console.log('showTT:', showTT);
+
+	      /* INCLUDE SOME LOGIC TO REPOSITION TT OVER ZOOMED IN MARKERS:
+	          this.tooltip
+	      .attr('transform', function() {
+	      let t = d3.event.translate;
+	      return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")"
+	      })
+	      ;
+	      */
 	    };
 
 	    function __hideSummary(d) {
@@ -642,186 +663,179 @@
 	  }
 	});
 
-	function pullData(dir, locFile, awardsFile, mapFile) {
-	  var fileReturn = new XMLHttpRequest(),
-	      fileReturn2 = new XMLHttpRequest(),
-	      mapReturn = new XMLHttpRequest(),
-	      myRequests = [];
+	//Page begin:
+	var dataPull = new GetData( //This is the runPage cb-function to start the page when data is loaded
+	function (beerData, filterData, mapData) {
+	  //Entry into site view
+	  ReactDOM.render( //Render page after underlying data has loaded
+	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData }), document.getElementById('content'));
+	});
 
-	  myRequests.push(false);
-	  myRequests.push(false);
-	  myRequests.push(false);
+	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json');
 
-	  fileReturn.onreadystatechange = function () {
-	    if (fileReturn.readyState == 4 && fileReturn.status == 200) {
-	      myRequests[0] = true;
-	      if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2]) massage();
-	    }
-	  };
-	  fileReturn2.onreadystatechange = function () {
-	    if (fileReturn2.readyState == 4 && fileReturn2.status == 200) {
-	      myRequests[1] = true;
-	      if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2]) massage();
-	    }
-	  };
-	  mapReturn.onreadystatechange = function () {
-	    if (mapReturn.readyState == 4 && mapReturn.status == 200) {
-	      myRequests[2] = true;
-	      //console.log('just got mapData:', mapReturn.responseText);
-	      if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2]) massage();
-	    }
-	  };
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
 
-	  fileReturn.open("GET", dir + locFile, true);
-	  fileReturn.send();
-	  fileReturn2.open("GET", dir + awardsFile, true);
-	  fileReturn2.send();
-	  mapReturn.open("GET", dir + mapFile, true);
-	  mapReturn.send();
+	"use strict";
 
-	  var massage = function massage() {
-	    //Data Massage
-	    var latLongs = $.csv.toObjects(fileReturn.responseText),
-	        awards = $.csv.toArrays(fileReturn2.responseText),
-	        map = JSON.parse(mapReturn.responseText),
-	        finalData = [],
-	        row = [],
-	        year,
-	        style,
-	        ttl = [],
-	        gold,
-	        silver,
-	        bronze,
-	        rI,
-	        tempLL;
+	var GetData = function GetData(runPage) {
 
-	    if (awards.length < 2) {
-	      console.log('aborting due to length');return;
-	    }
+	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile) {
+	    var locReturn = new XMLHttpRequest(),
+	        awardsReturn = new XMLHttpRequest(),
+	        mapReturn = new XMLHttpRequest(),
+	        detLocReturn = new XMLHttpRequest(),
+	        myRequests = [];
 
-	    ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
+	    myRequests.push(false);
+	    myRequests.push(false);
+	    myRequests.push(false);
+	    myRequests.push(false);
 
-	    rI = 0;
-	    for (var i = 1; i < awards.length; i++) {
-	      gold = false;silver = false;bronze = false;
-	      for (var j = 0; j < awards[0].length; j++) {
-	        switch (awards[0][j]) {
-	          case 'year':
-	            year = awards[i][j];break; //dat['year'] = '2013'
-	          case 'cat_name':
-	            style = awards[i][j];break; //dat['style'] = 'IPA'
-	          case 'gold_beer':
-	            if (awards[i][j] !== '') gold = true;break;
-	          case 'silver_beer':
-	            if (awards[i][j] !== '') silver = true;break;
-	          case 'bronze_beer':
-	            if (awards[i][j] !== '') bronze = true;break;
+	    locReturn.onreadystatechange = function () {
+	      if (locReturn.readyState == 4 && locReturn.status == 200) {
+	        myRequests[0] = true;
+	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
+	      }
+	    };
+	    awardsReturn.onreadystatechange = function () {
+	      if (awardsReturn.readyState == 4 && awardsReturn.status == 200) {
+	        myRequests[1] = true;
+	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
+	      }
+	    };
+	    mapReturn.onreadystatechange = function () {
+	      if (mapReturn.readyState == 4 && mapReturn.status == 200) {
+	        myRequests[2] = true;
+	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
+	      }
+	    };
+	    detLocReturn.onreadystatechange = function () {
+	      if (detLocReturn.readyState == 4 && detLocReturn.status == 200) {
+	        myRequests[3] = true;
+	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
+	      }
+	    };
+
+	    locReturn.open("GET", dir + locFile, true);
+	    locReturn.send();
+	    awardsReturn.open("GET", dir + awardsFile, true);
+	    awardsReturn.send();
+	    mapReturn.open("GET", dir + mapFile, true);
+	    mapReturn.send();
+	    detLocReturn.open('GET', dir + detLocFile, true);
+	    detLocReturn.send();
+
+	    var massage = function massage() {
+	      //Data Massage
+	      var latLongs = $.csv.toObjects(locReturn.responseText),
+	          detLatLongs = $.csv.toObjects(detLocReturn.responseText),
+	          awards = $.csv.toObjects(awardsReturn.responseText),
+	          map = JSON.parse(mapReturn.responseText),
+	          ttl = [],
+	          myData = [];
+
+	      if (awards.length < 2) {
+	        console.log('aborting due to insufficient length of awards data');return;
+	      }
+
+	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
+
+	      console.log('awards:', awards);
+
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = awards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var awardRow = _step.value;
+
+	          var tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
+	          if (tempLL !== false) {
+	            awardRow.LL = tempLL;
+	            awardRow.show = true;
+	            myData.push(awardRow);
+	          }
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
 	        }
 	      }
 
-	      //Copy contest data into entry record
-	      if (gold) {
-	        row[rI] = [];
-	        row[rI]['show'] = true;
-	        row[rI]['year'] = year;
-	        row[rI]['style'] = style;
-	        row[rI]['medal'] = 'gold';
-	        row[rI]['beer'] = awards[i][4]; //gold_beer
-	        row[rI]['brewery'] = awards[i][5]; //gold_brewery
-	        row[rI]['city'] = awards[i][6]; //gold_city
-	        row[rI]['state'] = awards[i][7]; //gold_state
-	        tempLL = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state']);
-	        if (tempLL !== false) {
-	          row[rI]['LL'] = tempLL;
-	          rI++;
-	        } else row[rI] = [];
-	      }
-	      if (silver) {
-	        row[rI] = [];
-	        row[rI]['show'] = true;
-	        row[rI]['year'] = year;
-	        row[rI]['style'] = style;
-	        row[rI]['medal'] = 'silver';
-	        row[rI]['beer'] = awards[i][8]; //_beer
-	        row[rI]['brewery'] = awards[i][9]; //_brewery
-	        row[rI]['city'] = awards[i][10]; //_city
-	        row[rI]['state'] = awards[i][11]; //_state
-	        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state']);
-	        rI++;
-	      }
-	      if (bronze) {
-	        row[rI] = [];
-	        row[rI]['show'] = true;
-	        row[rI]['year'] = year;
-	        row[rI]['style'] = style;
-	        row[rI]['medal'] = 'bronze';
-	        row[rI]['beer'] = awards[i][12]; //_beer
-	        row[rI]['brewery'] = awards[i][13]; //_brewery
-	        row[rI]['city'] = awards[i][14]; //_city
-	        row[rI]['state'] = awards[i][15]; //_state
-	        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state']);
-	        rI++;
-	      }
-	    }
-	    makeFilters(row, ttl, map);
-	  };
+	      makeFilters(myData, ttl, map);
+	    };
 
-	  var makeFilters = function makeFilters(beerData, ttl, map) {
-	    var filterData = [],
-	        theseVals = [],
-	        myValues = [],
-	        temp;
+	    var makeFilters = function makeFilters(beerData, ttl, map) {
+	      var filterData = [],
+	          theseVals = [],
+	          myValues = [],
+	          temp;
 
-	    for (var y = 1; y < ttl.length - 1; y++) {
-	      theseVals = [];
-	      myValues[ttl[y]] = [];
+	      for (var y = 1; y < ttl.length - 1; y++) {
+	        theseVals = [];
+	        myValues[ttl[y]] = [];
 
-	      for (var z = 0; z < beerData.length; z++) {
-	        //Ignore 'show' andf 'LL' for filters
-	        temp = beerData[z][ttl[y]];
-	        if (theseVals.indexOf(temp) === -1) {
-	          //If value not represented, add it
-	          theseVals.push(temp);
-	          myValues[ttl[y]].push([temp, true]);
+	        for (var z = 0; z < beerData.length; z++) {
+	          //Ignore 'show' andf 'LL' for filters
+	          temp = beerData[z][ttl[y]];
+	          if (theseVals.indexOf(temp) === -1) {
+	            //If value not represented, add it
+	            theseVals.push(temp);
+	            myValues[ttl[y]].push([temp, true]);
+	          }
 	        }
 	      }
-	    }
 
-	    for (var x = 1; x < ttl.length - 1; x++) {
-	      filterData.push({
-	        name: ttl[x],
-	        values: myValues[ttl[x]]
-	      });
-	    }
+	      for (var x = 1; x < ttl.length - 1; x++) {
+	        filterData.push({
+	          name: ttl[x],
+	          values: myValues[ttl[x]]
+	        });
+	      }
 
-	    //console.log('filter data:',filterData);
-	    //console.log('marker data:',beerData);
-	    runPage(beerData, filterData, map);
-	  };
+	      //console.log('filter data:',filterData);
+	      //console.log('marker data:',beerData);
 
-	  var runPage = function runPage(beerData, filterData, mapData) {
-	    //Entry into site view
-	    ReactDOM.render( //Render page after underlying data has loaded
-	    React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData }), document.getElementById('content'));
-	  };
-	}
-
-	var findLL = function findLL(latLongs, location) {
-	  var z = 0,
-	      found = false;
-	  while (z < latLongs.length && !found) {
-	    if (latLongs[z].location == location) {
-	      found = true;
-	      return { lat: latLongs[z].lat, lng: latLongs[z].lng };
-	    }
-	    z++;
+	      runPage(beerData, filterData, map);
+	    };
 	  }
-	  //console.log('no lat long found for:',location);
-	  return false;
+
+	  var findLL = function findLL(latLongs, detLatLongs, brewery, location) {
+	    var z = 0;
+	    brewery += ', ' + location;
+	    while (z < detLatLongs.length) {
+	      //Preferred pass on brewery
+	      if (detLatLongs[z].brewery_city == brewery) return { lat: detLatLongs[z].lat, lng: detLatLongs[z].lng };
+	      z++;
+	    }
+	    z = 0;
+	    while (z < latLongs.length) {
+	      //Consolation pass on city/state
+	      if (latLongs[z].location == location) return { lat: latLongs[z].lat, lng: latLongs[z].lng };
+	      z++;
+	    }
+	    //console.log('no lat long found for:',location);
+	    return false;
+	  };
+
+	  return {
+	    pullData: pullData
+	  };
 	};
 
-	//Page begin:
-	pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv', 'US.json');
+	module.exports = GetData;
 
 /***/ }
 /******/ ]);

@@ -1,6 +1,9 @@
 var RESET = '_RESET';
-var MAX_NODE_R = 8;
-var MIN_NODE_R = 2;
+var MAX_NODE_R = 9;
+var MIN_NODE_R = 3;
+var MAX_ZOOM = 20;
+
+var GetData = require('./getData.js');
 
 var ClientUI = React.createClass({
   getInitialState: function() {
@@ -92,7 +95,7 @@ var ClientUI = React.createClass({
           }
           j++;
         }
-        awardRecord['show'] = potentialShow;
+        awardRecord.show = potentialShow;
         if (potentialShow) {                                          //This record is what we're showing, so we add its values to the filters
           trimmedFilters = this._addToTrimmedFilters(trimmedFilters, potentialTrimmed);
         }
@@ -102,9 +105,9 @@ var ClientUI = React.createClass({
         //console.log('filterVal:', filterVal);
         if ( awardRecord[ filterName ] === filterVal[0] ) {        //This is a record that was affected by the most recent filter change
           //console.log('_filterMarkers on:', nextMarkers[i]);
-          awardRecord['show'] = nextFilters[ nameIndex ].values[ valueIndex ][1];
+          awardRecord.show = nextFilters[ nameIndex ].values[ valueIndex ][1];
         }
-        if (awardRecord['show']) {
+        if (awardRecord.show) {
           tempPT = JSON.parse(JSON.stringify(potentialTrimmed));  //Maintain PT as a header
           for (var i=0; i<tempPT.length; i++) {                   //Scoop up all the values in this shown marker
             //console.log('oh boy, awardRecord[ tempPT[i].name ]:', awardRecord[ tempPT[i].name ]);
@@ -149,10 +152,10 @@ var ClientUI = React.createClass({
 	      initMarker, cleansedIndex = 0;
 	 
     for (let awardRecord of markerData) {                //Check each marker
-	    if (awardRecord['show']===false) continue;           //Not showing, skip it
+	    if (awardRecord.show===false) continue;           //Not showing, skip it
 	    
-	    myLat = awardRecord['LL'].lat;
-	    myLng = awardRecord['LL'].lng;
+	    myLat = awardRecord.LL.lat;
+	    myLng = awardRecord.LL.lng;
 	    initMarker = false;
 	    
 	    if (markerCount[ myLat +'-'+ myLng ] === undefined) {
@@ -175,23 +178,33 @@ var ClientUI = React.createClass({
 	//Handles converting congruent location data into a friendly marker & maintains list of awards on a marker
 	  if (isNew) {
 	    thisMarker = {};
-      thisMarker.lat = awardRecord['LL'].lat;
-      thisMarker.lng = awardRecord['LL'].lng;
+      thisMarker.lat = awardRecord.LL.lat;
+      thisMarker.lng = awardRecord.LL.lng;
       thisMarker.myCount = 0;
       thisMarker.myAwards = [];
+      thisMarker.myBrewery = awardRecord.brewery;
+      thisMarker.singleBrewery = true;
 	  }
+	  
+	  
+	  
+	  //INCLUDE LOGIC TO DISPLAY TOOLTIP WITH BREWERY NAME INSTEAD OF CITY IF APPROPRIATE
+	  
+	  
+	  
+	  
 	  //Append/Update the marker to account for another award
 	  thisMarker.myCount++;
-    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord['city'] +', '+ awardRecord['state'];
-    
-    thisMarker.myAwards.push (
-      { year: awardRecord['year'],
-        medal: awardRecord['medal'],
-        style: awardRecord['style'],
-        beer: awardRecord['beer'],
-        brewery: awardRecord['brewery']
-      }
-    );
+	  
+	  if (thisMarker.singleBrewery && thisMarker.myBrewery === awardRecord.brewery ) {
+	    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord.brewery
+	                            + ' [' + awardRecord.city +', '+ awardRecord.state + ']';
+	  } else {
+	    thisMarker.singleBrewery = false;
+	    thisMarker.hoverContent = '(' + thisMarker.myCount + ') ' + awardRecord.city +', '+ awardRecord.state;
+	  }
+	  
+    thisMarker.myAwards.push (awardRecord);
     
     return thisMarker;
 	},
@@ -246,7 +259,7 @@ var Map = React.createClass({
               
     let zoom = d3.behavior.zoom()
                 .scale(1)
-                .scaleExtent([1, 8])
+                .scaleExtent([1, MAX_ZOOM])
                 .on("zoom", this._zoom);
     
     this.svg = d3.select("#"+this.state.myID).append("svg")
@@ -274,11 +287,13 @@ var Map = React.createClass({
                   	
                   	
                   	//INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
+                  	
+                  	//ADD CODE TO MAINTAIN TOOLTIP POS AFTER ZOOM
   },
   
   _zoom: function() {
     this.lastZoomScale = d3.event.scale;
-    
+      
     this.g
       .transition()
         .duration(750)
@@ -353,13 +368,19 @@ var Map = React.createClass({
     };
     
     function __showSummary(d) {
+      //console.log('this:', this, 'd:', d);
       var showTT = tooltip
                     .style("visibility", "visible")
                     .attr('class', 'summary')
                   	.text(d.hoverContent)
                   	.style("top", ( projection([ d.lng, this.__data__.lat ])[1] -10) + "px" )   //-10 so is above cursor
                   	.style("left", ( projection([ d.lng, this.__data__.lat ])[0] +10) + "px" )
+                  	.attr('transform', function() {
+                  	  return (this.transform);
+                  	}.bind(this) )
                   	;
+                    
+                    console.log('showTT:', showTT);
                   	
                   	
                   	/* INCLUDE SOME LOGIC TO REPOSITION TT OVER ZOOMED IN MARKERS:
@@ -456,11 +477,11 @@ var DetailsBox = React.createClass({
           this.state.content.map(function(award, i) {
             return (
               <div key={i} className="detailBoxItem" >
-                Year:     {award.year} <br/>
-                Medal:    {award.medal} <br/>
-                Style:    {award.style} <br/>
-                Beer:     {award.beer} <br/>
-                Brewery:  {award.brewery}
+                <b>Year:</b>     {award.year} <br/>
+                <b>Medal:</b>    {award.medal} <br/>
+                <b>Style:</b>    {award.style} <br/>
+                <b>Beer:</b>     {award.beer} <br/>
+                <b>Brewery:</b>  {award.brewery}
               </div>
             );
           })
@@ -563,183 +584,20 @@ var FilterItem = React.createClass({
   }
 });
 
-function pullData(dir, locFile, awardsFile, mapFile) {
-  var fileReturn = new XMLHttpRequest(),
-      fileReturn2 = new XMLHttpRequest(),
-      mapReturn = new XMLHttpRequest(),
-      myRequests = [];
-      
-  myRequests.push(false);
-  myRequests.push(false);
-  myRequests.push(false);
 
-  fileReturn.onreadystatechange = function() {
-    if (fileReturn.readyState==4 && fileReturn.status==200)
-    {
-      myRequests[0]=true;
-      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
-    }
-  }
-  fileReturn2.onreadystatechange = function() {
-    if (fileReturn2.readyState==4 && fileReturn2.status==200)
-    {
-      myRequests[1]=true;
-      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
-    }
-  }
-  mapReturn.onreadystatechange = function() {
-    if (mapReturn.readyState==4 && mapReturn.status==200)
-    {
-      myRequests[2]=true;
-      //console.log('just got mapData:', mapReturn.responseText);
-      if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2]) massage();
-    }
-  }
-  
-  fileReturn.open("GET", dir+locFile, true);
-  fileReturn.send();
-  fileReturn2.open("GET", dir+awardsFile, true);
-  fileReturn2.send();
-  mapReturn.open("GET", dir+mapFile, true);
-  mapReturn.send();
-  
-  var massage = function() {
-  //Data Massage
-    var latLongs = $.csv.toObjects(fileReturn.responseText),
-        awards = $.csv.toArrays(fileReturn2.responseText),
-        map = JSON.parse(mapReturn.responseText),
-        finalData = [], row = [], year, style, ttl = [],
-        gold, silver, bronze,
-        rI,
-        tempLL;
-    
-    if (awards.length<2) {
-      console.log('aborting due to length'); return;
-    }
-    
-    ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL' ];
-    
-    rI = 0;
-    for (var i=1; i<awards.length; i++) {
-      gold = false; silver = false; bronze = false;
-      for (var j=0; j<awards[0].length; j++) {
-        switch (awards[0][j]) {
-          case 'year':
-           year = awards[i][j]; break;      //dat['year'] = '2013'
-          case 'cat_name':
-            style = awards[i][j]; break;   //dat['style'] = 'IPA'
-          case 'gold_beer':
-            if (awards[i][j]!=='') gold = true; break;
-          case 'silver_beer':
-            if (awards[i][j]!=='') silver = true; break;
-          case 'bronze_beer':
-            if (awards[i][j]!=='') bronze = true; break;
-        }
-      }
-        
-      //Copy contest data into entry record
-      if (gold) {
-        row[rI] = [];
-        row[rI]['show'] = true;
-        row[rI]['year'] = year;
-        row[rI]['style'] = style;
-        row[rI]['medal'] = 'gold';
-        row[rI]['beer'] = awards[i][4];           //gold_beer
-        row[rI]['brewery'] = awards[i][5];        //gold_brewery
-        row[rI]['city'] = awards[i][6];           //gold_city
-        row[rI]['state'] = awards[i][7];          //gold_state
-        tempLL = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
-        if (tempLL !== false) {
-          row[rI]['LL'] = tempLL;
-          rI++;
-        } else row[rI] = [];
-      }
-      if (silver) {
-        row[rI] = [];
-        row[rI]['show'] = true;
-        row[rI]['year'] = year;
-        row[rI]['style'] = style;
-        row[rI]['medal'] = 'silver';
-        row[rI]['beer'] = awards[i][8];            //_beer
-        row[rI]['brewery'] = awards[i][9];         //_brewery
-        row[rI]['city'] = awards[i][10];           //_city
-        row[rI]['state'] = awards[i][11];          //_state
-        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
-        rI++;
-      }
-      if (bronze) {
-        row[rI] = [];
-        row[rI]['show'] = true;
-        row[rI]['year'] = year;
-        row[rI]['style'] = style;
-        row[rI]['medal'] = 'bronze';
-        row[rI]['beer'] = awards[i][12];           //_beer
-        row[rI]['brewery'] = awards[i][13];        //_brewery
-        row[rI]['city'] = awards[i][14];           //_city
-        row[rI]['state'] = awards[i][15];          //_state
-        row[rI]['LL'] = findLL(latLongs, row[rI]['city'] + ', ' + row[rI]['state'])
-        rI++;
-      }
-    }
-    makeFilters(row, ttl, map);
-  }
-  
-  var makeFilters = function(beerData, ttl, map) {
-    var filterData = [],
-        theseVals = [], myValues = [],
-        temp;
-    
-    for (var y=1; y<ttl.length-1; y++) {
-      theseVals = [];
-      myValues[ ttl[y] ] = [];
-      
-      for (var z=0; z<beerData.length; z++) {                               //Ignore 'show' andf 'LL' for filters
-        temp = beerData[z][ ttl[y] ];
-        if (theseVals.indexOf( temp ) === -1 )  {          //If value not represented, add it
-          theseVals.push( temp );
-          myValues[ ttl[y] ].push( [ temp, true ] );
-        }
-      }
-    }
-    
-    for (var x=1; x<ttl.length-1; x++) {
-      filterData.push(
-          {
-            name: ttl[x],
-            values: myValues[ ttl[x] ]
-          }
-        );
-    }
-    
-    //console.log('filter data:',filterData);
-    //console.log('marker data:',beerData);
-    runPage(beerData, filterData, map);
-  }
-  
-  var runPage = function(beerData, filterData, mapData) {
-    //Entry into site view
-    ReactDOM.render(  //Render page after underlying data has loaded
-      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} />,
-      document.getElementById('content')
-    );
-  }
-}
-     
-var findLL = function(latLongs, location) {
-  var z = 0, found = false;
-  while (z < latLongs.length && !found) {
-    if (latLongs[z].location == location) {
-      found=true;
-      return { lat: latLongs[z].lat, lng: latLongs[z].lng };
-    }
-    z++;
-  }
-  //console.log('no lat long found for:',location);
-  return false;
-}
 
 //Page begin:
-pullData('json_data/', 'lat_long_20160223.csv', 'compiled_info.csv', 'US.json');
+var dataPull = new GetData(   //This is the runPage cb-function to start the page when data is loaded
+  function(beerData, filterData, mapData) {
+      //Entry into site view
+      ReactDOM.render(  //Render page after underlying data has loaded
+        <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} />,
+        document.getElementById('content')
+      )
+  }
+);
+
+dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json');
 
 
 

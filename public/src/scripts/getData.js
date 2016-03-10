@@ -64,15 +64,13 @@ var GetData = (function (runPage) {
       
       ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL' ];
 
-      console.log('awards:', awards);
-      
       for (let awardRow of awards) {
           let tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
           if (tempLL !== false) {
             awardRow.LL = tempLL;
             awardRow.show = true;
             myData.push(awardRow);
-          }
+          } else console.log('Record missing LL:', awardRow);
       }
       
       makeFilters(myData, ttl, map);

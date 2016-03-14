@@ -1,43 +1,58 @@
 var GetData = (function (runPage) {
     
-  function pullData(dir, locFile, detLocFile, awardsFile, mapFile) {
+  function pullData(dir, locFile, detLocFile, awardsFile, mapFile, geneFile) {
     var locReturn = new XMLHttpRequest(),
         awardsReturn = new XMLHttpRequest(),
         mapReturn = new XMLHttpRequest(),
         detLocReturn = new XMLHttpRequest(),
-        myRequests = [];
-        
-    myRequests.push(false);
-    myRequests.push(false);
-    myRequests.push(false);
-    myRequests.push(false);
-  
+        geneReturn = new XMLHttpRequest(),
+        myRequests = [],
+        numFiles = 5;
+    
+    for (let i=0; i<numFiles; i++) {
+      myRequests.push(false);
+    }
+    
+    var _allReady = function() {
+      for (let fileReceived of myRequests) {
+        if (!fileReceived) return false;
+      }
+      return true;
+    };
+    
     locReturn.onreadystatechange = function() {
       if (locReturn.readyState==4 && locReturn.status==200)
       {
         myRequests[0]=true;
-        if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2] && myRequests[2]===myRequests[3]) massage();
+        if (_allReady()) massage();
       }
     };
     awardsReturn.onreadystatechange = function() {
       if (awardsReturn.readyState==4 && awardsReturn.status==200)
       {
         myRequests[1]=true;
-        if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2] && myRequests[2]===myRequests[3]) massage();
+        if (_allReady()) massage();
       }
     };
     mapReturn.onreadystatechange = function() {
       if (mapReturn.readyState==4 && mapReturn.status==200)
       {
         myRequests[2]=true;
-        if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2] && myRequests[2]===myRequests[3]) massage();
+        if (_allReady()) massage();
       }
     };
     detLocReturn.onreadystatechange = function() {
       if (detLocReturn.readyState==4 && detLocReturn.status==200)
       {
         myRequests[3]=true;
-        if (myRequests[0]===myRequests[1] && myRequests[1]===myRequests[2] && myRequests[2]===myRequests[3]) massage();
+        if (_allReady()) massage();
+      }
+    };
+    geneReturn.onreadystatechange = function() {
+      if (geneReturn.readyState==4 && geneReturn.status==200)
+      {
+        myRequests[4]=true;
+        if (_allReady()) massage();
       }
     };
     
@@ -49,6 +64,8 @@ var GetData = (function (runPage) {
     mapReturn.send();
     detLocReturn.open('GET', dir+detLocFile, true);
     detLocReturn.send();
+    geneReturn.open('GET', dir+geneFile, true);
+    geneReturn.send();
     
     var massage = function() {
     //Data Massage
@@ -56,11 +73,14 @@ var GetData = (function (runPage) {
           detLatLongs = $.csv.toObjects(detLocReturn.responseText),
           awards =      $.csv.toObjects(awardsReturn.responseText),
           map =         JSON.parse(mapReturn.responseText),
+          geneology =   $.csv.toObjects(geneReturn.responseText),
           ttl = [], myData = [];
       
       if (awards.length<2) {
         console.log('aborting due to insufficient length of awards data'); return;
       }
+      
+      console.table(geneology);
       
       ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL' ];
 
@@ -70,13 +90,15 @@ var GetData = (function (runPage) {
             awardRow.LL = tempLL;
             awardRow.show = true;
             myData.push(awardRow);
-          } else console.log('Record missing LL:', awardRow);
+          } // else console.log('Record missing LL:', awardRow);
       }
       
-      makeFilters(myData, ttl, map);
+      geneology = treeify(geneology);
+      
+      makeFilters(myData, ttl, map, geneology);
     };
     
-    var makeFilters = function(beerData, ttl, map) {
+    var makeFilters = function(beerData, ttl, map, geneology) {
       var filterData = [],
           theseVals = [], myValues = [],
           temp;
@@ -106,7 +128,48 @@ var GetData = (function (runPage) {
       //console.log('filter data:',filterData);
       //console.log('marker data:',beerData);
       
-      runPage(beerData, filterData, map);
+      runPage(beerData, filterData, map, geneology);
+    };
+    
+    var treeify = function(data) {
+    //Convert flat data into a nice tree
+      var YEAR_START = 1998;
+      var dataMap = data.reduce(function(map, node) {
+        node.level = parseInt(node.year) - YEAR_START;
+      	map[node.id] = node;
+      	return map;
+      }, {});
+      
+      var treeRoot = { style:'root', id: '0', level: 0};
+      dataMap['0'] = treeRoot;
+      
+      // create the tree array
+      var treeData = [];
+      treeData.push(treeRoot);
+
+      data.forEach(function(node) {
+      	// add to parent
+      	var parent = dataMap[node.parent];
+      	
+      	if (!parent) parent = dataMap['0'];
+    		// create child array if it doesn't exist
+    		(parent.children || (parent.children = []))
+    			// add node to child array
+    			.push(node);
+      	/*
+      	if (parent) {
+      		// create child array if it doesn't exist
+      		(parent.children || (parent.children = []))
+      			// add node to child array
+      			.push(node);
+      	} else {
+      		// parent is null or missing
+      		treeData.push(node);
+      	}
+      	*/
+      });
+      
+      return treeData;
     };
   }
        

@@ -19,7 +19,7 @@ var ClientUI = React.createClass({
     return ({
       filters: this.props.initFilters,
       markers: this.props.initBeerData,
-      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+      mapMarkers: this._cleanseMarkers(),
       trimmedFilters: this.props.initFilters
     });
   },
@@ -154,13 +154,13 @@ var ClientUI = React.createClass({
     return tF;
   },
   
-  _cleanseMarkers: function(markerData) {
+  _cleanseMarkers: function() {
     //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
     var markerCount = [],
 	      myLat, myLng, cleansedMarkers = [],
 	      initMarker, cleansedIndex = 0;
 	 
-    for (let awardRecord of markerData) {                //Check each marker
+    for (let awardRecord of this.props.initBeerData) {                //Check each marker
 	    if (awardRecord.show===false) continue;           //Not showing, skip it
 	    
 	    myLat = awardRecord.LL.lat;
@@ -224,7 +224,7 @@ var ClientUI = React.createClass({
     return (
       <div id='UI'>
         <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} filters={this.state.trimmedFilters}
-            notify={this._applyFilter}/>
+            notify={this._applyFilter} geneData={this.props.geneData} />
       </div>
       );
   }
@@ -424,42 +424,27 @@ var Map = React.createClass({
   }
 });
 var Geneology = React.createClass({
-  getInitialState: function() {
-    return ({ myID: 'geneology',
-              data:  {
-                      "name": "Top Node",
-                      "children": [
-                        {
-                          "name": "Bob: Child of Top Node",
-                          "parent": "Top Node",
-                          "children": [
-                            {
-                              "name": "Son of Bob",
-                              "parent": "Bob: Child of Top Node"
-                            },
-                            {
-                              "name": "Daughter of Bob",
-                              "parent": "Bob: Child of Top Node"
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Sally: Child of Top Node",
-                          "parent": "Top Node"
-                        }
-                      ]
-                    }
-    })
-  },
-  
+  getInitialState: function() { return { myID: 'geneology' }; },
   componentDidMount: function() {
+    window.addEventListener('resize', this._handleResize);
     this._drawGenes();
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this._handleResize);
+  },
+  _handleResize: function() {
+    var margin = {top: 20, right: 20, bottom: 20, left: 30},
+        width = parseInt(d3.select("#"+this.state.myID).style('width')) - margin.left - margin.right,
+        height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
+    d3.select('svg')
+      .attr("width", width + margin.right + margin.left)
+      .attr("height", height + margin.top + margin.bottom);
   },
   
   _drawGenes: function() {
-    var margin = {top: 20, right: 20, bottom: 20, left: 20},
-        width = parseInt(d3.select("#"+this.state.myID).style('width')),
-        height = parseInt(d3.select("#"+this.state.myID).style('height'));
+    var margin = {top: 20, right: 20, bottom: 20, left: 30},
+        width = parseInt(d3.select("#"+this.state.myID).style('width')) - margin.left - margin.right,
+        height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
     
     var i = 0,
         duration = 750,
@@ -477,23 +462,31 @@ var Geneology = React.createClass({
               .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-      //inits our data abstraction
-      root = this.state.data;
-      root.x0 = height / 2;
-      root.y0 = 0;
-      
-      //defines the collapse function
-      function collapse(d) {
-        if (d.children) {
-          d._children = d.children;
-          d._children.forEach(collapse);
-          d.children = null;
-        }
+    //inits our data abstraction
+    root = this.props.data[0];
+    root.x0 = height / 2;
+    root.y0 = 0;
+    
+    var yearStart = parseInt(root.children[0].year);
+    console.log('yearStart:', yearStart);
+    
+    //defines the collapse function
+    function collapse(d) {
+      if (d.children) {
+        d._children = d.children;
+        d._children.forEach(collapse);
+        d.children = null;
       }
-      
-      //collapses everything
-      root.children.forEach(collapse);
-      update(root);
+    }
+    
+    console.log('data:', this.props.data);
+    //collapses everything
+    root.children.forEach(collapse);
+    
+    var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
+    var axis = [];
+    
+    update(root);
     
     //unnecesssary styling
     //d3.select(self.frameElement).style("height", "800px");
@@ -505,7 +498,7 @@ var Geneology = React.createClass({
           links = tree.links(nodes);
     
       // Normalize for fixed-depth.
-      nodes.forEach(function(d) { d.y = d.depth * 180; });
+      nodes.forEach(function(d) { d.y = d.level * 150; });
     
       // Update the nodes…
       var node = svg.selectAll("g.node")
@@ -515,17 +508,19 @@ var Geneology = React.createClass({
       var nodeEnter = node.enter().append("g")
           .attr("class", "node")
           .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-          .on("click", click);
+          .on("click", click)
+          .call(_maintainAxis);     //!! NOT WORKING PROPERLY, NEED IT TO CALL PER NODE
     
       nodeEnter.append("circle")
           .attr("r", 1e-6)      //Why this value for r? For the transitions?
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
       nodeEnter.append("text")
-          .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+          .attr("x", function(d) { return d.children || d._children ? 5 : -5; })
+          .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-          .text(function(d) { return d.name; })
+          .text(function(d) { return d.style; })
           .style("fill-opacity", 1e-6);
     
       // Transition existing nodes to their new position.
@@ -551,7 +546,7 @@ var Geneology = React.createClass({
     
       nodeExit.select("text")
           .style("fill-opacity", 1e-6);
-    
+      
       // Update the links…
       var link = svg.selectAll("path.link")
           .data(links, function(d) { return d.target.id; });
@@ -559,6 +554,7 @@ var Geneology = React.createClass({
       // Enter any new links at the parent's previous position.
       link.enter().insert("path", "g")
           .attr("class", "link")
+          .attr('stroke', 'green')
           .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
             return diagonal({source: o, target: o});
@@ -585,6 +581,22 @@ var Geneology = React.createClass({
       });
     }
     
+    function _maintainAxis(d) {
+      console.log('d in _mA:', d);
+      var drawnAlready = axis.indexOf(d.year);
+      if (drawnAlready=== -1) {
+        axis.push(d.year);
+        svg.append("line")
+          .attr("x1", d.x)  //<<== change your code here
+          .attr("y1", margin.top)
+          .attr("x2", d.x)  //<<== and here
+          .attr("y2", height - margin.top - margin.bottom)
+          .style("stroke-width", 2)
+          .style("stroke", "red")
+          .style("fill", "none");
+      }
+    }
+    
     // Toggle children on click.
     function click(d) {
       if (d.children) {
@@ -598,13 +610,11 @@ var Geneology = React.createClass({
     }
     
   },
-
   render: function() {
     //console.log('rendering Map');
     return (
 			<div id="gene-holder">
-				<div id={this.state.myID} >GENES, BITCHES</div>
-				
+				<div id={this.state.myID} />
 			</div>
 		);
   },
@@ -632,9 +642,10 @@ var MultiGraphBox = React.createClass({
                   }.bind(this) );
     
     if (this.state.graphShowing === 'Awards') {
+      console.log('printing awards, props:', this.props);
       return (
         <div id='multiGraph' >
-          <div id="map-frame">
+          <div id="graph-frame">
             <Map markers={this.props.markers} mapData={this.props.mapData} />
             <div id='tabBox' >
               {myTabs}
@@ -649,19 +660,18 @@ var MultiGraphBox = React.createClass({
     } else if (this.state.graphShowing === 'Geneology') {
       return (
         <div id='multiGraph' >
-          <div id='map-frame' >
-            <Geneology />
+          <div id='graph-frame' >
+            <Geneology data={this.props.geneData} />
             <div id='tabBox' >
               {myTabs}
             </div>
           </div>
-          <div id='nonMapBoxes'>
-            <FilterBox filters={this.props.filters} notify={this.props.notify}/>
-            <DetailsBox />
-          </div>
         </div>
         );
     }
+    /* <div id='nonMapBoxes'>
+            <DetailsBox />
+          </div> */
   }
 });
 var DetailsBox = React.createClass({
@@ -799,16 +809,18 @@ var FilterItem = React.createClass({
 
 //Page begin:
 var dataPull = new GetData(   //This is the runPage cb-function to start the page when data is loaded
-  function(beerData, filterData, mapData) {
-      //Entry into site view
-      ReactDOM.render(  //Render page after underlying data has loaded
-        <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} />,
-        document.getElementById('content')
-      )
+  function(beerData, filterData, mapData, geneData) {
+    //Entry into site view
+    d3.select("#loading").remove();
+    ReactDOM.render(  //Render page after underlying data has loaded
+      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} geneData={geneData} />,
+      document.getElementById('content')
+    )
   }
 );
 
-dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json');
+dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv'
+  , 'US.json', 'year_style_id_parents_MOD.csv');
 
 
 

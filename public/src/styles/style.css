@@ -24,10 +24,11 @@ body {
   height:100%;
   width: 100%;
 }
-#map-holder, #map-frame, #gene-holder {
+#graph-frame, #map-holder, #gene-holder {
   width: 100%;
   height: 100%;
 }
+#graph-frame { margin-right: 20px; }
 
 #multiGraph {
   width: 100%;
@@ -78,14 +79,31 @@ body {
   border-width: 2px;
   border-color: green;
 }
-
+#geneology {
+  overflow-x: auto;
+  overflow-y:hidden;
+}
 #map, #geneology {
   height: 100%;
   z-index: 20;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  margin-right: 20px;
+}
+.link {
+  fill: none;
+  stroke-width: 1.5px;
+}
+.node {
+  cursor: pointer;
+}
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font: 10px sans-serif;
 }
 #markerCounter {
   position: relative;

@@ -99,7 +99,7 @@
 	    return {
 	      filters: this.props.initFilters,
 	      markers: this.props.initBeerData,
-	      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+	      mapMarkers: this._cleanseMarkers(),
 	      trimmedFilters: this.props.initFilters
 	    };
 	  },
@@ -306,7 +306,7 @@
 	    return tF;
 	  },
 
-	  _cleanseMarkers: function _cleanseMarkers(markerData) {
+	  _cleanseMarkers: function _cleanseMarkers() {
 	    //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
 	    var markerCount = [],
 	        myLat,
@@ -320,7 +320,7 @@
 	    var _iteratorError3 = undefined;
 
 	    try {
-	      for (var _iterator3 = markerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	      for (var _iterator3 = this.props.initBeerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var awardRecord = _step3.value;
 	        //Check each marker
 	        if (awardRecord.show === false) continue; //Not showing, skip it
@@ -398,7 +398,7 @@
 
 	  render: function render() {
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
-	      notify: this._applyFilter }));
+	      notify: this._applyFilter, geneData: this.props.geneData }));
 	  }
 	});
 	var Map = React.createClass({
@@ -432,7 +432,7 @@
 
 	  _drawMap: function _drawMap() {
 	    this.width = parseInt(d3.select("#" + this.state.myID).style('width'));
-	    this.mapRatio = 0.5;
+	    //this.mapRatio = 0.5;
 	    this.height = parseInt(d3.select("#" + this.state.myID).style('height')); //this.width * this.mapRatio;
 
 	    this.projection = d3.geo.albersUsa().scale(this.width).translate([this.width / 2, this.height / 2]);
@@ -541,10 +541,177 @@
 	  getInitialState: function getInitialState() {
 	    return { myID: 'geneology' };
 	  },
+	  componentDidMount: function componentDidMount() {
+	    window.addEventListener('resize', this._handleResize);
+	    this._drawGenes();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('resize', this._handleResize);
+	  },
+	  _handleResize: function _handleResize() {
+	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
+	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
+	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
+	    d3.select('svg').attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom);
+	  },
 
+	  _drawGenes: function _drawGenes() {
+	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
+	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
+	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
+
+	    var i = 0,
+	        duration = 750,
+	        root;
+
+	    var tree = d3.layout.tree().size([height, width]);
+
+	    var diagonal = d3.svg.diagonal().projection(function (d) {
+	      return [d.y, d.x];
+	    });
+
+	    var svg = d3.select("#" + this.state.myID).append("svg").attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	    //inits our data abstraction
+	    root = this.props.data[0];
+	    root.x0 = height / 2;
+	    root.y0 = 0;
+
+	    var yearStart = parseInt(root.children[0].year);
+	    console.log('yearStart:', yearStart);
+
+	    //defines the collapse function
+	    function collapse(d) {
+	      if (d.children) {
+	        d._children = d.children;
+	        d._children.forEach(collapse);
+	        d.children = null;
+	      }
+	    }
+
+	    console.log('data:', this.props.data);
+	    //collapses everything
+	    root.children.forEach(collapse);
+
+	    var colorMax = [255, 0, 0],
+	        colorMin = [0, 0, 255];
+	    var axis = [];
+
+	    update(root);
+
+	    //unnecesssary styling
+	    //d3.select(self.frameElement).style("height", "800px");
+
+	    function update(source) {
+
+	      // Compute the new tree layout.
+	      var nodes = tree.nodes(root).reverse(),
+	          links = tree.links(nodes);
+
+	      // Normalize for fixed-depth.
+	      nodes.forEach(function (d) {
+	        d.y = d.level * 150;
+	      });
+
+	      // Update the nodes…
+	      var node = svg.selectAll("g.node").data(nodes, function (d) {
+	        return d.id || (d.id = ++i);
+	      });
+
+	      // Enter any new nodes at the parent's previous position.
+	      var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
+	        return "translate(" + source.y0 + "," + source.x0 + ")";
+	      }).on("click", click).call(_maintainAxis);
+
+	      nodeEnter.append("circle").attr("r", 1e-6) //Why this value for r? For the transitions?
+	      .style("fill", function (d) {
+	        return d._children ? "lightsteelblue" : "#fff";
+	      });
+
+	      nodeEnter.append("text").attr("x", function (d) {
+	        return d.children || d._children ? 5 : -5;
+	      }).attr("y", function (d) {
+	        return d.children || d._children ? -10 : 10;
+	      }).attr("dy", ".35em") //centers text
+	      .attr("text-anchor", function (d) {
+	        return d.children || d._children ? "end" : "start";
+	      }).text(function (d) {
+	        return d.style;
+	      }).style("fill-opacity", 1e-6);
+
+	      // Transition existing nodes to their new position.
+	      var nodeUpdate = node.transition().duration(duration).attr("transform", function (d) {
+	        return "translate(" + d.y + "," + d.x + ")";
+	      });
+
+	      nodeUpdate.select("circle").attr("r", 4.5).style("fill", function (d) {
+	        return d._children ? "lightsteelblue" : "#fff";
+	      });
+
+	      nodeUpdate.select("text").style("fill-opacity", 1);
+
+	      // Transition exiting nodes to the parent's new position.
+	      var nodeExit = node.exit().transition().duration(duration).attr("transform", function (d) {
+	        return "translate(" + source.y + "," + source.x + ")";
+	      }).remove();
+
+	      nodeExit.select("circle").attr("r", 1e-6);
+
+	      nodeExit.select("text").style("fill-opacity", 1e-6);
+
+	      // Update the links…
+	      var link = svg.selectAll("path.link").data(links, function (d) {
+	        return d.target.id;
+	      });
+
+	      // Enter any new links at the parent's previous position.
+	      link.enter().insert("path", "g").attr("class", "link").attr('stroke', 'green').attr("d", function (d) {
+	        var o = { x: source.x0, y: source.y0 };
+	        return diagonal({ source: o, target: o });
+	      });
+
+	      // Transition links to their new position.
+	      link.transition().duration(duration).attr("d", diagonal);
+
+	      // Transition exiting nodes to the parent's new position.
+	      link.exit().transition().duration(duration).attr("d", function (d) {
+	        var o = { x: source.x, y: source.y };
+	        return diagonal({ source: o, target: o });
+	      }).remove();
+
+	      // Stash the old positions for transition.
+	      nodes.forEach(function (d) {
+	        d.x0 = d.x;
+	        d.y0 = d.y;
+	      });
+	    }
+
+	    function _maintainAxis(d) {
+	      console.log('d in _mA:', d);
+	      var drawnAlready = axis.indexOf(d.year);
+	      if (drawnAlready === -1) {
+	        axis.push(d.year);
+	        svg.append("line").attr("x1", d.x) //<<== change your code here
+	        .attr("y1", margin.top).attr("x2", d.x) //<<== and here
+	        .attr("y2", height - margin.top - margin.bottom).style("stroke-width", 2).style("stroke", "red").style("fill", "none");
+	      }
+	    }
+
+	    // Toggle children on click.
+	    function click(d) {
+	      if (d.children) {
+	        d._children = d.children;
+	        d.children = null;
+	      } else {
+	        d.children = d._children;
+	        d._children = null;
+	      }
+	      update(d);
+	    }
+	  },
 	  render: function render() {
 	    //console.log('rendering Map');
-	    return React.createElement('div', { id: 'gene-holder' }, React.createElement('div', { id: this.state.myID }, 'GENES, BITCHES'));
+	    return React.createElement('div', { id: 'gene-holder' }, React.createElement('div', { id: this.state.myID }));
 	  }
 	});
 	var MultiGraphBox = React.createClass({
@@ -552,7 +719,7 @@
 
 	  getInitialState: function getInitialState() {
 	    return { supportedGraphs: ['Awards', 'Geneology', 'Entries'],
-	      graphShowing: 'Awards' };
+	      graphShowing: 'Geneology' };
 	  },
 
 	  _changeGraph: function _changeGraph(e) {
@@ -569,10 +736,14 @@
 	    }.bind(this));
 
 	    if (this.state.graphShowing === 'Awards') {
-	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'map-frame' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, myTabs)), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
+	      console.log('printing awards, props:', this.props);
+	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, myTabs)), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
 	    } else if (this.state.graphShowing === 'Geneology') {
-	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'map-frame' }, React.createElement(Geneology, null), React.createElement('div', { id: 'tabBox' }, myTabs)), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
+	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Geneology, { data: this.props.geneData }), React.createElement('div', { id: 'tabBox' }, myTabs)));
 	    }
+	    /* <div id='nonMapBoxes'>
+	            <DetailsBox />
+	          </div> */
 	  }
 	});
 	var DetailsBox = React.createClass({
@@ -688,13 +859,14 @@
 
 	//Page begin:
 	var dataPull = new GetData( //This is the runPage cb-function to start the page when data is loaded
-	function (beerData, filterData, mapData) {
+	function (beerData, filterData, mapData, geneData) {
 	  //Entry into site view
+	  d3.select("#loading").remove();
 	  ReactDOM.render( //Render page after underlying data has loaded
-	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData }), document.getElementById('content'));
+	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData }), document.getElementById('content'));
 	});
 
-	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json');
+	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents_MOD.csv');
 
 /***/ },
 /* 2 */
@@ -704,81 +876,29 @@
 
 	var GetData = function GetData(runPage) {
 
-	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile) {
+	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile, geneFile) {
 	    var locReturn = new XMLHttpRequest(),
 	        awardsReturn = new XMLHttpRequest(),
 	        mapReturn = new XMLHttpRequest(),
 	        detLocReturn = new XMLHttpRequest(),
-	        myRequests = [];
+	        geneReturn = new XMLHttpRequest(),
+	        myRequests = [],
+	        numFiles = 5;
 
-	    myRequests.push(false);
-	    myRequests.push(false);
-	    myRequests.push(false);
-	    myRequests.push(false);
+	    for (var i = 0; i < numFiles; i++) {
+	      myRequests.push(false);
+	    }
 
-	    locReturn.onreadystatechange = function () {
-	      if (locReturn.readyState == 4 && locReturn.status == 200) {
-	        myRequests[0] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    awardsReturn.onreadystatechange = function () {
-	      if (awardsReturn.readyState == 4 && awardsReturn.status == 200) {
-	        myRequests[1] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    mapReturn.onreadystatechange = function () {
-	      if (mapReturn.readyState == 4 && mapReturn.status == 200) {
-	        myRequests[2] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    detLocReturn.onreadystatechange = function () {
-	      if (detLocReturn.readyState == 4 && detLocReturn.status == 200) {
-	        myRequests[3] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-
-	    locReturn.open("GET", dir + locFile, true);
-	    locReturn.send();
-	    awardsReturn.open("GET", dir + awardsFile, true);
-	    awardsReturn.send();
-	    mapReturn.open("GET", dir + mapFile, true);
-	    mapReturn.send();
-	    detLocReturn.open('GET', dir + detLocFile, true);
-	    detLocReturn.send();
-
-	    var massage = function massage() {
-	      //Data Massage
-	      var latLongs = $.csv.toObjects(locReturn.responseText),
-	          detLatLongs = $.csv.toObjects(detLocReturn.responseText),
-	          awards = $.csv.toObjects(awardsReturn.responseText),
-	          map = JSON.parse(mapReturn.responseText),
-	          ttl = [],
-	          myData = [];
-
-	      if (awards.length < 2) {
-	        console.log('aborting due to insufficient length of awards data');return;
-	      }
-
-	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
-
+	    var _allReady = function _allReady() {
 	      var _iteratorNormalCompletion = true;
 	      var _didIteratorError = false;
 	      var _iteratorError = undefined;
 
 	      try {
-	        for (var _iterator = awards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var awardRow = _step.value;
+	        for (var _iterator = myRequests[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var fileReceived = _step.value;
 
-	          var tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
-	          if (tempLL !== false) {
-	            awardRow.LL = tempLL;
-	            awardRow.show = true;
-	            myData.push(awardRow);
-	          } else console.log('Record missing LL:', awardRow);
+	          if (!fileReceived) return false;
 	        }
 	      } catch (err) {
 	        _didIteratorError = true;
@@ -795,10 +915,105 @@
 	        }
 	      }
 
-	      makeFilters(myData, ttl, map);
+	      return true;
 	    };
 
-	    var makeFilters = function makeFilters(beerData, ttl, map) {
+	    locReturn.onreadystatechange = function () {
+	      if (locReturn.readyState == 4 && locReturn.status == 200) {
+	        myRequests[0] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    awardsReturn.onreadystatechange = function () {
+	      if (awardsReturn.readyState == 4 && awardsReturn.status == 200) {
+	        myRequests[1] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    mapReturn.onreadystatechange = function () {
+	      if (mapReturn.readyState == 4 && mapReturn.status == 200) {
+	        myRequests[2] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    detLocReturn.onreadystatechange = function () {
+	      if (detLocReturn.readyState == 4 && detLocReturn.status == 200) {
+	        myRequests[3] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    geneReturn.onreadystatechange = function () {
+	      if (geneReturn.readyState == 4 && geneReturn.status == 200) {
+	        myRequests[4] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+
+	    locReturn.open("GET", dir + locFile, true);
+	    locReturn.send();
+	    awardsReturn.open("GET", dir + awardsFile, true);
+	    awardsReturn.send();
+	    mapReturn.open("GET", dir + mapFile, true);
+	    mapReturn.send();
+	    detLocReturn.open('GET', dir + detLocFile, true);
+	    detLocReturn.send();
+	    geneReturn.open('GET', dir + geneFile, true);
+	    geneReturn.send();
+
+	    var massage = function massage() {
+	      //Data Massage
+	      var latLongs = $.csv.toObjects(locReturn.responseText),
+	          detLatLongs = $.csv.toObjects(detLocReturn.responseText),
+	          awards = $.csv.toObjects(awardsReturn.responseText),
+	          map = JSON.parse(mapReturn.responseText),
+	          geneology = $.csv.toObjects(geneReturn.responseText),
+	          ttl = [],
+	          myData = [];
+
+	      if (awards.length < 2) {
+	        console.log('aborting due to insufficient length of awards data');return;
+	      }
+
+	      console.table(geneology);
+
+	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
+
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
+
+	      try {
+	        for (var _iterator2 = awards[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var awardRow = _step2.value;
+
+	          var tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
+	          if (tempLL !== false) {
+	            awardRow.LL = tempLL;
+	            awardRow.show = true;
+	            myData.push(awardRow);
+	          } // else console.log('Record missing LL:', awardRow);
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+
+	      geneology = treeify(geneology);
+
+	      makeFilters(myData, ttl, map, geneology);
+	    };
+
+	    var makeFilters = function makeFilters(beerData, ttl, map, geneology) {
 	      var filterData = [],
 	          theseVals = [],
 	          myValues = [],
@@ -829,7 +1044,48 @@
 	      //console.log('filter data:',filterData);
 	      //console.log('marker data:',beerData);
 
-	      runPage(beerData, filterData, map);
+	      runPage(beerData, filterData, map, geneology);
+	    };
+
+	    var treeify = function treeify(data) {
+	      //Convert flat data into a nice tree
+	      var YEAR_START = 1998;
+	      var dataMap = data.reduce(function (map, node) {
+	        node.level = parseInt(node.year) - YEAR_START;
+	        map[node.id] = node;
+	        return map;
+	      }, {});
+
+	      var treeRoot = { style: 'root', id: '0', level: 0 };
+	      dataMap['0'] = treeRoot;
+
+	      // create the tree array
+	      var treeData = [];
+	      treeData.push(treeRoot);
+
+	      data.forEach(function (node) {
+	        // add to parent
+	        var parent = dataMap[node.parent];
+
+	        if (!parent) parent = dataMap['0'];
+	        // create child array if it doesn't exist
+	        (parent.children || (parent.children = [])).
+	        // add node to child array
+	        push(node);
+	        /*
+	        if (parent) {
+	        	// create child array if it doesn't exist
+	        	(parent.children || (parent.children = []))
+	        		// add node to child array
+	        		.push(node);
+	        } else {
+	        	// parent is null or missing
+	        	treeData.push(node);
+	        }
+	        */
+	      });
+
+	      return treeData;
 	    };
 	  }
 

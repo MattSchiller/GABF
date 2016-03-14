@@ -1,23 +1,26 @@
 # scripts for cleaning dirty data
 
 import csv
+import datetime
 import re
 
 # generalize this so that it takes column titles
 
-with open('GABF_winners_v2.csv', 'r') as inp, open('breweries1.txt', 'w') as out:
-    breweries_list = []
-    all_winners = csv.DictReader(inp)
-    for row in all_winners:
-        if row['gold_brewery'] not in breweries_list:
-            breweries_list.append(row['gold_brewery'])
-        if row['silver_brewery'] not in breweries_list:
-            breweries_list.append(row['silver_brewery'])
-        if row['bronze_brewery'] not in breweries_list:
-            breweries_list.append(row['bronze_brewery'])
-    breweries_list.sort()
-    for brewery in breweries_list:
-        print(brewery, file=out)
+
+def write_brewery_names():
+    with open('GABF_winner.csv', 'r') as inp, open('breweries1.txt', 'w') as out:
+        breweries_list = []
+        all_winners = csv.DictReader(inp)
+        for row in all_winners:
+            if row['gold_brewery'] not in breweries_list:
+                breweries_list.append(row['gold_brewery'])
+            if row['silver_brewery'] not in breweries_list:
+                breweries_list.append(row['silver_brewery'])
+            if row['bronze_brewery'] not in breweries_list:
+                breweries_list.append(row['bronze_brewery'])
+        breweries_list.sort()
+        for brewery in breweries_list:
+            print(brewery, file=out)
 
 
 def find_unique_strings(csv_dict, cols=[]):
@@ -37,9 +40,10 @@ def dict_strings(list_of_strings):
     for item in list_of_strings:
         if item[:10] not in similar_strings:
             similar_strings[item[:10]] = [item]
-        else: 
+        else:
             similar_strings[item[:10]].append(item)
     return similar_strings
+
 
 def get_input():
     ''' Get and confirm user input for replacement string.'''
@@ -105,16 +109,39 @@ def replace_items(in_dict, out_dict, cols, replacement_csv):
     print('Done writing output rows.')
 
 
+def clean_brewery_name_col():
+    ''' Clean and prompt input on results of brewery names.'''
+    p = re.compile(r'([A-Z]+ [A-Z\s]*?Brew[^\s]+)', re.IGNORECASE)
+    with open('GABF_winners.csv', 'r') as inp, open('csvs/brewery_name_map.csv', 'r') as name_map:
+        all_winners = csv.DictReader(inp)
+        names = csv.DictReader(name_map)
+        replacements = {row['token']: row['replacement'] for row in names}
+        with open('GABF_winners_v2.csv', 'w') as out:
+            fieldnames = all_winners.fieldnames
+            target_cols = ['gold_brewery', 'silver_brewery', 'bronze_brewery']
+            new_csv = csv.DictWriter(out, fieldnames=fieldnames)
+            new_csv.writeheader()
+            replace_items(all_winners, new_csv, target_cols, replacements)
 
-p = re.compile(r'([A-Z]+ [A-Z\s]*?Brew[^\s]+)', re.IGNORECASE)
 
-with open('GABF_winners.csv', 'r') as inp, open('brewery_name_map.csv', 'r') as name_map:
-    all_winners = csv.DictReader(inp)
-    names = csv.DictReader(name_map)
-    replacements = {row['token']: row['replacement'] for row in names}
-    with open('GABF_winners_v2.csv', 'w') as out:
-        fieldnames = all_winners.fieldnames
-        target_cols = ['gold_brewery', 'silver_brewery', 'bronze_brewery']
-        new_csv = csv.DictWriter(out, fieldnames=fieldnames)
-        new_csv.writeheader()
-        replace_items(all_winners, new_csv, target_cols, replacements)
+def output_categories_by_year(csv_filename='GABF_winners.csv',
+        output_filename=None):
+    ''' Open info csv and output categories by year.'''
+    if not output_filename:
+        output_filename = str(datetime.date.today()) + '-years-styles.csv'
+    with open(csv_filename, 'r') as f:
+        all_data = csv.DictReader(f)
+        years_styles = [(row['year'], row['cat_name']) for row in all_data]
+    # Sort tuple of years, styles by year
+    sorted_output = sorted(years_styles)
+    with open(output_filename, 'w') as f:
+        fieldnames = ['year', 'style', 'id', 'parent_id']
+        out = csv.DictWriter(f, fieldnames=fieldnames)
+        out.writeheader()
+        row_id = 1
+        for year, style in years_styles:
+            out.writerow({'year': year, 'style': style, 'id': row_id})
+            row_id += 1
+
+
+

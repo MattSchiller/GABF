@@ -1,6 +1,7 @@
 html {
   height: 100%;
   overflow:hidden;
+  font-family: Oswald, sans-serif;
 }
 body {
   height: 90%;
@@ -23,10 +24,11 @@ body {
   height:100%;
   width: 100%;
 }
-#map-holder, #map-frame {
+#graph-frame, #map-holder, #gene-holder {
   width: 100%;
   height: 100%;
 }
+#graph-frame { margin-right: 20px; }
 
 #multiGraph {
   width: 100%;
@@ -77,14 +79,31 @@ body {
   border-width: 2px;
   border-color: green;
 }
-
-#map {
+#geneology {
+  overflow-x: auto;
+  overflow-y:hidden;
+}
+#map, #geneology {
   height: 100%;
   z-index: 20;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  margin-right: 20px;
+}
+.link {
+  fill: none;
+  stroke-width: 1.5px;
+}
+.node {
+  cursor: pointer;
+}
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font: 10px sans-serif;
 }
 #markerCounter {
   position: relative;
@@ -100,8 +119,6 @@ body {
 }
 .mark {
   fill: pink;
-  stroke: grey;
-  opacity: .9;
   cursor: pointer;
 }
 .summary {
@@ -116,6 +133,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 10pt;
+  font-family: Oswald, sans-serif;
   margin-bottom: 2px;
   border-radius: 2px;
   overflow-y: hidden;

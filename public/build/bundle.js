@@ -81,10 +81,16 @@
 
 	var RESET = '_RESET';
 	var MAX_NODE_R = 9;
-	var MIN_NODE_R = 3;
+	var MIN_NODE_R = 2;
 	var MAX_ZOOM = 20;
 
 	var GetData = __webpack_require__(2);
+
+	var calculateMarkerRadius = function calculateMarkerRadius(count, scale) {
+	  var myScale = d3.scale.linear().domain([1, MAX_ZOOM]).range([1, 0.3]);
+	  scale = scale * myScale(scale); //Makes zoomed in markers slightly bigger
+	  return Math.max(MIN_NODE_R, Math.min(count / 2, MAX_NODE_R)) / scale + 'px';
+	};
 
 	var ClientUI = React.createClass({
 	  displayName: 'ClientUI',
@@ -93,7 +99,7 @@
 	    return {
 	      filters: this.props.initFilters,
 	      markers: this.props.initBeerData,
-	      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+	      mapMarkers: this._cleanseMarkers(),
 	      trimmedFilters: this.props.initFilters
 	    };
 	  },
@@ -300,7 +306,7 @@
 	    return tF;
 	  },
 
-	  _cleanseMarkers: function _cleanseMarkers(markerData) {
+	  _cleanseMarkers: function _cleanseMarkers() {
 	    //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
 	    var markerCount = [],
 	        myLat,
@@ -314,7 +320,7 @@
 	    var _iteratorError3 = undefined;
 
 	    try {
-	      for (var _iterator3 = markerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	      for (var _iterator3 = this.props.initBeerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var awardRecord = _step3.value;
 	        //Check each marker
 	        if (awardRecord.show === false) continue; //Not showing, skip it
@@ -335,7 +341,7 @@
 	        cleansedMarkers[markerIndex] = newMarker;
 	      }
 
-	      //console.log('cleansedMarkers:', cleansedMarkers);
+	      //Sort markers so the big markers are rendered 'under' smaller ones
 	    } catch (err) {
 	      _didIteratorError3 = true;
 	      _iteratorError3 = err;
@@ -349,6 +355,15 @@
 	          throw _iteratorError3;
 	        }
 	      }
+	    }
+
+	    for (var i = 0; i < cleansedMarkers.length; i++) {
+	      var tempMarker = cleansedMarkers[i]; //Copy of the current element.
+	      for (var j = i - 1; j >= 0 && cleansedMarkers[j].myCount < tempMarker.myCount; j--) {
+	        //Shift the number
+	        cleansedMarkers[j + 1] = cleansedMarkers[j];
+	      }
+	      cleansedMarkers[j + 1] = tempMarker;
 	    }
 
 	    return cleansedMarkers;
@@ -365,8 +380,6 @@
 	      thisMarker.myBrewery = awardRecord.brewery;
 	      thisMarker.singleBrewery = true;
 	    }
-
-	    //INCLUDE LOGIC TO DISPLAY TOOLTIP WITH BREWERY NAME INSTEAD OF CITY IF APPROPRIATE
 
 	    //Append/Update the marker to account for another award
 	    thisMarker.myCount++;
@@ -385,7 +398,7 @@
 
 	  render: function render() {
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
-	      notify: this._applyFilter }));
+	      notify: this._applyFilter, geneData: this.props.geneData }));
 	  }
 	});
 	var Map = React.createClass({
@@ -419,7 +432,7 @@
 
 	  _drawMap: function _drawMap() {
 	    this.width = parseInt(d3.select("#" + this.state.myID).style('width'));
-	    this.mapRatio = 0.5;
+	    //this.mapRatio = 0.5;
 	    this.height = parseInt(d3.select("#" + this.state.myID).style('height')); //this.width * this.mapRatio;
 
 	    this.projection = d3.geo.albersUsa().scale(this.width).translate([this.width / 2, this.height / 2]);
@@ -428,13 +441,13 @@
 
 	    var zoom = d3.behavior.zoom().scale(1).scaleExtent([1, MAX_ZOOM]).on("zoom", this._zoom);
 
-	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height);
+	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height).call(zoom);
 
-	    this.g = this.svg.append("g").call(zoom);
+	    this.g = this.svg.append("g");
 
 	    this.g.selectAll("path").data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features).enter().append("path").attr("d", this.path).attr("class", "state").attr('stroke-width', '1px');
 
-	    this.tooltip = d3.select("#" + this.state.myID).append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden");
+	    this.tooltip = d3.select("body").append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden");
 
 	    //INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
 
@@ -444,15 +457,16 @@
 	  _zoom: function _zoom() {
 	    this.lastZoomScale = d3.event.scale;
 
-	    this.g.transition().duration(750).attr("transform", function () {
-	      var t = d3.event.translate;
-	      return "translate(" + parseInt(t[0]) + ',' + parseInt(t[1]) + ")scale(" + d3.event.scale + ")";
-	    });
+	    this.g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 
-	    this.g.selectAll('.mark, .state').transition().duration(750).attr("stroke-width", function () {
+	    this.g.selectAll('.mark, .state')
+	    //.transition()
+	    //.duration(750)
+	    .attr("stroke-width", function () {
 	      return (1 / d3.event.scale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
-	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / d3.event.scale + 'px';
+	      return calculateMarkerRadius(d.myCount, d3.event.scale);
+	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/d3.event.scale + 'px';
 	    });
 	  },
 
@@ -466,7 +480,8 @@
 	    var markers = this.g.selectAll(".mark").data(this.props.markers)
 	    //Update existing markers
 	    .attr('class', 'mark').attr('r', function (d) {
-	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / lastZoomScale + 'px';
+	      return calculateMarkerRadius(d.myCount, lastZoomScale);
+	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -481,10 +496,11 @@
 	    markers.exit().remove();
 
 	    //Create newly shown markers
-	    markers.enter().append("circle").attr('class', 'mark').attr("stroke-width", function () {
+	    markers.enter().append("circle").attr('class', 'mark').attr('stroke', 'grey').attr('opacity', '0.75').attr("stroke-width", function () {
 	      return (1 / lastZoomScale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
-	      return Math.max(MIN_NODE_R, Math.min(d.myCount / 2, MAX_NODE_R)) / lastZoomScale + 'px';
+	      return calculateMarkerRadius(d.myCount, lastZoomScale);
+	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -501,25 +517,15 @@
 
 	    function __showSummary(d) {
 	      //console.log('this:', this, 'd:', d);
-	      var showTT = tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("top", projection([d.lng, this.__data__.lat])[1] - 10 + "px") //-10 so is above cursor
-	      .style("left", projection([d.lng, this.__data__.lat])[0] + 10 + "px").attr('transform', function () {
-	        return this.transform;
-	      }.bind(this));
+	      d3.select(this).attr("stroke", "red").attr('opacity', '0.95');
 
-	      console.log('showTT:', showTT);
-
-	      /* INCLUDE SOME LOGIC TO REPOSITION TT OVER ZOOMED IN MARKERS:
-	          this.tooltip
-	      .attr('transform', function() {
-	      let t = d3.event.translate;
-	      return "translate(" + parseInt(t[0]) +','+ parseInt(t[1]) + ")"
-	      })
-	      ;
-	      */
+	      tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("left", d3.event.pageX + 10 + "px").style("top", d3.event.pageY - 10 + "px");
 	    };
 
 	    function __hideSummary(d) {
-	      console.log('Hiding summary for "this":', this);
+	      //console.log('Hiding summary for "this":', this);
+	      d3.select(this).attr('stroke', 'grey').attr('opacity', '0.75');
+
 	      var hideTT = tooltip.style('visibility', 'hidden').style("top", "0px").style("left", "0px");
 	    };
 	  },
@@ -529,12 +535,191 @@
 	    return React.createElement('div', { id: 'map-holder' }, React.createElement('div', { id: this.state.myID }), React.createElement('div', { id: 'markerCounter' }, this.props.markers.length));
 	  }
 	});
+	var Geneology = React.createClass({
+	  displayName: 'Geneology',
+
+	  getInitialState: function getInitialState() {
+	    return { myID: 'geneology' };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    window.addEventListener('resize', this._handleResize);
+	    this._drawGenes();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('resize', this._handleResize);
+	  },
+	  _handleResize: function _handleResize() {
+	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
+	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
+	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
+	    d3.select('svg').attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom);
+	  },
+
+	  _drawGenes: function _drawGenes() {
+	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
+	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
+	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
+
+	    var i = 0,
+	        duration = 750,
+	        root;
+
+	    var tree = d3.layout.tree().size([height, width]);
+
+	    var diagonal = d3.svg.diagonal().projection(function (d) {
+	      return [d.y, d.x];
+	    });
+
+	    var svg = d3.select("#" + this.state.myID).append("svg").attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	    //inits our data abstraction
+	    root = this.props.data[0];
+	    root.x0 = height / 2;
+	    root.y0 = 0;
+
+	    var yearStart = parseInt(root.children[0].year);
+	    console.log('yearStart:', yearStart);
+
+	    //defines the collapse function
+	    function collapse(d) {
+	      if (d.children) {
+	        d._children = d.children;
+	        d._children.forEach(collapse);
+	        d.children = null;
+	      }
+	    }
+
+	    console.log('data:', this.props.data);
+	    //collapses everything
+	    root.children.forEach(collapse);
+
+	    var colorMax = [255, 0, 0],
+	        colorMin = [0, 0, 255];
+	    var axis = [];
+
+	    update(root);
+
+	    //unnecesssary styling
+	    //d3.select(self.frameElement).style("height", "800px");
+
+	    function update(source) {
+
+	      // Compute the new tree layout.
+	      var nodes = tree.nodes(root).reverse(),
+	          links = tree.links(nodes);
+
+	      // Normalize for fixed-depth.
+	      nodes.forEach(function (d) {
+	        d.y = d.level * 150;
+	      });
+
+	      // Update the nodes…
+	      var node = svg.selectAll("g.node").data(nodes, function (d) {
+	        return d.id || (d.id = ++i);
+	      });
+
+	      // Enter any new nodes at the parent's previous position.
+	      var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
+	        return "translate(" + source.y0 + "," + source.x0 + ")";
+	      }).on("click", click).call(_maintainAxis);
+
+	      nodeEnter.append("circle").attr("r", 1e-6) //Why this value for r? For the transitions?
+	      .style("fill", function (d) {
+	        return d._children ? "lightsteelblue" : "#fff";
+	      });
+
+	      nodeEnter.append("text").attr("x", function (d) {
+	        return d.children || d._children ? 5 : -5;
+	      }).attr("y", function (d) {
+	        return d.children || d._children ? -10 : 10;
+	      }).attr("dy", ".35em") //centers text
+	      .attr("text-anchor", function (d) {
+	        return d.children || d._children ? "end" : "start";
+	      }).text(function (d) {
+	        return d.style;
+	      }).style("fill-opacity", 1e-6);
+
+	      // Transition existing nodes to their new position.
+	      var nodeUpdate = node.transition().duration(duration).attr("transform", function (d) {
+	        return "translate(" + d.y + "," + d.x + ")";
+	      });
+
+	      nodeUpdate.select("circle").attr("r", 4.5).style("fill", function (d) {
+	        return d._children ? "lightsteelblue" : "#fff";
+	      });
+
+	      nodeUpdate.select("text").style("fill-opacity", 1);
+
+	      // Transition exiting nodes to the parent's new position.
+	      var nodeExit = node.exit().transition().duration(duration).attr("transform", function (d) {
+	        return "translate(" + source.y + "," + source.x + ")";
+	      }).remove();
+
+	      nodeExit.select("circle").attr("r", 1e-6);
+
+	      nodeExit.select("text").style("fill-opacity", 1e-6);
+
+	      // Update the links…
+	      var link = svg.selectAll("path.link").data(links, function (d) {
+	        return d.target.id;
+	      });
+
+	      // Enter any new links at the parent's previous position.
+	      link.enter().insert("path", "g").attr("class", "link").attr('stroke', 'green').attr("d", function (d) {
+	        var o = { x: source.x0, y: source.y0 };
+	        return diagonal({ source: o, target: o });
+	      });
+
+	      // Transition links to their new position.
+	      link.transition().duration(duration).attr("d", diagonal);
+
+	      // Transition exiting nodes to the parent's new position.
+	      link.exit().transition().duration(duration).attr("d", function (d) {
+	        var o = { x: source.x, y: source.y };
+	        return diagonal({ source: o, target: o });
+	      }).remove();
+
+	      // Stash the old positions for transition.
+	      nodes.forEach(function (d) {
+	        d.x0 = d.x;
+	        d.y0 = d.y;
+	      });
+	    }
+
+	    function _maintainAxis(d) {
+	      console.log('d in _mA:', d);
+	      var drawnAlready = axis.indexOf(d.year);
+	      if (drawnAlready === -1) {
+	        axis.push(d.year);
+	        svg.append("line").attr("x1", d.x) //<<== change your code here
+	        .attr("y1", margin.top).attr("x2", d.x) //<<== and here
+	        .attr("y2", height - margin.top - margin.bottom).style("stroke-width", 2).style("stroke", "red").style("fill", "none");
+	      }
+	    }
+
+	    // Toggle children on click.
+	    function click(d) {
+	      if (d.children) {
+	        d._children = d.children;
+	        d.children = null;
+	      } else {
+	        d.children = d._children;
+	        d._children = null;
+	      }
+	      update(d);
+	    }
+	  },
+	  render: function render() {
+	    //console.log('rendering Map');
+	    return React.createElement('div', { id: 'gene-holder' }, React.createElement('div', { id: this.state.myID }));
+	  }
+	});
 	var MultiGraphBox = React.createClass({
 	  displayName: 'MultiGraphBox',
 
 	  getInitialState: function getInitialState() {
-	    return { supportedGraphs: ['Awards', 'Entries'],
-	      graphShowing: 'Awards' };
+	    return { supportedGraphs: ['Awards', 'Geneology', 'Entries'],
+	      graphShowing: 'Geneology' };
 	  },
 
 	  _changeGraph: function _changeGraph(e) {
@@ -543,13 +728,22 @@
 	  },
 
 	  render: function render() {
-	    var graphToShow = {};
-	    return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'map-frame' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, this.state.supportedGraphs.map(function (graph, i) {
+	    var myTabs = this.state.supportedGraphs.map(function (graph, i) {
 	      //console.log('drawing tabs, state:', this.state);
 	      var tabClass = '';
 	      if (graph === this.state.graphShowing) tabClass = ' currTab';
 	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: this._changeGraph }, graph);
-	    }.bind(this)))), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
+	    }.bind(this));
+
+	    if (this.state.graphShowing === 'Awards') {
+	      console.log('printing awards, props:', this.props);
+	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, myTabs)), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
+	    } else if (this.state.graphShowing === 'Geneology') {
+	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Geneology, { data: this.props.geneData }), React.createElement('div', { id: 'tabBox' }, myTabs)));
+	    }
+	    /* <div id='nonMapBoxes'>
+	            <DetailsBox />
+	          </div> */
 	  }
 	});
 	var DetailsBox = React.createClass({
@@ -573,7 +767,7 @@
 	  render: function render() {
 	    if (this.state.content === []) return React.createElement('div', null);
 	    return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
-	      return React.createElement('div', { key: i, className: 'detailBoxItem' }, 'Year:     ', award.year, ' ', React.createElement('br', null), 'Medal:    ', award.medal, ' ', React.createElement('br', null), 'Style:    ', award.style, ' ', React.createElement('br', null), 'Beer:     ', award.beer, ' ', React.createElement('br', null), 'Brewery:  ', award.brewery);
+	      return React.createElement('div', { key: i, className: 'detailBoxItem' }, React.createElement('b', null, 'Year:'), '     ', award.year, ' ', React.createElement('br', null), React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), '    ', award.style, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
 	    }));
 	  }
 	});
@@ -665,13 +859,14 @@
 
 	//Page begin:
 	var dataPull = new GetData( //This is the runPage cb-function to start the page when data is loaded
-	function (beerData, filterData, mapData) {
+	function (beerData, filterData, mapData, geneData) {
 	  //Entry into site view
+	  d3.select("#loading").remove();
 	  ReactDOM.render( //Render page after underlying data has loaded
-	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData }), document.getElementById('content'));
+	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData }), document.getElementById('content'));
 	});
 
-	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json');
+	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents_MOD.csv');
 
 /***/ },
 /* 2 */
@@ -681,83 +876,29 @@
 
 	var GetData = function GetData(runPage) {
 
-	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile) {
+	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile, geneFile) {
 	    var locReturn = new XMLHttpRequest(),
 	        awardsReturn = new XMLHttpRequest(),
 	        mapReturn = new XMLHttpRequest(),
 	        detLocReturn = new XMLHttpRequest(),
-	        myRequests = [];
+	        geneReturn = new XMLHttpRequest(),
+	        myRequests = [],
+	        numFiles = 5;
 
-	    myRequests.push(false);
-	    myRequests.push(false);
-	    myRequests.push(false);
-	    myRequests.push(false);
+	    for (var i = 0; i < numFiles; i++) {
+	      myRequests.push(false);
+	    }
 
-	    locReturn.onreadystatechange = function () {
-	      if (locReturn.readyState == 4 && locReturn.status == 200) {
-	        myRequests[0] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    awardsReturn.onreadystatechange = function () {
-	      if (awardsReturn.readyState == 4 && awardsReturn.status == 200) {
-	        myRequests[1] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    mapReturn.onreadystatechange = function () {
-	      if (mapReturn.readyState == 4 && mapReturn.status == 200) {
-	        myRequests[2] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-	    detLocReturn.onreadystatechange = function () {
-	      if (detLocReturn.readyState == 4 && detLocReturn.status == 200) {
-	        myRequests[3] = true;
-	        if (myRequests[0] === myRequests[1] && myRequests[1] === myRequests[2] && myRequests[2] === myRequests[3]) massage();
-	      }
-	    };
-
-	    locReturn.open("GET", dir + locFile, true);
-	    locReturn.send();
-	    awardsReturn.open("GET", dir + awardsFile, true);
-	    awardsReturn.send();
-	    mapReturn.open("GET", dir + mapFile, true);
-	    mapReturn.send();
-	    detLocReturn.open('GET', dir + detLocFile, true);
-	    detLocReturn.send();
-
-	    var massage = function massage() {
-	      //Data Massage
-	      var latLongs = $.csv.toObjects(locReturn.responseText),
-	          detLatLongs = $.csv.toObjects(detLocReturn.responseText),
-	          awards = $.csv.toObjects(awardsReturn.responseText),
-	          map = JSON.parse(mapReturn.responseText),
-	          ttl = [],
-	          myData = [];
-
-	      if (awards.length < 2) {
-	        console.log('aborting due to insufficient length of awards data');return;
-	      }
-
-	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
-
-	      console.log('awards:', awards);
-
+	    var _allReady = function _allReady() {
 	      var _iteratorNormalCompletion = true;
 	      var _didIteratorError = false;
 	      var _iteratorError = undefined;
 
 	      try {
-	        for (var _iterator = awards[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var awardRow = _step.value;
+	        for (var _iterator = myRequests[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var fileReceived = _step.value;
 
-	          var tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
-	          if (tempLL !== false) {
-	            awardRow.LL = tempLL;
-	            awardRow.show = true;
-	            myData.push(awardRow);
-	          }
+	          if (!fileReceived) return false;
 	        }
 	      } catch (err) {
 	        _didIteratorError = true;
@@ -774,10 +915,105 @@
 	        }
 	      }
 
-	      makeFilters(myData, ttl, map);
+	      return true;
 	    };
 
-	    var makeFilters = function makeFilters(beerData, ttl, map) {
+	    locReturn.onreadystatechange = function () {
+	      if (locReturn.readyState == 4 && locReturn.status == 200) {
+	        myRequests[0] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    awardsReturn.onreadystatechange = function () {
+	      if (awardsReturn.readyState == 4 && awardsReturn.status == 200) {
+	        myRequests[1] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    mapReturn.onreadystatechange = function () {
+	      if (mapReturn.readyState == 4 && mapReturn.status == 200) {
+	        myRequests[2] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    detLocReturn.onreadystatechange = function () {
+	      if (detLocReturn.readyState == 4 && detLocReturn.status == 200) {
+	        myRequests[3] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+	    geneReturn.onreadystatechange = function () {
+	      if (geneReturn.readyState == 4 && geneReturn.status == 200) {
+	        myRequests[4] = true;
+	        if (_allReady()) massage();
+	      }
+	    };
+
+	    locReturn.open("GET", dir + locFile, true);
+	    locReturn.send();
+	    awardsReturn.open("GET", dir + awardsFile, true);
+	    awardsReturn.send();
+	    mapReturn.open("GET", dir + mapFile, true);
+	    mapReturn.send();
+	    detLocReturn.open('GET', dir + detLocFile, true);
+	    detLocReturn.send();
+	    geneReturn.open('GET', dir + geneFile, true);
+	    geneReturn.send();
+
+	    var massage = function massage() {
+	      //Data Massage
+	      var latLongs = $.csv.toObjects(locReturn.responseText),
+	          detLatLongs = $.csv.toObjects(detLocReturn.responseText),
+	          awards = $.csv.toObjects(awardsReturn.responseText),
+	          map = JSON.parse(mapReturn.responseText),
+	          geneology = $.csv.toObjects(geneReturn.responseText),
+	          ttl = [],
+	          myData = [];
+
+	      if (awards.length < 2) {
+	        console.log('aborting due to insufficient length of awards data');return;
+	      }
+
+	      console.table(geneology);
+
+	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
+
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
+
+	      try {
+	        for (var _iterator2 = awards[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var awardRow = _step2.value;
+
+	          var tempLL = findLL(latLongs, detLatLongs, awardRow.brewery, awardRow.city + ', ' + awardRow.state);
+	          if (tempLL !== false) {
+	            awardRow.LL = tempLL;
+	            awardRow.show = true;
+	            myData.push(awardRow);
+	          } // else console.log('Record missing LL:', awardRow);
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+
+	      geneology = treeify(geneology);
+
+	      makeFilters(myData, ttl, map, geneology);
+	    };
+
+	    var makeFilters = function makeFilters(beerData, ttl, map, geneology) {
 	      var filterData = [],
 	          theseVals = [],
 	          myValues = [],
@@ -808,7 +1044,48 @@
 	      //console.log('filter data:',filterData);
 	      //console.log('marker data:',beerData);
 
-	      runPage(beerData, filterData, map);
+	      runPage(beerData, filterData, map, geneology);
+	    };
+
+	    var treeify = function treeify(data) {
+	      //Convert flat data into a nice tree
+	      var YEAR_START = 1998;
+	      var dataMap = data.reduce(function (map, node) {
+	        node.level = parseInt(node.year) - YEAR_START;
+	        map[node.id] = node;
+	        return map;
+	      }, {});
+
+	      var treeRoot = { style: 'root', id: '0', level: 0 };
+	      dataMap['0'] = treeRoot;
+
+	      // create the tree array
+	      var treeData = [];
+	      treeData.push(treeRoot);
+
+	      data.forEach(function (node) {
+	        // add to parent
+	        var parent = dataMap[node.parent];
+
+	        if (!parent) parent = dataMap['0'];
+	        // create child array if it doesn't exist
+	        (parent.children || (parent.children = [])).
+	        // add node to child array
+	        push(node);
+	        /*
+	        if (parent) {
+	        	// create child array if it doesn't exist
+	        	(parent.children || (parent.children = []))
+	        		// add node to child array
+	        		.push(node);
+	        } else {
+	        	// parent is null or missing
+	        	treeData.push(node);
+	        }
+	        */
+	      });
+
+	      return treeData;
 	    };
 	  }
 

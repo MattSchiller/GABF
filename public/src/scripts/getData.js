@@ -95,10 +95,10 @@ var GetData = (function (runPage) {
       
       geneology = treeify(geneology);
       
-      makeFilters(myData, ttl, map, geneology);
+      makeFilters(myData, ttl, map, geneology, awards);
     };
     
-    var makeFilters = function(beerData, ttl, map, geneology) {
+    var makeFilters = function(beerData, ttl, map, geneData, awardsData) {
       var filterData = [],
           theseVals = [], myValues = [],
           temp;
@@ -128,7 +128,7 @@ var GetData = (function (runPage) {
       //console.log('filter data:',filterData);
       //console.log('marker data:',beerData);
       
-      runPage(beerData, filterData, map, geneology);
+      runPage(beerData, filterData, map, geneData, awardsData);
     };
     
     var treeify = function(data) {
@@ -156,23 +156,45 @@ var GetData = (function (runPage) {
     		(parent.children || (parent.children = []))
     			// add node to child array
     			.push(node);
-      	/*
-      	if (parent) {
-      		// create child array if it doesn't exist
-      		(parent.children || (parent.children = []))
-      			// add node to child array
-      			.push(node);
-      	} else {
-      		// parent is null or missing
-      		treeData.push(node);
-      	}
-      	*/
       });
+      
+      console.log('treeData, pre:', treeData);
+      
+      treeData = inFillNodes(treeData, awardsData);
       
       return treeData;
     };
   }
-       
+  
+  var inFillNodes = function(treeData, awardsData) {
+  //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
+    var sourceNode = JSON.parse(JSON.stringify(treeData[0])),
+        sourceYear = parseInt(sourceNode.year),
+        sourceStyle = sourceNode.style,
+        doIContinue = findAward(sourceNode.year, sourceStyle, awardsData);
+        
+    
+    
+    if (sourceNode.children)
+    
+    let childNode = sourceNode.children[0] {
+      if (parseInt(childNode.year) > (sourceYear+1) ) {         //We need to create infill
+        let myNode
+      }
+    }
+    */
+    
+  };
+  
+  var findAward = function(year, style, awardsData) {
+    var i = 0;
+    while (i < awardsData.length) {
+      if (awardsData[i].year === year && awardsData[i].style === style) return true;
+      i++;
+    }
+    return false;
+  };
+  
   var findLL = function(latLongs, detLatLongs, brewery, location) {
     var z = 0;
     brewery += ', '+location;

@@ -14,6 +14,17 @@ var calculateMarkerRadius = function(count, scale) {
   return Math.max(MIN_NODE_R, Math.min(count/2, MAX_NODE_R) )/scale + 'px';
 };
 
+//****************USED FOR FORMATTING ELEMENTS OVER OTHER ELEMENTS IN SVG
+d3.selection.prototype.moveToBack = function() {
+  return this.each(function() {
+    var firstChild = this.parentNode.firstChild;
+    if (firstChild) {
+        this.parentNode.insertBefore(this, firstChild);
+    }
+  });
+};
+//***********************************************************************
+
 var ClientUI = React.createClass({
   getInitialState: function() {
     return ({
@@ -224,7 +235,7 @@ var ClientUI = React.createClass({
     return (
       <div id='UI'>
         <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} filters={this.state.trimmedFilters}
-            notify={this._applyFilter} geneData={this.props.geneData} />
+            notify={this._applyFilter} geneData={this.props.geneData} awardData={this.props.awardData} />
       </div>
       );
   }
@@ -273,13 +284,13 @@ var Map = React.createClass({
                 .scaleExtent([1, MAX_ZOOM])
                 .on("zoom", this._zoom);
     
-    this.svg = d3.select("#"+this.state.myID).append("svg")
-                .attr("width", this.width)
-                .attr("height", this.height)
-                .call(zoom);
+    this.svg = d3.select("#"+this.state.myID)
+                .append("svg")
+                  .attr("width", this.width)
+                  .attr("height", this.height)
+                  .call(zoom);
     
     this.g = this.svg.append("g");
-              
               
     this.g.selectAll("path")
             .data(topojson.feature(this.props.mapData, this.props.mapData.objects.states).features)
@@ -297,10 +308,7 @@ var Map = React.createClass({
                   	.style("visibility", "hidden")
                   	;
                   	
-                  	
                   	//INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
-                  	
-                  	//ADD CODE TO MAINTAIN TOOLTIP POS AFTER ZOOM
   },
   
   _zoom: function() {
@@ -361,7 +369,6 @@ var Map = React.createClass({
                         return (1/lastZoomScale).toFixed(2) +"px";})
                 .attr('r', function(d) {
                   return calculateMarkerRadius(d.myCount, lastZoomScale);
-                  //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
                   })
                 .attr("transform", function(d) {
                     if ( projection([ d.lng, d.lat ]) === null) {
@@ -376,8 +383,7 @@ var Map = React.createClass({
                 ;
 
     function __showDetails(d) {
-      console.log('Showing details for d:', d);
-      var event = new CustomEvent('showDetails', { 'detail': d.myAwards });  //CHANGE THIS>>>>
+      var event = new CustomEvent('showDetails', { 'detail': { type: 'Awards', data: d.myAwards } });
       window.dispatchEvent(event);
     };
     
@@ -434,21 +440,22 @@ var Geneology = React.createClass({
   },
   _handleResize: function() {
     var margin = {top: 20, right: 20, bottom: 20, left: 30},
-        width = parseInt(d3.select("#"+this.state.myID).style('width')) - margin.left - margin.right,
         height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
     d3.select('svg')
-      .attr("width", width + margin.right + margin.left)
       .attr("height", height + margin.top + margin.bottom);
   },
   
   _drawGenes: function() {
-    var margin = {top: 20, right: 20, bottom: 20, left: 30},
-        width = parseInt(d3.select("#"+this.state.myID).style('width')) - margin.left - margin.right,
+    var margin = {top: 5, right: 2, bottom: 5, left: 20},
+        MIN_YEAR = 1999, MAX_YEAR = 2015, YEAR_WIDTH = 150,
+        width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
         height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
     
     var i = 0,
         duration = 750,
         root;
+        
+    var awardData = this.props.awardData;
     
     var tree = d3.layout.tree()
                 .size([height, width]);
@@ -456,11 +463,12 @@ var Geneology = React.createClass({
     var diagonal = d3.svg.diagonal()
                     .projection(function(d) { return [d.y, d.x]; });
     
-    var svg = d3.select("#"+this.state.myID).append("svg")
-                .attr("width", width + margin.right + margin.left)
-                .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select("#"+this.state.myID)
+                .append("svg")
+                  .attr("width", width)// + margin.right + margin.left)
+                  .attr("height", height)// + margin.top + margin.bottom)
+                .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     //inits our data abstraction
     root = this.props.data[0];
@@ -468,7 +476,7 @@ var Geneology = React.createClass({
     root.y0 = 0;
     
     var yearStart = parseInt(root.children[0].year);
-    console.log('yearStart:', yearStart);
+    //console.log('yearStart:', yearStart);
     
     //defines the collapse function
     function collapse(d) {
@@ -479,14 +487,15 @@ var Geneology = React.createClass({
       }
     }
     
-    console.log('data:', this.props.data);
+    //console.log('data:', this.props.data);
     //collapses everything
     root.children.forEach(collapse);
     
     var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
-    var axis = [];
     
     update(root);
+    _maintainAxis();
+    d3.selectAll('line').moveToBack();
     
     //unnecesssary styling
     //d3.select(self.frameElement).style("height", "800px");
@@ -498,7 +507,7 @@ var Geneology = React.createClass({
           links = tree.links(nodes);
     
       // Normalize for fixed-depth.
-      nodes.forEach(function(d) { d.y = d.level * 150; });
+      nodes.forEach(function(d) { d.y = d.level * YEAR_WIDTH; });
     
       // Update the nodes…
       var node = svg.selectAll("g.node")
@@ -509,9 +518,10 @@ var Geneology = React.createClass({
           .attr("class", "node")
           .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
           .on("click", click)
-          .call(_maintainAxis);     //!! NOT WORKING PROPERLY, NEED IT TO CALL PER NODE
-    
+          ;
+          
       nodeEnter.append("circle")
+          .attr('class', function(d) { return d.style === 'root' ? 'hidden' : ''; })
           .attr("r", 1e-6)      //Why this value for r? For the transitions?
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
@@ -520,6 +530,7 @@ var Geneology = React.createClass({
           .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+          .attr('class', function(d) { return d.style === 'root' ? 'hidden' : ''})
           .text(function(d) { return d.style; })
           .style("fill-opacity", 1e-6);
     
@@ -554,6 +565,7 @@ var Geneology = React.createClass({
       // Enter any new links at the parent's previous position.
       link.enter().insert("path", "g")
           .attr("class", "link")
+          .attr('class', function(d) { return d.source.id === '0' ? 'link hidden' : 'link'; })
           .attr('stroke', 'green')
           .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
@@ -580,20 +592,27 @@ var Geneology = React.createClass({
         d.y0 = d.y;
       });
     }
-    
-    function _maintainAxis(d) {
-      console.log('d in _mA:', d);
-      var drawnAlready = axis.indexOf(d.year);
-      if (drawnAlready=== -1) {
-        axis.push(d.year);
-        svg.append("line")
-          .attr("x1", d.x)  //<<== change your code here
-          .attr("y1", margin.top)
-          .attr("x2", d.x)  //<<== and here
-          .attr("y2", height - margin.top - margin.bottom)
-          .style("stroke-width", 2)
-          .style("stroke", "red")
-          .style("fill", "none");
+    function _maintainAxis() {
+      
+      let offset = margin.left-20;
+      let z = offset + YEAR_WIDTH;
+      while (z < width) {
+        let myLine = svg.append("line")
+                        .attr("x1", z)
+                        .attr("y1", 5)
+                        .attr("x2", z)
+                        .attr("y2", height - 20)
+                        .attr('opacity', '0.2')
+                        .style("stroke-width", 2)
+                        .style("stroke", "navy")
+                        .style("fill", "none");
+        svg.append('text')
+              .attr('x', z-35)
+              .attr('y', margin.top+10)
+              .attr()
+              .text(yearStart - 1 + parseInt( (z-offset)/YEAR_WIDTH ) );
+          
+        z += YEAR_WIDTH;
       }
     }
     
@@ -606,9 +625,41 @@ var Geneology = React.createClass({
         d.children = d._children;
         d._children = null;
       }
+      //Draw added/subtracted nodes
       update(d);
-    }
+      
+      //Scroll to new node
+      var scrollYear = (parseInt(d.year) - yearStart) * YEAR_WIDTH;
+      var scrollTo = d.x;
+      d3.select("#geneology")
+          .transition()
+          .duration(1500)
+          .tween("uniqueTweenName", scrollToNode(scrollYear));
     
+      function scrollToNode(scrollLeft) {
+        return function() {
+            var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
+            return function(t) { this.scrollLeft = i(t) //- d3.select("#geneology").property('scrollWidth')/10, 0)
+            };
+        };
+      };
+      
+      //Populate the details box
+      __showDetails(d);
+      
+      function __showDetails(d) {
+        let year = d.year,
+            style = d.style,
+            myAwards = [];
+        
+        for (let award of awardData) {
+          if (award.year === year && award.style === style) myAwards.push(award);
+        }
+        
+        var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
+        window.dispatchEvent(event);
+      }
+    }
   },
   render: function() {
     //console.log('rendering Map');
@@ -621,13 +672,15 @@ var Geneology = React.createClass({
 });
 var MultiGraphBox = React.createClass({
   getInitialState: function() {
-    return { supportedGraphs: ['Awards', 'Geneology', 'Entries'],
+    return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
              graphShowing: 'Geneology' }
   },
   
   _changeGraph: function(e) {
     let myGraph = e.target.getAttribute('data-name');
     this.setState({ graphShowing: myGraph });
+    let event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
+      window.dispatchEvent(event);
   },
   
   render: function() {
@@ -639,44 +692,36 @@ var MultiGraphBox = React.createClass({
                       <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={this._changeGraph}>
                         {graph}
                       </div> );
-                  }.bind(this) );
+                  }.bind(this) ),
+        myGraph, myNonGraph;
     
     if (this.state.graphShowing === 'Awards') {
-      console.log('printing awards, props:', this.props);
-      return (
-        <div id='multiGraph' >
-          <div id="graph-frame">
-            <Map markers={this.props.markers} mapData={this.props.mapData} />
-            <div id='tabBox' >
-              {myTabs}
-            </div>
-          </div>
-          <div id='nonMapBoxes'>
-            <FilterBox filters={this.props.filters} notify={this.props.notify}/>
-            <DetailsBox />
-          </div>
-        </div>
-      );
+      myGraph = ( <Map markers={this.props.markers} mapData={this.props.mapData} /> );
+      myNonGraph = ( <div> <FilterBox filters={this.props.filters} notify={this.props.notify} />
+                     <DetailsBox type={this.state.graphShowing} /> </div>);
     } else if (this.state.graphShowing === 'Geneology') {
-      return (
-        <div id='multiGraph' >
-          <div id='graph-frame' >
-            <Geneology data={this.props.geneData} />
-            <div id='tabBox' >
-              {myTabs}
-            </div>
+      myGraph = <Geneology data={this.props.geneData} awardData={this.props.awardData} />;
+      myNonGraph = ( <DetailsBox type={this.state.graphShowing} /> );
+    }
+    
+    return (
+      <div id='multiGraph' >
+        <div id='nonMapBoxes'>
+          {myNonGraph}
+        </div>
+        <div id="graph-frame">
+          {myGraph}
+          <div id='tabBox' >
+            {myTabs}
           </div>
         </div>
-        );
-    }
-    /* <div id='nonMapBoxes'>
-            <DetailsBox />
-          </div> */
+      </div>
+    );
   }
 });
 var DetailsBox = React.createClass({
   getInitialState: function() {
-    return ({content: []})
+    return ({ type: '', content: [] })
   },
   
   componentDidMount: function() {
@@ -687,28 +732,58 @@ var DetailsBox = React.createClass({
   },
   
   _updateContent: function(e) {
-    this.setState({content: e.detail});
+    console.log('Updating state with event.detail:', e.detail);
+    this.setState({type: e.detail.type, content: e.detail.data});
   },
   
   render: function() {
-    if (this.state.content === []) return <div />
-    return (
-      <div id={'detailsBox'} >
-        {
-          this.state.content.map(function(award, i) {
-            return (
-              <div key={i} className="detailBoxItem" >
-                <b>Year:</b>     {award.year} <br/>
-                <b>Medal:</b>    {award.medal} <br/>
-                <b>Style:</b>    {award.style} <br/>
-                <b>Beer:</b>     {award.beer} <br/>
-                <b>Brewery:</b>  {award.brewery}
-              </div>
-            );
-          })
+    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type;
+
+    switch (tabSwitch) {
+      case 'Awards':
+        return ( <div id='detailsBox' >
+          {
+            this.state.content.map(function(award, i) {
+              return (
+                <div key={i} className="detailBoxItem" >
+                  <b>Year:</b>     {award.year} <br/>
+                  <b>Medal:</b>    {award.medal} <br/>
+                  <b>Style:</b>    {award.style} <br/>
+                  <b>Beer:</b>     {award.beer} <br/>
+                  <b>Brewery:</b>  {award.brewery}
+                </div>
+              );
+            })
+          }
+          </div> ); break;
+      case 'Geneology':
+        var myContent;
+        if (this.state.content.length === 0) myContent = <div id='detailsBox' >Click a beer node to see awards for that year</div>
+        else {
+          console.log('non-empty');
+          let myAwards = this.state.content.map(function(award, i) {
+                return (
+                  <div key={i} className="detailBoxItem" >
+                    <b>Medal:</b>    {award.medal} <br/>
+                    <b>Beer:</b>     {award.beer} <br/>
+                    <b>Brewery:</b>  {award.brewery}
+                  </div>
+                );
+              }),
+              myYear = this.state.content[0].year,
+              myStyle = this.state.content[0].style;
+              console.log('this.state.content[0].year:', this.state.content[0].year);
+          myContent = ( <div id='detailsBox'>
+                          <div id='detailsBox'>
+                            <b>Year:</b> {myYear} <br/>
+                            <b>Style:</b> {myStyle} <br/>
+                          </div>
+                          {myAwards}
+                        </div> );
         }
-      </div>
-      );
+        return myContent; break;
+      default: return <div />; break;
+    }
   }
 });
 
@@ -736,7 +811,7 @@ var Filter = React.createClass({
     window.addEventListener('click', this._toggleCheck);
   },
   componentWillUnmount: function() {
-    window.removeEventListender('click', this._toggleCheck);
+    window.removeEventListener('click', this._toggleCheck);
   },
   _toggleCheck: function(e) {//To close menu if user clicks anywhere else
     if (e.target.getAttribute('data-filter')!==this.props.name) this.setState({showItems:false});
@@ -806,14 +881,13 @@ var FilterItem = React.createClass({
 });
 
 
-
-//Page begin:
+//************************************************Page begin*****************************************
 var dataPull = new GetData(   //This is the runPage cb-function to start the page when data is loaded
-  function(beerData, filterData, mapData, geneData) {
+  function(beerData, filterData, mapData, geneData, awardData) {
     //Entry into site view
     d3.select("#loading").remove();
     ReactDOM.render(  //Render page after underlying data has loaded
-      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} geneData={geneData} />,
+      <ClientUI initBeerData={beerData} initFilters={filterData} mapData={mapData} geneData={geneData} awardData={awardData} />,
       document.getElementById('content')
     )
   }

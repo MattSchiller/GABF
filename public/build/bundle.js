@@ -92,6 +92,17 @@
 	  return Math.max(MIN_NODE_R, Math.min(count / 2, MAX_NODE_R)) / scale + 'px';
 	};
 
+	//****************USED FOR FORMATTING ELEMENTS OVER OTHER ELEMENTS IN SVG
+	d3.selection.prototype.moveToBack = function () {
+	  return this.each(function () {
+	    var firstChild = this.parentNode.firstChild;
+	    if (firstChild) {
+	      this.parentNode.insertBefore(this, firstChild);
+	    }
+	  });
+	};
+	//***********************************************************************
+
 	var ClientUI = React.createClass({
 	  displayName: 'ClientUI',
 
@@ -398,7 +409,7 @@
 
 	  render: function render() {
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
-	      notify: this._applyFilter, geneData: this.props.geneData }));
+	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData }));
 	  }
 	});
 	var Map = React.createClass({
@@ -450,8 +461,6 @@
 	    this.tooltip = d3.select("body").append("div").style("position", "absolute").style("z-index", "10").style("visibility", "hidden");
 
 	    //INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
-
-	    //ADD CODE TO MAINTAIN TOOLTIP POS AFTER ZOOM
 	  },
 
 	  _zoom: function _zoom() {
@@ -500,7 +509,6 @@
 	      return (1 / lastZoomScale).toFixed(2) + "px";
 	    }).attr('r', function (d) {
 	      return calculateMarkerRadius(d.myCount, lastZoomScale);
-	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -510,8 +518,7 @@
 	    }).on("click", __showDetails).on("mouseover", __showSummary).on("mouseout", __hideSummary);
 
 	    function __showDetails(d) {
-	      console.log('Showing details for d:', d);
-	      var event = new CustomEvent('showDetails', { 'detail': d.myAwards }); //CHANGE THIS>>>>
+	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Awards', data: d.myAwards } });
 	      window.dispatchEvent(event);
 	    };
 
@@ -550,19 +557,23 @@
 	  },
 	  _handleResize: function _handleResize() {
 	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
-	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
 	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
-	    d3.select('svg').attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom);
+	    d3.select('svg').attr("height", height + margin.top + margin.bottom);
 	  },
 
 	  _drawGenes: function _drawGenes() {
-	    var margin = { top: 20, right: 20, bottom: 20, left: 30 },
-	        width = parseInt(d3.select("#" + this.state.myID).style('width')) - margin.left - margin.right,
+	    var margin = { top: 5, right: 2, bottom: 5, left: 20 },
+	        MIN_YEAR = 1999,
+	        MAX_YEAR = 2015,
+	        YEAR_WIDTH = 150,
+	        width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
 	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
 
 	    var i = 0,
 	        duration = 750,
 	        root;
+
+	    var awardData = this.props.awardData;
 
 	    var tree = d3.layout.tree().size([height, width]);
 
@@ -570,7 +581,9 @@
 	      return [d.y, d.x];
 	    });
 
-	    var svg = d3.select("#" + this.state.myID).append("svg").attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	    var svg = d3.select("#" + this.state.myID).append("svg").attr("width", width) // + margin.right + margin.left)
+	    .attr("height", height) // + margin.top + margin.bottom)
+	    .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	    //inits our data abstraction
 	    root = this.props.data[0];
@@ -578,7 +591,7 @@
 	    root.y0 = 0;
 
 	    var yearStart = parseInt(root.children[0].year);
-	    console.log('yearStart:', yearStart);
+	    //console.log('yearStart:', yearStart);
 
 	    //defines the collapse function
 	    function collapse(d) {
@@ -589,15 +602,16 @@
 	      }
 	    }
 
-	    console.log('data:', this.props.data);
+	    //console.log('data:', this.props.data);
 	    //collapses everything
 	    root.children.forEach(collapse);
 
 	    var colorMax = [255, 0, 0],
 	        colorMin = [0, 0, 255];
-	    var axis = [];
 
 	    update(root);
+	    _maintainAxis();
+	    d3.selectAll('line').moveToBack();
 
 	    //unnecesssary styling
 	    //d3.select(self.frameElement).style("height", "800px");
@@ -610,7 +624,7 @@
 
 	      // Normalize for fixed-depth.
 	      nodes.forEach(function (d) {
-	        d.y = d.level * 150;
+	        d.y = d.level * YEAR_WIDTH;
 	      });
 
 	      // Update the nodes…
@@ -621,9 +635,11 @@
 	      // Enter any new nodes at the parent's previous position.
 	      var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
 	        return "translate(" + source.y0 + "," + source.x0 + ")";
-	      }).on("click", click).call(_maintainAxis);
+	      }).on("click", click);
 
-	      nodeEnter.append("circle").attr("r", 1e-6) //Why this value for r? For the transitions?
+	      nodeEnter.append("circle").attr('class', function (d) {
+	        return d.style === 'root' ? 'hidden' : '';
+	      }).attr("r", 1e-6) //Why this value for r? For the transitions?
 	      .style("fill", function (d) {
 	        return d._children ? "lightsteelblue" : "#fff";
 	      });
@@ -635,6 +651,8 @@
 	      }).attr("dy", ".35em") //centers text
 	      .attr("text-anchor", function (d) {
 	        return d.children || d._children ? "end" : "start";
+	      }).attr('class', function (d) {
+	        return d.style === 'root' ? 'hidden' : '';
 	      }).text(function (d) {
 	        return d.style;
 	      }).style("fill-opacity", 1e-6);
@@ -665,7 +683,9 @@
 	      });
 
 	      // Enter any new links at the parent's previous position.
-	      link.enter().insert("path", "g").attr("class", "link").attr('stroke', 'green').attr("d", function (d) {
+	      link.enter().insert("path", "g").attr("class", "link").attr('class', function (d) {
+	        return d.source.id === '0' ? 'link hidden' : 'link';
+	      }).attr('stroke', 'green').attr("d", function (d) {
 	        var o = { x: source.x0, y: source.y0 };
 	        return diagonal({ source: o, target: o });
 	      });
@@ -685,15 +705,15 @@
 	        d.y0 = d.y;
 	      });
 	    }
+	    function _maintainAxis() {
 
-	    function _maintainAxis(d) {
-	      console.log('d in _mA:', d);
-	      var drawnAlready = axis.indexOf(d.year);
-	      if (drawnAlready === -1) {
-	        axis.push(d.year);
-	        svg.append("line").attr("x1", d.x) //<<== change your code here
-	        .attr("y1", margin.top).attr("x2", d.x) //<<== and here
-	        .attr("y2", height - margin.top - margin.bottom).style("stroke-width", 2).style("stroke", "red").style("fill", "none");
+	      var offset = margin.left - 20;
+	      var z = offset + YEAR_WIDTH;
+	      while (z < width) {
+	        var myLine = svg.append("line").attr("x1", z).attr("y1", 5).attr("x2", z).attr("y2", height - 20).attr('opacity', '0.2').style("stroke-width", 2).style("stroke", "navy").style("fill", "none");
+	        svg.append('text').attr('x', z - 35).attr('y', margin.top + 10).attr().text(yearStart - 1 + parseInt((z - offset) / YEAR_WIDTH));
+
+	        z += YEAR_WIDTH;
 	      }
 	    }
 
@@ -706,7 +726,59 @@
 	        d.children = d._children;
 	        d._children = null;
 	      }
+	      //Draw added/subtracted nodes
 	      update(d);
+
+	      //Scroll to new node
+	      var scrollYear = (parseInt(d.year) - yearStart) * YEAR_WIDTH;
+	      var scrollTo = d.x;
+	      d3.select("#geneology").transition().duration(1500).tween("uniqueTweenName", scrollToNode(scrollYear));
+
+	      function scrollToNode(scrollLeft) {
+	        return function () {
+	          var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
+	          return function (t) {
+	            this.scrollLeft = i(t); //- d3.select("#geneology").property('scrollWidth')/10, 0)
+	          };
+	        };
+	      };
+
+	      //Populate the details box
+	      __showDetails(d);
+
+	      function __showDetails(d) {
+	        var year = d.year,
+	            style = d.style,
+	            myAwards = [];
+
+	        var _iteratorNormalCompletion4 = true;
+	        var _didIteratorError4 = false;
+	        var _iteratorError4 = undefined;
+
+	        try {
+	          for (var _iterator4 = awardData[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+	            var award = _step4.value;
+
+	            if (award.year === year && award.style === style) myAwards.push(award);
+	          }
+	        } catch (err) {
+	          _didIteratorError4 = true;
+	          _iteratorError4 = err;
+	        } finally {
+	          try {
+	            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+	              _iterator4.return();
+	            }
+	          } finally {
+	            if (_didIteratorError4) {
+	              throw _iteratorError4;
+	            }
+	          }
+	        }
+
+	        var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
+	        window.dispatchEvent(event);
+	      }
 	    }
 	  },
 	  render: function render() {
@@ -718,13 +790,15 @@
 	  displayName: 'MultiGraphBox',
 
 	  getInitialState: function getInitialState() {
-	    return { supportedGraphs: ['Awards', 'Geneology', 'Entries'],
+	    return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
 	      graphShowing: 'Geneology' };
 	  },
 
 	  _changeGraph: function _changeGraph(e) {
 	    var myGraph = e.target.getAttribute('data-name');
 	    this.setState({ graphShowing: myGraph });
+	    var event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
+	    window.dispatchEvent(event);
 	  },
 
 	  render: function render() {
@@ -733,24 +807,26 @@
 	      var tabClass = '';
 	      if (graph === this.state.graphShowing) tabClass = ' currTab';
 	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: this._changeGraph }, graph);
-	    }.bind(this));
+	    }.bind(this)),
+	        myGraph,
+	        myNonGraph;
 
 	    if (this.state.graphShowing === 'Awards') {
-	      console.log('printing awards, props:', this.props);
-	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData }), React.createElement('div', { id: 'tabBox' }, myTabs)), React.createElement('div', { id: 'nonMapBoxes' }, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, null)));
+	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData });
+	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing }), ' ');
 	    } else if (this.state.graphShowing === 'Geneology') {
-	      return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'graph-frame' }, React.createElement(Geneology, { data: this.props.geneData }), React.createElement('div', { id: 'tabBox' }, myTabs)));
+	      myGraph = React.createElement(Geneology, { data: this.props.geneData, awardData: this.props.awardData });
+	      myNonGraph = React.createElement(DetailsBox, { type: this.state.graphShowing });
 	    }
-	    /* <div id='nonMapBoxes'>
-	            <DetailsBox />
-	          </div> */
+
+	    return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'nonMapBoxes' }, myNonGraph), React.createElement('div', { id: 'graph-frame' }, myGraph, React.createElement('div', { id: 'tabBox' }, myTabs)));
 	  }
 	});
 	var DetailsBox = React.createClass({
 	  displayName: 'DetailsBox',
 
 	  getInitialState: function getInitialState() {
-	    return { content: [] };
+	    return { type: '', content: [] };
 	  },
 
 	  componentDidMount: function componentDidMount() {
@@ -761,14 +837,34 @@
 	  },
 
 	  _updateContent: function _updateContent(e) {
-	    this.setState({ content: e.detail });
+	    console.log('Updating state with event.detail:', e.detail);
+	    this.setState({ type: e.detail.type, content: e.detail.data });
 	  },
 
 	  render: function render() {
-	    if (this.state.content === []) return React.createElement('div', null);
-	    return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
-	      return React.createElement('div', { key: i, className: 'detailBoxItem' }, React.createElement('b', null, 'Year:'), '     ', award.year, ' ', React.createElement('br', null), React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), '    ', award.style, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
-	    }));
+	    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type;
+
+	    switch (tabSwitch) {
+	      case 'Awards':
+	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
+	          return React.createElement('div', { key: i, className: 'detailBoxItem' }, React.createElement('b', null, 'Year:'), '     ', award.year, ' ', React.createElement('br', null), React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), '    ', award.style, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
+	        }));break;
+	      case 'Geneology':
+	        var myContent;
+	        if (this.state.content.length === 0) myContent = React.createElement('div', { id: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
+	          console.log('non-empty');
+	          var myAwards = this.state.content.map(function (award, i) {
+	            return React.createElement('div', { key: i, className: 'detailBoxItem' }, React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
+	          }),
+	              myYear = this.state.content[0].year,
+	              myStyle = this.state.content[0].style;
+	          console.log('this.state.content[0].year:', this.state.content[0].year);
+	          myContent = React.createElement('div', { id: 'detailsBox' }, React.createElement('div', { id: 'detailsBox' }, React.createElement('b', null, 'Year:'), ' ', myYear, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), ' ', myStyle, ' ', React.createElement('br', null)), myAwards);
+	        }
+	        return myContent;break;
+	      default:
+	        return React.createElement('div', null);break;
+	    }
 	  }
 	});
 
@@ -794,7 +890,7 @@
 	    window.addEventListener('click', this._toggleCheck);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    window.removeEventListender('click', this._toggleCheck);
+	    window.removeEventListener('click', this._toggleCheck);
 	  },
 	  _toggleCheck: function _toggleCheck(e) {
 	    //To close menu if user clicks anywhere else
@@ -857,13 +953,13 @@
 	  }
 	});
 
-	//Page begin:
+	//************************************************Page begin*****************************************
 	var dataPull = new GetData( //This is the runPage cb-function to start the page when data is loaded
-	function (beerData, filterData, mapData, geneData) {
+	function (beerData, filterData, mapData, geneData, awardData) {
 	  //Entry into site view
 	  d3.select("#loading").remove();
 	  ReactDOM.render( //Render page after underlying data has loaded
-	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData }), document.getElementById('content'));
+	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData, awardData: awardData }), document.getElementById('content'));
 	});
 
 	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents_MOD.csv');
@@ -1010,10 +1106,10 @@
 
 	      geneology = treeify(geneology);
 
-	      makeFilters(myData, ttl, map, geneology);
+	      makeFilters(myData, ttl, map, geneology, awards);
 	    };
 
-	    var makeFilters = function makeFilters(beerData, ttl, map, geneology) {
+	    var makeFilters = function makeFilters(beerData, ttl, map, geneData, awardsData) {
 	      var filterData = [],
 	          theseVals = [],
 	          myValues = [],
@@ -1044,7 +1140,7 @@
 	      //console.log('filter data:',filterData);
 	      //console.log('marker data:',beerData);
 
-	      runPage(beerData, filterData, map, geneology);
+	      runPage(beerData, filterData, map, geneData, awardsData);
 	    };
 
 	    var treeify = function treeify(data) {
@@ -1072,22 +1168,34 @@
 	        (parent.children || (parent.children = [])).
 	        // add node to child array
 	        push(node);
-	        /*
-	        if (parent) {
-	        	// create child array if it doesn't exist
-	        	(parent.children || (parent.children = []))
-	        		// add node to child array
-	        		.push(node);
-	        } else {
-	        	// parent is null or missing
-	        	treeData.push(node);
-	        }
-	        */
 	      });
+
+	      console.log('treeData, pre:', treeData);
+
+	      treeData = inFillNodes(treeData);
 
 	      return treeData;
 	    };
 	  }
+
+	  var inFillNodes = function inFillNodes(treeData) {
+	    //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
+	    var sourceNode = treeData[0],
+	        sourceYear = parseInt(sourceNode.year),
+	        sourceStyle = sourceNode.style;
+
+	    console.log(awardsData);debugger;
+	    //JSON.parse(JSON.stringify(obj))
+
+	    /*if (sourceNode.children)
+	    
+	    let childNode = sourceNode.children[0] {
+	      if (parseInt(childNode.year) > (sourceYear+1) ) {         //We need to create infill
+	        let myNode
+	      }
+	    }
+	    */
+	  };
 
 	  var findLL = function findLL(latLongs, detLatLongs, brewery, location) {
 	    var z = 0;

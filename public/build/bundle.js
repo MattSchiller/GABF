@@ -409,7 +409,7 @@
 
 	  render: function render() {
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
-	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData }));
+	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData, lineageData: this.props.lineageData }));
 	  }
 	});
 	var Map = React.createClass({
@@ -434,7 +434,7 @@
 	  },
 
 	  _handleResize: function _handleResize() {
-	    //ADD SOMETHING TO NOT SHIT BRICKS WHEN RESIZE WHILE ZOOM
+	    //ADD SOMETHING TO NOT SHIT BRICKS WHEN RESIZE WHILE ZOOMED
 
 	    d3.select('svg').remove();
 	    this._drawMap();
@@ -551,6 +551,8 @@
 	  componentDidMount: function componentDidMount() {
 	    window.addEventListener('resize', this._handleResize);
 	    this._drawGenes();
+	    console.log('destination:', this.props.destination);
+	    if (this.props.destination) nodeScroll(this.props.destination);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    window.removeEventListener('resize', this._handleResize);
@@ -561,14 +563,33 @@
 	    d3.select('svg').attr("height", height + margin.top + margin.bottom);
 	  },
 
+	  _nodeScrollMain: function _nodeScrollMain(d) {
+	    //Scroll to new node
+	    //CLONE OF LOWER FUNCTION
+
+	    //NEED TO ADD YEAR START OR SOMETHING
+	    var scrollYear = ((parseInt(d.year) || destinationYear) - yearStart) * YEAR_WIDTH;
+	    d3.select("#" + this.state.myID).transition().duration(YEAR_DELAY).tween("uniqueTweenName", scrollToNode(scrollYear));
+
+	    function scrollToNode(scrollLeft) {
+	      return function () {
+	        var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
+	        return function (t) {
+	          this.scrollLeft = i(t); //- d3.select("#geneology").property('scrollWidth')/10, 0)
+	        };
+	      };
+	    };
+	  },
+
 	  _drawGenes: function _drawGenes() {
 	    var margin = { top: 5, right: 2, bottom: 5, left: 20 },
 	        MIN_YEAR = 1999,
 	        MAX_YEAR = 2015,
 	        YEAR_WIDTH = 150,
 	        YEAR_DELAY = 750,
+	        TEXT_ID_LABEL = 'LABEL',
 	        width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
-	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
+	        height = parseInt(d3.select("#" + this.state.myID).style('height')); // - margin.top - margin.bottom;
 
 	    var i = 0,
 	        duration = 750,
@@ -602,18 +623,18 @@
 	        d._children.forEach(collapse);
 	      }
 	    }
-
 	    function expand(d) {
 	      var yearDiff = parseInt(d.year) - yearStart;
 	      var myD = d;
 	      if (d._children) {
-	        console.log('myD:', myD);
+	        myD.children = myD._children;
+	        myD._children = null;
+	        update(myD);
+	        nodeScroll(myD);
+	        if (myD.children[0].style == myD.style) hideText(TEXT_ID_LABEL + d.id);
+
 	        setTimeout(function () {
-	          myD.children = myD._children;
-	          myD._children = null;
 	          myD.children.forEach(expand);
-	          update(myD);
-	          nodeScroll(myD);
 	        }, YEAR_DELAY);
 	      }
 	    }
@@ -625,11 +646,15 @@
 	        colorMin = [0, 0, 255];
 
 	    update(root);
-	    _maintainAxis();
+	    drawAxis();
 	    d3.selectAll('line').moveToBack();
 
-	    //unnecesssary styling
-	    //d3.select(self.frameElement).style("height", "800px");
+	    function showText(id) {
+	      d3.select('#' + id).select('text').style('visibility', 'visible');
+	    }
+	    function hideText(id) {
+	      d3.select('#' + id).select('text').style('visibility', 'hidden');
+	    }
 
 	    function update(source) {
 
@@ -651,12 +676,17 @@
 	      var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
 	        return "translate(" + source.y0 + "," + source.x0 + ")";
 	      }).on("click", function (d) {
-	        expand(d);
-	        //update(d);
+	        if (d._children) expand(d);
 	        click(d);
 	      }).on('dblclick', function (d) {
 	        collapse(d);
 	        update(d);
+	      }).on('mouseover', function (d) {
+	        showText(TEXT_ID_LABEL + d.id);
+	      }).attr('id', function (d) {
+	        return TEXT_ID_LABEL + d.id;
+	      }).on('mouseout', function (d) {
+	        if (d.children && d.children[0].style == d.style) hideText(TEXT_ID_LABEL + d.id);
 	      });
 
 	      nodeEnter.append("circle").attr('class', function (d) {
@@ -667,9 +697,9 @@
 	      });
 
 	      nodeEnter.append("text").attr("x", function (d) {
-	        return d.children || d._children ? 0 : -0;
+	        return d.children || d._children ? -5 : 5;
 	      }).attr("y", function (d) {
-	        return d.children || d._children ? -10 : 10;
+	        return d.children || d._children ? 0 : 0;
 	      }).attr("dy", ".35em") //centers text
 	      .attr("text-anchor", function (d) {
 	        return d.children || d._children ? "end" : "start";
@@ -677,7 +707,10 @@
 	        return d.style === 'root' ? 'hidden' : '';
 	      }).text(function (d) {
 	        return d.style;
-	      }).style("fill-opacity", 1e-6);
+	      }).style('background-color', 'green');
+	      //.style("fill-opacity", 1e-6);
+
+	      //to add: transparent text box behind all text with not root parents to 'hide' the green line behind it
 
 	      // Transition existing nodes to their new position.
 	      var nodeUpdate = node.transition().duration(duration).attr("transform", function (d) {
@@ -727,13 +760,12 @@
 	        d.y0 = d.y;
 	      });
 	    }
-	    function _maintainAxis() {
-
+	    function drawAxis() {
 	      var offset = margin.left - 20;
 	      var z = offset + YEAR_WIDTH;
 	      while (z < width) {
-	        var myLine = svg.append("line").attr("x1", z).attr("y1", 5).attr("x2", z).attr("y2", height - 20).attr('opacity', '0.2').style("stroke-width", 2).style("stroke", "navy").style("fill", "none");
-	        svg.append('text').attr('x', z - 35).attr('y', margin.top + 10).attr().text(yearStart - 1 + parseInt((z - offset) / YEAR_WIDTH));
+	        var myLine = svg.append("line").attr("x1", z).attr("y1", 5).attr("x2", z).attr("y2", height).attr('opacity', '0.2').style("stroke-width", 2).style("stroke", "navy").style("fill", "none");
+	        svg.append('text').attr('x', z - 35).attr('y', height - 10).style('font-size', '12pt').text(yearStart - 1 + parseInt((z - offset) / YEAR_WIDTH));
 
 	        z += YEAR_WIDTH;
 	      }
@@ -741,8 +773,7 @@
 
 	    function nodeScroll(d) {
 	      //Scroll to new node
-	      var scrollYear = (parseInt(d.year) - yearStart) * YEAR_WIDTH;
-	      var scrollTo = d.x;
+	      var scrollYear = ((parseInt(d.year) || destinationYear) - yearStart) * YEAR_WIDTH;
 	      d3.select("#geneology").transition().duration(YEAR_DELAY).tween("uniqueTweenName", scrollToNode(scrollYear));
 
 	      function scrollToNode(scrollLeft) {
@@ -755,19 +786,9 @@
 	      };
 	    }
 
-	    // Toggle children on click, show details, and scroll to parent
+	    // Show children on click, show details, and scroll to parent
 	    function click(d) {
-	      /*if (d.children) {
-	        d._children = d.children;
-	        d.children = null;
-	      } else {
-	        d.children = d._children;
-	        d._children = null;
-	      }*/
-
-	      //Scroll
 	      nodeScroll(d);
-	      //Populate the details box
 	      __showDetails(d);
 
 	      function __showDetails(d) {
@@ -815,12 +836,16 @@
 
 	  getInitialState: function getInitialState() {
 	    return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
-	      graphShowing: 'Geneology' };
+	      graphShowing: 'Geneology',
+	      geneDestination: undefined
+	    };
 	  },
 
 	  _changeGraph: function _changeGraph(e) {
-	    var myGraph = e.target.getAttribute('data-name');
-	    this.setState({ graphShowing: myGraph });
+	    var myGraph = e.currentTarget.getAttribute('data-name'),
+	        myDestination = e.currentTarget.getAttribute('data-destination');
+
+	    this.setState({ graphShowing: myGraph, geneDestination: myDestination });
 	    var event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
 	    window.dispatchEvent(event);
 	  },
@@ -837,9 +862,10 @@
 
 	    if (this.state.graphShowing === 'Awards') {
 	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData });
-	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing }), ' ');
+	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toGeneology: this._changeGraph }), ' ');
 	    } else if (this.state.graphShowing === 'Geneology') {
-	      myGraph = React.createElement(Geneology, { data: this.props.geneData, awardData: this.props.awardData });
+	      myGraph = React.createElement(Geneology, { data: this.props.geneData, awardData: this.props.awardData, lineageData: this.props.lineageData,
+	        destination: this.state.geneDestination });
 	      myNonGraph = React.createElement(DetailsBox, { type: this.state.graphShowing });
 	    }
 
@@ -870,8 +896,9 @@
 
 	    switch (tabSwitch) {
 	      case 'Awards':
+	        var toGenes = this.props.toGeneology;
 	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
-	          return React.createElement('div', { key: i, className: 'detailBoxItem' }, React.createElement('b', null, 'Year:'), '     ', award.year, ' ', React.createElement('br', null), React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), '    ', award.style, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
+	          return React.createElement('div', { key: i, className: 'detailBoxItem', 'data-name': 'Geneology', 'data-destination': { year: award.year, style: award.style }, onClick: toGenes }, React.createElement('b', null, 'Year:'), '     ', award.year, ' ', React.createElement('br', null), React.createElement('b', null, 'Medal:'), '    ', award.medal, ' ', React.createElement('br', null), React.createElement('b', null, 'Style:'), '    ', award.style, ' ', React.createElement('br', null), React.createElement('b', null, 'Beer:'), '     ', award.beer, ' ', React.createElement('br', null), React.createElement('b', null, 'Brewery:'), '  ', award.brewery);
 	        }));break;
 	      case 'Geneology':
 	        var myContent;
@@ -979,11 +1006,12 @@
 
 	//************************************************Page begin*****************************************
 	var dataPull = new GetData( //This is the runPage cb-function to start the page when data is loaded
-	function (beerData, filterData, mapData, geneData, awardData) {
+	function (beerData, filterData, mapData, geneData, awardData, lineageData) {
 	  //Entry into site view
 	  d3.select("#loading").remove();
 	  ReactDOM.render( //Render page after underlying data has loaded
-	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData, awardData: awardData }), document.getElementById('content'));
+	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData, awardData: awardData,
+	    lineageData: lineageData }), document.getElementById('content'));
 	});
 
 	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents.csv');
@@ -993,6 +1021,32 @@
 /***/ function(module, exports) {
 
 	"use strict";
+
+	var _slicedToArray = function () {
+	  function sliceIterator(arr, i) {
+	    var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
+	      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+	        _arr.push(_s.value);if (i && _arr.length === i) break;
+	      }
+	    } catch (err) {
+	      _d = true;_e = err;
+	    } finally {
+	      try {
+	        if (!_n && _i["return"]) _i["return"]();
+	      } finally {
+	        if (_d) throw _e;
+	      }
+	    }return _arr;
+	  }return function (arr, i) {
+	    if (Array.isArray(arr)) {
+	      return arr;
+	    } else if (Symbol.iterator in Object(arr)) {
+	      return sliceIterator(arr, i);
+	    } else {
+	      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	    }
+	  };
+	}();
 
 	var GetData = function GetData(runPage) {
 
@@ -1088,7 +1142,9 @@
 	          map = JSON.parse(mapReturn.responseText),
 	          geneology = $.csv.toObjects(geneReturn.responseText),
 	          ttl = [],
-	          myData = [];
+	          beerData = [],
+	          filterData,
+	          lineages;
 
 	      if (awards.length < 2) {
 	        console.log('aborting due to insufficient length of awards data');return;
@@ -1110,7 +1166,7 @@
 	          if (tempLL !== false) {
 	            awardRow.LL = tempLL;
 	            awardRow.show = true;
-	            myData.push(awardRow);
+	            beerData.push(awardRow);
 	          } else console.log('Record missing LL:', awardRow);
 	        }
 	      } catch (err) {
@@ -1128,12 +1184,19 @@
 	        }
 	      }
 
-	      geneology = treeify(geneology, awards);
+	      var _treeify = treeify(geneology, awards);
 
-	      makeFilters(myData, ttl, map, geneology, awards);
+	      var _treeify2 = _slicedToArray(_treeify, 2);
+
+	      geneology = _treeify2[0];
+	      lineages = _treeify2[1];
+
+	      filterData = makeFilters(beerData, ttl);
+
+	      runPage(beerData, filterData, map, geneology, awards, lineages);
 	    };
 
-	    var makeFilters = function makeFilters(beerData, ttl, map, geneData, awardsData) {
+	    var makeFilters = function makeFilters(beerData, ttl) {
 	      var filterData = [],
 	          theseVals = [],
 	          myValues = [],
@@ -1155,29 +1218,24 @@
 	      }
 
 	      for (var x = 1; x < ttl.length - 1; x++) {
-	        filterData.push({
-	          name: ttl[x],
-	          values: myValues[ttl[x]]
-	        });
+	        filterData.push({ name: ttl[x], values: myValues[ttl[x]] });
 	      }
 
-	      //console.log('filter data:',filterData);
-	      //console.log('marker data:',beerData);
-
-	      runPage(beerData, filterData, map, geneData, awardsData);
+	      return filterData;
 	    };
 
 	    var treeify = function treeify(data, awards) {
-	      //Convert flat data into a nice tree
+	      //Convert flat data into a nice tree, as well as create lineage data along the way
 	      var YEAR_START = 1998;
 	      var dataMap = data.reduce(function (map, node) {
 	        node.level = parseInt(node.year) - YEAR_START;
 	        map[node.id] = node;
 	        return map;
-	      }, {});
+	      }, {}),
+	          lineages = {};
 
 	      var treeRoot = { style: 'root', id: '0', level: 0 };
-	      dataMap['0'] = treeRoot;
+	      //dataMap['0'] = treeRoot;
 
 	      // create the tree array
 	      var treeData = [];
@@ -1187,11 +1245,16 @@
 	        // add to parent
 	        var parent = dataMap[node.parent_id];
 
-	        if (!parent) parent = dataMap['0'];
+	        if (!parent) {
+	          parent = treeRoot;
+	          node.lineage = node.id;
+	        } else node.lineage = parent.lineage;
 	        // create child array if it doesn't exist
 	        (parent.children || (parent.children = [])).
 	        // add node to child array
 	        push(node);
+
+	        lineages[node.style + node.year] = node.lineage;
 	      });
 
 	      console.log('treeData, pre:', treeData);
@@ -1199,73 +1262,9 @@
 	      //treeData[0] = infillNodes(treeData[0], awards);
 
 	      console.log('treedata, post:', treeData);
-	      return treeData;
+	      return [treeData, lineages];
 	    };
 	  }
-
-	  var infillNodes = function infillNodes(sourceNode, awardsData) {
-	    //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
-	    //console.log('ifN:', sourceNode);
-	    var sourceYear = parseInt(sourceNode.year),
-	        cloneNode = JSON.parse(JSON.stringify(sourceNode)),
-	        myChildren = sourceNode.children || [],
-	        firstChild = myChildren[0] || {},
-	        shouldIExtend = findAward(sourceYear, parseInt(firstChild.year), sourceNode.style, awardsData);
-
-	    if (shouldIExtend) {
-	      //Replace children with single child of self-clone
-	      cloneNode.year = String(sourceYear + 1);
-	      cloneNode.level = sourceNode.level + 1;
-	      cloneNode.id = cloneNode.id + '+';
-	      sourceNode.children = [];
-	      sourceNode.children.push(cloneNode);
-	      //console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
-	    }
-
-	    //ISSUE OF ADDING 2016 AWARDS WHEN IT SHOULDN'T
-
-	    var _iteratorNormalCompletion3 = true;
-	    var _didIteratorError3 = false;
-	    var _iteratorError3 = undefined;
-
-	    try {
-	      for (var _iterator3 = (sourceNode.children || [])[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-	        var child = _step3.value;
-	        //Recursively infill the tree
-	        //console.log('inChild, and my child:', child);
-	        child = infillNodes(child, awardsData);
-	      }
-	    } catch (err) {
-	      _didIteratorError3 = true;
-	      _iteratorError3 = err;
-	    } finally {
-	      try {
-	        if (!_iteratorNormalCompletion3 && _iterator3.return) {
-	          _iterator3.return();
-	        }
-	      } finally {
-	        if (_didIteratorError3) {
-	          throw _iteratorError3;
-	        }
-	      }
-	    }
-
-	    return sourceNode;
-	  };
-
-	  var findAward = function findAward(year, childYear, style, awardsData) {
-	    //console.log('year:', year, 'style:', style, 'data:', awardsData); debugger;
-	    var i = 0;
-	    //console.log('childYear:', childYear, 'year:', year);
-	    if (childYear == year + 1) return false;
-	    while (i < awardsData.length) {
-	      if (parseInt(awardsData[i].year) === year && awardsData[i].style == style) {
-	        return true;
-	      }
-	      i++;
-	    }
-	    return false;
-	  };
 
 	  var findLL = function findLL(latLongs, detLatLongs, brewery, location) {
 	    var z = 0;

@@ -435,7 +435,7 @@ var Geneology = React.createClass({
     window.addEventListener('resize', this._handleResize);
     this._drawGenes();
     console.log('destination:', this.props.destination);
-    if (this.props.destination) nodeScroll(this.props.destination);
+    //if (this.props.destination) _nodeScrollMain(this.props.destination);
   },
   componentWillUnmount: function() {
     window.removeEventListener('resize', this._handleResize);

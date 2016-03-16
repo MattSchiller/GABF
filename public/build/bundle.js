@@ -602,9 +602,8 @@
 	      }
 	    }
 
-	    //console.log('data:', this.props.data);
 	    //collapses everything
-	    root.children.forEach(collapse);
+	    //root.children.forEach(collapse);
 
 	    var colorMax = [255, 0, 0],
 	        colorMin = [0, 0, 255];
@@ -645,7 +644,7 @@
 	      });
 
 	      nodeEnter.append("text").attr("x", function (d) {
-	        return d.children || d._children ? 5 : -5;
+	        return d.children || d._children ? 0 : -0;
 	      }).attr("y", function (d) {
 	        return d.children || d._children ? -10 : 10;
 	      }).attr("dy", ".35em") //centers text
@@ -719,13 +718,13 @@
 
 	    // Toggle children on click.
 	    function click(d) {
-	      if (d.children) {
+	      /*if (d.children) {
 	        d._children = d.children;
 	        d.children = null;
 	      } else {
 	        d.children = d._children;
 	        d._children = null;
-	      }
+	      }*/
 	      //Draw added/subtracted nodes
 	      update(d);
 
@@ -1104,7 +1103,7 @@
 	        }
 	      }
 
-	      geneology = treeify(geneology);
+	      geneology = treeify(geneology, awards);
 
 	      makeFilters(myData, ttl, map, geneology, awards);
 	    };
@@ -1143,7 +1142,7 @@
 	      runPage(beerData, filterData, map, geneData, awardsData);
 	    };
 
-	    var treeify = function treeify(data) {
+	    var treeify = function treeify(data, awards) {
 	      //Convert flat data into a nice tree
 	      var YEAR_START = 1998;
 	      var dataMap = data.reduce(function (map, node) {
@@ -1172,29 +1171,75 @@
 
 	      console.log('treeData, pre:', treeData);
 
-	      treeData = inFillNodes(treeData);
+	      treeData[0] = infillNodes(treeData[0], awards);
 
+	      console.log('treedata, post:', treeData);
 	      return treeData;
 	    };
 	  }
 
-	  var inFillNodes = function inFillNodes(treeData) {
+	  var infillNodes = function infillNodes(sourceNode, awardsData) {
 	    //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
-	    var sourceNode = treeData[0],
-	        sourceYear = parseInt(sourceNode.year),
-	        sourceStyle = sourceNode.style;
+	    console.log('ifN:', sourceNode);
+	    var sourceYear = parseInt(sourceNode.year),
+	        cloneNode = JSON.parse(JSON.stringify(sourceNode)),
+	        myChildren = sourceNode.children || [],
+	        firstChild = myChildren[0] || {},
+	        shouldIExtend = findAward(sourceYear, parseInt(firstChild.year), sourceNode.style, awardsData);
 
-	    console.log(awardsData);debugger;
-	    //JSON.parse(JSON.stringify(obj))
+	    if (shouldIExtend) {
+	      //Replace children with single child of self-clone
+	      cloneNode.year = String(sourceYear + 1);
+	      cloneNode.level = sourceNode.level + 1;
+	      cloneNode.id = cloneNode.id + '+';
+	      sourceNode.children = [];
+	      sourceNode.children.push(cloneNode);
+	      console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
+	    }
 
-	    /*if (sourceNode.children)
-	    
-	    let childNode = sourceNode.children[0] {
-	      if (parseInt(childNode.year) > (sourceYear+1) ) {         //We need to create infill
-	        let myNode
+	    //ISSUE OF ADDING 2016 AWARDS WHEN IT SHOULDN'T
+
+	    var _iteratorNormalCompletion3 = true;
+	    var _didIteratorError3 = false;
+	    var _iteratorError3 = undefined;
+
+	    try {
+	      for (var _iterator3 = (sourceNode.children || [])[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	        var child = _step3.value;
+	        //Recursively infill the tree
+	        console.log('inChild, and my child:', child);
+	        child = infillNodes(child, awardsData);
+	      }
+	    } catch (err) {
+	      _didIteratorError3 = true;
+	      _iteratorError3 = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+	          _iterator3.return();
+	        }
+	      } finally {
+	        if (_didIteratorError3) {
+	          throw _iteratorError3;
+	        }
 	      }
 	    }
-	    */
+
+	    return sourceNode;
+	  };
+
+	  var findAward = function findAward(year, childYear, style, awardsData) {
+	    //console.log('year:', year, 'style:', style, 'data:', awardsData); debugger;
+	    var i = 0;
+	    console.log('childYear:', childYear, 'year:', year);
+	    if (childYear == year + 1) return false;
+	    while (i < awardsData.length) {
+	      if (parseInt(awardsData[i].year) === year && awardsData[i].style == style) {
+	        return true;
+	      }
+	      i++;
+	    }
+	    return false;
 	  };
 
 	  var findLL = function findLL(latLongs, detLatLongs, brewery, location) {

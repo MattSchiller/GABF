@@ -487,9 +487,8 @@ var Geneology = React.createClass({
       }
     }
     
-    //console.log('data:', this.props.data);
     //collapses everything
-    root.children.forEach(collapse);
+    //root.children.forEach(collapse);
     
     var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
     
@@ -526,7 +525,7 @@ var Geneology = React.createClass({
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
       nodeEnter.append("text")
-          .attr("x", function(d) { return d.children || d._children ? 5 : -5; })
+          .attr("x", function(d) { return d.children || d._children ? 0 : -0; })
           .attr("y", function(d) { return d.children || d._children ? -10 : 10; })
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
@@ -618,13 +617,13 @@ var Geneology = React.createClass({
     
     // Toggle children on click.
     function click(d) {
-      if (d.children) {
+      /*if (d.children) {
         d._children = d.children;
         d.children = null;
       } else {
         d.children = d._children;
         d._children = null;
-      }
+      }*/
       //Draw added/subtracted nodes
       update(d);
       

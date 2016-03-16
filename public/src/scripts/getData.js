@@ -93,7 +93,7 @@ var GetData = (function (runPage) {
           } // else console.log('Record missing LL:', awardRow);
       }
       
-      geneology = treeify(geneology);
+      geneology = treeify(geneology, awards);
       
       makeFilters(myData, ttl, map, geneology, awards);
     };
@@ -131,7 +131,7 @@ var GetData = (function (runPage) {
       runPage(beerData, filterData, map, geneData, awardsData);
     };
     
-    var treeify = function(data) {
+    var treeify = function(data, awards) {
     //Convert flat data into a nice tree
       var YEAR_START = 1998;
       var dataMap = data.reduce(function(map, node) {
@@ -160,36 +160,50 @@ var GetData = (function (runPage) {
       
       console.log('treeData, pre:', treeData);
       
-      treeData = inFillNodes(treeData, awardsData);
+      treeData[0] = infillNodes(treeData[0], awards);
       
+      console.log('treedata, post:', treeData);
       return treeData;
     };
   }
   
-  var inFillNodes = function(treeData, awardsData) {
+  var infillNodes = function(sourceNode, awardsData) {
   //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
-    var sourceNode = JSON.parse(JSON.stringify(treeData[0])),
-        sourceYear = parseInt(sourceNode.year),
-        sourceStyle = sourceNode.style,
-        doIContinue = findAward(sourceNode.year, sourceStyle, awardsData);
-        
+    console.log('ifN:', sourceNode);
+    var sourceYear = parseInt(sourceNode.year),
+        cloneNode = JSON.parse(JSON.stringify(sourceNode)),
+        myChildren = ( sourceNode.children || [] ),
+        firstChild = ( myChildren[0] || {} ),
+        shouldIExtend = findAward(sourceYear, parseInt(firstChild.year), sourceNode.style, awardsData);
     
-    
-    if (sourceNode.children)
-    
-    let childNode = sourceNode.children[0] {
-      if (parseInt(childNode.year) > (sourceYear+1) ) {         //We need to create infill
-        let myNode
-      }
+    if (shouldIExtend) {      //Replace children with single child of self-clone
+      cloneNode.year = String(sourceYear+1);
+      cloneNode.level = sourceNode.level+1;
+      cloneNode.id = cloneNode.id + '+';
+      sourceNode.children = [];
+      sourceNode.children.push(cloneNode);
+      console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
     }
-    */
-    
+
+    //ISSUE OF ADDING 2016 AWARDS WHEN IT SHOULDN'T
+
+    for (var child of (sourceNode.children || [] ) ) {      //Recursively infill the tree
+      console.log('inChild, and my child:', child);
+      child = infillNodes(child, awardsData);
+    }
+
+    return sourceNode;
   };
   
-  var findAward = function(year, style, awardsData) {
+  var findAward = function(year, childYear, style, awardsData) {
+    //console.log('year:', year, 'style:', style, 'data:', awardsData); debugger;
     var i = 0;
+    console.log('childYear:', childYear, 'year:', year);
+    if (childYear == year + 1) return false;
     while (i < awardsData.length) {
-      if (awardsData[i].year === year && awardsData[i].style === style) return true;
+      if (parseInt(awardsData[i].year) === year && awardsData[i].style == style) {
+        return true;
+      }
       i++;
     }
     return false;

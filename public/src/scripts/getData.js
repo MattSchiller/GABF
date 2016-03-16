@@ -90,7 +90,7 @@ var GetData = (function (runPage) {
             awardRow.LL = tempLL;
             awardRow.show = true;
             myData.push(awardRow);
-          } // else console.log('Record missing LL:', awardRow);
+          } else console.log('Record missing LL:', awardRow);
       }
       
       geneology = treeify(geneology, awards);
@@ -149,7 +149,7 @@ var GetData = (function (runPage) {
 
       data.forEach(function(node) {
       	// add to parent
-      	var parent = dataMap[node.parent];
+      	var parent = dataMap[node.parent_id];
       	
       	if (!parent) parent = dataMap['0'];
     		// create child array if it doesn't exist
@@ -160,7 +160,7 @@ var GetData = (function (runPage) {
       
       console.log('treeData, pre:', treeData);
       
-      treeData[0] = infillNodes(treeData[0], awards);
+      //treeData[0] = infillNodes(treeData[0], awards);
       
       console.log('treedata, post:', treeData);
       return treeData;
@@ -169,7 +169,7 @@ var GetData = (function (runPage) {
   
   var infillNodes = function(sourceNode, awardsData) {
   //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
-    console.log('ifN:', sourceNode);
+    //console.log('ifN:', sourceNode);
     var sourceYear = parseInt(sourceNode.year),
         cloneNode = JSON.parse(JSON.stringify(sourceNode)),
         myChildren = ( sourceNode.children || [] ),
@@ -182,13 +182,13 @@ var GetData = (function (runPage) {
       cloneNode.id = cloneNode.id + '+';
       sourceNode.children = [];
       sourceNode.children.push(cloneNode);
-      console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
+      //console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
     }
 
     //ISSUE OF ADDING 2016 AWARDS WHEN IT SHOULDN'T
 
     for (var child of (sourceNode.children || [] ) ) {      //Recursively infill the tree
-      console.log('inChild, and my child:', child);
+      //console.log('inChild, and my child:', child);
       child = infillNodes(child, awardsData);
     }
 
@@ -198,7 +198,7 @@ var GetData = (function (runPage) {
   var findAward = function(year, childYear, style, awardsData) {
     //console.log('year:', year, 'style:', style, 'data:', awardsData); debugger;
     var i = 0;
-    console.log('childYear:', childYear, 'year:', year);
+    //console.log('childYear:', childYear, 'year:', year);
     if (childYear == year + 1) return false;
     while (i < awardsData.length) {
       if (parseInt(awardsData[i].year) === year && awardsData[i].style == style) {

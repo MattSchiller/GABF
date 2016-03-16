@@ -1,0 +1,59 @@
+Record missing LL: Object {year: "1999", style: "Fruit Beers (other than raspberry)", medal: "gold", beer: "No Medal Awarded", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "Scottish-Style Ale", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "Sweet Stout", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "American Dark Lager", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "German-Style Dopplebock", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "Chocolate / Cocoa Flavored Beer", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "Chocolate / Cocoa Flavored Beer", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "English-Style Bitter", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "1999", style: "Non-Alcoholic (Beer) Malt Beverages", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2000", style: "Bohemian-Style Pilsener", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2000", style: "American-Style Amber Lager", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2000", style: "American-Style Amber Lager", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2000", style: "European-Style Dark / Münchner", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2000", style: "Non-Alcoholic (Beer) Malt Beverages", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2001", style: "Oatmeal Stout", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2001", style: "Smoke Beer", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2001", style: "Strong Scotch Ale", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2002", style: "Non-Alcoholic (Beer) Malt Beverages", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2002", style: "German-Style Pilsener", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2002", style: "Classic Irish-Style Dry Stout", medal: "silver", beer: "McDoogin's Irish Stout", brewery: "Thirsty Dog Brewing"…}
+ Record missing LL: Object {year: "2003", style: "Non-Alcoholic (Beer) Malt Beverages", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2003", style: "German-Style Schwarzbier", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2003", style: "German-Style Schwarzbier", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2003", style: "Brown Porter", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2003", style: "German-Style Märzen / Oktoberfest", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2005", style: "Belgian-Style White (or Wit) / Belgian-Style Wheat", medal: "bronze", beer: "Nit Wit", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2005", style: "Extra Special Bitter or Strong Bitter", medal: "gold", beer: "Boscos XXX Pale Ale", brewery: "Boscos Brewing"…}
+ Record missing LL: Object {year: "2005", style: "British Stout", medal: "gold", beer: "Lasto's Oatmeal Stout", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2005", style: "German-Style Wheat Ale", medal: "gold", beer: "Boscos Hefeweizen", brewery: "Boscos Brewing"…}
+ Record missing LL: Object {year: "2005", style: "American-Style Low-Carbohydrate Light Lager", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2006", style: "American-Style Amber Lager", medal: "gold", beer: "Steam Engine Lager", brewery: "Steamworks Brewing"…}
+ Record missing LL: Object {year: "2006", style: "European-Style Dark / Münchner Dunkel", medal: "gold", beer: "", brewery: ""…}beer: ""brewery: ""city: ""medal: "gold"state: ""style: "European-Style Dark / Münchner Dunkel"year: "2006"__proto__: Object
+ Record missing LL: Object {year: "2006", style: "Belgian-Style White (or Wit) / Belgian Style Wheatwine", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2006", style: "Vienna-Style Lager", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2006", style: "Baltic-Style Porter", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2007", style: "Other Low Strength Ale or Lager", medal: "gold", beer: "Half Wit", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2007", style: "Wood- and Barrel-Aged Sour Beer", medal: "bronze", beer: "Barrel-Aged Cherry", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2007", style: "German Style Schwarzbier", medal: "bronze", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2007", style: "German Style Kölsch/Köln Style Kölsch", medal: "silver", beer: "Colorado Kölsch", brewery: "Steamworks Brewing"…}
+ Record missing LL: Object {year: "2007", style: "Belgian-Style White (or Wit)/Belgian-", medal: "gold", beer: "Nit Wit", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2007", style: "Sweet Stout", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2007", style: "Classic Irish-Style Dry Stout", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2007", style: "Munich-Style Helles", medal: "bronze", beer: "What in the Helles?", brewery: "Steamworks Brewing"…}
+ Record missing LL: Object {year: "2007", style: "American-Style Pale Ale", medal: "silver", beer: "Piranha Pale Ale", brewery: "BJ's Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2007", style: "American-Style Amber Lager", medal: "gold", beer: "Steam Engine Lager", brewery: "Steamworks Brewing"…}
+ Record missing LL: Object {year: "2008", style: "American-Style Dark Lager", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2008", style: "English-Style India Pale Ale", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2008", style: "English-Style India Pale Ale", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2010", style: "American-Style Dark Lager", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2011", style: "Bohemian-Style Pilsener", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2012", style: "Munich-Style Helles", medal: "gold", beer: "6X Helles", brewery: "CB & Potts Restaurant & Brewery"…}
+ Record missing LL: Object {year: "2012", style: "Robust Porter", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2013", style: "American-Style or International-Style Pilsener", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2013", style: "Imperial Red Ale", medal: "gold", beer: "", brewery: ""…}beer: ""brewery: ""city: ""medal: "gold"state: ""style: "Imperial Red Ale"year: "2013"__proto__: Object
+ Record missing LL: Object {year: "2013", style: "American-Style Amber/Red Ale", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2013", style: "Bohemian-Style Pilsener", medal: "silver", beer: "Czech Pilsner", brewery: "Gordon Biersch Brewery"…}
+ Record missing LL: Object {year: "2014", style: "English-Style Brown Ale", medal: "silver", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2014", style: "Golden or Blonde Ale", medal: "gold", beer: "", brewery: ""…}
+ Record missing LL: Object {year: "2015", style: "Pumpkin Beer", medal: "gold", beer: "", brewery: ""…}

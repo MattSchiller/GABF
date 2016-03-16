@@ -1,7 +1,8 @@
-year,style,id,parent,flag
-1999,European-Style Pilsener,1,,
-2001,Specialty Beer,6,1,
-2003,American-Style Brown Ale,11,6,
-2004,Rye Beer,12,6,
-2006,Belgian-Style Sour Ale,13,11,
-2006,Robust Porter,14,11,
+year,style,id,parent_id
+1999,American Lager/Ale or Cream Ale,6,
+1999,American-Style Amber / Red Ale,46,
+1999,Vienna-Style Lager,41,
+2000,American-Style Amber / Red Ale,57,46
+2000,Vienna-Style Lager,109,41
+2001,American-Style Amber / Red Ale,144,57
+2001,Vienna-Style Lager,147,109

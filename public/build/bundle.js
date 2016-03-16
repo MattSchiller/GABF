@@ -566,6 +566,7 @@
 	        MIN_YEAR = 1999,
 	        MAX_YEAR = 2015,
 	        YEAR_WIDTH = 150,
+	        YEAR_DELAY = 750,
 	        width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
 	        height = parseInt(d3.select("#" + this.state.myID).style('height')) - margin.top - margin.bottom;
 
@@ -597,13 +598,28 @@
 	    function collapse(d) {
 	      if (d.children) {
 	        d._children = d.children;
-	        d._children.forEach(collapse);
 	        d.children = null;
+	        d._children.forEach(collapse);
+	      }
+	    }
+
+	    function expand(d) {
+	      var yearDiff = parseInt(d.year) - yearStart;
+	      var myD = d;
+	      if (d._children) {
+	        console.log('myD:', myD);
+	        setTimeout(function () {
+	          myD.children = myD._children;
+	          myD._children = null;
+	          myD.children.forEach(expand);
+	          update(myD);
+	          nodeScroll(myD);
+	        }, YEAR_DELAY);
 	      }
 	    }
 
 	    //collapses everything
-	    //root.children.forEach(collapse);
+	    root.children.forEach(collapse);
 
 	    var colorMax = [255, 0, 0],
 	        colorMin = [0, 0, 255];
@@ -634,7 +650,14 @@
 	      // Enter any new nodes at the parent's previous position.
 	      var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
 	        return "translate(" + source.y0 + "," + source.x0 + ")";
-	      }).on("click", click);
+	      }).on("click", function (d) {
+	        expand(d);
+	        //update(d);
+	        click(d);
+	      }).on('dblclick', function (d) {
+	        collapse(d);
+	        update(d);
+	      });
 
 	      nodeEnter.append("circle").attr('class', function (d) {
 	        return d.style === 'root' ? 'hidden' : '';
@@ -716,22 +739,11 @@
 	      }
 	    }
 
-	    // Toggle children on click.
-	    function click(d) {
-	      /*if (d.children) {
-	        d._children = d.children;
-	        d.children = null;
-	      } else {
-	        d.children = d._children;
-	        d._children = null;
-	      }*/
-	      //Draw added/subtracted nodes
-	      update(d);
-
+	    function nodeScroll(d) {
 	      //Scroll to new node
 	      var scrollYear = (parseInt(d.year) - yearStart) * YEAR_WIDTH;
 	      var scrollTo = d.x;
-	      d3.select("#geneology").transition().duration(1500).tween("uniqueTweenName", scrollToNode(scrollYear));
+	      d3.select("#geneology").transition().duration(YEAR_DELAY).tween("uniqueTweenName", scrollToNode(scrollYear));
 
 	      function scrollToNode(scrollLeft) {
 	        return function () {
@@ -741,7 +753,20 @@
 	          };
 	        };
 	      };
+	    }
 
+	    // Toggle children on click, show details, and scroll to parent
+	    function click(d) {
+	      /*if (d.children) {
+	        d._children = d.children;
+	        d.children = null;
+	      } else {
+	        d.children = d._children;
+	        d._children = null;
+	      }*/
+
+	      //Scroll
+	      nodeScroll(d);
 	      //Populate the details box
 	      __showDetails(d);
 
@@ -961,7 +986,7 @@
 	  React.createElement(ClientUI, { initBeerData: beerData, initFilters: filterData, mapData: mapData, geneData: geneData, awardData: awardData }), document.getElementById('content'));
 	});
 
-	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents_MOD.csv');
+	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents.csv');
 
 /***/ },
 /* 2 */
@@ -1086,7 +1111,7 @@
 	            awardRow.LL = tempLL;
 	            awardRow.show = true;
 	            myData.push(awardRow);
-	          } // else console.log('Record missing LL:', awardRow);
+	          } else console.log('Record missing LL:', awardRow);
 	        }
 	      } catch (err) {
 	        _didIteratorError2 = true;
@@ -1160,7 +1185,7 @@
 
 	      data.forEach(function (node) {
 	        // add to parent
-	        var parent = dataMap[node.parent];
+	        var parent = dataMap[node.parent_id];
 
 	        if (!parent) parent = dataMap['0'];
 	        // create child array if it doesn't exist
@@ -1171,7 +1196,7 @@
 
 	      console.log('treeData, pre:', treeData);
 
-	      treeData[0] = infillNodes(treeData[0], awards);
+	      //treeData[0] = infillNodes(treeData[0], awards);
 
 	      console.log('treedata, post:', treeData);
 	      return treeData;
@@ -1180,7 +1205,7 @@
 
 	  var infillNodes = function infillNodes(sourceNode, awardsData) {
 	    //Fills in the gap-spaces with the same 'node' as the parent, should it have children down the line
-	    console.log('ifN:', sourceNode);
+	    //console.log('ifN:', sourceNode);
 	    var sourceYear = parseInt(sourceNode.year),
 	        cloneNode = JSON.parse(JSON.stringify(sourceNode)),
 	        myChildren = sourceNode.children || [],
@@ -1194,7 +1219,7 @@
 	      cloneNode.id = cloneNode.id + '+';
 	      sourceNode.children = [];
 	      sourceNode.children.push(cloneNode);
-	      console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
+	      //console.log('cloned, sourceNode:', sourceNode, 'clone:', cloneNode);
 	    }
 
 	    //ISSUE OF ADDING 2016 AWARDS WHEN IT SHOULDN'T
@@ -1207,7 +1232,7 @@
 	      for (var _iterator3 = (sourceNode.children || [])[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var child = _step3.value;
 	        //Recursively infill the tree
-	        console.log('inChild, and my child:', child);
+	        //console.log('inChild, and my child:', child);
 	        child = infillNodes(child, awardsData);
 	      }
 	    } catch (err) {
@@ -1231,7 +1256,7 @@
 	  var findAward = function findAward(year, childYear, style, awardsData) {
 	    //console.log('year:', year, 'style:', style, 'data:', awardsData); debugger;
 	    var i = 0;
-	    console.log('childYear:', childYear, 'year:', year);
+	    //console.log('childYear:', childYear, 'year:', year);
 	    if (childYear == year + 1) return false;
 	    while (i < awardsData.length) {
 	      if (parseInt(awardsData[i].year) === year && awardsData[i].style == style) {

@@ -447,7 +447,7 @@ var Geneology = React.createClass({
   
   _drawGenes: function() {
     var margin = {top: 5, right: 2, bottom: 5, left: 20},
-        MIN_YEAR = 1999, MAX_YEAR = 2015, YEAR_WIDTH = 150,
+        MIN_YEAR = 1999, MAX_YEAR = 2015, YEAR_WIDTH = 150, YEAR_DELAY = 750,
         width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
         height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
     
@@ -482,13 +482,28 @@ var Geneology = React.createClass({
     function collapse(d) {
       if (d.children) {
         d._children = d.children;
-        d._children.forEach(collapse);
         d.children = null;
+        d._children.forEach(collapse);
+      }
+    }
+    
+    function expand(d) {
+      let yearDiff = parseInt(d.year) - yearStart;
+      var myD = d;
+      if (d._children) {
+        console.log('myD:', myD);
+        setTimeout( function() {
+          myD.children = myD._children;
+          myD._children = null;
+          myD.children.forEach(expand);
+          update(myD);
+          nodeScroll(myD);
+        }, YEAR_DELAY);
       }
     }
     
     //collapses everything
-    //root.children.forEach(collapse);
+    root.children.forEach(collapse);
     
     var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
     
@@ -516,7 +531,15 @@ var Geneology = React.createClass({
       var nodeEnter = node.enter().append("g")
           .attr("class", "node")
           .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-          .on("click", click)
+          .on("click", function(d) {
+                                      expand(d);
+                                      //update(d);
+                                      click(d);
+                                    })
+          .on('dblclick', function(d) {
+                                      collapse(d);
+                                      update(d);
+                                      })
           ;
           
       nodeEnter.append("circle")
@@ -615,24 +638,13 @@ var Geneology = React.createClass({
       }
     }
     
-    // Toggle children on click.
-    function click(d) {
-      /*if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }*/
-      //Draw added/subtracted nodes
-      update(d);
-      
-      //Scroll to new node
+    function nodeScroll(d) {
+    //Scroll to new node
       var scrollYear = (parseInt(d.year) - yearStart) * YEAR_WIDTH;
       var scrollTo = d.x;
       d3.select("#geneology")
           .transition()
-          .duration(1500)
+          .duration(YEAR_DELAY)
           .tween("uniqueTweenName", scrollToNode(scrollYear));
     
       function scrollToNode(scrollLeft) {
@@ -642,7 +654,20 @@ var Geneology = React.createClass({
             };
         };
       };
+    }
+    
+    // Toggle children on click, show details, and scroll to parent
+    function click(d) {
+      /*if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }*/
       
+      //Scroll
+      nodeScroll(d);
       //Populate the details box
       __showDetails(d);
       
@@ -893,7 +918,7 @@ var dataPull = new GetData(   //This is the runPage cb-function to start the pag
 );
 
 dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv'
-  , 'US.json', 'year_style_id_parents_MOD.csv');
+  , 'US.json', 'year_style_id_parents.csv');
 
 
 

@@ -433,11 +433,14 @@ var Map = React.createClass({
 var Geneology = React.createClass({
   getInitialState: function() { return { myID: 'geneology' }; },
   componentDidMount: function() {
+    var linKey;
     window.addEventListener('resize', this._handleResize);
-    this._drawGenes();
-    console.log('lineageData:', this.props.lineageData);
+    
     if(typeof this.props.destination !== "undefined" && typeof this.props.destination.year !== "undefined")
-      this._nodeScrollMain(this.props.destination);
+      linKey = this.props.lineageData[this.props.destination.style + this.props.destination.year];
+ 
+    this._drawGenes(linKey);
+    this._nodeScrollMain(this.props.destination);
   },
   componentWillUnmount: function() {
     window.removeEventListener('resize', this._handleResize);
@@ -452,7 +455,7 @@ var Geneology = React.createClass({
   _nodeScrollMain: function(d) {
   //Scroll to new node
   //CLONE OF LOWER FUNCTION
-    console.log('d.year:', d.year);
+    if (typeof d == 'undefined' || typeof d.year == 'undefined') return;
     var scrollYear = (parseInt(d.year) - MIN_YEAR ) * YEAR_WIDTH;
     d3.select("#"+this.state.myID)
         .transition()
@@ -461,14 +464,13 @@ var Geneology = React.createClass({
   
     function scrollToNode(scrollLeft) {
       return function() {
-        console.log('main this:', this);
         var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
         return function(t) { this.scrollLeft = i(t) };
       };
     };
   },
   
-  _drawGenes: function() {
+  _drawGenes: function(linKey) {
     var margin = {top: 5, right: 2, bottom: 5, left: 20},
         TEXT_ID_LABEL = 'LABEL',
         width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
@@ -523,12 +525,19 @@ var Geneology = React.createClass({
     }
     
     //collapses everything
-    root.children.forEach(collapse);
+    //Handles a click-through from Map
+    if (linKey == undefined) {
+      console.log('collapsing all'); root.children.forEach(collapse); }
     
-    var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
+    //var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
     
-    update(root);
     drawAxis();
+    update(root);
+    
+    
+    //NODES THAT SHOULD BE EXPANDED ARE NOT BEING; FIX!
+    
+    
     d3.selectAll('line').moveToBack();
     
     function showText(id) {
@@ -541,7 +550,6 @@ var Geneology = React.createClass({
     }
     
     function update(source) {
-    
       // Compute the new tree layout.
       var nodes = tree.nodes(root).reverse(),
           links = tree.links(nodes);
@@ -575,7 +583,10 @@ var Geneology = React.createClass({
           ;
           
       nodeEnter.append("circle")
-          .attr('class', function(d) { return d.style === 'root' ? 'hidden' : ''; })
+          .attr('class', function(d) {
+            let shown = true;
+            if (linKey !== undefined && d.lineage !== linKey) shown = false;
+            return (d.style === 'root' || !shown) ? 'hidden' : 'node'; })
           .attr("r", 1e-6)      //Why this value for r? For the transitions?
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
@@ -584,7 +595,11 @@ var Geneology = React.createClass({
           .attr("y", function(d) { return d.children || d._children ? 0 : 0; })
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-          .attr('class', function(d) { return d.style === 'root' ? 'hidden' : ''})
+          .attr('class', function(d) {
+              console.log('linKey:', linKey, 'd.lineage:', d.lineage);
+            let shown = true;
+            if (linKey !== undefined && d.lineage !== linKey) shown = false;
+            return (d.style === 'root' || !shown) ? 'hidden' : ''; })
           .text(function(d) { return d.style; })
           .style('background-color', 'green')
           //.style("fill-opacity", 1e-6);
@@ -624,7 +639,10 @@ var Geneology = React.createClass({
       // Enter any new links at the parent's previous position.
       link.enter().insert("path", "g")
           .attr("class", "link")
-          .attr('class', function(d) { return d.source.id === '0' ? 'link hidden' : 'link'; })
+          .attr('class', function(d) {
+            let shown = true;
+            if (linKey !== undefined && d.source.lineage !== linKey) shown = false;
+            return (d.source.style === 'root' || !shown) ? 'link hidden' : 'link'; })
           .attr('stroke', 'green')
           .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
@@ -668,7 +686,7 @@ var Geneology = React.createClass({
               .attr('x', z-35)
               .attr('y', height-10)
               .style('font-size', '12pt')
-              .style('fill', 'dark-grey')
+              .style('fill', 'grey')
               .text(MIN_YEAR - 1 + parseInt( (z-offset)/YEAR_WIDTH ) );
           
         z += YEAR_WIDTH;
@@ -685,7 +703,6 @@ var Geneology = React.createClass({
     
       function scrollToNode(scrollLeft) {
         return function() {
-            console.log('lower level, this:', this);
             var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
             return function(t) { this.scrollLeft = i(t) };
         };
@@ -712,7 +729,6 @@ var Geneology = React.createClass({
     }
   },
   render: function() {
-    //console.log('rendering Map');
     return (
 			<div id="gene-holder">
 				<div id={this.state.myID} />

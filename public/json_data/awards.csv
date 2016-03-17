@@ -98,9 +98,9 @@ year,style,medal,beer,brewery,city,state
 1999,English Old Ale/English Strong Ale,Gold,Anniversary Ale,Steelhead Brewery,Eugene,OR
 1999,English Old Ale/English Strong Ale,Silver,Cabin Fever Winter Ale,Boundary Bay Brewery,Bellingham,WA
 1999,English Old Ale/English Strong Ale,Bronze,Special Old Ale,Commonwealth Brewing,Boston,MA
-1999,German Style Brown Ale/Düsseldorf Style Altbier,Gold,Otis Alt,Elk Grove Brewery,Elk Grove,CA
-1999,German Style Brown Ale/Düsseldorf Style Altbier,Silver,Spalty Alt,Red Rock Brewing,Salt Lake City,UT
-1999,German Style Brown Ale/Düsseldorf Style Altbier,Bronze,Old 8444,Union Colony Brewery,Greeley,CO
+1999,German Style Brown Ale,Gold,Otis Alt,Elk Grove Brewery,Elk Grove,CA
+1999,German Style Brown Ale,Silver,Spalty Alt,Red Rock Brewing,Salt Lake City,UT
+1999,German Style Brown Ale,Bronze,Old 8444,Union Colony Brewery,Greeley,CO
 1999,Barley Wine Style Ale,Gold,Old Gander Barley Wine Ale,Snow Goose Restaurant and Sleeping Lady Brewing Company,Anchorage,AK
 1999,Barley Wine Style Ale,Silver,Full Sail Boardhead Barleywine Ale,Full Sail Brewing,Portland,OR
 1999,Barley Wine Style Ale,Bronze,Old Scratch's Wicked Stepmother,Great Dane Pub,Madison,WI
@@ -164,9 +164,9 @@ year,style,medal,beer,brewery,city,state
 2000,German Style Wheat Ale,Gold,Penn Weizen,Pennsylvania Brewing,Pittsburgh,PA
 2000,German Style Wheat Ale,Silver,Brewmaster Select Hefeweizen,Station Casinos Breweries/Barley’s Casino & Brewing Company,Henderson,NV
 2000,German Style Wheat Ale,Bronze,Double Play Dunkelweizen,Leinenkugel Brewing,Phoenix,AZ
-2000,German Style Brown Ale/Dusseldorf Style Altbier,Gold,Boca Alt,Brewzzi,Boca Raton,FL
-2000,German Style Brown Ale/Dusseldorf Style Altbier,Silver,Alt Who Goes There?,General Lafayette Inn & Brewery,Lafayette Hill,PA
-2000,German Style Brown Ale/Dusseldorf Style Altbier,Bronze,Dornbusch Alt,Dornbusch Brewing Co.,Ipswich,MA
+2000,German Style Brown Ale,Gold,Boca Alt,Brewzzi,Boca Raton,FL
+2000,German Style Brown Ale,Silver,Alt Who Goes There?,General Lafayette Inn & Brewery,Lafayette Hill,PA
+2000,German Style Brown Ale,Bronze,Dornbusch Alt,Dornbusch Brewing Co.,Ipswich,MA
 2000,American Style Amber/Red Ale,Gold,Ruedrich's Red Seal Ale,North Coast Brewing,Fort Bragg,CA
 2000,American Style Amber/Red Ale,Silver,Shark Bite Red,Pizza Port,Carlsbad,CA
 2000,American Style Amber/Red Ale,Bronze,Ragtop Red,Rock Bottom,La Jolla,CA
@@ -395,9 +395,9 @@ year,style,medal,beer,brewery,city,state
 2001,Specialty Beer,Gold,Big Bad Bourbon Brown,Big Horn Brewing,Dallas,TX
 2001,Specialty Beer,Silver,Pullman Brown Ale,Flossmoor Station,Flossmoor,IL
 2001,Specialty Beer,Bronze,Ginger Shandy,McCoy's Public House,Kansas City,MO
-2001,German Style Brown Ale/Düsseldorf Style Altbier,Gold,Boca Alt,Brewzzi,Boca Raton,FL
-2001,German Style Brown Ale/Düsseldorf Style Altbier,Silver,Otis Alt,Elk Grove Brewery,Elk Grove,CA
-2001,German Style Brown Ale/Düsseldorf Style Altbier,Bronze,Dusseldorf Altbier,Gilded Otter Brewing Co.,New Paltz,NY
+2001,German Style Brown Ale,Gold,Boca Alt,Brewzzi,Boca Raton,FL
+2001,German Style Brown Ale,Silver,Otis Alt,Elk Grove Brewery,Elk Grove,CA
+2001,German Style Brown Ale,Bronze,Dusseldorf Altbier,Gilded Otter Brewing Co.,New Paltz,NY
 2001,German Style Pilsener,Gold,Tuppers' Hop Pocket Pils,Old Dominion Brewing,Ashburn,VA
 2001,German Style Pilsener,Silver,Hanalei Lager,Honolulu Brewing Company LLC,Honolulu,HI
 2001,German Style Pilsener,Bronze,Blue Paddle Pilsner,New Belgium Brewing,Fort Collins,CO
@@ -836,9 +836,9 @@ year,style,medal,beer,brewery,city,state
 2003,Imperial or Double India Pale Ale,Gold,Frank Double I.P.A,Port Brewing Co. Pizza Port Carlsbad,Carlsbad,CA
 2003,Imperial or Double India Pale Ale,Silver,Hop 15,Pizza Port,Solana Beach,CA
 2003,Imperial or Double India Pale Ale,Bronze,Imperor IPA,BJ's Restaurant & Brewery,Chandler,AZ
-2003,German Style Brown Ale/Düsseldorf Style,Gold,Otter Creek Copper Ale,Otter Creek Brewing,Middlebury,VT
-2003,German Style Brown Ale/Düsseldorf Style,Silver,Ettinger Amber,Laurelwood Brewing,Portland,OR
-2003,German Style Brown Ale/Düsseldorf Style,Bronze,All the Way Alt,Desert Edge Brewery,Salt Lake City,UT
+2003,German Style Brown Ale,Gold,Otter Creek Copper Ale,Otter Creek Brewing,Middlebury,VT
+2003,German Style Brown Ale,Silver,Ettinger Amber,Laurelwood Brewing,Portland,OR
+2003,German Style Brown Ale,Bronze,All the Way Alt,Desert Edge Brewery,Salt Lake City,UT
 2003,Belgian Style White (or Wit)/Belgian Style,Gold,Celis White,Michigan Brewing,Webberville,MI
 2003,Belgian Style White (or Wit)/Belgian Style,Silver,Blanche de Brooklyn,The Brooklyn Brewery,Brookyln,NY
 2003,Belgian Style White (or Wit)/Belgian Style,Bronze,Boulevard Zon,Boulevard Brewing,Kansas City,MO
@@ -1049,9 +1049,9 @@ year,style,medal,beer,brewery,city,state
 2004,American Style Hefeweizen,Gold,Hefeweizen,Pyramid Ales & Lagers,Seattle,WA
 2004,American Style Hefeweizen,Silver,American Wheat,Upstream Brewing,Omaha,NE
 2004,American Style Hefeweizen,Bronze,Mueller Unfiltered Wheat,Springfield Brewing,Springfield,MO
-2004,German Style Brown Ale/Düsseldorf Style Altbier,Gold,Alt,Widmer Brothers Brewing,Portland,OR
-2004,German Style Brown Ale/Düsseldorf Style Altbier,Silver,Four Alarm Alt,Pumphouse Brewery,Longmont,CO
-2004,German Style Brown Ale/Düsseldorf Style Altbier,Bronze,Otis Alt,Elk Grove Brewery,Elk Grove,CA
+2004,German Style Brown Ale,Gold,Alt,Widmer Brothers Brewing,Portland,OR
+2004,German Style Brown Ale,Silver,Four Alarm Alt,Pumphouse Brewery,Longmont,CO
+2004,German Style Brown Ale,Bronze,Otis Alt,Elk Grove Brewery,Elk Grove,CA
 2004,Beer With Yeast,Gold,Triumph Kellerbier,Triumph Brewing,New Hope,PA
 2004,Beer With Yeast,Silver,Moonmen,SandLot Brewery at Coors Field,Denver,CO
 2004,Beer With Yeast,Bronze,The Detroit Dwarf,Detroit Beer Co.,Detroit,MI
@@ -1211,9 +1211,9 @@ year,style,medal,beer,brewery,city,state
 2005,Foreign (Export) Style Stout,Gold,Black Bear XX Stout,Alameda Brewhouse,Portland,OR
 2005,Foreign (Export) Style Stout,Silver,Organic Chocolate Stout,Bison Brewing Co.,Berkeley,CA
 2005,Foreign (Export) Style Stout,Bronze,Black Hole XXX Stout,Chelsea Brewing,New York,NY
-2005,German Style Brown Ale/Düsseldorf Style Altbier,Gold,Devon Altbier,John Harvard's Brew House,Springfield,PA
-2005,German Style Brown Ale/Düsseldorf Style Altbier,Silver,Green Flash Ruby Red Ale,Green Flash Brewing Co.,Vista,CA
-2005,German Style Brown Ale/Düsseldorf Style Altbier,Bronze,Dusseldorf Altbier,Gilded Otter Brewing Co.,New Paltz,NY
+2005,German Style Brown Ale,Gold,Devon Altbier,John Harvard's Brew House,Springfield,PA
+2005,German Style Brown Ale,Silver,Green Flash Ruby Red Ale,Green Flash Brewing Co.,Vista,CA
+2005,German Style Brown Ale,Bronze,Dusseldorf Altbier,Gilded Otter Brewing Co.,New Paltz,NY
 2005,Bohemian Style Pilsener,Gold,Pallavicini Pilsner,Pug Ryan's Brewery,Dillon,CO
 2005,Bohemian Style Pilsener,Silver,Triumph Czech Pilsener,Triumph Brewing,Princeton,NJ
 2005,Bohemian Style Pilsener,Bronze,Vermont Lager,Otter Creek Brewing,Middlebury,VT
@@ -1454,9 +1454,9 @@ year,style,medal,beer,brewery,city,state
 2006,Scottish Style Ale,Gold,Laughing Lab Scottish Ale,Bristol Brewing,Colorado Springs,CO
 2006,Scottish Style Ale,Silver,MacPelican’s Scottish Style Ale,Pelican Pub,Pacific City,OR
 2006,Scottish Style Ale,Bronze,Kiltlifter Scottish Ale,Pug Ryan's Brewery,Dillon,CO
-2006,German Style Brown Ale/Düsseldorf Style Alt Biersch,Gold,Otis Alt,Elk Grove Brewery,Elk Grove,CA
-2006,German Style Brown Ale/Düsseldorf Style Alt Biersch,Silver,“Alt 45”,The Cambridge House,Granby,CT
-2006,German Style Brown Ale/Düsseldorf Style Alt Biersch,Bronze,Terrapin Alt,Rock Bottom,Bethesda,MD
+2006,German Style Brown Ale,Gold,Otis Alt,Elk Grove Brewery,Elk Grove,CA
+2006,German Style Brown Ale,Silver,“Alt 45”,The Cambridge House,Granby,CT
+2006,German Style Brown Ale,Bronze,Terrapin Alt,Rock Bottom,Bethesda,MD
 2006,Strong Scotch Ale,Gold,Kilt Sniffer Strong Scotch Ale,Big Dog’s Brewing Co.,Las Vegas,NV
 2006,Strong Scotch Ale,Silver,Highland Scotch Reserve,Boundary Bay Brewery,Bellingham,WA
 2006,Strong Scotch Ale,Bronze,Rambeaux,RAM Restaurant,Seattle,WA
@@ -1490,9 +1490,9 @@ year,style,medal,beer,brewery,city,state
 2007,French- and Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Malvern,PA
 2007,French- and Belgian Style Saison,Silver,Liquid Sun 1087,Rock Bottom,Scottsdale,AZ
 2007,French- and Belgian Style Saison,Bronze,Southampton Saison,Southampton Publick House,Southampton,NY
-2007,German Style Brown Ale/Düsseldorf Style,Gold,Alt,Herkimer Pub and Brewery,Minneapolis,MN
-2007,German Style Brown Ale/Düsseldorf Style,Silver,1065 Firechief Ale,Rock Bottom,Bethesda,MD
-2007,German Style Brown Ale/Düsseldorf Style,Bronze,Gordon Biersch Alt,Gordon Biersch Brewery,Chattanooga,TN
+2007,German Style Brown Ale,Gold,Alt,Herkimer Pub and Brewery,Minneapolis,MN
+2007,German Style Brown Ale,Silver,1065 Firechief Ale,Rock Bottom,Bethesda,MD
+2007,German Style Brown Ale,Bronze,Gordon Biersch Alt,Gordon Biersch Brewery,Chattanooga,TN
 2007,Wood- and Barrel-Aged Sour Beer,Gold,Cuvee de Tomme,Port Brewing & The Lost Abbey,San Marcos,CA
 2007,Wood- and Barrel-Aged Sour Beer,Silver,Temptation,Russian River Brewing,Santa Rosa,CA
 2007,Wood- and Barrel-Aged Sour Beer,Bronze,Barrel-Aged Cherry,BJ's Restaurant & Brewery,Reno,NV

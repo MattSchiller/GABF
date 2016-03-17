@@ -2,6 +2,7 @@ var RESET = '_RESET';
 var MAX_NODE_R = 9;
 var MIN_NODE_R = 2;
 var MAX_ZOOM = 20;
+var MIN_YEAR = 1999, MAX_YEAR = 2015, YEAR_WIDTH = 150, YEAR_DELAY = 750;
 
 var GetData = require('./getData.js');
 
@@ -434,8 +435,9 @@ var Geneology = React.createClass({
   componentDidMount: function() {
     window.addEventListener('resize', this._handleResize);
     this._drawGenes();
-    console.log('destination:', this.props.destination);
-    //if (this.props.destination) _nodeScrollMain(this.props.destination);
+    console.log('lineageData:', this.props.lineageData);
+    if(typeof this.props.destination !== "undefined" && typeof this.props.destination.year !== "undefined")
+      this._nodeScrollMain(this.props.destination);
   },
   componentWillUnmount: function() {
     window.removeEventListener('resize', this._handleResize);
@@ -450,9 +452,8 @@ var Geneology = React.createClass({
   _nodeScrollMain: function(d) {
   //Scroll to new node
   //CLONE OF LOWER FUNCTION
-  
-  //NEED TO ADD YEAR START OR SOMETHING
-    var scrollYear = ( (parseInt(d.year) || destinationYear) - yearStart ) * YEAR_WIDTH;
+    console.log('d.year:', d.year);
+    var scrollYear = (parseInt(d.year) - MIN_YEAR ) * YEAR_WIDTH;
     d3.select("#"+this.state.myID)
         .transition()
         .duration(YEAR_DELAY)
@@ -460,16 +461,16 @@ var Geneology = React.createClass({
   
     function scrollToNode(scrollLeft) {
       return function() {
-          var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
-          return function(t) { this.scrollLeft = i(t) //- d3.select("#geneology").property('scrollWidth')/10, 0)
-          };
+        console.log('main this:', this);
+        var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
+        return function(t) { this.scrollLeft = i(t) };
       };
     };
   },
   
   _drawGenes: function() {
     var margin = {top: 5, right: 2, bottom: 5, left: 20},
-        MIN_YEAR = 1999, MAX_YEAR = 2015, YEAR_WIDTH = 150, YEAR_DELAY = 750, TEXT_ID_LABEL = 'LABEL',
+        TEXT_ID_LABEL = 'LABEL',
         width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
         height = parseInt(d3.select("#"+this.state.myID).style('height'));// - margin.top - margin.bottom;
     
@@ -497,9 +498,6 @@ var Geneology = React.createClass({
     root.x0 = height / 2;
     root.y0 = 0;
     
-    var yearStart = parseInt(root.children[0].year);
-    //console.log('yearStart:', yearStart);
-    
     //defines the collapse function
     function collapse(d) {
       if (d.children) {
@@ -509,7 +507,7 @@ var Geneology = React.createClass({
       }
     }
     function expand(d) {
-      let yearDiff = parseInt(d.year) - yearStart;
+      let yearDiff = parseInt(d.year) - MIN_YEAR;
       var myD = d;
       if (d._children) {
         myD.children = myD._children;
@@ -670,7 +668,8 @@ var Geneology = React.createClass({
               .attr('x', z-35)
               .attr('y', height-10)
               .style('font-size', '12pt')
-              .text(yearStart - 1 + parseInt( (z-offset)/YEAR_WIDTH ) );
+              .style('fill', 'dark-grey')
+              .text(MIN_YEAR - 1 + parseInt( (z-offset)/YEAR_WIDTH ) );
           
         z += YEAR_WIDTH;
       }
@@ -678,7 +677,7 @@ var Geneology = React.createClass({
     
     function nodeScroll(d) {
     //Scroll to new node
-      var scrollYear = ( (parseInt(d.year) || destinationYear) - yearStart ) * YEAR_WIDTH;
+      var scrollYear = ( parseInt(d.year) - MIN_YEAR ) * YEAR_WIDTH;
       d3.select("#geneology")
           .transition()
           .duration(YEAR_DELAY)
@@ -686,9 +685,9 @@ var Geneology = React.createClass({
     
       function scrollToNode(scrollLeft) {
         return function() {
+            console.log('lower level, this:', this);
             var i = d3.interpolateNumber(this.scrollLeft, scrollLeft);
-            return function(t) { this.scrollLeft = i(t) //- d3.select("#geneology").property('scrollWidth')/10, 0)
-            };
+            return function(t) { this.scrollLeft = i(t) };
         };
       };
     }
@@ -731,8 +730,11 @@ var MultiGraphBox = React.createClass({
   
   _changeGraph: function(e) {
     let myGraph = e.currentTarget.getAttribute('data-name'),
-        myDestination = e.currentTarget.getAttribute('data-destination');
-        
+        myDestination = { year: e.currentTarget.getAttribute('data-year'),
+                          style: e.currentTarget.getAttribute('data-style') };
+    
+    console.log('e.currentTarget:', e.currentTarget);
+    console.log('myDestination:', myDestination, 'year:', myDestination.year);
     this.setState({ graphShowing: myGraph, geneDestination: myDestination });
     let event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
       window.dispatchEvent(event);
@@ -802,7 +804,7 @@ var DetailsBox = React.createClass({
           {
             this.state.content.map(function(award, i) {
               return (
-                <div key={i} className="detailBoxItem" data-name={'Geneology'} data-destination={{year: award.year, style: award.style}} onClick={toGenes} >
+                <div key={i} className="detailBoxItem" data-name={'Geneology'} data-year={award.year} data-style={award.style} onClick={toGenes} >
                   <b>Year:</b>     {award.year} <br/>
                   <b>Medal:</b>    {award.medal} <br/>
                   <b>Style:</b>    {award.style} <br/>

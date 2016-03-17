@@ -28,7 +28,7 @@ year,style,id,parent_id
 1999,Experimental Beer,9,
 1999,Foreign Style Stout,31,
 1999,Fruit Beers (other than raspberry),10,
-1999,German Style Brown Ale/Düsseldorf Style Altbier,34,
+1999,German Style Brown Ale,34,
 1999,German Style Dopplebock,38,
 1999,German Style Kölsch/Köln Style Kölsch,22,
 1999,German Style Märzen/Oktoberfest,49,
@@ -84,7 +84,7 @@ year,style,id,parent_id
 2000,Experimental Beer,62,9
 2000,Foreign Style Stout,63,31
 2000,Fruit Beers (Other than Raspberry),96,10
-2000,German Style Brown Ale/Dusseldorf Style Altbier,56,34
+2000,German Style Brown Ale,56,34
 2000,German Style Doppelbock,102,38
 2000,German Style Kölsch/Köln Style Kölsch,97,22
 2000,German Style Märzen/Oktoberfest,83,49
@@ -138,7 +138,7 @@ year,style,id,parent_id
 2001,Experimental Beer,118,62
 2001,Foreign Style Stout,127,63
 2001,Fruit Beer,153,96
-2001,German Style Brown Ale/Düsseldorf Style Altbier,133,56
+2001,German Style Brown Ale,133,56
 2001,German Style Doppelbock,116,102
 2001,German Style Kölsch/Köln Style Kölsch,162,97
 2001,German Style Märzen/Oktoberfest,122,83
@@ -260,7 +260,7 @@ year,style,id,parent_id
 2003,Foreign (Export) Style Stout,284,197
 2003,French- and Belgian Style Saison,270,190
 2003,Garden Beer (Fruit & Vegetable),275,217
-2003,German Style Brown Ale/Düsseldorf Style,280,205
+2003,German Style Brown Ale,280,205
 2003,German Style Dopplebock,245,182
 2003,German Style Hefeweizen,237,188
 2003,German Style Kölsch/Köln Style Kölsch,260,192
@@ -326,7 +326,7 @@ year,style,id,parent_id
 2004,Foreign (Export) Style Stout,341,284
 2004,French- and Belgian Style Saison,303,270
 2004,Fruit and Vegetable Beer,336,275
-2004,German Style Brown Ale/Düsseldorf Style Altbier,351,280
+2004,German Style Brown Ale,351,280
 2004,German Style Kölsch/Köln Style Kölsch,315,260
 2004,German Style Märzen/Oktoberfest,349,266
 2004,German Style Pilsener,337,243
@@ -395,7 +395,7 @@ year,style,id,parent_id
 2005,Foreign (Export) Style Stout,404,341
 2005,French- and Belgian Style Saison,390,303
 2005,Fruit and Vegetable Beer,414,336
-2005,German Style Brown Ale/Düsseldorf Style Altbier,405,351
+2005,German Style Brown Ale,405,351
 2005,German Style Kölsch/Köln Style Kölsch,365,315
 2005,German Style Märzen/Oktoberfest,422,349
 2005,German Style Pilsener,409,337
@@ -462,7 +462,7 @@ year,style,id,parent_id
 2006,Foreign (Export) Style Stout,445,404
 2006,French- and Belgian Style Saison,460,390
 2006,Fruit and Vegetable Beer,443,414
-2006,German Style Brown Ale/Düsseldorf Style Alt Biersch,486,405
+2006,German Style Brown Ale,486,405
 2006,German Style Kölsch/Köln Style Kölsch,424,365
 2006,German Style Märzen/Oktoberfest,427,422
 2006,German Style Pilsener,488,409
@@ -533,7 +533,7 @@ year,style,id,parent_id
 2007,Foreign (Export) Style Stout,561,445
 2007,French- and Belgian Style Saison,497,460
 2007,Fruit Beer or Vegetable Beer,514,443
-2007,German Style Brown Ale/Düsseldorf Style,498,486
+2007,German Style Brown Ale,498,486
 2007,German Style Kölsch/Köln Style Kölsch,509,424
 2007,German Style Märzen,493,427
 2007,German Style Schwarzbier,505,477
@@ -970,7 +970,7 @@ year,style,id,parent_id
 2013,American Style Amber Lager,969,924
 2013,American Style Amber/Red Ale,1009,958
 2013,American Style Black Ale,985,940
-2013,American Style Brett Beer,1039,873
+2013,American Style Brett Beer,1039,927
 2013,American Style Brown Ale,991,959
 2013,American Style Cream Ale,989,946
 2013,American Style Dark Lager,1037,953

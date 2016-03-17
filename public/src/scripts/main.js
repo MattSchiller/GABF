@@ -433,13 +433,15 @@ var Map = React.createClass({
 var Geneology = React.createClass({
   getInitialState: function() { return { myID: 'geneology' }; },
   componentDidMount: function() {
-    var linKey;
+    var linVal, linStyle, linYear;
     window.addEventListener('resize', this._handleResize);
     
-    if(typeof this.props.destination !== "undefined" && typeof this.props.destination.year !== "undefined")
-      linKey = this.props.lineageData[this.props.destination.style + this.props.destination.year];
- 
-    this._drawGenes(linKey);
+    if(typeof this.props.destination !== "undefined" && typeof this.props.destination.year !== "undefined") {
+      linStyle = this.props.destination.style;
+      linYear = this.props.destination.year
+      linVal = this.props.lineageData[linStyle + linYear];
+    }
+    this._drawGenes(linVal, linStyle, linYear);
     this._nodeScrollMain(this.props.destination);
   },
   componentWillUnmount: function() {
@@ -470,7 +472,7 @@ var Geneology = React.createClass({
     };
   },
   
-  _drawGenes: function(linKey) {
+  _drawGenes: function(linVal, linStyle, linYear) {
     var margin = {top: 5, right: 2, bottom: 5, left: 20},
         TEXT_ID_LABEL = 'LABEL',
         width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
@@ -511,7 +513,7 @@ var Geneology = React.createClass({
     function expand(d) {
       let yearDiff = parseInt(d.year) - MIN_YEAR;
       var myD = d;
-      if (d._children) {
+      if (myD._children) {
         myD.children = myD._children;
         myD._children = null;
         update(myD);
@@ -523,17 +525,28 @@ var Geneology = React.createClass({
         }, YEAR_DELAY);
       }
     }
+    function weakExpand(d) {
+      if (d.lineage !== linVal) return;
+      if (d._children) {
+        d.children = d._children;
+        d._children = null;
+        update(d);
+        if (d.children[0].style == d.style) {
+          if (d.style !== linStyle || d.year !== linYear) hideText(TEXT_ID_LABEL + d.id);
+          else __showDetails(d);
+        }
+        d.children.forEach(weakExpand);
+      }
+    }
     
     //collapses everything
-    //Handles a click-through from Map
-    if (linKey == undefined) {
-      console.log('collapsing all'); root.children.forEach(collapse); }
+    if (linVal == undefined) root.children.forEach(collapse);
+    else root.children.forEach(weakExpand);           //Handles a click-through from Map
     
     //var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
     
     drawAxis();
     update(root);
-    
     
     //NODES THAT SHOULD BE EXPANDED ARE NOT BEING; FIX!
     
@@ -556,10 +569,10 @@ var Geneology = React.createClass({
     
       // Normalize for fixed-depth.
       nodes.forEach(function(d) { d.y = d.level * YEAR_WIDTH; });
-    
+      
       // Update the nodes…
       var node = svg.selectAll("g.node")
-          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+          .data(nodes, function(d) { return d.id; });
     
       // Enter any new nodes at the parent's previous position.
       var nodeEnter = node.enter().append("g")
@@ -585,9 +598,9 @@ var Geneology = React.createClass({
       nodeEnter.append("circle")
           .attr('class', function(d) {
             let shown = true;
-            if (linKey !== undefined && d.lineage !== linKey) shown = false;
+            if (linVal !== undefined && d.lineage !== linVal) shown = false;
             return (d.style === 'root' || !shown) ? 'hidden' : 'node'; })
-          .attr("r", 1e-6)      //Why this value for r? For the transitions?
+          .attr("r", 1e-6)
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
       nodeEnter.append("text")
@@ -596,9 +609,10 @@ var Geneology = React.createClass({
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
           .attr('class', function(d) {
-              console.log('linKey:', linKey, 'd.lineage:', d.lineage);
             let shown = true;
-            if (linKey !== undefined && d.lineage !== linKey) shown = false;
+            if ( (linVal !== undefined) // Click through from Map
+               && (d.lineage !== linVal) ) // I'm not in the correct lineage
+                shown = false;
             return (d.style === 'root' || !shown) ? 'hidden' : ''; })
           .text(function(d) { return d.style; })
           .style('background-color', 'green')
@@ -641,7 +655,7 @@ var Geneology = React.createClass({
           .attr("class", "link")
           .attr('class', function(d) {
             let shown = true;
-            if (linKey !== undefined && d.source.lineage !== linKey) shown = false;
+            if (linVal !== undefined && d.source.lineage !== linVal) shown = false;
             return (d.source.style === 'root' || !shown) ? 'link hidden' : 'link'; })
           .attr('stroke', 'green')
           .attr("d", function(d) {
@@ -713,21 +727,23 @@ var Geneology = React.createClass({
     function click(d) {
       nodeScroll(d);
       __showDetails(d);
+    }
+    function __showDetails(d) {
+      let year = d.year,
+          style = d.style,
+          myAwards = [];
       
-      function __showDetails(d) {
-        let year = d.year,
-            style = d.style,
-            myAwards = [];
-        
-        for (let award of awardData) {
-          if (award.year === year && award.style === style) myAwards.push(award);
-        }
-        
-        var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
-        window.dispatchEvent(event);
+      for (let award of awardData) {
+        if (award.year === year && award.style === style) myAwards.push(award);
       }
+      
+      var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
+      window.dispatchEvent(event);
     }
   },
+  
+  
+  
   render: function() {
     return (
 			<div id="gene-holder">
@@ -806,7 +822,6 @@ var DetailsBox = React.createClass({
   },
   
   _updateContent: function(e) {
-    console.log('Updating state with event.detail:', e.detail);
     this.setState({type: e.detail.type, content: e.detail.data});
   },
 
@@ -835,7 +850,6 @@ var DetailsBox = React.createClass({
         var myContent;
         if (this.state.content.length === 0) myContent = <div id='detailsBox' >Click a beer node to see awards for that year</div>
         else {
-          console.log('non-empty');
           let myAwards = this.state.content.map(function(award, i) {
                 return (
                   <div key={i} className="detailBoxItem" >

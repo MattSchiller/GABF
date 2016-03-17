@@ -159,11 +159,6 @@ var GetData = (function (runPage) {
     		lineages[node.style + node.year] = node.lineage;
       });
       
-      console.log('treeData, pre:', treeData);
-      
-      //treeData[0] = infillNodes(treeData[0], awards);
-      
-      console.log('treedata, post:', treeData);
       return [treeData, lineages];
     };
   }

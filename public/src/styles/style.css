@@ -52,6 +52,12 @@ body {
   overflow-x: scroll;
   overflow-y: hidden;
 }
+
+/*CANNOT GET THIS TO WORK */
+#geneology::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
 #map, #geneology {
   height: 100%;
   z-index: 20;
@@ -108,7 +114,7 @@ svg {z-index: -2;}
   flex-direction: column;
   height: 100%;
   margin-right: 20px;
-  min-width: 15%;
+  width: 15%;
   overflow-y: auto;
 }
 #detailsBox {

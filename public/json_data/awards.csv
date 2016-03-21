@@ -140,9 +140,9 @@ year,style,medal,beer,brewery,city,state
 1999,English Style Bitter,Gold,,,,
 1999,English Style Bitter,Silver,Dergy's Amber,Wilmington Brewing Company,Wilmington,NC
 1999,English Style Bitter,Bronze,Red Butte Bitter,Desert Edge Brewery,Salt Lake City,UT
-1999,Belgian and French Style Specialty Ales,Gold,Waterloo Grand Cru,Waterloo Brewing Company,Austin,TX
-1999,Belgian and French Style Specialty Ales,Silver,Western Reserve Cloud Nine,Western Reserve Brewing,Cleveland,OH
-1999,Belgian and French Style Specialty Ales,Bronze,La Conner Red,La Conner Brewing Company,La Conner,WA
+1999,Belgian & French Style Specialty Ales,Gold,Waterloo Grand Cru,Waterloo Brewing Company,Austin,TX
+1999,Belgian & French Style Specialty Ales,Silver,Western Reserve Cloud Nine,Western Reserve Brewing,Cleveland,OH
+1999,Belgian & French Style Specialty Ales,Bronze,La Conner Red,La Conner Brewing Company,La Conner,WA
 1999,German Style Märzen/Oktoberfest,Gold,Black Forest Oktoberfest,Black Forest Brew Haus LLC.,Farmingdale,NY
 1999,German Style Märzen/Oktoberfest,Silver,Atwater Blocktoberfest,Atwater Block Brewery,Detroit,MI
 1999,German Style Märzen/Oktoberfest,Bronze,Tabernash Oktoberfest,Tabernash Brewing,Longmont,CO
@@ -212,9 +212,9 @@ year,style,medal,beer,brewery,city,state
 2000,Chocolate/Cocoa Flavored Beer,Gold,Ghirardelli Square Chocolate Stout,Steelhead Brewery,Burlingame,CA
 2000,Chocolate/Cocoa Flavored Beer,Silver,Chocolate Stout,Rogue Ales,Newport,OR
 2000,Chocolate/Cocoa Flavored Beer,Bronze,Jurupa Valley Stout,Jurupa Valley Brewing Co.,Riverside,CA
-2000,Belgian- & French Style Specialty Ales,Gold,Cherry Lambic,Commonwealth Brewing,New York,NY
-2000,Belgian- & French Style Specialty Ales,Silver,Saison L' Ete,Willoughby Brewing,Willoughby,OH
-2000,Belgian- & French Style Specialty Ales,Bronze,La Folie,New Belgium Brewing,Fort Collins,CO
+2000,Belgian & French Style Specialty Ales,Gold,Cherry Lambic,Commonwealth Brewing,New York,NY
+2000,Belgian & French Style Specialty Ales,Silver,Saison L' Ete,Willoughby Brewing,Willoughby,OH
+2000,Belgian & French Style Specialty Ales,Bronze,La Folie,New Belgium Brewing,Fort Collins,CO
 2000,Bohemian Style Pilsener,Gold,,,,
 2000,Bohemian Style Pilsener,Silver,Czech Mate Pils,Brew Moon,Needham,MA
 2000,Bohemian Style Pilsener,Bronze,Full Sail Pilsner,Full Sail Brewing,Hood River,OR
@@ -470,9 +470,9 @@ year,style,medal,beer,brewery,city,state
 2001,Golden or Blonde Ale,Gold,Golden Wheat Ale,Russian River Brewing,Guerneville,CA
 2001,Golden or Blonde Ale,Silver,Old Faithful Ale,Grand Teton Brewing,Victor,ID
 2001,Golden or Blonde Ale,Bronze,Kiwanda Cream Ale,Pelican Pub,Pacific City,OR
-2001,Belgian- & French Style Specialty Ale,Gold,La Folie,New Belgium Brewing,Fort Collins,CO
-2001,Belgian- & French Style Specialty Ale,Silver,Liquid Sunshine,Rock Bottom,Westminster,CO
-2001,Belgian- & French Style Specialty Ale,Bronze,Artisian Saison,Rocky River Brewing,Rocky River,OH
+2001,Belgian & French Style Specialty Ale,Gold,La Folie,New Belgium Brewing,Fort Collins,CO
+2001,Belgian & French Style Specialty Ale,Silver,Liquid Sunshine,Rock Bottom,Westminster,CO
+2001,Belgian & French Style Specialty Ale,Bronze,Artisian Saison,Rocky River Brewing,Rocky River,OH
 2001,Old Ale or Strong Ale,Gold,Southampton Old Ale,Southampton Publick House,Southampton,NY
 2001,Old Ale or Strong Ale,Silver,Old Stock Ale,North Coast Brewing,Fort Bragg,CA
 2001,Old Ale or Strong Ale,Bronze,Wee Huey's Heavy,Big Horn Brewing,Tacoma,WA
@@ -566,9 +566,9 @@ year,style,medal,beer,brewery,city,state
 2002,Belgian Style Sour Ale,Gold,La Folie,New Belgium Brewing,Fort Collins,CO
 2002,Belgian Style Sour Ale,Silver,Lip Burner Lamb-Beak,Bitter End,Austin,TX
 2002,Belgian Style Sour Ale,Bronze,Flanders Red Ale,Southampton Publick House,Southampton,NY
-2002,Belgian- & French Style Ale,Gold,Allagash White,Allagash Brewing Co.,Portland,ME
-2002,Belgian- & French Style Ale,Silver,Artisan Saison,Rocky River Brewing,Rocky River,OH
-2002,Belgian- & French Style Ale,Bronze,Spring Saison,Engine House #9 Restaurant & Brewery,Tacoma,WA
+2002,Belgian & French Style Ale,Gold,Allagash White,Allagash Brewing Co.,Portland,ME
+2002,Belgian & French Style Ale,Silver,Artisan Saison,Rocky River Brewing,Rocky River,OH
+2002,Belgian & French Style Ale,Bronze,Spring Saison,Engine House #9 Restaurant & Brewery,Tacoma,WA
 2002,Munich Style Helles,Gold,Helles in a Handbasket,Hub City Brewery,Lubbock,TX
 2002,Munich Style Helles,Silver,Helles Lager,Firestone Walker,Paso Robles,CA
 2002,Munich Style Helles,Bronze,French Creek Helles,Sly Fox Brewhouse,Phoenixville,PA
@@ -800,15 +800,15 @@ year,style,medal,beer,brewery,city,state
 2003,American Dark Lager,Gold,Freidabrau Oktoberfest,RAM International/Humperdink's/Big Horn Brewing Co.,Lakewood,WA
 2003,American Dark Lager,Silver,Michelob Amber Bock,Anheuser-Busch,Saint Louis,MO
 2003,American Dark Lager,Bronze,H. Saxer Dark Lager,MacTarnahan's Brewing,Portland,OR
-2003,Belgian-and French Style Ale,Gold,Trappist Pale Ale,Southampton Publick House,Southampton,NY
-2003,Belgian-and French Style Ale,Silver,Enchanted Abbey,Angelic Brewing,Madison,WI
-2003,Belgian-and French Style Ale,Bronze,Tiburon Blonde,Marin Brewing,Larkspur,CA
+2003,Belgian & French Style Ale,Gold,Trappist Pale Ale,Southampton Publick House,Southampton,NY
+2003,Belgian & French Style Ale,Silver,Enchanted Abbey,Angelic Brewing,Madison,WI
+2003,Belgian & French Style Ale,Bronze,Tiburon Blonde,Marin Brewing,Larkspur,CA
 2003,Experimental Beer,Gold,Ninkasi,Boscos Brewing,Memphis,TN
 2003,Experimental Beer,Silver,Randy's Grand Cru,Aiken Brewing,Aiken,SC
 2003,Experimental Beer,Bronze,Trappist Pale Ale,McKenzie Brew House,Glen Mills,PA
-2003,French- and Belgian Style Saison,Gold,Saison de Brooklyn,The Brooklyn Brewery,Brookyln,NY
-2003,French- and Belgian Style Saison,Silver,Artisan Saison,Rocky River Brewing,Rocky River,OH
-2003,French- and Belgian Style Saison,Bronze,Saison,McKenzie Brew House,Glen Mills,PA
+2003,French & Belgian Style Saison,Gold,Saison de Brooklyn,The Brooklyn Brewery,Brookyln,NY
+2003,French & Belgian Style Saison,Silver,Artisan Saison,Rocky River Brewing,Rocky River,OH
+2003,French & Belgian Style Saison,Bronze,Saison,McKenzie Brew House,Glen Mills,PA
 2003,American Style Specialty Lager,Gold,Ice House,Plank Road Brewery,Milwaukee,WI
 2003,American Style Specialty Lager,Silver,Mickey's Malt Liquor,Mickey's Brewing,Milwaukee,WI
 2003,American Style Specialty Lager,Bronze,Milwaukee's Best Ice,Miller Brewing,Milwaukee,WI
@@ -905,9 +905,9 @@ year,style,medal,beer,brewery,city,state
 2004,Imperial or Double India Pale Ale,Gold,DoHeny Double IPA,Pizza Port,San Clemente,CA
 2004,Imperial or Double India Pale Ale,Silver,Frank Double IPA,Port Brewing Pizza Port Carlsbad,Carlsbad,CA
 2004,Imperial or Double India Pale Ale,Bronze,Pliny the Elder,Russian River Brewing,Santa Rosa,CA
-2004,French- and Belgian Style Saison,Gold,Cave Aged Hennepin,Brewery Ommegang,Cooperstown,NY
-2004,French- and Belgian Style Saison,Silver,Saison de Carbs,Rio Salado Brewing Company,Tempe,AZ
-2004,French- and Belgian Style Saison,Bronze,Farm House Reserve,Fitgers Brewhouse,Duluth,MN
+2004,French & Belgian Style Saison,Gold,Cave Aged Hennepin,Brewery Ommegang,Cooperstown,NY
+2004,French & Belgian Style Saison,Silver,Saison de Carbs,Rio Salado Brewing Company,Tempe,AZ
+2004,French & Belgian Style Saison,Bronze,Farm House Reserve,Fitgers Brewhouse,Duluth,MN
 2004,"American Style ""Light"" Amber Lager",Gold,MoJo Lager,Starr Hill Brewing,Charlottesville,VA
 2004,"American Style ""Light"" Amber Lager",Silver,Henry Weinhard Amber Light,Miller Brewing,Milwaukee,WI
 2004,"American Style ""Light"" Amber Lager",Bronze,Coastal Light Pale,Firestone Walker,Paso Robles,CA
@@ -935,9 +935,9 @@ year,style,medal,beer,brewery,city,state
 2004,English Style India Pale Ale,Gold,Squatters India Pale Ale,Utah Brewers,Salt Lake City,UT
 2004,English Style India Pale Ale,Silver,Goose Island India Pale Ale,Goose Island Beer Co.,Chicago,IL
 2004,English Style India Pale Ale,Bronze,Newcomb's IPA,McCoy's Public House,Kansas City,MO
-2004,Belgian- and French Style Ale,Gold,Oro De Calabaza,Jolly Pumpkin Artisan Ales,Dexter,MI
-2004,Belgian- and French Style Ale,Silver,Grand Cru,Minneapolis Town Hall Brewery,Minneapolis,MN
-2004,Belgian- and French Style Ale,Bronze,Bavay,McKenzie Brew House,Glen Mills,PA
+2004,Belgian & French Style Ale,Gold,Oro De Calabaza,Jolly Pumpkin Artisan Ales,Dexter,MI
+2004,Belgian & French Style Ale,Silver,Grand Cru,Minneapolis Town Hall Brewery,Minneapolis,MN
+2004,Belgian & French Style Ale,Bronze,Bavay,McKenzie Brew House,Glen Mills,PA
 2004,Belgian Style White (or Wit)/Belgian Style Wheat,Gold,Nit Wit,BJ's Restaurant & Brewery,Huntington Beach,CA
 2004,Belgian Style White (or Wit)/Belgian Style Wheat,Silver,Katerina Wit,Main Street Brewery Lamppost Pizza,Corona,CA
 2004,Belgian Style White (or Wit)/Belgian Style Wheat,Bronze,Celis White,Michigan Brewing,Webberville,MI
@@ -1166,9 +1166,9 @@ year,style,medal,beer,brewery,city,state
 2005,English Style India Pale Ale,Gold,Sierra Nevada IPA,Sierra Nevada Brewing,Chico,CA
 2005,English Style India Pale Ale,Silver,Squatters IPA,Utah Brewers,Salt Lake City,UT
 2005,English Style India Pale Ale,Bronze,1800,Minneapolis Town Hall Brewery,Minneapolis,MN
-2005,French- and Belgian Style Saison,Gold,Saison de Brooklyn,The Brooklyn Brewery,Brooklyn,NY
-2005,French- and Belgian Style Saison,Silver,Southampton Saison,Southampton Publick House,Southampton,NY
-2005,French- and Belgian Style Saison,Bronze,Stillwater Rye,Montana Brewing,Billings,MT
+2005,French & Belgian Style Saison,Gold,Saison de Brooklyn,The Brooklyn Brewery,Brooklyn,NY
+2005,French & Belgian Style Saison,Silver,Southampton Saison,Southampton Publick House,Southampton,NY
+2005,French & Belgian Style Saison,Bronze,Stillwater Rye,Montana Brewing,Billings,MT
 2005,Brown Porter,Gold,Our Porter,Long Valley Pub,Long Valley,NJ
 2005,Brown Porter,Silver,Old Grind Porter,Etna Brewing Co.,Etna,CA
 2005,Brown Porter,Bronze,Prince William Porter,Moose's Tooth,Anchorage,AK
@@ -1196,9 +1196,9 @@ year,style,medal,beer,brewery,city,state
 2005,American Style Hefeweizen,Gold,Easy Street Wheat,Odell Brewing,Fort Collins,CO
 2005,American Style Hefeweizen,Silver,Faller Wheat Ale,Rock Bottom,Seattle,WA
 2005,American Style Hefeweizen,Bronze,O'Fallon Wheat,O'Fallon Brewery,O'Fallon,MO
-2005,Belgian- and French Style Ale,Gold,Matilda,Goose Island Beer Co.,Chicago,IL
-2005,Belgian- and French Style Ale,Silver,Biere de Garde,Capitol City Brewing,Arlington,VA
-2005,Belgian- and French Style Ale,Bronze,Oro de Calabaza,Jolly Pumpkin Artisan Ales,Dexter,MI
+2005,Belgian & French Style Ale,Gold,Matilda,Goose Island Beer Co.,Chicago,IL
+2005,Belgian & French Style Ale,Silver,Biere de Garde,Capitol City Brewing,Arlington,VA
+2005,Belgian & French Style Ale,Bronze,Oro de Calabaza,Jolly Pumpkin Artisan Ales,Dexter,MI
 2005,Strong Scotch Ale,Gold,High Road Scotch Ale,Walking Man Brewing,Stevenson,WA
 2005,Strong Scotch Ale,Silver,Wee Heavy,AleSmith Brewing,San Diego,CA
 2005,Strong Scotch Ale,Bronze,Caber Tossed Wee Heavy,Oggi's Pizza and Brewing,San Clemente,CA
@@ -1328,9 +1328,9 @@ year,style,medal,beer,brewery,city,state
 2006,Fruit and Vegetable Beer,Gold,Belgian Red,New Glarus Brewing,New Glarus,WI
 2006,Fruit and Vegetable Beer,Silver,Blue Moon Chardonnay Blonde,Blue Moon Brewing Co.,Golden,CO
 2006,Fruit and Vegetable Beer,Bronze,Patty’s Chile Beer,Wynkoop Brewing,Denver,CO
-2006,Belgian- and French Style Ale,Gold,Le Fleur Misseur,New Belgium Brewing,Fort Collins,CO
-2006,Belgian- and French Style Ale,Silver,Dim Wit,BJ's Restaurant & Brewery,Chandler,AZ
-2006,Belgian- and French Style Ale,Bronze,Belgian Double White Ale,Southampton Publick House,Southampton,NY
+2006,Belgian & French Style Ale,Gold,Le Fleur Misseur,New Belgium Brewing,Fort Collins,CO
+2006,Belgian & French Style Ale,Silver,Dim Wit,BJ's Restaurant & Brewery,Chandler,AZ
+2006,Belgian & French Style Ale,Bronze,Belgian Double White Ale,Southampton Publick House,Southampton,NY
 2006,Foreign (Export) Style Stout,Gold,Tsunami Stout,Pelican Pub,Pacific City,OR
 2006,Foreign (Export) Style Stout,Silver,Black Bear XX Stout,Alameda Brewhouse,Portland,OR
 2006,Foreign (Export) Style Stout,Bronze,San Quentin’s Breakout Stout,Marin Brewing,Larkspur,CA
@@ -1376,9 +1376,9 @@ year,style,medal,beer,brewery,city,state
 2006,Vienna Style Lager,Gold,,,,
 2006,Vienna Style Lager,Silver,Balto Marz Hon,Clipper City Brewing,Baltimore,MD
 2006,Vienna Style Lager,Bronze,Schild brau Amber,Millstream Brewing,Amana,IA
-2006,French- and Belgian Style Saison,Gold,Organic Farmhouse Ale,Bison Brewing Co.,Berkeley,CA
-2006,French- and Belgian Style Saison,Silver,Saison,Capitol City Brewing,Arlington,VA
-2006,French- and Belgian Style Saison,Bronze,Hennepin Farmhouse Saison,Brewery Ommegang,Cooperstown,NY
+2006,French & Belgian Style Saison,Gold,Organic Farmhouse Ale,Bison Brewing Co.,Berkeley,CA
+2006,French & Belgian Style Saison,Silver,Saison,Capitol City Brewing,Arlington,VA
+2006,French & Belgian Style Saison,Bronze,Hennepin Farmhouse Saison,Brewery Ommegang,Cooperstown,NY
 2006,Classic Irish Style Dry Stout,Gold,Maxwell’s Stout,Basil T’s Brewery & Italian Grill,Red Bank,NJ
 2006,Classic Irish Style Dry Stout,Silver,Slapshot Stout,RAM Restaurant,Seattle,WA
 2006,Classic Irish Style Dry Stout,Bronze,Irish Stout,Schooner’s Grille & Brewery,Antioch,CA
@@ -1487,9 +1487,9 @@ year,style,medal,beer,brewery,city,state
 2007,European Style Dark/Münchner Dunkel,Gold,Dunkelstilsken,CB & Pott’s Restaurant & Brewery (Highlands Ranch),Highlands Ranch,CO
 2007,European Style Dark/Münchner Dunkel,Silver,Capital Munich Dark,Capital Brewery,Middleton,WI
 2007,European Style Dark/Münchner Dunkel,Bronze,Munich Dunkel,RedRock Brewing Co.,Salt Lake City,UT
-2007,French- and Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Malvern,PA
-2007,French- and Belgian Style Saison,Silver,Liquid Sun 1087,Rock Bottom,Scottsdale,AZ
-2007,French- and Belgian Style Saison,Bronze,Southampton Saison,Southampton Publick House,Southampton,NY
+2007,French & Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Malvern,PA
+2007,French & Belgian Style Saison,Silver,Liquid Sun 1087,Rock Bottom,Scottsdale,AZ
+2007,French & Belgian Style Saison,Bronze,Southampton Saison,Southampton Publick House,Southampton,NY
 2007,German Style Brown Ale,Gold,Alt,Herkimer Pub and Brewery,Minneapolis,MN
 2007,German Style Brown Ale,Silver,1065 Firechief Ale,Rock Bottom,Bethesda,MD
 2007,German Style Brown Ale,Bronze,Gordon Biersch Alt,Gordon Biersch Brewery,Chattanooga,TN
@@ -1562,9 +1562,9 @@ year,style,medal,beer,brewery,city,state
 2007,Bock,Gold,Troegenator,Tröegs Brewing Co.,Harrisburg,PA
 2007,Bock,Silver,Gruffmeister 8 Maibock,Foothills Brewing,Winston-Salem,NC
 2007,Bock,Bronze,Butthead Bock,Tommyknocker Brewery,Idaho Springs,CO
-2007,Belgian and French Style Ale,Gold,Tiburon Blonde,Marin Brewing,Larkspur,CA
-2007,Belgian and French Style Ale,Silver,Southampton Double White Ale,Southampton Publick House,Southampton,NY
-2007,Belgian and French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
+2007,Belgian & French Style Ale,Gold,Tiburon Blonde,Marin Brewing,Larkspur,CA
+2007,Belgian & French Style Ale,Silver,Southampton Double White Ale,Southampton Publick House,Southampton,NY
+2007,Belgian & French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
 2007,American Style Brown Ale,Gold,Doryman’s Dark Ale,Pelican Pub,Pacific City,OR
 2007,American Style Brown Ale,Silver,RedRock Nut Brown Ale,RedRock Brewing Co.,Salt Lake City,UT
 2007,American Style Brown Ale,Bronze,Bitch Creek ESB,Grand Teton Brewing,Victor,ID
@@ -1811,9 +1811,9 @@ year,style,medal,beer,brewery,city,state
 2008,Bohemian Style Pilsener,Gold,Pleasantville Pils,Durango Brewing Co.,Durango,CO
 2008,Bohemian Style Pilsener,Silver,Pallavicini Pilsner,Pug Ryans Brewery,Dillon,CO
 2008,Bohemian Style Pilsener,Bronze,Double Aught,Bear Republic Brewing,Healdsburg,CA
-2008,Belgian- and French Style Ale,Gold,Redemption,Russian River Brewing,Santa Rosa,CA
-2008,Belgian- and French Style Ale,Silver,Pride,Midnight Sun Brewing Co.,Anchorage,AK
-2008,Belgian- and French Style Ale,Bronze,Rare Vos,Brewery Ommegang,Cooperstown,NY
+2008,Belgian & French Style Ale,Gold,Redemption,Russian River Brewing,Santa Rosa,CA
+2008,Belgian & French Style Ale,Silver,Pride,Midnight Sun Brewing Co.,Anchorage,AK
+2008,Belgian & French Style Ale,Bronze,Rare Vos,Brewery Ommegang,Cooperstown,NY
 2008,Baltic Style Porter,Gold,Kick in the Baltic Porter,Bluegrass Brewing Co.,Louisville,KY
 2008,Baltic Style Porter,Silver,Killer Kowalski,Flossmoor Station,Flossmoor,IL
 2008,Baltic Style Porter,Bronze,SMP,Sixpoint Craft Ales,Brooklyn,NY
@@ -1892,9 +1892,9 @@ year,style,medal,beer,brewery,city,state
 2008,German Style Wheat Ale,Gold,I’m Half the Beer I Used to Be,BJ's Restaurant & Brewery,Huntington Beach,CA
 2008,German Style Wheat Ale,Silver,Dark-n-Curvy Dunkelweizen,Piece Brewery,Chicago,IL
 2008,German Style Wheat Ale,Bronze,Wasatch Hefeweizen,Wasatch Brewery,Park City,UT
-2008,French- and Belgian Style Saison,Gold,Saison,Iron Hill Brewery,Wilmington,DE
-2008,French- and Belgian Style Saison,Silver,Saison,Nodding Head Brewing,Philadelphia,PA
-2008,French- and Belgian Style Saison,Bronze,Luciernaga,Jolly Pumpkin Artisan Ales,Dexter,MI
+2008,French & Belgian Style Saison,Gold,Saison,Iron Hill Brewery,Wilmington,DE
+2008,French & Belgian Style Saison,Silver,Saison,Nodding Head Brewing,Philadelphia,PA
+2008,French & Belgian Style Saison,Bronze,Luciernaga,Jolly Pumpkin Artisan Ales,Dexter,MI
 2008,Other Strong Beer,Gold,Derail Ale,Durango Brewing Co.,Durango,CO
 2008,Other Strong Beer,Silver,Imperial Oatmeal Stout,Boundary Bay Brewery,Bellingham,WA
 2008,Other Strong Beer,Bronze,FiftyFifty Imperial Stout,FiftyFifty Brewing Co.,Truckee,CA
@@ -2000,9 +2000,9 @@ year,style,medal,beer,brewery,city,state
 2009,Belgian Style Lambic or Sour Ale,Gold,Duck Duck Gooze,The Lost Abbey,San Marcos,CA
 2009,Belgian Style Lambic or Sour Ale,Silver,Red Rock,Big Rock Chop House,Birmingham,MI
 2009,Belgian Style Lambic or Sour Ale,Bronze,Supplication,Russian River Brewing,Santa Rosa,CA
-2009,Belgian and French Style Ale,Gold,Carnevale,The Lost Abbey,San Marcos,CA
-2009,Belgian and French Style Ale,Silver,Demolition,Goose Island Beer Co.,Chicago,IL
-2009,Belgian and French Style Ale,Bronze,Collaborative Evil-Sacramento,Sacramento Brewing Co.,Sacramento,CA
+2009,Belgian & French Style Ale,Gold,Carnevale,The Lost Abbey,San Marcos,CA
+2009,Belgian & French Style Ale,Silver,Demolition,Goose Island Beer Co.,Chicago,IL
+2009,Belgian & French Style Ale,Bronze,Collaborative Evil-Sacramento,Sacramento Brewing Co.,Sacramento,CA
 2009,Belgian Style Abbey Ale,Gold,Signature Dubbel,Choc Beer Co.,Krebs,OK
 2009,Belgian Style Abbey Ale,Silver,Tripel,Allagash Brewing Co.,Portland,ME
 2009,Belgian Style Abbey Ale,Bronze,Deschutes Brewery Quad,Deschutes Brewery,Bend,OR
@@ -2021,9 +2021,9 @@ year,style,medal,beer,brewery,city,state
 2009,Baltic Style Porter,Gold,Duck-Rabbit Baltic Porter,The Duck-Rabbit Craft Brewery,Farmville,NC
 2009,Baltic Style Porter,Silver,Danzig,Devil’s Backbone Brewing Co.,Roseland,VA
 2009,Baltic Style Porter,Bronze,Veles Baltic Porter,Fire,House Grill & BrewerySunnyvale,CA
-2009,French- and Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Glen Mills,PA
-2009,French- and Belgian Style Saison,Silver,Belgian Summer Ale,Great Adirondack Brewing Co.,Lake Placid,NY
-2009,French- and Belgian Style Saison,Bronze,Saison Du Bastone,Bastone Brewery,Royal Oak,MI
+2009,French & Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Glen Mills,PA
+2009,French & Belgian Style Saison,Silver,Belgian Summer Ale,Great Adirondack Brewing Co.,Lake Placid,NY
+2009,French & Belgian Style Saison,Bronze,Saison Du Bastone,Bastone Brewery,Royal Oak,MI
 2009,International Style Pilsener,Gold,Gold Leaf Lager,Devil’s Backbone Brewing Co.,Roseland,VA
 2009,International Style Pilsener,Silver,OE800,Miller Brewing,Golden,CO
 2009,International Style Pilsener,Bronze,Gold Mountain Pilsner,Silver City Brewery,Silverdale,WA
@@ -2219,9 +2219,9 @@ year,style,medal,beer,brewery,city,state
 2010,Vienna Style Lager,Gold,Chuckanut Vienna Lager,Chuckanut Brewery,Bellingham,WA
 2010,Vienna Style Lager,Silver,Clueless Beer Writer,The Sandlot,Denver,CO
 2010,Vienna Style Lager,Bronze,Heavy Seas Marzen,Clipper City Brewing,Baltimore,MD
-2010,Belgian- and French Style Ale,Gold,Allagash Blonde,Allagash Brewing Co.,Portland,ME
-2010,Belgian- and French Style Ale,Silver,Bastogne Blonde Ale,Rock Bottom,Louisville,CO
-2010,Belgian- and French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
+2010,Belgian & French Style Ale,Gold,Allagash Blonde,Allagash Brewing Co.,Portland,ME
+2010,Belgian & French Style Ale,Silver,Bastogne Blonde Ale,Rock Bottom,Louisville,CO
+2010,Belgian & French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
 2010,Imperial India Pale Ale,Gold,Doheny Double IPA,Pizza Port,San Clemente,CA
 2010,Imperial India Pale Ale,Silver,Hop Crisis!,21st Amendment,San Francisco,CA
 2010,Imperial India Pale Ale,Bronze,Decadence Imperial IPA,Trinity Brewing,Providence,RI
@@ -2336,9 +2336,9 @@ year,style,medal,beer,brewery,city,state
 2010,Field Beer,Gold,Frog’s Hollow Double Pumpkin Ale,Hoppin’ Frog Brewing Co.,Akron,OH
 2010,Field Beer,Silver,Dark o’ the Moon,Elysian Brewery,Seattle,WA
 2010,Field Beer,Bronze,Imperial Pumpkin Ale,Weyerbacher Brewing Co.,Easton,PA
-2010,French- and Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Glen Mills,PA
-2010,French- and Belgian Style Saison,Silver,Colette,Great Divide Brewing,Denver,CO
-2010,French- and Belgian Style Saison,Bronze,Belgian Summer Ale,Great Adirondack Brewing Co.,Lake Placid,NY
+2010,French & Belgian Style Saison,Gold,Saison Vautour,McKenzie Brew House,Glen Mills,PA
+2010,French & Belgian Style Saison,Silver,Colette,Great Divide Brewing,Denver,CO
+2010,French & Belgian Style Saison,Bronze,Belgian Summer Ale,Great Adirondack Brewing Co.,Lake Placid,NY
 2010,American Style or International Style Pilsener,Gold,Gold Leaf Lager,Devils Backbone Brewing,Roseland,VA
 2010,American Style or International Style Pilsener,Silver,Random Luck,The Sandlot,Denver,CO
 2010,American Style or International Style Pilsener,Bronze,Gold Country Pilsner,Auburn Alehouse,Auburn,CA
@@ -2402,9 +2402,9 @@ year,style,medal,beer,brewery,city,state
 2011,Gluten-Free Beer,Gold,Gluten-Free Lemon Pale,Strange Brewing Co.,Denver,CO
 2011,Gluten-Free Beer,Silver,New Grist,Lakefront Brewery,Milwaukee,WI
 2011,Gluten-Free Beer,Bronze,Seeley Axe White,Kettlehouse Brewing Co.,Missoula,MT
-2011,French- and Belgian Style Saison,Gold,Saison-Brett,Boulevard Brewing,Kansas City,MO
-2011,French- and Belgian Style Saison,Silver,Funkwerks Saison,Funkwerks,Fort Collins,CO
-2011,French- and Belgian Style Saison,Bronze,Sofi e,Goose Island Beer Co.,Chicago,IL
+2011,French & Belgian Style Saison,Gold,Saison-Brett,Boulevard Brewing,Kansas City,MO
+2011,French & Belgian Style Saison,Silver,Funkwerks Saison,Funkwerks,Fort Collins,CO
+2011,French & Belgian Style Saison,Bronze,Sofi e,Goose Island Beer Co.,Chicago,IL
 2011,Wood- and Barrel-Aged Beer,Gold,Velvet Merkin,Firestone Walker,Paso Robles,CA
 2011,Wood- and Barrel-Aged Beer,Silver,Wee Pogue,Sun King Brewery,Indianapolis,IN
 2011,Wood- and Barrel-Aged Beer,Bronze,Pinot Jubel,Deschutes Brewery,Bend,OR
@@ -2555,9 +2555,9 @@ year,style,medal,beer,brewery,city,state
 2011,Rye Beer,Gold,Three Flowers IPA,Marin Brewing,Larkspur,CA
 2011,Rye Beer,Silver,Bock in Bock,Tequesta Brewing Co.,Tequesta,FL
 2011,Rye Beer,Bronze,Crank Tank,SweetWater Brewing Co.,Atlanta,GA
-2011,Belgian- and French Style Ale,Gold,California Ale,Telegraph Brewing Co.,Santa Barbara,CA
-2011,Belgian- and French Style Ale,Silver,TAPS Biere de Garde,TAPS Fish House & Brewery,Brea,CA
-2011,Belgian- and French Style Ale,Bronze,Pin-Up Blonde,Bastone Brewery,Royal Oak,MI
+2011,Belgian & French Style Ale,Gold,California Ale,Telegraph Brewing Co.,Santa Barbara,CA
+2011,Belgian & French Style Ale,Silver,TAPS Biere de Garde,TAPS Fish House & Brewery,Brea,CA
+2011,Belgian & French Style Ale,Bronze,Pin-Up Blonde,Bastone Brewery,Royal Oak,MI
 2011,Irish Style Red Ale,Gold,O’Rion Irish Red,Equinox Brewing,Fort Collins,CO
 2011,Irish Style Red Ale,Silver,Copperhead Red,Ghost River Brewing,Memphis,TN
 2011,Irish Style Red Ale,Bronze,Colorado Boy Irish Ale,Colorado Boy Brewing Co.,Ridgway,CO
@@ -2651,9 +2651,9 @@ year,style,medal,beer,brewery,city,state
 2012,Oatmeal Stout,Gold,Oats,Pizza Port,Solana Beach,CA
 2012,Oatmeal Stout,Silver,Stumbler’s Stout,Columbia River Brewing Co.,Portland,OR
 2012,Oatmeal Stout,Bronze,Stagecoach Stout,Figueroa Mountain Brewing,Buellton,CA
-2012,French- and Belgian Style Saison,Gold,Saison,Funkwerks,Fort Collins,CO
-2012,French- and Belgian Style Saison,Silver,Saison,Aspen Brewing Co.,Aspen,CO
-2012,French- and Belgian Style Saison,Bronze,El Verano,Beachwood BBQ & Brewing,Long Beach,CA
+2012,French & Belgian Style Saison,Gold,Saison,Funkwerks,Fort Collins,CO
+2012,French & Belgian Style Saison,Silver,Saison,Aspen Brewing Co.,Aspen,CO
+2012,French & Belgian Style Saison,Bronze,El Verano,Beachwood BBQ & Brewing,Long Beach,CA
 2012,Barley Wine Style Ale,Gold,Johan the Barleywine,Sun King Brewery,Indianapolis,IN
 2012,Barley Wine Style Ale,Silver,Barley Wine,Charleville Vineyard & Microbrewery,Ste. Genevieve,MO
 2012,Barley Wine Style Ale,Bronze,Dr. StrangeLove,Strange Brewing Co.,Denver,CO
@@ -2738,9 +2738,9 @@ year,style,medal,beer,brewery,city,state
 2012,Dortmunder or German Style Oktoberfest,Gold,Move Back,The SandLot,Denver,CO
 2012,Dortmunder or German Style Oktoberfest,Silver,Rolling Thunder Dortmunder,Snake River Brewing,Jackson,WY
 2012,Dortmunder or German Style Oktoberfest,Bronze,Celestial Gold,The Church Brew Works,Pittsburgh,PA
-2012,Belgian- and French Style Ale,Gold,Saint’s Devotion,The Lost Abbey,San Marcos,CA
-2012,Belgian- and French Style Ale,Silver,Your Favorite Foreign Movie,DC Brau Brewing Co.,Washington,DC
-2012,Belgian- and French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
+2012,Belgian & French Style Ale,Gold,Saint’s Devotion,The Lost Abbey,San Marcos,CA
+2012,Belgian & French Style Ale,Silver,Your Favorite Foreign Movie,DC Brau Brewing Co.,Washington,DC
+2012,Belgian & French Style Ale,Bronze,Domaine DuPage,Two Brothers Brewing Co.,Warrenville,IL
 2012,German Style Sour Ale,Gold,Berliner Metro Weiss,Devils Backbone Brewing,BasecampRoseland,VA
 2012,German Style Sour Ale,Silver,German Sparkle Party,10 Barrel Brewing Co.,Bend,OR
 2012,German Style Sour Ale,Bronze,NBB Love Felix,New Belgium Brewing,Fort Collins,CO
@@ -3065,9 +3065,9 @@ year,style,medal,beer,brewery,city,state
 2013,Wood- and Barrel-Aged Beer,Gold,Hellshire III,Oakshire Brewing,Eugene,OR
 2013,Wood- and Barrel-Aged Beer,Silver,Barrel-Aged Frostbite Lager,RAM Restaurant & Brewery,IllinoisWheeling,IL
 2013,Wood- and Barrel-Aged Beer,Bronze,Rum Barrel Belgian Dubbel Style Ale,Three Brothers Brewing,Harrisonburg,VA
-2013,French- and Belgian Style Saison,Gold,Liopard Oir Farmhouse Saison,Lavery Brewing Co.,Erie,PA
-2013,French- and Belgian Style Saison,Silver,Urban Farmhouse Ale,The Commons Brewery,Portland,OR
-2013,French- and Belgian Style Saison,Bronze,Maggie’s Farmhouse Ale,Crossroads Brewing Co.,Athens,NY
+2013,French & Belgian Style Saison,Gold,Liopard Oir Farmhouse Saison,Lavery Brewing Co.,Erie,PA
+2013,French & Belgian Style Saison,Silver,Urban Farmhouse Ale,The Commons Brewery,Portland,OR
+2013,French & Belgian Style Saison,Bronze,Maggie’s Farmhouse Ale,Crossroads Brewing Co.,Athens,NY
 2013,American Style Wheat Beer,Gold,Shredders Wheat,Baker City Brewing Co.,Baker City,OR
 2013,American Style Wheat Beer,Silver,American Wheat,Gella's Diner,Hays,KS
 2013,American Style Wheat Beer,Bronze,Super 77 Wheat,Wiley Roots Brewing Co.,Greeley,CO
@@ -3140,9 +3140,9 @@ year,style,medal,beer,brewery,city,state
 2013,Specialty Beer,Gold,Warmer,Hangar 24 Craft Brewery,Redlands,CA
 2013,Specialty Beer,Silver,Fate Candy Bar Milk Stout,Fate Brewing Co.,Scottsdale,AZ
 2013,Specialty Beer,Bronze,Pack Dog Peanut Butter Ale,Marley’s Brewery & Grille,Bloomsburg,PA
-2013,Belgian- and French Style Ale,Gold,Azreal,Devils Backbone Brewing,Outpost,
-2013,Belgian- and French Style Ale,Silver,Grisette,Sly Fox Brewhouse,Pottstown,PA
-2013,Belgian- and French Style Ale,Bronze,California Ale,Telegraph Brewing Co.,Santa Barbara,CA
+2013,Belgian & French Style Ale,Gold,Azreal,Devils Backbone Brewing,Outpost,
+2013,Belgian & French Style Ale,Silver,Grisette,Sly Fox Brewhouse,Pottstown,PA
+2013,Belgian & French Style Ale,Bronze,California Ale,Telegraph Brewing Co.,Santa Barbara,CA
 2013,German Style Doppelbock or Eisbock,Gold,Samuel Adams Double Bock,Samuel Adams Brewing,Cincinnati,OH
 2013,German Style Doppelbock or Eisbock,Silver,Christian Moerlein Emancipator,Christian Moerlein Brewing Co.,Cincinnati,OH
 2013,German Style Doppelbock or Eisbock,Bronze,Resurrection Doppelbock,Red Lodge Ales,Red Lodge,MT
@@ -3203,9 +3203,9 @@ year,style,medal,beer,brewery,city,state
 2014,Wood- and Barrel-Aged Strong Beer,Gold,Lonesome Dove,Sun King Brewery,Indianapolis,IN
 2014,Wood- and Barrel-Aged Strong Beer,Silver,Barrel Aged 666: Sympathy for the Devil,Sun King Brewery,Indianapolis,IN
 2014,Wood- and Barrel-Aged Strong Beer,Bronze,Buffalo Bock,Minneapolis Town Hall Brewery,Minneapolis,MN
-2014,French- and Belgian Style Saison,Gold,Daily Wages,Brasserie Saint James,Reno,NV
-2014,French- and Belgian Style Saison,Silver,Un Atout,Beachwood BBQ & Brewing,Long Beach,CA
-2014,French- and Belgian Style Saison,Bronze,Saison-Brett,Boulevard Brewing,Kansas City,MO
+2014,French & Belgian Style Saison,Gold,Daily Wages,Brasserie Saint James,Reno,NV
+2014,French & Belgian Style Saison,Silver,Un Atout,Beachwood BBQ & Brewing,Long Beach,CA
+2014,French & Belgian Style Saison,Bronze,Saison-Brett,Boulevard Brewing,Kansas City,MO
 2014,American Style India Pale Ale,Gold,Breakside IPA,Breakside Brewery,Milwaukie,OR
 2014,American Style India Pale Ale,Silver,Senita,Half Acre Beer Co.,Chicago,IL
 2014,American Style India Pale Ale,Bronze,Bodhi,Columbus Brewing Co.,Columbus,OH
@@ -3335,9 +3335,9 @@ year,style,medal,beer,brewery,city,state
 2014,American Style Dark Lager,Gold,Lagerithm,Bottle Logic Brewing,Anaheim,CA
 2014,American Style Dark Lager,Silver,Old Virginia Dark,Devils Backbone Brewing,Lexington,VA
 2014,American Style Dark Lager,Bronze,Shiner Bock,Spoetzl Brewery,Shiner,TX
-2014,Belgian- and French Style Ale,Gold,Grisette,Sly Fox Brewhouse,Pottstown,PA
-2014,Belgian- and French Style Ale,Silver,The Citizen,DC Brau Brewing Co.,Washington,DC
-2014,Belgian- and French Style Ale,Bronze,Barren Hill Biere De Extra,Barren Hill Tavern and Brewery,Lafayette Hill,PA
+2014,Belgian & French Style Ale,Gold,Grisette,Sly Fox Brewhouse,Pottstown,PA
+2014,Belgian & French Style Ale,Silver,The Citizen,DC Brau Brewing Co.,Washington,DC
+2014,Belgian & French Style Ale,Bronze,Barren Hill Biere De Extra,Barren Hill Tavern and Brewery,Lafayette Hill,PA
 2014,Belgian Style Strong Specialty Ale,Gold,Squatters Hell’s Keep,Utah Brewers,Salt Lake City,UT
 2014,Belgian Style Strong Specialty Ale,Silver,Thor’s Hammer,Bastone Brewery,Royal Oak,MI
 2014,Belgian Style Strong Specialty Ale,Bronze,Golden Sabbath,Big Island Brewhaus,Kamuela,HI
@@ -3428,9 +3428,9 @@ year,style,medal,beer,brewery,city,state
 2015,Wood- and Barrel-Aged Strong Stout,Gold,Ctayt,AC Golden Brewing Co.,Golden,CO
 2015,Wood- and Barrel-Aged Strong Stout,Silver,Sherry Ink,Rhinegeist Brewing,Cincinnati,OH
 2015,Wood- and Barrel-Aged Strong Stout,Bronze,Dosvidanya,DESTIHL - Champaign,Champaign,IL
-2015,French- and Belgian Style Saison,Gold,Siren’s Lure,Fair Winds Brewing Co.,Lorton,VA
-2015,French- and Belgian Style Saison,Silver,Daily Wages,Brasserie Saint James,Reno,NV
-2015,French- and Belgian Style Saison,Bronze,Saison,URBN St. Brewing Co.,El Cajon,CA
+2015,French & Belgian Style Saison,Gold,Siren’s Lure,Fair Winds Brewing Co.,Lorton,VA
+2015,French & Belgian Style Saison,Silver,Daily Wages,Brasserie Saint James,Reno,NV
+2015,French & Belgian Style Saison,Bronze,Saison,URBN St. Brewing Co.,El Cajon,CA
 2015,German Style Sour Ale,Gold,Gose,Reuben's Brews,Seattle,WA
 2015,German Style Sour Ale,Silver,Volkssekt,Bend Brewing,Bend,OR
 2015,German Style Sour Ale,Bronze,Cucumber Crush,10 Barrel Brewing Co.,Bend,OR
@@ -3578,9 +3578,9 @@ year,style,medal,beer,brewery,city,state
 2015,Vienna Style Lager,Gold,Vienna Lager,Devils Backbone Brewing,Lexington,VA
 2015,Vienna Style Lager,Silver,Oktoberfest,Stoudts Brewing Co.,Adamstown,PA
 2015,Vienna Style Lager,Bronze,Firebrick,August Schell Brewing,New Ulm,MN
-2015,Belgian- and French Style Ale,Gold,Vintage Monks,Adelbert’s Brewery,Austin,TX
-2015,Belgian- and French Style Ale,Silver,Grisette,Sly Fox Brewhouse,Pottstown,PA
-2015,Belgian- and French Style Ale,Bronze,Petite Classique,The Commons Brewery,Portland,OR
+2015,Belgian & French Style Ale,Gold,Vintage Monks,Adelbert’s Brewery,Austin,TX
+2015,Belgian & French Style Ale,Silver,Grisette,Sly Fox Brewhouse,Pottstown,PA
+2015,Belgian & French Style Ale,Bronze,Petite Classique,The Commons Brewery,Portland,OR
 2015,Other Belgian Style Ale,Gold,Spangalang Table Beer,Spangalang Brewery,Denver,CO
 2015,Other Belgian Style Ale,Silver,Summer Rye Ale,Mayflower Brewing Co.,Plymouth,MA
 2015,Other Belgian Style Ale,Bronze,Witty Moron,Stone Brewing,San Diego,CA

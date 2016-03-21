@@ -1,6 +1,6 @@
 year,style,id,parent_id
 1999,American Dark Lager,37,
-1999,American Lager/Ale or Cream Ale,6,
+1999,American Lager or Cream Ale,6,
 1999,American Amber/Red Ale,46,
 1999,American Amber Lager,52,
 1999,American Brown Ale,44,
@@ -59,7 +59,7 @@ year,style,id,parent_id
 2000,American Brown Ale,67,44
 2000,American Dark Lager,94,37
 2000,American India Pale Ale,78,42
-2000,American Lager/Ale or Cream Ale,87,6
+2000,American Lager or Cream Ale,87,6
 2000,American Light Lager,92,12
 2000,American Pale Ale,74,13
 2000,American Premium Lager,75,19
@@ -115,7 +115,7 @@ year,style,id,parent_id
 2001,American Dark Lager,135,94
 2001,American India Pale Ale,160,78
 2001,American Lager,156,87
-2001,American Lager/Ale or Cream Ale,155,70
+2001,American Lager or Cream Ale,155,70
 2001,American Light Lager,130,92
 2001,American Pale Ale,111,74
 2001,American Premium Lager,128,75
@@ -170,7 +170,7 @@ year,style,id,parent_id
 2002,American Brown Ale,173,119
 2002,American India Pale Ale,199,160
 2002,American Lager,207,156
-2002,American Lager/Ale or Cream,165,155
+2002,American Lager or Cream Ale,165,155
 2002,American Light Lager,195,130
 2002,American Pale Ale,193,111
 2002,American Premium Lager,220,128
@@ -222,7 +222,7 @@ year,style,id,parent_id
 2002,Vienna Lager,168,147
 2002,Wood- & Barrel-Aged Beer,219,
 2003,American Dark Lager,267,169
-2003,American Lager/Ale or Cream Ale,240,165
+2003,American Lager or Cream Ale,240,165
 2003,"American ""Light"" Amber Lager",252,195
 2003,American Amber Lager,254,204
 2003,American Amber/Red Ale,257,174
@@ -286,7 +286,7 @@ year,style,id,parent_id
 2003,Strong Scotch Ale,286,170
 2003,Vienna Lager,272,168
 2003,Wood- & Barrel-Aged Beer,251,219
-2004,American Lager/Ale or Cream Ale,310,240
+2004,American Lager or Cream Ale,310,240
 2004,"American ""Light"" Amber Lager",304,252
 2004,American Amber Lager,300,254
 2004,American Amber/Red Ale,347,232
@@ -312,7 +312,7 @@ year,style,id,parent_id
 2004,Bock,343,248
 2004,Bohemian Pilsener,321,247
 2004,British Stout,342,244
-2004,Brown Porter,338,252
+2004,Brown Porter,338,253
 2004,Classic English Pale Ale,322,241
 2004,Classic Irish Dry Stout,308,231
 2004,Coffee Flavored Beer,340,276
@@ -353,7 +353,7 @@ year,style,id,parent_id
 2004,Strong Scotch Ale,318,286
 2004,Vienna Lager,354,272
 2004,Wood- & Barrel-Aged Beer,326,251
-2005,American Cream Ale or Lager,377,310
+2005,American Lager or Cream Ale,377,310
 2005,"American ""Light"" Amber Lager",415,304
 2005,American Amber/Red Ale,368,347
 2005,American Amber Lager,416,300
@@ -423,7 +423,7 @@ year,style,id,parent_id
 2005,Vienna Lager,388,354
 2005,Wood- & Barrel-Aged Beer,366,326
 2006,Aged Beer,432,366
-2006,American Cream Ale or Lager,457,377
+2006,American Lager or Cream Ale,457,377
 2006,American Amber/Red Ale,475,368
 2006,American Amber Lager,430,416
 2006,American Brown Ale,463,360
@@ -495,7 +495,7 @@ year,style,id,parent_id
 2007,American Amber Lager,550,430
 2007,American Amber/Red Ale,529,475
 2007,American Brown Ale,523,463
-2007,American Cream Ale or Lager,547,457
+2007,American Lager or Cream Ale,547,457
 2007,American Dark Lager,533,446
 2007,American Hefeweizen,535,473
 2007,American India Pale Ale,507,482
@@ -567,12 +567,12 @@ year,style,id,parent_id
 2007,Wood- & Barrel-Aged Sour Beer,499,425
 2007,Wood- & Barrel-Aged Strong Beer,500,471
 2008,Aged Beer,595,565
-2008,America Light Lager,609,554
+2008,American Light Lager,609,554
 2008,American-Belgo Ale,589,
 2008,American Amber Lager,570,550
 2008,American Amber/Red Ale,582,529
 2008,American Brown Ale,621,523
-2008,American Cream Ale or Lager,577,547
+2008,American Lager or Cream Ale,577,547
 2008,American Dark Lager,573,533
 2008,American Hefeweizen,603,535
 2008,American India Pale Ale,593,507
@@ -646,7 +646,7 @@ year,style,id,parent_id
 2009,American Amber Lager,720,570
 2009,American Amber/Red Ale,648,582
 2009,American Brown Ale,644,621
-2009,American Cream Ale or Lager,713,577
+2009,American Lager or Cream Ale,713,577
 2009,American Dark Lager,673,573
 2009,American India Pale Ale,666,593
 2009,American Lager or Premium Lager,716,608
@@ -731,7 +731,7 @@ year,style,id,parent_id
 2010,American or International Pilsener,781,676
 2010,American Pale Ale,726,691
 2010,American Sour Ale,754,718
-2010,American Specialty Lager or Cream Ale,788,714
+2010,American Lager or Cream Ale,788,714
 2010,American Stout,766,687
 2010,American Strong Pale Ale,730,671
 2010,American Wheat Beer,787,684
@@ -811,7 +811,7 @@ year,style,id,parent_id
 2011,American or International Pilsener,874,781
 2011,American Pale Ale,815,726
 2011,American Sour Ale,826,754
-2011,American Specialty Lager or Cream Ale or Lager,805,788
+2011,American Lager or Cream Ale,805,788
 2011,American Stout,810,766
 2011,American Strong Pale Ale,823,730
 2011,American Wheat Beer,869,787
@@ -894,7 +894,7 @@ year,style,id,parent_id
 2012,American or International Pilsener,897,874
 2012,American Pale Ale,930,815
 2012,American Sour Ale,898,826
-2012,American Specialty Lager or Cream Ale or Lager,946,805
+2012,American Lager or Cream Ale,946,805
 2012,American Stout,951,810
 2012,American Strong Pale Ale,928,823
 2012,American Wheat Beer,956,869
@@ -972,7 +972,7 @@ year,style,id,parent_id
 2013,American Black Ale,985,940
 2013,American Brett Beer,1039,927
 2013,American Brown Ale,991,959
-2013,American Cream Ale,989,946
+2013,American Lager or Cream Ale,989,946
 2013,American Dark Lager,1037,953
 2013,American India Pale Ale,1015,920
 2013,American Lager or Light Lager,987,954
@@ -1056,7 +1056,7 @@ year,style,id,parent_id
 2014,American Black Ale,1130,985
 2014,American Brett Beer,1080,1039
 2014,American Brown Ale,1063,991
-2014,American Cream Ale,1116,989
+2014,American Lager or Cream Ale,1116,989
 2014,American Dark Lager,1112,1037
 2014,American Fruit Beer,1120,1031
 2014,American India Pale Ale,1070,1015
@@ -1145,7 +1145,7 @@ year,style,id,parent_id
 2015,American Amber/Red Ale,1230,1072
 2015,American Black Ale,1167,1130
 2015,American Brown Ale,1149,1063
-2015,American Cream Ale,1164,1116
+2015,American Lager or Cream Ale,1164,1116
 2015,American Dark Lager,1186,1112
 2015,American Fruit Beer,1156,1120
 2015,American India Pale Ale,1196,1070

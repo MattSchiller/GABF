@@ -431,16 +431,21 @@ var Map = React.createClass({
   }
 });
 var Geneology = React.createClass({
-  getInitialState: function() { return { myID: 'geneology' }; },
+  getInitialState: function() {
+    return { myID: 'geneology',
+             margin: {top: 5, right: 2, bottom: 5, left: 20}
+            }
+  },
   componentDidMount: function() {
     var linVal, linStyle, linYear;
     window.addEventListener('resize', this._handleResize);
     
     if(typeof this.props.destination !== "undefined" && typeof this.props.destination.year !== "undefined") {
       linStyle = this.props.destination.style;
-      linYear = this.props.destination.year
+      linYear = this.props.destination.year;
       linVal = this.props.lineageData[linStyle + linYear];
     }
+    
     this._drawGenes(linVal, linStyle, linYear);
     this._nodeScrollMain(this.props.destination);
   },
@@ -448,10 +453,9 @@ var Geneology = React.createClass({
     window.removeEventListener('resize', this._handleResize);
   },
   _handleResize: function() {
-    var margin = {top: 20, right: 20, bottom: 20, left: 30},
-        height = parseInt(d3.select("#"+this.state.myID).style('height')) - margin.top - margin.bottom;
+    var height = parseInt(d3.select("#"+this.state.myID).style('height')) - this.state.margin.top - this.state.margin.bottom;
     d3.select('svg')
-      .attr("height", height + margin.top + margin.bottom);
+      .attr("height", height + this.state.margin.top + this.state.margin.bottom);
   },
   
   _nodeScrollMain: function(d) {
@@ -473,8 +477,7 @@ var Geneology = React.createClass({
   },
   
   _drawGenes: function(linVal, linStyle, linYear) {
-    var margin = {top: 5, right: 2, bottom: 5, left: 20},
-        TEXT_ID_LABEL = 'LABEL',
+    var TEXT_ID_LABEL = 'LABEL',
         width = (MAX_YEAR - MIN_YEAR + 2) * YEAR_WIDTH,
         height = parseInt(d3.select("#"+this.state.myID).style('height'));// - margin.top - margin.bottom;
     
@@ -485,7 +488,7 @@ var Geneology = React.createClass({
     var awardData = this.props.awardData;
     
     var tree = d3.layout.tree()
-                .size([height, width]);
+                .size([height - 30 , width]);   //30 for offset of year labels
     
     var diagonal = d3.svg.diagonal()
                     .projection(function(d) { return [d.y, d.x]; });
@@ -495,7 +498,7 @@ var Geneology = React.createClass({
                   .attr("width", width)// + margin.right + margin.left)
                   .attr("height", height)// + margin.top + margin.bottom)
                 .append("g")
-                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                  .attr("transform", "translate(" + this.state.margin.left + "," + this.state.margin.top + ")");
     
     //inits our data abstraction
     root = this.props.data[0];
@@ -517,35 +520,22 @@ var Geneology = React.createClass({
         myD.children = myD._children;
         myD._children = null;
         update(myD);
-        nodeScroll(myD);
-        if (myD.children[0].style == myD.style) hideText(TEXT_ID_LABEL + d.id);
-  
-        setTimeout( function() {
+        //setTimeout( function() {
           myD.children.forEach(expand);
-        }, YEAR_DELAY);
-      }
+        //}, YEAR_DELAY);
+        maybeHideText(myD);
+      } else { if (linVal == undefined) click(myD); }    //Scroll to end on expand
     }
     function weakExpand(d) {
       if (d.lineage !== linVal) return;
-      if (d._children) {
-        d.children = d._children;
-        d._children = null;
-        update(d);
-        if (d.children[0].style == d.style) {
-          if (d.style !== linStyle || d.year !== linYear) hideText(TEXT_ID_LABEL + d.id);
-          else __showDetails(d);
-        }
-        d.children.forEach(weakExpand);
-      }
+      if (d.children) d.children.forEach(weakExpand);
     }
     
     //collapses everything
     if (linVal == undefined) root.children.forEach(collapse);
-    else root.children.forEach(weakExpand);           //Handles a click-through from Map
+    else root.children.forEach(expand);           //Handles a click-through from Map
     
-    //var colorMax = [255, 0, 0], colorMin = [0, 0, 255];
-    
-    drawAxis();
+    drawAxis(this.state.margin);
     update(root);
     
     //NODES THAT SHOULD BE EXPANDED ARE NOT BEING; FIX!
@@ -557,9 +547,21 @@ var Geneology = React.createClass({
       d3.select('#'+id).select('text')
         .style('visibility', 'visible');
     }
+    function maybeHideText(d) {
+      if (d.children && d.children[0].style == d.style) {
+        if (d.lineage !== d.id) { //You're not the root of your lineage
+          if (linVal == undefined || (linStyle !== d.style || linYear !== d.year) ) {//You're not the map click-through
+            hideText(TEXT_ID_LABEL + d.id);
+            return true;
+          } else { __showDetails(d); }  //You ARE the map-click-through, let's show them details!
+        }
+      }
+      return false;
+    }
     function hideText(id) {
       d3.select('#'+id).select('text')
-        .style('visibility', 'hidden');
+        .style('visibility', 'hidden')
+        .attr('generic', function(d) {console.log('hiding d:', d); return '5';});
     }
     
     function update(source) {
@@ -591,15 +593,13 @@ var Geneology = React.createClass({
                                     })
           .attr('id', function(d) { return TEXT_ID_LABEL + d.id; } )
           .on('mouseout', function(d) {
-                                      if (d.children && d.children[0].style == d.style) hideText(TEXT_ID_LABEL + d.id);
+                                      maybeHideText(d);
                                     })
           ;
           
       nodeEnter.append("circle")
           .attr('class', function(d) {
-            let shown = true;
-            if (linVal !== undefined && d.lineage !== linVal) shown = false;
-            return (d.style === 'root' || !shown) ? 'hidden' : 'node'; })
+            return (d.style === 'root') ? 'hidden' : 'node'; })
           .attr("r", 1e-6)
           .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
     
@@ -609,11 +609,7 @@ var Geneology = React.createClass({
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
           .attr('class', function(d) {
-            let shown = true;
-            if ( (linVal !== undefined) // Click through from Map
-               && (d.lineage !== linVal) ) // I'm not in the correct lineage
-                shown = false;
-            return (d.style === 'root' || !shown) ? 'hidden' : ''; })
+            return (d.style === 'root' || maybeHideText(d) ) ? 'hidden' : ''; })
           .text(function(d) { return d.style; })
           .style('background-color', 'green')
           //.style("fill-opacity", 1e-6);
@@ -624,7 +620,7 @@ var Geneology = React.createClass({
     
       // Transition existing nodes to their new position.
       var nodeUpdate = node.transition()
-          .duration(duration)
+          .duration(0)//duration)
           .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
     
       nodeUpdate.select("circle")
@@ -654,9 +650,7 @@ var Geneology = React.createClass({
       link.enter().insert("path", "g")
           .attr("class", "link")
           .attr('class', function(d) {
-            let shown = true;
-            if (linVal !== undefined && d.source.lineage !== linVal) shown = false;
-            return (d.source.style === 'root' || !shown) ? 'link hidden' : 'link'; })
+            return (d.source.style === 'root') ? 'link hidden' : 'link'; })
           .attr('stroke', 'green')
           .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
@@ -665,7 +659,7 @@ var Geneology = React.createClass({
     
       // Transition links to their new position.
       link.transition()
-          .duration(duration)
+          .duration(0)//duration)
           .attr("d", diagonal);
     
       // Transition exiting nodes to the parent's new position.
@@ -683,7 +677,7 @@ var Geneology = React.createClass({
         d.y0 = d.y;
       });
     }
-    function drawAxis() {
+    function drawAxis(margin) {
       let offset = margin.left-20;
       let z = offset + YEAR_WIDTH;
       while (z < width) {
@@ -725,6 +719,7 @@ var Geneology = React.createClass({
     
     // Show children on click, show details, and scroll to parent
     function click(d) {
+      //console.log('clicking, d:', d);
       nodeScroll(d);
       __showDetails(d);
     }
@@ -738,11 +733,9 @@ var Geneology = React.createClass({
       }
       
       var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
-      window.dispatchEvent(event);
+        window.dispatchEvent(event);
     }
   },
-  
-  
   
   render: function() {
     return (
@@ -755,8 +748,9 @@ var Geneology = React.createClass({
 var MultiGraphBox = React.createClass({
   getInitialState: function() {
     return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
-             graphShowing: 'Geneology',
-             geneDestination: undefined
+             graphShowing: 'Awards',
+             geneDestination: undefined,
+             trimmedGenes: this._trimGenes( {}, this.props.geneData)
             }
   },
   
@@ -765,11 +759,37 @@ var MultiGraphBox = React.createClass({
         myDestination = { year: e.currentTarget.getAttribute('data-year'),
                           style: e.currentTarget.getAttribute('data-style') };
     
-    console.log('e.currentTarget:', e.currentTarget);
-    console.log('myDestination:', myDestination, 'year:', myDestination.year);
-    this.setState({ graphShowing: myGraph, geneDestination: myDestination });
+    //console.log('e.currentTarget:', e.currentTarget);
+    //console.log('_changeGraph(), myDestination:', myDestination, 'year:', myDestination.year);
+    this.setState({ graphShowing: myGraph,
+                    geneDestination: myDestination,
+                    trimmedGenes: this._trimGenes(myDestination, this.props.geneData) });
+                    
     let event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
       window.dispatchEvent(event);
+  },
+  
+  _trimGenes: function(myDestination, geneData) {
+    if (myDestination.style == null) return geneData;
+    
+    var myRoot = {
+      id: geneData[0].id,
+      level: geneData[0].level,
+      style: geneData[0].style,
+      depth: geneData[0].depth
+      };
+    
+    //console.log('geneData:', geneData, 'myRoot:', myRoot);
+    
+    var linStyle = myDestination.style,
+        linYear = myDestination.year,
+        linVal = this.props.lineageData[linStyle + linYear],
+    //Create new children with lineage-only nodes
+        linChildren = geneData[0].children.filter(function(child) { return (child.lineage == linVal); } );
+
+    myRoot.children = linChildren;
+    
+    return { 0: myRoot }
   },
   
   render: function() {
@@ -789,7 +809,7 @@ var MultiGraphBox = React.createClass({
       myNonGraph = ( <div> <FilterBox filters={this.props.filters} notify={this.props.notify} />
                      <DetailsBox type={this.state.graphShowing} toGeneology={this._changeGraph} /> </div>);
     } else if (this.state.graphShowing === 'Geneology') {
-      myGraph = <Geneology data={this.props.geneData} awardData={this.props.awardData} lineageData={this.props.lineageData}
+      myGraph = <Geneology data={this.state.trimmedGenes} awardData={this.props.awardData} lineageData={this.props.lineageData}
           destination={this.state.geneDestination} />;
       myNonGraph = ( <DetailsBox type={this.state.graphShowing} /> );
     }
@@ -834,13 +854,17 @@ var DetailsBox = React.createClass({
         return ( <div id='detailsBox' >
           {
             this.state.content.map(function(award, i) {
+              let medalClass = award.medal;
               return (
-                <div key={i} className="detailBoxItem" data-name={'Geneology'} data-year={award.year} data-style={award.style} onClick={toGenes} >
-                  <b>Year:</b>     {award.year} <br/>
-                  <b>Medal:</b>    {award.medal} <br/>
-                  <b>Style:</b>    {award.style} <br/>
-                  <b>Beer:</b>     {award.beer} <br/>
-                  <b>Brewery:</b>  {award.brewery}
+                <div key={i} className={"detailBoxItem "+medalClass} data-name={'Geneology'} data-year={award.year}
+                    data-style={award.style} onClick={toGenes} >
+                  
+                  <span className='detailYear'> {"'"+award.year.slice(-2)} </span>
+                  <span className='detailStyle'>{award.style}</span> <br/>
+                    
+                  <span className='detailBeer'>{award.beer}</span> <br/>
+                  <span className='detailBrewery'>{award.brewery}</span>
+                  
                 </div>
               );
             })
@@ -851,21 +875,21 @@ var DetailsBox = React.createClass({
         if (this.state.content.length === 0) myContent = <div id='detailsBox' >Click a beer node to see awards for that year</div>
         else {
           let myAwards = this.state.content.map(function(award, i) {
+                let medalClass = award.medal;
                 return (
-                  <div key={i} className="detailBoxItem" >
-                    <b>Medal:</b>    {award.medal} <br/>
-                    <b>Beer:</b>     {award.beer} <br/>
-                    <b>Brewery:</b>  {award.brewery}
+                  <div key={i} className={"detailBoxItem "+medalClass} >
+                    <span className='detailBeer'>{award.beer} </span> <br/>
+                    <span className='detailBrewery'>{award.brewery}</span>
                   </div>
                 );
               }),
               myYear = this.state.content[0].year,
               myStyle = this.state.content[0].style;
-              console.log('this.state.content[0].year:', this.state.content[0].year);
+              //console.log('this.state.content[0].year:', this.state.content[0].year);
           myContent = ( <div id='detailsBox'>
-                          <div id='detailsBox'>
-                            <b>Year:</b> {myYear} <br/>
-                            <b>Style:</b> {myStyle} <br/>
+                          <div className='detailBoxItem geneDetailHeader'>
+                            <span className='detailStyle'> {myStyle} </span> <br/>
+                            <span className='headerYear'> {myYear} </span>
                           </div>
                           {myAwards}
                         </div> );

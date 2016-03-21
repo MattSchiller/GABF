@@ -220,7 +220,7 @@ year,style,id,parent_id
 2002,Strong Scotch Ale,170,161
 2002,Sweet Stout,187,152
 2002,Vienna Lager,168,147
-2002,Wood- and Barrel-Aged Beer,219,
+2002,Wood- & Barrel-Aged Beer,219,
 2003,American Dark Lager,267,169
 2003,American Lager/Ale or Cream Ale,240,165
 2003,"American ""Light"" Amber Lager",252,195
@@ -285,7 +285,7 @@ year,style,id,parent_id
 2003,Specialty Honey Beer,287,206
 2003,Strong Scotch Ale,286,170
 2003,Vienna Lager,272,168
-2003,Wood- and Barrel-Aged Beer,251,219
+2003,Wood- & Barrel-Aged Beer,251,219
 2004,American Lager/Ale or Cream Ale,310,240
 2004,"American ""Light"" Amber Lager",304,252
 2004,American Amber Lager,300,254
@@ -352,7 +352,7 @@ year,style,id,parent_id
 2004,Specialty Honey Beer,330,287
 2004,Strong Scotch Ale,318,286
 2004,Vienna Lager,354,272
-2004,Wood- and Barrel-Aged Beer,326,251
+2004,Wood- & Barrel-Aged Beer,326,251
 2005,American Cream Ale or Lager,377,310
 2005,"American ""Light"" Amber Lager",415,304
 2005,American Amber/Red Ale,368,347
@@ -421,7 +421,7 @@ year,style,id,parent_id
 2005,Specialty Honey Beer,412,330
 2005,Strong Scotch Ale,401,318
 2005,Vienna Lager,388,354
-2005,Wood- and Barrel-aged Beer,366,326
+2005,Wood- & Barrel-Aged Beer,366,326
 2006,Aged Beer,432,366
 2006,American Cream Ale or Lager,457,377
 2006,American Amber/Red Ale,475,368
@@ -489,8 +489,8 @@ year,style,id,parent_id
 2006,Strong Scotch Ale,487,401
 2006,Sweet Stout,437,
 2006,Vienna Lager,459,388
-2006,Wood- and Barrel-aged Beer,425,366
-2006,Wood- and Barrel-Aged Strong Beer,471,366
+2006,Wood- & Barrel-Aged Beer,425,366
+2006,Wood- & Barrel-Aged Strong Beer,471,366
 2007,Aged Beer,565,432
 2007,American Amber Lager,550,430
 2007,American Amber/Red Ale,529,475
@@ -563,9 +563,9 @@ year,style,id,parent_id
 2007,Strong Scotch Ale,540,487
 2007,Sweet Stout,516,437
 2007,Vienna Lager,506,459
-2007,Wood- and Barrel-Aged Beer,510,425
-2007,Wood- and Barrel-Aged Sour Beer,499,425
-2007,Wood- and Barrel-Aged Strong Beer,500,471
+2007,Wood- & Barrel-Aged Beer,510,425
+2007,Wood- & Barrel-Aged Sour Beer,499,425
+2007,Wood- & Barrel-Aged Strong Beer,500,471
 2008,Aged Beer,595,565
 2008,America Light Lager,609,554
 2008,American-Belgo Ale,589,
@@ -638,9 +638,9 @@ year,style,id,parent_id
 2008,Strong Scotch Ale,587,540
 2008,Sweet Stout,598,516
 2008,Vienna Lager,636,506
-2008,Wood- and Barrel-Aged Beer,574,510
-2008,Wood- and Barrel-Aged Sour Beer,635,499
-2008,Wood- and Barrel-Aged Strong Beer,629,500
+2008,Wood- & Barrel-Aged Beer,574,510
+2008,Wood- & Barrel-Aged Sour Beer,635,499
+2008,Wood- & Barrel-Aged Strong Beer,629,500
 2009,Aged Beer,651,595
 2009,American-Belgo Ale,706,589
 2009,American Amber Lager,720,570
@@ -716,9 +716,9 @@ year,style,id,parent_id
 2009,Specialty Honey Beer,703,585
 2009,Sweet Stout,678,598
 2009,Vienna Lager,662,636
-2009,Wood- and Barrel-Aged Beer,689,574
-2009,Wood- and Barrel-Aged Sour Beer,661,635
-2009,Wood- and Barrel-Aged Strong Beer,646,629
+2009,Wood- & Barrel-Aged Beer,689,574
+2009,Wood- & Barrel-Aged Sour Beer,661,635
+2009,Wood- & Barrel-Aged Strong Beer,646,629
 2010,Aged Beer,721,651
 2010,American-Belgo Ale,759,706
 2010,American Amber Lager,765,720
@@ -794,10 +794,10 @@ year,style,id,parent_id
 2010,Specialty Honey Beer,795,703
 2010,Sweet Stout,731,678
 2010,Vienna Lager,740,662
-2010,Wood- and Barrel-Aged Beer,772,689
-2010,Wood- and Barrel-Aged Sour Beer,771,661
-2010,Wood- and Barrel-Aged Strong Beer,785,646
-2010,Wood- and Barrel-Aged Strong Stout,764,646
+2010,Wood- & Barrel-Aged Beer,772,689
+2010,Wood- & Barrel-Aged Sour Beer,771,661
+2010,Wood- & Barrel-Aged Strong Beer,785,646
+2010,Wood- & Barrel-Aged Strong Stout,764,646
 2011,Aged Beer,825,721
 2011,American-Belgo Ale,816,759
 2011,American Amber Lager,827,765
@@ -877,10 +877,10 @@ year,style,id,parent_id
 2011,Specialty Honey Beer,864,795
 2011,Sweet Stout,871,731
 2011,Vienna Lager,814,740
-2011,Wood- and Barrel-Aged Beer,803,772
-2011,Wood- and Barrel-Aged Sour Beer,859,771
-2011,Wood- and Barrel-Aged Strong Beer,863,785
-2011,Wood- and Barrel-Aged Strong Stout,817,764
+2011,Wood- & Barrel-Aged Beer,803,772
+2011,Wood- & Barrel-Aged Sour Beer,859,771
+2011,Wood- & Barrel-Aged Strong Beer,863,785
+2011,Wood- & Barrel-Aged Strong Stout,817,764
 2012,Aged Beer,899,825
 2012,American-Belgo Ale,964,816
 2012,American Amber Lager,924,827
@@ -961,10 +961,10 @@ year,style,id,parent_id
 2012,Specialty Honey Beer,942,864
 2012,Sweet Stout,895,871
 2012,Vienna Lager,883,814
-2012,Wood- and Barrel-Aged Beer,931,803
-2012,Wood- and Barrel-Aged Sour Beer,892,859
-2012,Wood- and Barrel-Aged Strong Beer,907,863
-2012,Wood- and Barrel-Aged Strong Stout,947,817
+2012,Wood- & Barrel-Aged Beer,931,803
+2012,Wood- & Barrel-Aged Sour Beer,892,859
+2012,Wood- & Barrel-Aged Strong Beer,907,863
+2012,Wood- & Barrel-Aged Strong Stout,947,817
 2013,Aged Beer,1043,899
 2013,American-Belgo Ale,1027,964
 2013,American Amber Lager,969,924
@@ -1045,10 +1045,10 @@ year,style,id,parent_id
 2013,Specialty Honey Beer,1007,942
 2013,Sweet Stout or Cream Stout,1019,895
 2013,Vienna Lager,1033,883
-2013,Wood- and Barrel-Aged Beer,1022,931
-2013,Wood- and Barrel-Aged Sour Beer,968,892
-2013,Wood- and Barrel-Aged Strong Beer,982,907
-2013,Wood- and Barrel-Aged Strong Stout,995,947
+2013,Wood- & Barrel-Aged Beer,1022,931
+2013,Wood- & Barrel-Aged Sour Beer,968,892
+2013,Wood- & Barrel-Aged Strong Beer,982,907
+2013,Wood- & Barrel-Aged Strong Stout,995,947
 2014,Aged Beer,1104,1043
 2014,American-Belgo Ale,1100,1027
 2014,American Amber Lager,1101,969
@@ -1135,10 +1135,10 @@ year,style,id,parent_id
 2014,Specialty Honey Beer,1085,1007
 2014,Sweet Stout or Cream Stout,1087,1019
 2014,Vienna Lager,1105,1033
-2014,Wood- and Barrel-Aged Beer,1132,1022
-2014,Wood- and Barrel-Aged Sour Beer,1064,968
-2014,Wood- and Barrel-Aged Strong Beer,1068,982
-2014,Wood- and Barrel-Aged Strong Stout,1078,995
+2014,Wood- & Barrel-Aged Beer,1132,1022
+2014,Wood- & Barrel-Aged Sour Beer,1064,968
+2014,Wood- & Barrel-Aged Strong Beer,1068,982
+2014,Wood- & Barrel-Aged Strong Stout,1078,995
 2015,Aged Beer,1223,1104
 2015,American-Belgo Ale,1227,1100
 2015,American Amber Lager,1191,1101
@@ -1227,7 +1227,7 @@ year,style,id,parent_id
 2015,Specialty Beer,1215,1094
 2015,Sweet Stout or Cream Stout,1148,1087
 2015,Vienna Lager,1193,1105
-2015,Wood- and Barrel-Aged Beer,1210,1132
-2015,Wood- and Barrel-Aged Sour Beer,1147,1064
-2015,Wood- and Barrel-Aged Strong Beer,1188,1068
-2015,Wood- and Barrel-Aged Strong Stout,1143,1078
+2015,Wood- & Barrel-Aged Beer,1210,1132
+2015,Wood- & Barrel-Aged Sour Beer,1147,1064
+2015,Wood- & Barrel-Aged Strong Beer,1188,1068
+2015,Wood- & Barrel-Aged Strong Stout,1143,1078

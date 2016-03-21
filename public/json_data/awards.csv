@@ -8,15 +8,15 @@ year,style,medal,beer,brewery,city,state
 1999,American Specialty Lager,Gold,Brewery Hill Pocono Pilsner,The Lion Brewery,Wilkes-Barre,PA
 1999,American Specialty Lager,Silver,Mickey's Ice,Mickey's Brewing,Milwaukee,WI
 1999,American Specialty Lager,Bronze,St. Ides Malt Liquor,St. Ides Brewing,Fogelsville,PA
-1999,Belgian Ales,Gold,Damnation Belgian Ale,Russian River Brewing,Guerneville,CA
-1999,Belgian Ales,Silver,Trident Tripel,Angelic Brewing,Madison,WI
-1999,Belgian Ales,Bronze,Saison,Brasserie Monx Ltd.,Seattle,WA
+1999,Belgian Ale,Gold,Damnation Belgian Ale,Russian River Brewing,Guerneville,CA
+1999,Belgian Ale,Silver,Trident Tripel,Angelic Brewing,Madison,WI
+1999,Belgian Ale,Bronze,Saison,Brasserie Monx Ltd.,Seattle,WA
 1999,Herb and Spice Beer,Gold,Cerveza Chilibeso,Great Basin Brewing,Sparks,NV
 1999,Herb and Spice Beer,Silver,Special B,Brew Moon,Boston,MA
 1999,Herb and Spice Beer,Bronze,Great Pumpkin Spiced Ale,Cottonwood Brewery,Boone,NC
-1999,American Lager/Ale or Cream Ale,Gold,Liebotschaner Cream Ale,The Lion Brewery,Wilkes-Barre,PA
-1999,American Lager/Ale or Cream Ale,Silver,Brew 22,Mill Creek Brewpub,Walla Walla,WA
-1999,American Lager/Ale or Cream Ale,Bronze,Gotham City Gold,Commonwealth Brewing,New York,NY
+1999,American Lager or Cream Ale,Gold,Liebotschaner Cream Ale,The Lion Brewery,Wilkes-Barre,PA
+1999,American Lager or Cream Ale,Silver,Brew 22,Mill Creek Brewpub,Walla Walla,WA
+1999,American Lager or Cream Ale,Bronze,Gotham City Gold,Commonwealth Brewing,New York,NY
 1999,American Lager,Gold,Old Milwaukee,The Stroh Brewery Company,Fogelsville,PA
 1999,American Lager,Silver,Schmidt's,G. Heileman Brewing,Fogelsville,PA
 1999,American Lager,Bronze,Miller High Life,Miller Brewing,Milwaukee,WI
@@ -44,15 +44,15 @@ year,style,medal,beer,brewery,city,state
 1999,Munich Helles,Gold,Velas Helles,Calhoun's Restaurant,Knoxville,TN
 1999,Munich Helles,Silver,Lucknow Munich-style Lager,Castle Springs Brewing,Moultonborough,NH
 1999,Munich Helles,Bronze,Penn Gold,Pennsylvania Brewing,Pittsburgh,PA
-1999,American Wheat Ale or Lager,Gold,Diamondback Wheat,Elk Grove Brewery,Elk Grove,CA
-1999,American Wheat Ale or Lager,Silver,Shiner Honey Wheat,Spoetzl Brewery,Shiner,TX
-1999,American Wheat Ale or Lager,Bronze,Stoddard's American Wheat,Stoddard's Brewhouse and Eatery,Sunnyvale,CA
+1999,American Wheat Beer,Gold,Diamondback Wheat,Elk Grove Brewery,Elk Grove,CA
+1999,American Wheat Beer,Silver,Shiner Honey Wheat,Spoetzl Brewery,Shiner,TX
+1999,American Wheat Beer,Bronze,Stoddard's American Wheat,Stoddard's Brewhouse and Eatery,Sunnyvale,CA
 1999,Scottish Ale,Gold,No Medal Awarded,,,
 1999,Scottish Ale,Silver,Tilted Kilt,Pyramid Breweries,Seattle,WA
 1999,Scottish Ale,Bronze,Kilt Lifter Scottish Amber,Four Peaks Brewing,Tempe,AZ
-1999,European Dark/Münchner Dunkel,Gold,Atwater Dunkel,Atwater Block Brewery,Detroit,MI
-1999,European Dark/Münchner Dunkel,Silver,Black Forest Dark,HofbrauHaus Brewery and Biergarten at Station Casino,Kansas City,MO
-1999,European Dark/Münchner Dunkel,Bronze,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
+1999,Münchner Dunkel,Gold,Atwater Dunkel,Atwater Block Brewery,Detroit,MI
+1999,Münchner Dunkel,Silver,Black Forest Dark,HofbrauHaus Brewery and Biergarten at Station Casino,Kansas City,MO
+1999,Münchner Dunkel,Bronze,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
 1999,American Premium Lager,Gold,Miller Genuine Draft,Miller Brewing,Milwaukee,WI
 1999,American Premium Lager,Silver,Dundee's Classic Lager,High Falls Brewing,Rochester,NY
 1999,American Premium Lager,Bronze,Henry Weinhard's Private Reserve,Blitz-Weinhard Brewing,Tumwater,WA
@@ -62,9 +62,9 @@ year,style,medal,beer,brewery,city,state
 1999,Golden Ale/Canadian Ale,Gold,Blonde Ale,Goose Island Beer Co.,Chicago,IL
 1999,Golden Ale/Canadian Ale,Silver,Golden Wheat Ale,Russian River Brewing,Guerneville,CA
 1999,Golden Ale/Canadian Ale,Bronze,Blonde Ale,Powerhouse Brewing,Sebastopol,CA
-1999,German Kölsch/Köln Kölsch,Gold,Skinny Atlas Light,Empire Brewery of Rochester,Rochester,NY
-1999,German Kölsch/Köln Kölsch,Silver,Osage Golden Wheat,Two Rows Restaurant & Brewery,Dallas,TX
-1999,German Kölsch/Köln Kölsch,Bronze,Red Lodge Reserve,Red Lodge Ales,Red Lodge,MT
+1999,German Kölsch,Gold,Skinny Atlas Light,Empire Brewery of Rochester,Rochester,NY
+1999,German Kölsch,Silver,Osage Golden Wheat,Two Rows Restaurant & Brewery,Dallas,TX
+1999,German Kölsch,Bronze,Red Lodge Reserve,Red Lodge Ales,Red Lodge,MT
 1999,German Wheat Ale,Gold,Hoffbrau Hefeweizen,Arizona Roadhouse and Brewery,Tempe,AZ
 1999,German Wheat Ale,Silver,Double Play Dunkel Weizen,Leinenkugel Brewing,Phoenix,AZ
 1999,German Wheat Ale,Bronze,Wild Pitch Hefeweizen,Sandlot Brewery,Denver,CO
@@ -176,9 +176,9 @@ year,style,medal,beer,brewery,city,state
 2000,Specialty Beer,Gold,Aztec Amaranth Ale,Bulldog Brewing Co.,Fresno,CA
 2000,Specialty Beer,Silver,Captain Smith's Rye,Titanic Brewing,Coral Gables,FL
 2000,Specialty Beer,Bronze,Pullman Brown Ale,Flossmoor Station,Flossmoor,IL
-2000,Belgian Ales,Gold,Abbey Belgian Ale,New Belgium Brewing,Fort Collins,CO
-2000,Belgian Ales,Silver,Victoria's Triple Belgian,Humboldt Brewery,Arcata,CA
-2000,Belgian Ales,Bronze,Bridal Veil Ale,BJ's Pizza Grill & Brewery,Brea,CA
+2000,Belgian Ale,Gold,Abbey Belgian Ale,New Belgium Brewing,Fort Collins,CO
+2000,Belgian Ale,Silver,Victoria's Triple Belgian,Humboldt Brewery,Arcata,CA
+2000,Belgian Ale,Bronze,Bridal Veil Ale,BJ's Pizza Grill & Brewery,Brea,CA
 2000,English India Pale Ale,Gold,Goose Island IPA,Goose Island Beer Co.,Chicago,IL
 2000,English India Pale Ale,Silver,Hop Daddy IPA,Main Street Brewery,Corona,CA
 2000,English India Pale Ale,Bronze,Renegade IPA,Buckhead Brewery & Grill,Stockbridge,GA
@@ -248,18 +248,18 @@ year,style,medal,beer,brewery,city,state
 2000,German Märzen/Oktoberfest,Gold,Red Oktober,Salem Beer Works,Salem,MA
 2000,German Märzen/Oktoberfest,Silver,Great Dane Oktoberfest,The Great Dane Pub,Madison,WI
 2000,German Märzen/Oktoberfest,Bronze,Bittings Bad Boy,J.J. Bitting Brewing Co.,Woodbridge,NJ
-2000,American Wheat Ale or Lager,Gold,High Rollers Wheat Beer,Anderson Valley Brewing,Boonville,CA
-2000,American Wheat Ale or Lager,Silver,Weiss Guy Wheat,Alcatraz Brewing Co.,Littleton,CO
-2000,American Wheat Ale or Lager,Bronze,Choc,Pete's Place,Krebs,OK
+2000,American Wheat Beer,Gold,High Rollers Wheat Beer,Anderson Valley Brewing,Boonville,CA
+2000,American Wheat Beer,Silver,Weiss Guy Wheat,Alcatraz Brewing Co.,Littleton,CO
+2000,American Wheat Beer,Bronze,Choc,Pete's Place,Krebs,OK
 2000,Bock,Gold,Framingham Bock,John Harvard's Brew House,Boston,MA
 2000,Bock,Silver,Mad Brewer Maibock,Church Brew Works,Pittsburgh,PA
 2000,Bock,Bronze,Maibock,Iron Hill Brewery,Newark,DE
 2000,Munich Helles,Gold,Golden Eagle Lager,Rocky River Brewing,Sevierville,TN
 2000,Munich Helles,Silver,Helles or High Water,Brewzzi,Boca Raton,FL
 2000,Munich Helles,Bronze,Lodestone Lager,Iron Hill Brewery,Media,PA
-2000,American Lager/Ale or Cream Ale,Gold,California Gold,Stuft Pizza & Brewing Co.,San Diego,CA
-2000,American Lager/Ale or Cream Ale,Silver,Lodgepole Light,Prescott Brewing,Prescott,AZ
-2000,American Lager/Ale or Cream Ale,Bronze,Lucknow Blonde Ale,Castle Springs Brewing,Moultonborough,NH
+2000,American Lager or Cream Ale,Gold,California Gold,Stuft Pizza & Brewing Co.,San Diego,CA
+2000,American Lager or Cream Ale,Silver,Lodgepole Light,Prescott Brewing,Prescott,AZ
+2000,American Lager or Cream Ale,Bronze,Lucknow Blonde Ale,Castle Springs Brewing,Moultonborough,NH
 2000,English Bitter,Gold,Cutthroat Ale,Uinta Brewing,Salt Lake City,UT
 2000,English Bitter,Silver,8th Street Ale,Four Peaks Brewing,Tempe,AZ
 2000,English Bitter,Bronze,Long Valley Best Bitter,Long Valley Pub,Long Valley,NJ
@@ -275,9 +275,9 @@ year,style,medal,beer,brewery,city,state
 2000,American Light Lager,Gold,Bud Light,Anheuser-Busch,St. Louis,MO
 2000,American Light Lager,Silver,Stroh Light,Stroh Brewery,Fogelsville,PA
 2000,American Light Lager,Bronze,Schaefer Light,Schaefer Brewing,Fogelsville,PA
-2000,European Dark/Münchner,Gold,Black Forest,Valhalla Microbrewery,Pittsburgh,PA
-2000,European Dark/Münchner,Silver,Slam Dunkel,Great Basin Brewing,Sparks,NV
-2000,European Dark/Münchner,Bronze,No Medal Awarded,,,
+2000,Münchner Dunkel,Gold,Black Forest,Valhalla Microbrewery,Pittsburgh,PA
+2000,Münchner Dunkel,Silver,Slam Dunkel,Great Basin Brewing,Sparks,NV
+2000,Münchner Dunkel,Bronze,No Medal Awarded,,,
 2000,American Dark Lager,Gold,H. Saxer Dark Lager,Portland Brewing,Portland,OR
 2000,American Dark Lager,Silver,Henry Weinhard's Dark,Blitz-Weinhard Brewing,Tumwater,WA
 2000,American Dark Lager,Bronze,Michelob Amber Bock,Anheuser-Busch,St. Louis,MO
@@ -287,9 +287,9 @@ year,style,medal,beer,brewery,city,state
 2000,Fruit Beers (Other than Raspberry),Gold,Fuzzy Buzz Peach Ale,Copper Tank Brewing Co.,Dallas,TX
 2000,Fruit Beers (Other than Raspberry),Silver,Orange Grove Ale,Craftsman Brewing Co.,Pasadena,CA
 2000,Fruit Beers (Other than Raspberry),Bronze,One Ton Blackberry Ale,Third Street Ale Works,Santa Rosa,CA
-2000,German Kölsch/Köln Kölsch,Gold,Alcatraz Kolsch,Alcatraz Brewing Co.,Indianapolis,IN
-2000,German Kölsch/Köln Kölsch,Silver,Triple Screw Light Ale,Titanic Brewing,Coral Gables,FL
-2000,German Kölsch/Köln Kölsch,Bronze,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
+2000,German Kölsch,Gold,Alcatraz Kolsch,Alcatraz Brewing Co.,Indianapolis,IN
+2000,German Kölsch,Silver,Triple Screw Light Ale,Titanic Brewing,Coral Gables,FL
+2000,German Kölsch,Bronze,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
 2000,Herb and Spice Beer,Gold,Cambridge Espresso Stout,John Harvard's Brew House,Boston,MA
 2000,Herb and Spice Beer,Silver,Santa's Lil' Helper,Rocky River Brewing,Rocky River,OH
 2000,Herb and Spice Beer,Bronze,Stumblin Monk,Alesmith Brewing Co.,San Diego,CA
@@ -383,9 +383,9 @@ year,style,medal,beer,brewery,city,state
 2001,American Premium Lager,Gold,Empire Lager,P.H. Woods Restaurant,Moreno Valley,CA
 2001,American Premium Lager,Silver,Original Coors,Coors Brewing,Golden,CO
 2001,American Premium Lager,Bronze,Stroh,Stroh Brewery,Fogelsville,PA
-2001,American Wheat Ale or Lager,Gold,Grassfire Wheat,Hook & Ladder Brewing Company,Oakland,CA
-2001,American Wheat Ale or Lager,Silver,Shiner Winter Ale,The Spoetzl Brewery,San Antonio,TX
-2001,American Wheat Ale or Lager,Bronze,Widmer Hefeweizen,Widmer Brothers Brewing,Portland,OR
+2001,American Wheat Beer,Gold,Grassfire Wheat,Hook & Ladder Brewing Company,Oakland,CA
+2001,American Wheat Beer,Silver,Shiner Winter Ale,The Spoetzl Brewery,San Antonio,TX
+2001,American Wheat Beer,Bronze,Widmer Hefeweizen,Widmer Brothers Brewing,Portland,OR
 2001,American Light Lager,Gold,Schaefer Light,Schaefer Brewing,Fogelsville,PA
 2001,American Light Lager,Silver,Stroh Light,Stroh Brewery,Fogelsville,PA
 2001,American Light Lager,Bronze,Lone Star Light,Lone Star Brewing,Milwaukee,WI
@@ -422,9 +422,9 @@ year,style,medal,beer,brewery,city,state
 2001,Robust Porter,Gold,Robust Porter,Smuttynose Brewing,Portsmouth,NH
 2001,Robust Porter,Silver,Total Eclipse Black Ale,Hoppy Brewing,Sacramento,CA
 2001,Robust Porter,Bronze,Mocha Porter,Rogue Ales,Newport,OR
-2001,European Dark/Münchner Dunkel,Gold,Damsel in Distress Dunkel,Mammoth Brewing,Mammoth Lakes,CA
-2001,European Dark/Münchner Dunkel,Silver,Dunkles,Powerhouse Brewing,Sebastopol,CA
-2001,European Dark/Münchner Dunkel,Bronze,Pious Monk Dunkel,Church Brew Works,Pittsburgh,PA
+2001,Münchner Dunkel,Gold,Damsel in Distress Dunkel,Mammoth Brewing,Mammoth Lakes,CA
+2001,Münchner Dunkel,Silver,Dunkles,Powerhouse Brewing,Sebastopol,CA
+2001,Münchner Dunkel,Bronze,Pious Monk Dunkel,Church Brew Works,Pittsburgh,PA
 2001,Bock,Gold,Dunkles Bock,Boundary Bay Brewery,Bellingham,WA
 2001,Bock,Silver,Hell's Bock,Big Horn Brewing,Denver,CO
 2001,Bock,Bronze,Mad Brewer Maibock,Church Brew Works,Pittsburgh,PA
@@ -461,9 +461,9 @@ year,style,medal,beer,brewery,city,state
 2001,Specialty Honey Beer,Gold,Countdown Honey Brown,Thunder Canyon Brewery,Tucson,AZ
 2001,Specialty Honey Beer,Silver,Jarre Creek Ranch Brewery Honey Brown Ale,Jarre Creek Ranch Brewery,Castle Rock,CO
 2001,Specialty Honey Beer,Bronze,Honey Rye Doppelbock,Flossmoor Station,Flossmoor,IL
-2001,American Lager/Ale or Cream Ale,Gold,Taps Cream Ale,Taps Fish House and Brewery,Brea,CA
-2001,American Lager/Ale or Cream Ale,Silver,Holy Cow's Cream Ale,Holy Cow! Casino Café & Brewery,Las Vegas,NV
-2001,American Lager/Ale or Cream Ale,Bronze,Iowa City Light,Fitzpatrick's,Iowa City,IA
+2001,American Lager or Cream Ale,Gold,Taps Cream Ale,Taps Fish House and Brewery,Brea,CA
+2001,American Lager or Cream Ale,Silver,Holy Cow's Cream Ale,Holy Cow! Casino Café & Brewery,Las Vegas,NV
+2001,American Lager or Cream Ale,Bronze,Iowa City Light,Fitzpatrick's,Iowa City,IA
 2001,American Lager,Gold,Stag Beer,Pearl Brewing Co.,Fort Worth,TX
 2001,American Lager,Silver,Red Dog,Plank Road Brewery,Milwaukee,WI
 2001,American Lager,Bronze,Pearl Lager,Pearl Brewing Co.,Fort Worth,TX
@@ -482,18 +482,18 @@ year,style,medal,beer,brewery,city,state
 2001,Strong Scotch Ale,Gold,No Medal Awarded,,,
 2001,Strong Scotch Ale,Silver,Wee Heavy Ale,Capitol City Brewing,Arlington,VA
 2001,Strong Scotch Ale,Bronze,Wee Heavy,Iron Hill Brewery,Media,PA
-2001,German Kölsch/Köln Kölsch,Gold,Pete's Wicked Helles Lager,Pete's Brewing,San Antonio,TX
-2001,German Kölsch/Köln Kölsch,Silver,Capitol Kolsch,Capitol City Brewing,Arlington,VA
-2001,German Kölsch/Köln Kölsch,Bronze,Skinny Atlas Light,Empire Brewing Co. of Rochester,Rochester,NY
+2001,German Kölsch,Gold,Pete's Wicked Helles Lager,Pete's Brewing,San Antonio,TX
+2001,German Kölsch,Silver,Capitol Kolsch,Capitol City Brewing,Arlington,VA
+2001,German Kölsch,Bronze,Skinny Atlas Light,Empire Brewing Co. of Rochester,Rochester,NY
 2001,American Amber Lager,Gold,Killians Irish Red,Coors Brewing,Golden,CO
 2001,American Amber Lager,Silver,OKT-OBER-FEST,Big Horn Brewing,Dallas,TX
 2001,American Amber Lager,Bronze,Pete's Wicked Red Rush,Pete's Brewing,San Antonio,TX
 2001,Classic English Pale Ale,Gold,Custer's Last Ale,Snake River Brewing,Jackson,WY
 2001,Classic English Pale Ale,Silver,Breckenridge Pale Ale,Breckenridge Brewery,Denver,CO
 2001,Classic English Pale Ale,Bronze,Annadel Pale Ale,Third Street Ale Works,Santa Rosa,CA
-2002,American Lager/Ale or Cream,Gold,Red Dog,Plank Road Brewery,Milwaukee,WI
-2002,American Lager/Ale or Cream,Silver,Hamm's,Hamm's Brewing Company,Milwaukee,WI
-2002,American Lager/Ale or Cream,Bronze,Genesee Cream Ale,High Falls Brewing,Rochester,NY
+2002,American Lager or Cream Ale,Gold,Red Dog,Plank Road Brewery,Milwaukee,WI
+2002,American Lager or Cream Ale,Silver,Hamm's,Hamm's Brewing Company,Milwaukee,WI
+2002,American Lager or Cream Ale,Bronze,Genesee Cream Ale,High Falls Brewing,Rochester,NY
 2002,European Pilsener,Gold,Tenaya Creek Pilsner,Tenaya Creek Brewery,Las Vegas,NV
 2002,European Pilsener,Silver,Hermanbraü,Sandlot Brewery,Denver,CO
 2002,European Pilsener,Bronze,Henry Weinhard's Private Reserve,Henry Weinhard's Brewing,Milwaukee,WI
@@ -548,9 +548,9 @@ year,style,medal,beer,brewery,city,state
 2002,Specialty Beer,Gold,Ashman's Abbaye Dubbel,Flossmoor Station,Flossmoor,IL
 2002,Specialty Beer,Silver,Ginger Shandy,McCoys Public House,Kansas City,MO
 2002,Specialty Beer,Bronze,Maplenut Brown Ale,Tommyknocker Brewery,Idaho Springs,CO
-2002,European Dark/Münchner Dunkel,Gold,Voodoo's Child,Red Star Brewery,Greensburg,PA
-2002,European Dark/Münchner Dunkel,Silver,Dunkel,Moosejaw Pizza and Brewing,Wisconsin Dells,WI
-2002,European Dark/Münchner Dunkel,Bronze,Obscura,Mammoth Brewing,Mammoth,CA
+2002,Münchner Dunkel,Gold,Voodoo's Child,Red Star Brewery,Greensburg,PA
+2002,Münchner Dunkel,Silver,Dunkel,Moosejaw Pizza and Brewing,Wisconsin Dells,WI
+2002,Münchner Dunkel,Bronze,Obscura,Mammoth Brewing,Mammoth,CA
 2002,Barley Wine Ale,Gold,Auld Gnarley Head Barleywine,Wild Duck Brewery & Restaurant,Eugene,OR
 2002,Barley Wine Ale,Silver,Old Bounder,Boundary Bay Brewery,Bellingham,WA
 2002,Barley Wine Ale,Bronze,Old Herb Barleywine,Southampton Publick House,Southampton,NY
@@ -572,9 +572,9 @@ year,style,medal,beer,brewery,city,state
 2002,Munich Helles,Gold,Helles in a Handbasket,Hub City Brewery,Lubbock,TX
 2002,Munich Helles,Silver,Helles Lager,Firestone Walker,Paso Robles,CA
 2002,Munich Helles,Bronze,French Creek Helles,Sly Fox Brewhouse,Phoenixville,PA
-2002,German Kölsch/Köln Kölsch,Gold,Capitol Kolsch,Capitol City Brewing,Washington,DC
-2002,German Kölsch/Köln Kölsch,Silver,# 10 Kolsch,Wolf Pack Brewing,West Yellowstone,MT
-2002,German Kölsch/Köln Kölsch,Bronze,Golden Arm,Piece Brewery,Chicago,IL
+2002,German Kölsch,Gold,Capitol Kolsch,Capitol City Brewing,Washington,DC
+2002,German Kölsch,Silver,# 10 Kolsch,Wolf Pack Brewing,West Yellowstone,MT
+2002,German Kölsch,Bronze,Golden Arm,Piece Brewery,Chicago,IL
 2002,American Pale Ale,Gold,Rye Pale Ale,Terrapin Beer,Athens,GA
 2002,American Pale Ale,Silver,Piranha Pale Ale,BJ's Restaurant & Brewery,Portland,OR
 2002,American Pale Ale,Bronze,IPA,SLO Brewing,San Luis Obispo,CA
@@ -716,9 +716,9 @@ year,style,medal,beer,brewery,city,state
 2003,American Light Lager,Gold,Old Light,Pabst Brewing,San Antonio,TX
 2003,American Light Lager,Silver,Miller Lite,Miller Brewing,Milwaukee,WI
 2003,American Light Lager,Bronze,Old Milwaukee Light,Pabst Brewing,San Antonio,TX
-2003,American Lager/Ale or Cream Ale,Gold,Red Dog,Plank Road Brewery,Milwaukee,WI
-2003,American Lager/Ale or Cream Ale,Silver,Milwaukee's Best,Miller Brewing,Milwaukee,WI
-2003,American Lager/Ale or Cream Ale,Bronze,Old Style,Pabst Brewing,San Antonio,TX
+2003,American Lager or Cream Ale,Gold,Red Dog,Plank Road Brewery,Milwaukee,WI
+2003,American Lager or Cream Ale,Silver,Milwaukee's Best,Miller Brewing,Milwaukee,WI
+2003,American Lager or Cream Ale,Bronze,Old Style,Pabst Brewing,San Antonio,TX
 2003,Classic English Pale Ale,Gold,Starr Hill Pale Ale,Starr Hill Brewing,Charlottesville,VA
 2003,Classic English Pale Ale,Silver,Pale Ale,Diamond Bear Brewing Co.,Little Rock,AR
 2003,Classic English Pale Ale,Bronze,Custer's Last Ale,Snake River Brewing,Jackson,WY
@@ -773,21 +773,21 @@ year,style,medal,beer,brewery,city,state
 2003,Belgian Abbey Ale,Gold,Abbey Belgian Ale,New Belgium Brewing,Fort Collins,CO
 2003,Belgian Abbey Ale,Silver,PranQster,North Coast Brewing,Fort Bragg,CA
 2003,Belgian Abbey Ale,Bronze,Tripel,Iron Hill Brewery,Media,PA
-2003,European Dark/Münchner Dunkel,Gold,Emmett's Dunkel,Emmett's Tavern,West Dundee,IL
-2003,European Dark/Münchner Dunkel,Silver,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
-2003,European Dark/Münchner Dunkel,Bronze,Dunkel,Iron Hill Brewery,West Chester,PA
-2003,German Kölsch/Köln Kölsch,Gold,Atomic Blonde,Blue Corn Brewery,Albuquerque,NM
-2003,German Kölsch/Köln Kölsch,Silver,Bendsch,Deschutes Brewery,Bend,OR
-2003,German Kölsch/Köln Kölsch,Bronze,Lighthouse Ale,The Oyster Bar Bistro & Brewery,Fort Wayne,IN
+2003,Münchner Dunkel,Gold,Emmett's Dunkel,Emmett's Tavern,West Dundee,IL
+2003,Münchner Dunkel,Silver,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
+2003,Münchner Dunkel,Bronze,Dunkel,Iron Hill Brewery,West Chester,PA
+2003,German Kölsch,Gold,Atomic Blonde,Blue Corn Brewery,Albuquerque,NM
+2003,German Kölsch,Silver,Bendsch,Deschutes Brewery,Bend,OR
+2003,German Kölsch,Bronze,Lighthouse Ale,The Oyster Bar Bistro & Brewery,Fort Wayne,IN
 2003,American Lager,Gold,Old Milwaukee,Pabst Brewing,San Antonio,TX
 2003,American Lager,Silver,Rainier,Pabst Brewing,San Antonio,TX
 2003,American Lager,Bronze,Stegmaier Gold Medal,The Lion Brewery,Wilkes-Barre,PA
 2003,German Wheat Ale,Gold,Dunkel Weizen,The Unlikely Cowboy Restaurant & Brewery,Scottsdale,AZ
 2003,German Wheat Ale,Silver,Berliner Weisse,Nodding Head Brewing,Philadelphia,PA
 2003,German Wheat Ale,Bronze,John Jacob Jingleheimer Schmidt Dunkeldoppelhefe,The Great Dane Pub,Madison,WI
-2003,Extra Special Bitter or Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
-2003,Extra Special Bitter or Strong Bitter,Silver,Barbarians Best Bitter,Far West Ireland Brewing Co.,Redmond,WA
-2003,Extra Special Bitter or Strong Bitter,Bronze,Brown's Pt. ESB,Harmon Pub & Brewery,Tacoma,WA
+2003,Extra Special Bitter/Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
+2003,Extra Special Bitter/Strong Bitter,Silver,Barbarians Best Bitter,Far West Ireland Brewing Co.,Redmond,WA
+2003,Extra Special Bitter/Strong Bitter,Bronze,Brown's Pt. ESB,Harmon Pub & Brewery,Tacoma,WA
 2003,Belgian Sour Ale,Gold,Lambic de Hill,Iron Hill Brewery,Media,PA
 2003,Belgian Sour Ale,Silver,La Folie,New Belgium Brewing,Fort Collins,CO
 2003,Belgian Sour Ale,Bronze,LaConner Red,LaConner Brewing Co.,LaConner,WA
@@ -839,9 +839,9 @@ year,style,medal,beer,brewery,city,state
 2003,German Brown Ale,Gold,Otter Creek Copper Ale,Otter Creek Brewing,Middlebury,VT
 2003,German Brown Ale,Silver,Ettinger Amber,Laurelwood Brewing,Portland,OR
 2003,German Brown Ale,Bronze,All the Way Alt,Desert Edge Brewery,Salt Lake City,UT
-2003,Belgian White (or Wit)/Belgian Style,Gold,Celis White,Michigan Brewing,Webberville,MI
-2003,Belgian White (or Wit)/Belgian Style,Silver,Blanche de Brooklyn,The Brooklyn Brewery,Brookyln,NY
-2003,Belgian White (or Wit)/Belgian Style,Bronze,Boulevard Zon,Boulevard Brewing,Kansas City,MO
+2003,Belgian White,Gold,Celis White,Michigan Brewing,Webberville,MI
+2003,Belgian White,Silver,Blanche de Brooklyn,The Brooklyn Brewery,Brookyln,NY
+2003,Belgian White,Bronze,Boulevard Zon,Boulevard Brewing,Kansas City,MO
 2003,Bitter,Gold,Deschutes Summer Seasonal,Deschutes Brewery,Bend,OR
 2003,Bitter,Silver,Upland Pale Ale,Upland Brewing,Bloomington,IN
 2003,Bitter,Bronze,Blue Heron Pale Ale,BridgePort Brewing,Portland,OR
@@ -926,9 +926,9 @@ year,style,medal,beer,brewery,city,state
 2004,Other Strong Ale or Lager,Gold,Dragonstooth Stout,Elysian Brewery,Seattle,WA
 2004,Other Strong Ale or Lager,Silver,Roggenbock,Il Vicino Brewing,Albuquerque,NM
 2004,Other Strong Ale or Lager,Bronze,Small Craft,Clipper City Brewing,Baltimore,MD
-2004,American Lager/Ale or Cream Ale,Gold,Red Dog,Miller Brewing,Milwaukee,WI
-2004,American Lager/Ale or Cream Ale,Silver,Special Export,Pabst Brewing,San Antonio,TX
-2004,American Lager/Ale or Cream Ale,Bronze,Genesee Cream Ale,High Falls Brewing,Rochester,NY
+2004,American Lager or Cream Ale,Gold,Red Dog,Miller Brewing,Milwaukee,WI
+2004,American Lager or Cream Ale,Silver,Special Export,Pabst Brewing,San Antonio,TX
+2004,American Lager or Cream Ale,Bronze,Genesee Cream Ale,High Falls Brewing,Rochester,NY
 2004,German Wheat Ale,Gold,CBC Ultimate Weiss,Chicago Brewing,Las Vegas,NV
 2004,German Wheat Ale,Silver,Nodding Head Berliner Weisse,Nodding Head Brewing,Philadelphia,PA
 2004,German Wheat Ale,Bronze,Wasatch Hefeweizen,Utah Brewers,Salt Lake City,UT
@@ -941,9 +941,9 @@ year,style,medal,beer,brewery,city,state
 2004,Belgian White (or Wit)/Belgian Wheat,Gold,Nit Wit,BJ's Restaurant & Brewery,Huntington Beach,CA
 2004,Belgian White (or Wit)/Belgian Wheat,Silver,Katerina Wit,Main Street Brewery Lamppost Pizza,Corona,CA
 2004,Belgian White (or Wit)/Belgian Wheat,Bronze,Celis White,Michigan Brewing,Webberville,MI
-2004,German Kölsch/Köln Kölsch,Gold,Guido's Kolnerbrau,Snake River Brewing,Jackson,WY
-2004,German Kölsch/Köln Kölsch,Silver,Biloxi Blonde,Coast Brewing,Biloxi,MS
-2004,German Kölsch/Köln Kölsch,Bronze,Mammoth Gold,Mammoth Brewing,Mammoth Lakes,CA
+2004,German Kölsch,Gold,Guido's Kolnerbrau,Snake River Brewing,Jackson,WY
+2004,German Kölsch,Silver,Biloxi Blonde,Coast Brewing,Biloxi,MS
+2004,German Kölsch,Bronze,Mammoth Gold,Mammoth Brewing,Mammoth Lakes,CA
 2004,Imperial Stout,Gold,First Date Stout,Steelhead Brewery,Burlingame,CA
 2004,Imperial Stout,Silver,Imperial Stout,Silver City Brewery,Silverdale,WA
 2004,Imperial Stout,Bronze,The Legend of the Liquid Brain,Bull & Bush Brewery,Denver,CO
@@ -1001,9 +1001,9 @@ year,style,medal,beer,brewery,city,state
 2004,English Summer Ale,Gold,Cascade Golden Ale,Deschutes Brewery,Bend,OR
 2004,English Summer Ale,Silver,Chasing Tail Ale,Utah Brewers,Salt Lake City,UT
 2004,English Summer Ale,Bronze,Surfer's Summer Ale,Pelican Pub,Pacific City,OR
-2004,European Dark/Münchner Dunkel,Gold,Dunkles Bock,Boundary Bay Brewery,Bellingham,WA
-2004,European Dark/Münchner Dunkel,Silver,Dark Munich Lager,Rock Bottom,Phoenix,AZ
-2004,European Dark/Münchner Dunkel,Bronze,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
+2004,Münchner Dunkel,Gold,Dunkles Bock,Boundary Bay Brewery,Bellingham,WA
+2004,Münchner Dunkel,Silver,Dark Munich Lager,Rock Bottom,Phoenix,AZ
+2004,Münchner Dunkel,Bronze,Penn Dark,Pennsylvania Brewing,Pittsburgh,PA
 2004,Fruit and Vegetable Beer,Gold,Raspberry Tart,New Glarus Brewing,New Glarus,WI
 2004,Fruit and Vegetable Beer,Silver,Chile Beer,Six Rivers Brewery,McKinleyville,CA
 2004,Fruit and Vegetable Beer,Bronze,Leinenkugel's Berry Weiss,Jacob Leinenkugel Brewing,Chippewa Falls,WI
@@ -1031,9 +1031,9 @@ year,style,medal,beer,brewery,city,state
 2004,American Pale Ale,Gold,Duckdive Pale Ale,Bill's Tavern & Brewhouse,Cannon Beach,OR
 2004,American Pale Ale,Silver,New River Pale Ale,New River Brewing,Atlanta,GA
 2004,American Pale Ale,Bronze,Dillon DAM Extra Pale Ale,Dillon DAM Brewery,Dillon,CO
-2004,Extra Special Bitter or Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
-2004,Extra Special Bitter or Strong Bitter,Silver,Alaskan ESB,Alaskan Brewing,Juneau,AK
-2004,Extra Special Bitter or Strong Bitter,Bronze,Bachelor ESB,Deschutes Brewery,Bend,OR
+2004,Extra Special Bitter/Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
+2004,Extra Special Bitter/Strong Bitter,Silver,Alaskan ESB,Alaskan Brewing,Juneau,AK
+2004,Extra Special Bitter/Strong Bitter,Bronze,Bachelor ESB,Deschutes Brewery,Bend,OR
 2004,Non-Alcoholic (Beer) Malt Beverage,Gold,Old Milwaukee NA,Pabst Brewing,San Antonio,TX
 2004,Non-Alcoholic (Beer) Malt Beverage,Silver,Coors NA,Coors Brewing,Golden,CO
 2004,Non-Alcoholic (Beer) Malt Beverage,Bronze,Odoul's Amber,Anheuser-Busch,St. Louis,MO
@@ -1091,9 +1091,9 @@ year,style,medal,beer,brewery,city,state
 2005,English Summer Ale,Gold,Colorado Trail English Ale,Backcountry Brewery,Frisco,CO
 2005,English Summer Ale,Silver,Sandbagger Gold,Montana Brewing,Billings,MT
 2005,English Summer Ale,Bronze,Green Flash Extra Pale Ale,Green Flash Brewing Co.,Vista,CA
-2005,German Kölsch/Köln Kölsch,Gold,Bottom's Up Kölsch,Rock Bottom,Campbell,CA
-2005,German Kölsch/Köln Kölsch,Silver,Claire de Lune,Moon River Brewing Co.,Savannah,GA
-2005,German Kölsch/Köln Kölsch,Bronze,Kentucky Light,Alltech's Lexington Brewing Co.,Lexington,KY
+2005,German Kölsch,Gold,Bottom's Up Kölsch,Rock Bottom,Campbell,CA
+2005,German Kölsch,Silver,Claire de Lune,Moon River Brewing Co.,Savannah,GA
+2005,German Kölsch,Bronze,Kentucky Light,Alltech's Lexington Brewing Co.,Lexington,KY
 2005,Wood- & Barrel-Aged Beer,Gold,Cherry Stout,New Glarus Brewing,New Glarus,WI
 2005,Wood- & Barrel-Aged Beer,Silver,A Butt of Gibraltar,Rock Bottom,Englewood,CO
 2005,Wood- & Barrel-Aged Beer,Bronze,Hout,Ballast Point Brewing,San Diego,CA
@@ -1115,9 +1115,9 @@ year,style,medal,beer,brewery,city,state
 2005,American Dark Lager,Gold,Leinenkugel's Creamy Dark,Jacob Leinenkugel Brewing,Chippewa Falls,WI
 2005,American Dark Lager,Silver,Shiner Bock,The Spoetzl Brewery,San Antonio,TX
 2005,American Dark Lager,Bronze,Darth's Dark Lager,Redwood Brewing,Flint,MI
-2005,Extra Special Bitter or Strong Bitter,Gold,Boscos XXX Pale Ale,Boscos Brewing,Memphis,TN
-2005,Extra Special Bitter or Strong Bitter,Silver,Alaskan ESB,Alaskan Brewing,Juneau,AK
-2005,Extra Special Bitter or Strong Bitter,Bronze,Tinderstick ESB,Big Time Brewery,Seattle,WA
+2005,Extra Special Bitter/Strong Bitter,Gold,Boscos XXX Pale Ale,Boscos Brewing,Memphis,TN
+2005,Extra Special Bitter/Strong Bitter,Silver,Alaskan ESB,Alaskan Brewing,Juneau,AK
+2005,Extra Special Bitter/Strong Bitter,Bronze,Tinderstick ESB,Big Time Brewery,Seattle,WA
 2005,Classic Irish Dry Stout,Gold,Dark Starr Stout,Starr Hill Brewing,Crozet,VA
 2005,Classic Irish Dry Stout,Silver,Seaside Stout,Pizza Port,Solana Beach,CA
 2005,Classic Irish Dry Stout,Bronze,Sacrilicious Stout,Rochester Mills Beer Co.,Rochester,MI
@@ -1127,9 +1127,9 @@ year,style,medal,beer,brewery,city,state
 2005,English Brown Ale,Gold,Nut Brown Ale,Long Valley Pub,Long Valley,NJ
 2005,English Brown Ale,Silver,Alice B. Brownie,Big Horn Brewing,Westminster,CO
 2005,English Brown Ale,Bronze,Dawn Patrol Dark,Pizza Port,Carlsbad,CA
-2005,American Cream Ale or Lager,Gold,TAPS Cream Ale,TAPS Fish House & Brewery,Brea,CA
-2005,American Cream Ale or Lager,Silver,Genesee Cream Ale,High Falls Brewing,Rochester,NY
-2005,American Cream Ale or Lager,Bronze,Special Export,Pabst Brewing,San Antonio,TX
+2005,American Lager or Cream Ale,Gold,TAPS Cream Ale,TAPS Fish House & Brewery,Brea,CA
+2005,American Lager or Cream Ale,Silver,Genesee Cream Ale,High Falls Brewing,Rochester,NY
+2005,American Lager or Cream Ale,Bronze,Special Export,Pabst Brewing,San Antonio,TX
 2005,American Pale Ale,Gold,Pale Nectar,Firestone Walker,Paso Robles,CA
 2005,American Pale Ale,Silver,Oak Creek Pale Ale,Oak Creek Brewing Co.,Sedona,AZ
 2005,American Pale Ale,Bronze,Ironbound Ale,Iron Hill Brewery,Wilmington,DE
@@ -1265,18 +1265,18 @@ year,style,medal,beer,brewery,city,state
 2005,German Märzen/Oktoberfest,Gold,Michelob Marzen,Anheuser-Busch,St. Louis,MO
 2005,German Märzen/Oktoberfest,Silver,Sudwerk Marzen,Sudwerk Privatbrauerei Hübsch,Davis,CA
 2005,German Märzen/Oktoberfest,Bronze,Dogtoberfest Octoberfest,Flying Dog Brewery,Denver,CO
-2005,European Dark/Münchner Dunkel,Gold,Munich Dark,Capital Brewery,Middleton,WI
-2005,European Dark/Münchner Dunkel,Silver,Triumph Dunkel,Triumph Brewing,New Hope,PA
-2005,European Dark/Münchner Dunkel,Bronze,Black Mountain,Barley's Casino,Henderson,NV
-2006,German Kölsch/Köln Kölsch,Gold,Chaser Pale,Blackstone Brewing,Nashville,TN
-2006,German Kölsch/Köln Kölsch,Silver,Clear Water Kolsch,RAM Restaurant,Boise,ID
-2006,German Kölsch/Köln Kölsch,Bronze,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
+2005,Münchner Dunkel,Gold,Munich Dark,Capital Brewery,Middleton,WI
+2005,Münchner Dunkel,Silver,Triumph Dunkel,Triumph Brewing,New Hope,PA
+2005,Münchner Dunkel,Bronze,Black Mountain,Barley's Casino,Henderson,NV
+2006,German Kölsch,Gold,Chaser Pale,Blackstone Brewing,Nashville,TN
+2006,German Kölsch,Silver,Clear Water Kolsch,RAM Restaurant,Boise,ID
+2006,German Kölsch,Bronze,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
 2006,Wood- & Barrel-Aged Beer,Gold,Cherry Stout,New Glarus Brewing,New Glarus,WI
 2006,Wood- & Barrel-Aged Beer,Silver,Barrel 001,Santa Barbara Brewing,Santa Barbara,CA
 2006,Wood- & Barrel-Aged Beer,Bronze,Bourbon Ivan,Iron Hill Brewery,West Chester,PA
-2006,Extra Special Bitter or Strong Bitter,Gold,Firestone Walker IPA,Firestone Walker,Paso Robles,CA
-2006,Extra Special Bitter or Strong Bitter,Silver,Autumn Ale,Short’s Brewing Co.,Bellaire,MI
-2006,Extra Special Bitter or Strong Bitter,Bronze,Stone Pale Ale,Stone Brewing,Escondido,CA
+2006,Extra Special Bitter/Strong Bitter,Gold,Firestone Walker IPA,Firestone Walker,Paso Robles,CA
+2006,Extra Special Bitter/Strong Bitter,Silver,Autumn Ale,Short’s Brewing Co.,Bellaire,MI
+2006,Extra Special Bitter/Strong Bitter,Bronze,Stone Pale Ale,Stone Brewing,Escondido,CA
 2006,German Märzen/Oktoberfest,Gold,Samuel Adams Octoberfest,The Boston Beer Co.,Boston,MA
 2006,German Märzen/Oktoberfest,Silver,Michelob Marzen,Anheuser-Busch,St. Louis,MO
 2006,German Märzen/Oktoberfest,Bronze,Dominion Octoberfest,Old Dominion Brewing,Ashburn,VA
@@ -1289,9 +1289,9 @@ year,style,medal,beer,brewery,city,state
 2006,American Amber Lager,Gold,Steam Engine Lager,Steamworks Brewing,Durango,CO
 2006,American Amber Lager,Silver,Toasted Lager,Blue Point Brewing Co.,Patchogue,NY
 2006,American Amber Lager,Bronze,Oktoberfist,Bluegrass Brewing Co.,Louisville,KY
-2006,European Dark/Münchner Dunkel,Gold,No Medal Awarded,,,
-2006,European Dark/Münchner Dunkel,Silver,Storm King,Glenwood Canyon Brewing,Glenwood Springs,CO
-2006,European Dark/Münchner Dunkel,Bronze,Dunkel Rico,Stewart’s Brewing Co.,Bear,DE
+2006,Münchner Dunkel,Gold,No Medal Awarded,,,
+2006,Münchner Dunkel,Silver,Storm King,Glenwood Canyon Brewing,Glenwood Springs,CO
+2006,Münchner Dunkel,Bronze,Dunkel Rico,Stewart’s Brewing Co.,Bear,DE
 2006,Aged Beer,Gold,Triple Exultation 2004,Eel River Brewing,Fortuna,CA
 2006,Aged Beer,Silver,Hibernation Ale 2005,Great Divide Brewing,Denver,CO
 2006,Aged Beer,Bronze,World Wide Stout 2003,Dogfish Head Brewery,Milton,DE
@@ -1367,9 +1367,9 @@ year,style,medal,beer,brewery,city,state
 2006,Old Ale or Strong Ale,Gold,Vintage Ale,The Great Dane Pub,Madison,WI
 2006,Old Ale or Strong Ale,Silver,Tripel Exultation,Eel River Brewing,Fortuna,CA
 2006,Old Ale or Strong Ale,Bronze,Curmudgeons Nip,Odell Brewing,Fort Collins,CO
-2006,American Cream Ale or Lager,Gold,Red Dog,Miller Brewing,Milwaukee,WI
-2006,American Cream Ale or Lager,Silver,Lone Star,Pabst Brewing,Woodridge,IL
-2006,American Cream Ale or Lager,Bronze,Henry Weinhard Private Reserve,Miller Brewing,Milwaukee,WI
+2006,American Lager or Cream Ale,Gold,Red Dog,Miller Brewing,Milwaukee,WI
+2006,American Lager or Cream Ale,Silver,Lone Star,Pabst Brewing,Woodridge,IL
+2006,American Lager or Cream Ale,Bronze,Henry Weinhard Private Reserve,Miller Brewing,Milwaukee,WI
 2006,Experimental Beer,Gold,New Grist,Lakefront Brewery,Milwaukee,WI
 2006,Experimental Beer,Silver,Angry Mike’s Stoudt Creek,Flossmoor Station,Flossmoor,IL
 2006,Experimental Beer,Bronze,Samuel Adams Utopias 2003,The Boston Beer Co.,Boston,MA
@@ -1484,9 +1484,9 @@ year,style,medal,beer,brewery,city,state
 2007,Other Low Strength Ale or Lager,Gold,Half Wit,BJ's Restaurant & Brewery,Reno,NV
 2007,Other Low Strength Ale or Lager,Silver,Firestone Extra Pale,Firestone Walker,Paso Robles,CA
 2007,Other Low Strength Ale or Lager,Bronze,Firestone Lager (Mini-Hell),Firestone Walker,Paso Robles,CA
-2007,European Dark/Münchner Dunkel,Gold,Dunkelstilsken,CB & Pott’s Restaurant & Brewery (Highlands Ranch),Highlands Ranch,CO
-2007,European Dark/Münchner Dunkel,Silver,Capital Munich Dark,Capital Brewery,Middleton,WI
-2007,European Dark/Münchner Dunkel,Bronze,Munich Dunkel,RedRock Brewing Co.,Salt Lake City,UT
+2007,Münchner Dunkel,Gold,Dunkelstilsken,CB & Pott’s Restaurant & Brewery (Highlands Ranch),Highlands Ranch,CO
+2007,Münchner Dunkel,Silver,Capital Munich Dark,Capital Brewery,Middleton,WI
+2007,Münchner Dunkel,Bronze,Munich Dunkel,RedRock Brewing Co.,Salt Lake City,UT
 2007,French & Belgian Saison,Gold,Saison Vautour,McKenzie Brew House,Malvern,PA
 2007,French & Belgian Saison,Silver,Liquid Sun 1087,Rock Bottom,Scottsdale,AZ
 2007,French & Belgian Saison,Bronze,Southampton Saison,Southampton Publick House,Southampton,NY
@@ -1508,9 +1508,9 @@ year,style,medal,beer,brewery,city,state
 2007,American Specialty Lager,Gold,Icehouse,Miller Brewing,Milwaukee,WI
 2007,American Specialty Lager,Silver,Mickey’s Ice,Miller Brewing,Milwaukee,WI
 2007,American Specialty Lager,Bronze,Mickey’s Malt Liquor,Miller Brewing,Milwaukee,WI
-2007,Extra Special Bitter or Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
-2007,Extra Special Bitter or Strong Bitter,Silver,O’Brien’s Harvest,Hale's Ales,Seattle,WA
-2007,Extra Special Bitter or Strong Bitter,Bronze,Big Sea ESB,Free State Brewing Co.,Lawrence,KS
+2007,Extra Special Bitter/Strong Bitter,Gold,The Wise ESB,Elysian Brewery,Seattle,WA
+2007,Extra Special Bitter/Strong Bitter,Silver,O’Brien’s Harvest,Hale's Ales,Seattle,WA
+2007,Extra Special Bitter/Strong Bitter,Bronze,Big Sea ESB,Free State Brewing Co.,Lawrence,KS
 2007,German Schwarzbier,Gold,Gordon Biersch Schwarzbier,Gordon Biersch Brewery,Chattanooga,TN
 2007,German Schwarzbier,Silver,RedRock Black Bier,RedRock Brewing Co.,Salt Lake City,UT
 2007,German Schwarzbier,Bronze,No Medal Awarded,,,
@@ -1523,9 +1523,9 @@ year,style,medal,beer,brewery,city,state
 2007,German Wheat Ale,Gold,Boscos Hefeweizen,Boscos Brewing,Memphis,TN
 2007,German Wheat Ale,Silver,Dark ‘n’ Curvy,Piece Brewery,Chicago,IL
 2007,German Wheat Ale,Bronze,Gordon Biersch Hefeweizen,Gordon Biersch Brewery,Chattanooga,TN
-2007,German Kölsch/Köln Kölsch,Gold,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
-2007,German Kölsch/Köln Kölsch,Silver,Colorado Kölsch,Steamworks Brewing,Durango,CO
-2007,German Kölsch/Köln Kölsch,Bronze,Gordon Biersch SummerFest,Gordon Biersch Brewery,Chattanooga,TN
+2007,German Kölsch,Gold,Saint Arnold Fancy Lawnmower Beer,Saint Arnold Brewing,Houston,TX
+2007,German Kölsch,Silver,Colorado Kölsch,Steamworks Brewing,Durango,CO
+2007,German Kölsch,Bronze,Gordon Biersch SummerFest,Gordon Biersch Brewery,Chattanooga,TN
 2007,Wood- & Barrel-Aged Beer,Gold,Oak Whiskey Red,Twisted Pine Brewing Co.,Boulder,CO
 2007,Wood- & Barrel-Aged Beer,Silver,Kentucky Bourbon Barrel Ale,Alltech’s Lexington Brewing Co.,Lexington,KY
 2007,Wood- & Barrel-Aged Beer,Bronze,Buffalo Bock,RAM Restaurant & Brewery,Indianapolis,IN
@@ -1637,9 +1637,9 @@ year,style,medal,beer,brewery,city,state
 2007,Bitter or Pale Mild Ale,Gold,Pub Bitter,Deschutes Brewery,Bend,OR
 2007,Bitter or Pale Mild Ale,Silver,Squatters Organic Amber Ale,Utah Brewers,Salt Lake City,UT
 2007,Bitter or Pale Mild Ale,Bronze,Snake River Pale Ale,Snake River Brewing,Jackson,WY
-2007,American Cream Ale or Lager,Gold,Lone Star,Pabst Brewing,Woodridge,IL
-2007,American Cream Ale or Lager,Silver,Old Style,Pabst Brewing,Woodridge,IL
-2007,American Cream Ale or Lager,Bronze,TAPS Cream Ale,TAPS Fish House & Brewery,Brea,CA
+2007,American Lager or Cream Ale,Gold,Lone Star,Pabst Brewing,Woodridge,IL
+2007,American Lager or Cream Ale,Silver,Old Style,Pabst Brewing,Woodridge,IL
+2007,American Lager or Cream Ale,Bronze,TAPS Cream Ale,TAPS Fish House & Brewery,Brea,CA
 2007,Imperial or Double India Pale Ale,Gold,Hopsickle,Moylan's Brewery,Novato,CA
 2007,Imperial or Double India Pale Ale,Silver,Moylander,Moylan's Brewery,Novato,CA
 2007,Imperial or Double India Pale Ale,Bronze,Double Trouble Imperial IPA,21st Amendment,San Francisco,CA
@@ -1727,9 +1727,9 @@ year,style,medal,beer,brewery,city,state
 2008,American or German Sour Ale,Gold,The Dissident,Deschutes Brewery,Bend,OR
 2008,American or German Sour Ale,Silver,Brute,Ithaca Beer Co.,Ithaca,NY
 2008,American or German Sour Ale,Bronze,Fifth Element,Squatters,Salt Lake City,UT
-2008,American Cream Ale or Lager,Gold,Lone Star,Pabst Brewing,Woodridge,IL
-2008,American Cream Ale or Lager,Silver,Hamm’s,MillerCoors,Milwaukee,WI
-2008,American Cream Ale or Lager,Bronze,Henry Weinhard’s Blue Boar Pale Ale,MillerCoors,Milwaukee,WI
+2008,American Lager or Cream Ale,Gold,Lone Star,Pabst Brewing,Woodridge,IL
+2008,American Lager or Cream Ale,Silver,Hamm’s,MillerCoors,Milwaukee,WI
+2008,American Lager or Cream Ale,Bronze,Henry Weinhard’s Blue Boar Pale Ale,MillerCoors,Milwaukee,WI
 2008,Fruit or Vegetable Beer,Gold,Pyramid Apricot Ale,Pyramid Breweries,Seattle,WA
 2008,Fruit or Vegetable Beer,Silver,Alaskan Raspberry Wheat Beer,Alaskan Brewing,Juneau,AK
 2008,Fruit or Vegetable Beer,Bronze,Sangre de Frambuesa,Santa Fe Brewing Co.,Santa Fe,NM
@@ -1856,9 +1856,9 @@ year,style,medal,beer,brewery,city,state
 2008,Specialty Beer,Gold,Red & White,Dogfish Head Brewery,Milton,DE
 2008,Specialty Beer,Silver,Hazelnut Brown Nectar,Rogue Ales,Portland,OR
 2008,Specialty Beer,Bronze,Palo Santo Marron,Dogfish Head Brewery,Milton,DE
-2008,Extra Special Bitter or Strong Bitter,Gold,Bachelor ESB,Deschutes Brewery,Bend,OR
-2008,Extra Special Bitter or Strong Bitter,Silver,Sweetwater Motorboat ESB,Sweetwater Brewing,Atlanta,GA
-2008,Extra Special Bitter or Strong Bitter,Bronze,Standing Wave Pale Ale,Kannah Creek Brewing Co.,Grand Junction,CO
+2008,Extra Special Bitter/Strong Bitter,Gold,Bachelor ESB,Deschutes Brewery,Bend,OR
+2008,Extra Special Bitter/Strong Bitter,Silver,Sweetwater Motorboat ESB,Sweetwater Brewing,Atlanta,GA
+2008,Extra Special Bitter/Strong Bitter,Bronze,Standing Wave Pale Ale,Kannah Creek Brewing Co.,Grand Junction,CO
 2008,American Brown Ale,Gold,Kick-Ass Brown,C. H. Evans Brewing,Albany,NY
 2008,American Brown Ale,Silver,Bitch Creek ESB,Grand Teton Brewing,Victor,ID
 2008,American Brown Ale,Bronze,Bad Dog Brown Ale,Elk Grove Brewery,Elk Grove,CA
@@ -1991,9 +1991,9 @@ year,style,medal,beer,brewery,city,state
 2009,Belgian Witbier,Gold,ZON,Boulevard Brewing,Kansas City,MO
 2009,Belgian Witbier,Silver,Belgian White,Big Dog’s Brewing Co.,Las Vegas,NV
 2009,Belgian Witbier,Bronze,Wits End,Great American Restaurants,Centreville,VA
-2009,Extra Special Bitter or Strong Bitter,Gold,ESB,Redhook Ale Brewery,Woodinville,WA
-2009,Extra Special Bitter or Strong Bitter,Silver,Motorboat ESB,SweetWater Brewing Co.,Atlanta,GA
-2009,Extra Special Bitter or Strong Bitter,Bronze,Colorado Boy IPA,Colorado Boy Pub & Brewery,Ridgway,CO
+2009,Extra Special Bitter/Strong Bitter,Gold,ESB,Redhook Ale Brewery,Woodinville,WA
+2009,Extra Special Bitter/Strong Bitter,Silver,Motorboat ESB,SweetWater Brewing Co.,Atlanta,GA
+2009,Extra Special Bitter/Strong Bitter,Bronze,Colorado Boy IPA,Colorado Boy Pub & Brewery,Ridgway,CO
 2009,American India Pale Ale,Gold,Union Jack,Firestone Walker,Paso Robles,CA
 2009,American India Pale Ale,Silver,Sculpin IPA,Ballast Point Brewing,San Diego,CA
 2009,American India Pale Ale,Bronze,Blind Pig IPA,Russian River Brewing,Santa Rosa,CA
@@ -2135,9 +2135,9 @@ year,style,medal,beer,brewery,city,state
 2009,German Pilsener,Gold,106 Pilsner,Rock Bottom,Milwaukee,WI
 2009,German Pilsener,Silver,Pilsner,Chuckanut Brewery,Bellingham,WA
 2009,German Pilsener,Bronze,Troegs Sunshine Pils,Troegs Brewery,Harrisburg,PA
-2009,American Cream Ale or Lager,Gold,Milwaukee’s Best,Miller Brewing,Golden,CO
-2009,American Cream Ale or Lager,Silver,Hamm’s,Miller Brewing,Golden,CO
-2009,American Cream Ale or Lager,Bronze,Red Dog,Miller Brewing,Golden,CO
+2009,American Lager or Cream Ale,Gold,Milwaukee’s Best,Miller Brewing,Golden,CO
+2009,American Lager or Cream Ale,Silver,Hamm’s,Miller Brewing,Golden,CO
+2009,American Lager or Cream Ale,Bronze,Red Dog,Miller Brewing,Golden,CO
 2009,American Specialty Lager,Gold,Keystone Ice,Coors Brewing,Golden,CO
 2009,American Specialty Lager,Silver,Pre-Pro,Coors Brewing,Golden,CO
 2009,American Specialty Lager,Bronze,Steel Reserve,Miller Brewing,Golden,CO
@@ -2192,9 +2192,9 @@ year,style,medal,beer,brewery,city,state
 2010,Sweet Stout,Gold,Kickstart Stout,Barley Brothers Brewery,Lake Havasu City,AZ
 2010,Sweet Stout,Silver,Oil Change Stout,Flat Branch Pub and Brewery,Columbia,MO
 2010,Sweet Stout,Bronze,Portsmouth Brewery Milk Stout,Portsmouth Brewery,Portsmouth,NH
-2010,Extra Special Bitter or Strong Bitter,Gold,GAR Pale Ale,Great American Restaurants,Centreville,VA
-2010,Extra Special Bitter or Strong Bitter,Silver,Saint Arnold Elissa IPA,Saint Arnold Brewing,Houston,TX
-2010,Extra Special Bitter or Strong Bitter,Bronze,Bachelor ESB,Deschutes Brewery,Bend,OR
+2010,Extra Special Bitter/Strong Bitter,Gold,GAR Pale Ale,Great American Restaurants,Centreville,VA
+2010,Extra Special Bitter/Strong Bitter,Silver,Saint Arnold Elissa IPA,Saint Arnold Brewing,Houston,TX
+2010,Extra Special Bitter/Strong Bitter,Bronze,Bachelor ESB,Deschutes Brewery,Bend,OR
 2010,English Summer Ale,Gold,312 Urban Wheat Ale,Goose Island Beer Co.,Chicago,IL
 2010,English Summer Ale,Silver,Pacific Daylight,Dale Bros. Brewery,Upland,CA
 2010,English Summer Ale,Bronze,Sandbagger Gold,Montana Brewing,Billings,MT
@@ -2360,9 +2360,9 @@ year,style,medal,beer,brewery,city,state
 2010,American Wheat Beer,Gold,Sandy Bottom,Blue Mountain Barrel House,Afton,VA
 2010,American Wheat Beer,Silver,Shredders Wheat,Barley Brothers Brewery,Baker City,OR
 2010,American Wheat Beer,Bronze,County Seat Wheat,Blind Tiger Brewery,Topeka,KS
-2010,American Specialty Lager or Cream Ale,Gold,Hamm’s,Miller Brewing,Milwaukee,WI
-2010,American Specialty Lager or Cream Ale,Silver,Rainier,Pabst Brewing,Woodridge,IL
-2010,American Specialty Lager or Cream Ale,Bronze,Old Style,Pabst Brewing,Woodridge,IL
+2010,American Lager or Cream Ale,Gold,Hamm’s,Miller Brewing,Milwaukee,WI
+2010,American Lager or Cream Ale,Silver,Rainier,Pabst Brewing,Woodridge,IL
+2010,American Lager or Cream Ale,Bronze,Old Style,Pabst Brewing,Woodridge,IL
 2010,English India Pale Ale,Gold,Beech Street Bitter,Pizza Port,Carlsbad,CA
 2010,English India Pale Ale,Silver,Illusion Dweller,Mountain Sun Pub,Boulder,CO
 2010,English India Pale Ale,Bronze,Samuel Adams Latitude 48,Boston Beer Co.,Boston,MA
@@ -2411,9 +2411,9 @@ year,style,medal,beer,brewery,city,state
 2011,Extra Special Bitter,Gold,Minaret ESB,Cigar City Brewing,Tampa,FL
 2011,Extra Special Bitter,Silver,Colorado Kind,Mountain Sun Pub,Boulder,CO
 2011,Extra Special Bitter,Bronze,Harvest Ale,Goose Island Beer Co.,Chicago,IL
-2011,American Specialty Lager or Cream Ale or Lager,Gold,Red Dog,Miller Brewing,Milwaukee,WI
-2011,American Specialty Lager or Cream Ale or Lager,Silver,Rainier,Pabst Brewing,Woodridge,IL
-2011,American Specialty Lager or Cream Ale or Lager,Bronze,Old Style,Pabst Brewing,Woodridge,IL
+2011,American Lager or Cream Ale,Gold,Red Dog,Miller Brewing,Milwaukee,WI
+2011,American Lager or Cream Ale,Silver,Rainier,Pabst Brewing,Woodridge,IL
+2011,American Lager or Cream Ale,Bronze,Old Style,Pabst Brewing,Woodridge,IL
 2011,German Schwarzbier,Gold,TAPS Schwarzbier,TAPS Fish House & Brewery,Brea,CA
 2011,German Schwarzbier,Silver,Nevermore Lager,Rock Bottom,Louisville,CO
 2011,German Schwarzbier,Bronze,Gordon Biersch Schwarzbier,Gordon Biersch Brewery,Chattanooga,TN
@@ -2498,9 +2498,9 @@ year,style,medal,beer,brewery,city,state
 2011,American Brown Ale,Gold,Great American Brown,Pizza Port,Carlsbad,CA
 2011,American Brown Ale,Silver,Redrock Nut Brown Ale,Redrock Brewery,Salt Lake City,UT
 2011,American Brown Ale,Bronze,Brave American,American Brewing Co.,Edmonds,WA
-2011,"American Lager, Light Lager or Premium Lager",Gold,Old Milwaukee Light,Pabst Brewing,Woodridge,IL
-2011,"American Lager, Light Lager or Premium Lager",Silver,Busch Light,Anheuser-Busch,St. Louis,MO
-2011,"American Lager, Light Lager or Premium Lager",Bronze,Pabst Blue Ribbon Light,Pabst Brewing,Woodridge,IL
+2011,"American Light/Premium/Regular Lager",Gold,Old Milwaukee Light,Pabst Brewing,Woodridge,IL
+2011,"American Light/Premium/Regular Lager",Silver,Busch Light,Anheuser-Busch,St. Louis,MO
+2011,"American Light/Premium/Regular Lager",Bronze,Pabst Blue Ribbon Light,Pabst Brewing,Woodridge,IL
 2011,Herb and Spice Beer,Gold,Mexican Chocolate Stout,Copper Kettle Brewing Co.,Denver,CO
 2011,Herb and Spice Beer,Silver,LSD,Minneapolis Town Hall Brewery,Minneapolis,MN
 2011,Herb and Spice Beer,Bronze,CBC Heather Ale,Cambridge Brewing,Cambridge,MA
@@ -2834,9 +2834,9 @@ year,style,medal,beer,brewery,city,state
 2012,South German Hefeweizen,Gold,DreamWeaver Wheat,Tröegs Brewing Co.,Hershey,PA
 2012,South German Hefeweizen,Silver,Ebel’s Weiss,Two Brothers Brewing Co.,Warrenville,IL
 2012,South German Hefeweizen,Bronze,Yazoo Hefeweizen,Yazoo Brewing,Nashville,TN
-2012,American Specialty Lager or Cream Ale or Lager,Gold,Henry Weinhard’s Blue Boar Pale Ale,Blitz-Weinhard Brewing,Hood River,OR
-2012,American Specialty Lager or Cream Ale or Lager,Silver,Old Style,Pabst Brewing,Los Angeles,CA
-2012,American Specialty Lager or Cream Ale or Lager,Bronze,Mickey’s Malt Liquor,Miller Brewing,Milwaukee,WI
+2012,American Lager or Cream Ale,Gold,Henry Weinhard’s Blue Boar Pale Ale,Blitz-Weinhard Brewing,Hood River,OR
+2012,American Lager or Cream Ale,Silver,Old Style,Pabst Brewing,Los Angeles,CA
+2012,American Lager or Cream Ale,Bronze,Mickey’s Malt Liquor,Miller Brewing,Milwaukee,WI
 2012,Wood- & Barrel-Aged Strong Stout,Gold,Fourteen Fourteen,Central Waters Brewing Co.,Amherst,WI
 2012,Wood- & Barrel-Aged Strong Stout,Silver,Silva Stout,Green Flash Brewing Co.,San Diego,CA
 2012,Wood- & Barrel-Aged Strong Stout,Bronze,Barrel Aged Russian Imperial Stout,AC Golden Brewing Co.,Golden,CO
@@ -2858,9 +2858,9 @@ year,style,medal,beer,brewery,city,state
 2012,American Dark Lager,Gold,Shiner Bock,Spoetzl Brewery,Shiner,TX
 2012,American Dark Lager,Silver,Old Virginia Dark,Devils Backbone Brewing,BasecampRoseland,VA
 2012,American Dark Lager,Bronze,Session Black Premium Dark Lager,Full Sail Brewing,Hood River,OR
-2012,"American Lager, Light Lager or Premium Lager",Gold,Pabst Blue Ribbon,Pabst Brewing,Los Angeles,CA
-2012,"American Lager, Light Lager or Premium Lager",Silver,Miller Lite,Miller Brewing,Milwaukee,WI
-2012,"American Lager, Light Lager or Premium Lager",Bronze,Keystone Light,Coors Brewing,Golden,CO
+2012,"American Light/Premium/Regular Lager",Gold,Pabst Blue Ribbon,Pabst Brewing,Los Angeles,CA
+2012,"American Light/Premium/Regular Lager",Silver,Miller Lite,Miller Brewing,Milwaukee,WI
+2012,"American Light/Premium/Regular Lager",Bronze,Keystone Light,Coors Brewing,Golden,CO
 2012,Coffee Beer,Gold,Smog City Groundwork Coff ee,Tustin Brewing Co.,Tustin,CA
 2012,Coffee Beer,Silver,Hazelnut Coff ee Cream Stout,Redwood Brewing,Flint,MI
 2012,Coffee Beer,Bronze,Big Shot Espresso Stout,Twisted Pine Brewing Co.,Boulder,CO
@@ -2963,9 +2963,9 @@ year,style,medal,beer,brewery,city,state
 2013,Rye Beer,Gold,LowRyeDer,SweetWater Brewing Co.,Atlanta,GA
 2013,Rye Beer,Silver,Rye Smile,Triple Rock Brewery,Berkeley,CA
 2013,Rye Beer,Bronze,RastafaRye,Blue Point Brewing Co.,Patchogue,NY
-2013,American Cream Ale,Gold,Natural Ice,Anheuser-Busch,St. Louis,MO
-2013,American Cream Ale,Silver,Old Style,Pabst Brewing,Los Angeles,CA
-2013,American Cream Ale,Bronze,Rainier,Pabst Brewing,Los Angeles,CA
+2013,American Lager or Cream Ale,Gold,Natural Ice,Anheuser-Busch,St. Louis,MO
+2013,American Lager or Cream Ale,Silver,Old Style,Pabst Brewing,Los Angeles,CA
+2013,American Lager or Cream Ale,Bronze,Rainier,Pabst Brewing,Los Angeles,CA
 2013,Foreign Stout,Gold,Fade to Black Volume 1,Left Hand Brewing Co.,Longmont,CO
 2013,Foreign Stout,Silver,Don Vanuchi “The Killer”,Baker City Brewing Co.,Baker City,OR
 2013,Foreign Stout,Bronze,Tsunami Stout,Pelican Brewing Co.,Pacifi c City,OR
@@ -3344,9 +3344,9 @@ year,style,medal,beer,brewery,city,state
 2014,English Mild Ale,Gold,Workman’s Compensation,Lion Bridge Brewing Co.,Cedar Rapids,IA
 2014,English Mild Ale,Silver,Mamoot Mild Ale,Logboat Brewing Co.,Columbia,MO
 2014,English Mild Ale,Bronze,S.S. Minnow Mild Ale,Dry Dock Brewing,Aurora,CO
-2014,American Cream Ale,Gold,Primo,Pabst Brewing,Los Angeles,CA
-2014,American Cream Ale,Silver,Old Style,Pabst Brewing,Los Angeles,CA
-2014,American Cream Ale,Bronze,Colorado Cream Ale,Station 26 Brewing Co.,Denver,CO
+2014,American Lager or Cream Ale,Gold,Primo,Pabst Brewing,Los Angeles,CA
+2014,American Lager or Cream Ale,Silver,Old Style,Pabst Brewing,Los Angeles,CA
+2014,American Lager or Cream Ale,Bronze,Colorado Cream Ale,Station 26 Brewing Co.,Denver,CO
 2014,Classic Irish Dry Stout,Gold,Irish Table,Fonta Flora Brewery,Morganton,NC
 2014,Classic Irish Dry Stout,Silver,Shaft House Stout,Dostal Alley BrewPub,Central City,CO
 2014,Classic Irish Dry Stout,Bronze,Asphalt Jungle,Bagby Beer Co.,Oceanside,CA
@@ -3446,9 +3446,9 @@ year,style,medal,beer,brewery,city,state
 2015,American Brown Ale,Gold,1623 Almighty Brown Ale,7th Settlement Brewery,Dover,NH
 2015,American Brown Ale,Silver,Rapture Fusion Brown Ale,Rabbit Hole Brewing,Justin,TX
 2015,American Brown Ale,Bronze,Restraint,Institution Ale Co.,Camarillo,CA
-2015,European Dark/Münchner Dunkel,Gold,Gigi,Exile Brewing,Des Moines,IA
-2015,European Dark/Münchner Dunkel,Silver,Fearless Youth,Grimm Brothers Brewhouse,Loveland,CO
-2015,European Dark/Münchner Dunkel,Bronze,Chuckanut Dunkel,Chuckanut Brewery,Bellingham,WA
+2015,Münchner Dunkel,Gold,Gigi,Exile Brewing,Des Moines,IA
+2015,Münchner Dunkel,Silver,Fearless Youth,Grimm Brothers Brewhouse,Loveland,CO
+2015,Münchner Dunkel,Bronze,Chuckanut Dunkel,Chuckanut Brewery,Bellingham,WA
 2015,Belgian Strong Specialty Ale,Gold,Van Dammit,Jailbreak Brewing Co.,Laurel,MD
 2015,Belgian Strong Specialty Ale,Silver,The Cannibal,Iron Hill Brewery,Philadelphia,PA
 2015,Belgian Strong Specialty Ale,Bronze,Quad Damn It,Chicago Brewing,Las Vegas,NV
@@ -3488,9 +3488,9 @@ year,style,medal,beer,brewery,city,state
 2015,German Pilsener,Gold,Pivo,Firestone Walker,Paso Robles,CA
 2015,German Pilsener,Silver,Pilsner,pFriem Family Brewers,Hood River,OR
 2015,German Pilsener,Bronze,Pilsner,Dry Dock Brewing,Aurora,CO
-2015,American Cream Ale,Gold,Rainier Lager,Pabst Brewing,Los Angeles,CA
-2015,American Cream Ale,Silver,Olympia,Pabst Brewing,Los Angeles,CA
-2015,American Cream Ale,Bronze,Nuff,Dale Bros Brewery,Upland,CA
+2015,American Lager or Cream Ale,Gold,Rainier Lager,Pabst Brewing,Los Angeles,CA
+2015,American Lager or Cream Ale,Silver,Olympia,Pabst Brewing,Los Angeles,CA
+2015,American Lager or Cream Ale,Bronze,Nuff,Dale Bros Brewery,Upland,CA
 2015,American Wheat Beer,Gold,Super 77 Wheat,Wiley Roots Brewing Co.,Greeley,CO
 2015,American Wheat Beer,Silver,Whacked Out Wheat,Telluride Brewing Co.,Telluride,CO
 2015,American Wheat Beer,Bronze,Mogabi,Elevator Brewing,Columbus,OH

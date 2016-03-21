@@ -9,10 +9,10 @@ year,style,id,parent_id
 1999,American Pale Ale,13,
 1999,American Premium Lager,19,
 1999,American Specialty Lager,3,
-1999,American Wheat Ale or Lager,16,
+1999,American Wheat Beer,16,
 1999,Barley Wine Ale,35,
 1999,Belgian & French Specialty Ales,48,
-1999,Belgian Ales,4,
+1999,Belgian Ale,4,
 1999,Bock,14,
 1999,Bohemian Pilsener,8,
 1999,Brown Porter,20,
@@ -23,14 +23,14 @@ year,style,id,parent_id
 1999,English (Extra Special) Strong Bitter,25,
 1999,English Bitter,47,
 1999,English Brown Ale,43,
-1999,European Dark/Münchner Dunkel,18,
+1999,Münchner Dunkel,18,
 1999,European Pilsener,1,
 1999,Experimental Beer,9,
 1999,Foreign Stout,31,
 1999,Fruit Beers (other than raspberry),10,
 1999,German Brown Ale,34,
 1999,German Doppelbock,38,
-1999,German Kölsch/Köln Kölsch,22,
+1999,German Kölsch,22,
 1999,German Märzen/Oktoberfest,49,
 1999,German Pilsener,2,
 1999,German Schwarzbier,40,
@@ -64,10 +64,10 @@ year,style,id,parent_id
 2000,American Pale Ale,74,13
 2000,American Premium Lager,75,19
 2000,American Specialty Lager,77,3
-2000,American Wheat Ale or Lager,84,16
+2000,American Wheat Beer,84,16
 2000,Barley Wine Ale,81,35
 2000,Belgian & French Specialty Ales,72,48
-2000,Belgian Ales,60,4
+2000,Belgian Ale,60,4
 2000,Bock,85,14
 2000,Bohemian Pilsener,73,8
 2000,Brown Porter,91,20
@@ -79,14 +79,14 @@ year,style,id,parent_id
 2000,English Bitter,88,47
 2000,English Brown Ale,106,43
 2000,English India Pale Ale,61,42
-2000,European Dark/Münchner,93,18
+2000,Münchner Dunkel,93,18
 2000,European Pilsener,104,1
 2000,Experimental Beer,62,9
 2000,Foreign Stout,63,31
 2000,Fruit Beers (Other than Raspberry),96,10
 2000,German Brown Ale,56,34
 2000,German Doppelbock,102,38
-2000,German Kölsch/Köln Kölsch,97,22
+2000,German Kölsch,97,22
 2000,German Märzen/Oktoberfest,83,49
 2000,German Pilsener,69,2
 2000,German Schwarzbier,101,40
@@ -120,7 +120,7 @@ year,style,id,parent_id
 2001,American Pale Ale,111,74
 2001,American Premium Lager,128,75
 2001,American Specialty Lager,120,77
-2001,American Wheat Ale or Lager,129,84
+2001,American Wheat Beer,129,84
 2001,Barley Wine Ale,139,81
 2001,Belgian & French Specialty Ale,158,72
 2001,Belgian Ale,117,60
@@ -133,14 +133,14 @@ year,style,id,parent_id
 2001,Classic Irish Dry Stout,124,90
 2001,English Brown Ale,149,106
 2001,English India Pale Ale,110,61
-2001,European Dark/Münchner Dunkel,142,93
+2001,Münchner Dunkel,142,93
 2001,European Pilsener,140,104
 2001,Experimental Beer,118,62
 2001,Foreign Stout,127,63
 2001,Fruit Beer,153,96
 2001,German Brown Ale,133,56
 2001,German Doppelbock,116,102
-2001,German Kölsch/Köln Kölsch,162,97
+2001,German Kölsch,162,97
 2001,German Märzen/Oktoberfest,122,83
 2001,German Pilsener,134,69
 2001,German Schwarzbier,113,101
@@ -190,14 +190,14 @@ year,style,id,parent_id
 2002,Coffee Flavored Beer,202,
 2002,English Brown Ale,194,149
 2002,English India Pale Ale,210,110
-2002,European Dark/Münchner Dunkel,184,142
+2002,Münchner Dunkel,184,142
 2002,European Pilsener,166,140
 2002,Experimental Beer,212,118
 2002,Foreign Stout,197,127
 2002,Fruit And Vegetable Beer,217,153
 2002,German Brown Ale,205,133
 2002,German Doppelbock,182,116
-2002,German Kölsch/Köln Kölsch,192,162
+2002,German Kölsch,192,162
 2002,German Märzen/Oktoberfest,175,122
 2002,German Pilsener,208,134
 2002,German Schwarzbier,179,113
@@ -241,7 +241,7 @@ year,style,id,parent_id
 2003,Belgian Abbey Ale,258,176
 2003,Belgian Sour Ale,264,189
 2003,Belgian Strong Specialty Ale,227,201
-2003,Belgian White (or Wit)/Belgian Style,281,
+2003,Belgian White,281,
 2003,Bitter,282,222
 2003,Bock,248,198
 2003,Bohemian Pilsener,247,209
@@ -253,17 +253,17 @@ year,style,id,parent_id
 2003,English Brown Ale,249,194
 2003,English India Pale Ale,229,210
 2003,English Summer Ale,230,
-2003,European Dark/Münchner Dunkel,259,142
+2003,Münchner Dunkel,259,142
 2003,European Pilsener,283,166
 2003,Experimental Beer,269,212
-2003,Extra Special Bitter or Strong Bitter,263,181
+2003,Extra Special Bitter/Strong Bitter,263,181
 2003,Foreign (Export) Stout,284,197
 2003,French & Belgian Saison,270,190
 2003,Garden Beer (Fruit & Vegetable),275,217
 2003,German Brown Ale,280,205
 2003,German Doppelbock,245,182
 2003,German Hefeweizen,237,188
-2003,German Kölsch/Köln Kölsch,260,192
+2003,German Kölsch,260,192
 2003,German Märzen/Oktoberfest,266,175
 2003,German Pilsener,243,208
 2003,German Schwarzbier,234,179
@@ -319,15 +319,15 @@ year,style,id,parent_id
 2004,English Brown Ale,317,249
 2004,English India Pale Ale,312,241
 2004,English Summer Ale,334,230
-2004,European Dark/Münchner Dunkel,335,259
+2004,Münchner Dunkel,335,259
 2004,European Pilsener,305,283
 2004,Experimental Beer,299,269
-2004,Extra Special Bitter or Strong Bitter,345,263
+2004,Extra Special Bitter/Strong Bitter,345,263
 2004,Foreign (Export) Stout,341,284
 2004,French & Belgian Saison,303,270
 2004,Fruit and Vegetable Beer,336,275
 2004,German Brown Ale,351,280
-2004,German Kölsch/Köln Kölsch,315,260
+2004,German Kölsch,315,260
 2004,German Märzen/Oktoberfest,349,266
 2004,German Pilsener,337,243
 2004,German Schwarzbier,292,234
@@ -388,15 +388,15 @@ year,style,id,parent_id
 2005,English Brown Ale,376,317
 2005,English India Pale Ale,389,312
 2005,English Summer Ale,364,334
-2005,European Dark/Münchner Dunkel,423,335
+2005,Münchner Dunkel,423,335
 2005,European Pilsener,369,305
 2005,Experimental Beer,398,299
-2005,Extra Special Bitter or Strong Bitter,373,345
+2005,Extra Special Bitter/Strong Bitter,373,345
 2005,Foreign (Export) Stout,404,341
 2005,French & Belgian Saison,390,303
 2005,Fruit and Vegetable Beer,414,336
 2005,German Brown Ale,405,351
-2005,German Kölsch/Köln Kölsch,365,315
+2005,German Kölsch,365,315
 2005,German Märzen/Oktoberfest,422,349
 2005,German Pilsener,409,337
 2005,German Schwarzbier,361,292
@@ -455,15 +455,15 @@ year,style,id,parent_id
 2006,English Brown Ale,468,376
 2006,English India Pale Ale,447,389
 2006,English Summer Ale,469,364
-2006,European Dark/Münchner Dunkel,431,423
+2006,Münchner Dunkel,431,423
 2006,European Pilsener,489,369
 2006,Experimental Beer,458,398
-2006,Extra Special Bitter or Strong Bitter,426,373
+2006,Extra Special Bitter/Strong Bitter,426,373
 2006,Foreign (Export) Stout,445,404
 2006,French & Belgian Saison,460,390
 2006,Fruit and Vegetable Beer,443,414
 2006,German Brown Ale,486,405
-2006,German Kölsch/Köln Kölsch,424,365
+2006,German Kölsch,424,365
 2006,German Märzen/Oktoberfest,427,422
 2006,German Pilsener,488,409
 2006,German Schwarzbier,477,361
@@ -527,14 +527,14 @@ year,style,id,parent_id
 2007,English Dark Mild Ale or English-,530,
 2007,English India Pale Ale,528,447
 2007,English Summer Ale,558,469
-2007,European Dark/Münchner Dunkel,496,431
+2007,Münchner Dunkel,496,431
 2007,Experimental Beer,549,458
-2007,Extra Special Bitter or Strong Bitter,504,426
+2007,Extra Special Bitter/Strong Bitter,504,426
 2007,Foreign (Export) Stout,561,445
 2007,French & Belgian Saison,497,460
 2007,Fruit Beer or Vegetable Beer,514,443
 2007,German Brown Ale,498,486
-2007,German Kölsch/Köln Kölsch,509,424
+2007,German Kölsch,509,424
 2007,German Märzen,493,427
 2007,German Schwarzbier,505,477
 2007,German Strong Bock,553,435
@@ -603,7 +603,7 @@ year,style,id,parent_id
 2008,English Summer Ale,613,558
 2008,European Dunkel,568,496
 2008,Experimental Beer,588,549
-2008,Extra Special Bitter or Strong Bitter,620,504
+2008,Extra Special Bitter/Strong Bitter,620,504
 2008,Foreign Stout,628,561
 2008,French & Belgian Saison,632,497
 2008,Fruit or Vegetable Beer,578,514
@@ -678,7 +678,7 @@ year,style,id,parent_id
 2009,English Summer Ale,677,613
 2009,European Dunkel,681,568
 2009,Experimental Beer,647,588
-2009,Extra Special Bitter or Strong Bitter,665,620
+2009,Extra Special Bitter/Strong Bitter,665,620
 2009,Foreign Stout,688,628
 2009,French & Belgian Saison,675,632
 2009,Fruit Beer or Field Beer,715,578
@@ -756,7 +756,7 @@ year,style,id,parent_id
 2010,English Summer Ale,733,677
 2010,European Dunkel,773,681
 2010,Experimental Beer,729,647
-2010,Extra Special Bitter or Strong Bitter,732,665
+2010,Extra Special Bitter/Strong Bitter,732,665
 2010,Field Beer,779,715
 2010,Foreign Stout,783,688
 2010,French & Belgian Saison,780,675
@@ -807,7 +807,7 @@ year,style,id,parent_id
 2011,American Brown Ale,833,776
 2011,American Dark Lager,836,768
 2011,American India Pale Ale,851,763
-2011,"American Lager, Light Lager or Premium Lager",834,767
+2011,"American Light/Premium/Regular Lager",834,767
 2011,American or International Pilsener,874,781
 2011,American Pale Ale,815,726
 2011,American Sour Ale,826,754
@@ -890,7 +890,7 @@ year,style,id,parent_id
 2012,American Brown Ale,959,833
 2012,American Dark Lager,953,836
 2012,American India Pale Ale,920,851
-2012,"American Lager, Light Lager or Premium Lager",954,834
+2012,"American Light/Premium/Regular Lager",954,834
 2012,American or International Pilsener,897,874
 2012,American Pale Ale,930,815
 2012,American Sour Ale,898,826
@@ -1182,7 +1182,7 @@ year,style,id,parent_id
 2015,English India Pale Ale,1154,1082
 2015,English Mild Ale,1212,1115
 2015,English Summer Ale,1161,1075
-2015,European Dark/Münchner Dunkel,1150,1086
+2015,Münchner Dunkel,1150,1086
 2015,Experimental Beer,1177,1108
 2015,Export Stout,1204,1097
 2015,Extra Special Bitter,1166,1133

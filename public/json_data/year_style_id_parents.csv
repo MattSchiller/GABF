@@ -29,7 +29,7 @@ year,style,id,parent_id
 1999,Foreign Style Stout,31,
 1999,Fruit Beers (other than raspberry),10,
 1999,German Style Brown Ale,34,
-1999,German Style Dopplebock,38,
+1999,German Style Doppelbock,38,
 1999,German Style Kölsch/Köln Style Kölsch,22,
 1999,German Style Märzen/Oktoberfest,49,
 1999,German Style Pilsener,2,
@@ -261,7 +261,7 @@ year,style,id,parent_id
 2003,French & Belgian Style Saison,270,190
 2003,Garden Beer (Fruit & Vegetable),275,217
 2003,German Style Brown Ale,280,205
-2003,German Style Dopplebock,245,182
+2003,German Style Doppelbock,245,182
 2003,German Style Hefeweizen,237,188
 2003,German Style Kölsch/Köln Style Kölsch,260,192
 2003,German Style Märzen/Oktoberfest,266,175

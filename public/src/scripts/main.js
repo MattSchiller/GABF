@@ -425,7 +425,7 @@ var Map = React.createClass({
     return (
 			<div id="map-holder">
 				<div id={this.state.myID} />
-				<div id='markerCounter'>{this.props.markers.length}</div>
+				<div id='markerCounter'>{this.props.markers.length} Breweries</div>
 			</div>
 		);
   }
@@ -538,30 +538,38 @@ var Geneology = React.createClass({
     drawAxis(this.state.margin);
     update(root);
     
-    //NODES THAT SHOULD BE EXPANDED ARE NOT BEING; FIX!
-    
-    
     d3.selectAll('line').moveToBack();
     
     function showText(id) {
-      d3.select('#'+id).select('text')
+      let myID = TEXT_ID_LABEL + id;
+      d3.select('#'+myID).select('text')
         .style('visibility', 'visible');
     }
     function maybeHideText(d) {
       if (d.children && d.children[0].style == d.style) {
         if (d.lineage !== d.id) { //You're not the root of your lineage
           if (linVal == undefined || (linStyle !== d.style || linYear !== d.year) ) {//You're not the map click-through
-            hideText(TEXT_ID_LABEL + d.id);
+            hideText(d.id);
             return true;
-          } else { __showDetails(d); }  //You ARE the map-click-through, let's show them details!
+          } else { __showDetails(d); applyColor(d.id)}  //You ARE the map-click-through, let's show them details!
         }
       }
       return false;
     }
     function hideText(id) {
-      d3.select('#'+id).select('text')
+      let myID = TEXT_ID_LABEL + id;
+      d3.select('#'+myID).select('text')
         .style('visibility', 'hidden')
-        .attr('generic', function(d) {console.log('hiding d:', d); return '5';});
+    }
+    function applyColor(id) {
+      let myID = TEXT_ID_LABEL + id;
+      d3.select('.clicked')     //Remove all other colored nodes
+        .attr('class', 'node')
+        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+        
+      d3.select('#'+myID).select('circle')
+        .attr('class', function(d) { console.log('in d:', d); return 'node clicked'; })
+        .style("fill", function(d) { return 'pink'; });
     }
     
     function update(source) {
@@ -589,7 +597,7 @@ var Geneology = React.createClass({
                                       update(d);
                                     })
           .on('mouseover', function(d) {
-                                      showText(TEXT_ID_LABEL + d.id);
+                                      showText(d.id);
                                     })
           .attr('id', function(d) { return TEXT_ID_LABEL + d.id; } )
           .on('mouseout', function(d) {
@@ -605,7 +613,7 @@ var Geneology = React.createClass({
     
       nodeEnter.append("text")
           .attr("x", function(d) { return d.children || d._children ? -5 : 5; })
-          .attr("y", function(d) { return d.children || d._children ? 0 : 0; })
+          .attr("y", function(d) { return d.children || d._children ? -5 : 5; })
           .attr("dy", ".35em")      //centers text
           .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
           .attr('class', function(d) {
@@ -651,7 +659,6 @@ var Geneology = React.createClass({
           .attr("class", "link")
           .attr('class', function(d) {
             return (d.source.style === 'root') ? 'link hidden' : 'link'; })
-          .attr('stroke', 'green')
           .attr("d", function(d) {
             var o = {x: source.x0, y: source.y0};
             return diagonal({source: o, target: o});
@@ -722,6 +729,7 @@ var Geneology = React.createClass({
       //console.log('clicking, d:', d);
       nodeScroll(d);
       __showDetails(d);
+      applyColor(d.id)
     }
     function __showDetails(d) {
       let year = d.year,

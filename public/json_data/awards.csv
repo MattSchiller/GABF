@@ -47,7 +47,7 @@ year,style,medal,beer,brewery,city,state
 1999,American Style Wheat Ale or Lager,Gold,Diamondback Wheat,Elk Grove Brewery,Elk Grove,CA
 1999,American Style Wheat Ale or Lager,Silver,Shiner Honey Wheat,Spoetzl Brewery,Shiner,TX
 1999,American Style Wheat Ale or Lager,Bronze,Stoddard's American Wheat,Stoddard's Brewhouse and Eatery,Sunnyvale,CA
-1999,Scottish Style Ale,Gold,,,,
+1999,Scottish Style Ale,Gold,No Medal Awarded,,,
 1999,Scottish Style Ale,Silver,Tilted Kilt,Pyramid Breweries,Seattle,WA
 1999,Scottish Style Ale,Bronze,Kilt Lifter Scottish Amber,Four Peaks Brewing,Tempe,AZ
 1999,European Style Dark/Münchner Dunkel,Gold,Atwater Dunkel,Atwater Block Brewery,Detroit,MI
@@ -74,7 +74,7 @@ year,style,medal,beer,brewery,city,state
 1999,English Style (Extra Special) Strong Bitter,Gold,Extra Special Bitter,Russian River Brewing,Guerneville,CA
 1999,English Style (Extra Special) Strong Bitter,Silver,Settlers Ale,Crooked River Brewing,Cleveland,OH
 1999,English Style (Extra Special) Strong Bitter,Bronze,Saint Arnold Amber Ale,Saint Arnold Brewing,Houston,TX
-1999,Sweet Stout,Gold,,,,
+1999,Sweet Stout,Gold,No Medal Awarded,,,
 1999,Sweet Stout,Silver,Kickstart Stout,Barley Brothers Brewery,Lake Havasu City,AZ
 1999,Sweet Stout,Bronze,A Beer Named Bob,Bitter Creek Brewing,Rock Springs,WY
 1999,Raspberry Beers,Gold,Widmer Widberry,Widmer Brothers Brewing,Portland,OR
@@ -107,12 +107,12 @@ year,style,medal,beer,brewery,city,state
 1999,Oatmeal Stout,Gold,Blast Furnace Stout,Church Brew Works,Pittsburgh,PA
 1999,Oatmeal Stout,Silver,Farmer Jon's Oatmeal Stout,Heartland Brewery,New York,NY
 1999,Oatmeal Stout,Bronze,Ohio City Oatmeal Stout,Great Lakes Brewing,Cleveland,OH
-1999,American Dark Lager,Gold,,,,
+1999,American Dark Lager,Gold,No Medal Awarded,,,
 1999,American Dark Lager,Silver,Boiler Room Dark Lager,Colorado Belle,Laughlin,NV
 1999,American Dark Lager,Bronze,Black Star Black Lager,Great Northern Brewing,Whitefish,MT
-1999,German Style Dopplebock,Gold,Hogback Doppelbock,Mountain Sun Pub,Boulder,CO
-1999,German Style Dopplebock,Silver,,,,
-1999,German Style Dopplebock,Bronze,Dopplebock,H.C. Berger Brewing,Fort Collins,CO
+1999,German Style Doppelbock,Gold,Hogback Doppelbock,Mountain Sun Pub,Boulder,CO
+1999,German Style Doppelbock,Silver,No Medal Awarded,,,
+1999,German Style Doppelbock,Bronze,Doppelbock,H.C. Berger Brewing,Fort Collins,CO
 1999,Specialty Beer,Gold,Island City Wild Rice Lager,Minocqua Brewing Company,Minocqua,WI
 1999,Specialty Beer,Silver,Erie Nights Pumpkin Brew,Crooked River Brewing,Cleveland,OH
 1999,Specialty Beer,Bronze,Captain Smith's Rye,Titanic Brewing,Coral Gables,FL
@@ -131,13 +131,13 @@ year,style,medal,beer,brewery,city,state
 1999,American Style Brown Ale,Gold,Doryman's Dark Ale,Pelican Pub,Pacific City,OR
 1999,American Style Brown Ale,Silver,Emerald Irish Ale,Steelhead Brewery,Burlingame,CA
 1999,American Style Brown Ale,Bronze,Burly Brown Ale,James Page Brewing,Minneapolis,MN
-1999,Chocolate/Cocoa Flavored Beer,Gold,,,,
-1999,Chocolate/Cocoa Flavored Beer,Silver,,,,
+1999,Chocolate/Cocoa Flavored Beer,Gold,No Medal Awarded,,,
+1999,Chocolate/Cocoa Flavored Beer,Silver,No Medal Awarded,,,
 1999,Chocolate/Cocoa Flavored Beer,Bronze,Chocolate Thunder Porter,Watch City Brewing Company,Waltham,MA
 1999,American Style Amber/Red Ale,Gold,Red Nectar,Humboldt Brewery,Arcata,CA
 1999,American Style Amber/Red Ale,Silver,Capstone ESB,Oasis Brewery,Boulder,CO
 1999,American Style Amber/Red Ale,Bronze,Believer's Bitter,Angelic Brewing,Madison,WI
-1999,English Style Bitter,Gold,,,,
+1999,English Style Bitter,Gold,No Medal Awarded,,,
 1999,English Style Bitter,Silver,Dergy's Amber,Wilmington Brewing Company,Wilmington,NC
 1999,English Style Bitter,Bronze,Red Butte Bitter,Desert Edge Brewery,Salt Lake City,UT
 1999,Belgian & French Style Specialty Ales,Gold,Waterloo Grand Cru,Waterloo Brewing Company,Austin,TX
@@ -150,7 +150,7 @@ year,style,medal,beer,brewery,city,state
 1999,Other Strong Ale or Lager,Silver,Ricardo's Red Rocket,Bear Republic Brewing,Healdsburg,CA
 1999,Other Strong Ale or Lager,Bronze,Bell's Expedition Stout,Kalamazoo Brewing,Kalamazoo,MI
 1999,Non-Alcoholic (Beer) Malt Beverages,Gold,Old Milwaukee NA,The Stroh Brewery Company,Fogelsville,PA
-1999,Non-Alcoholic (Beer) Malt Beverages,Silver,,,,
+1999,Non-Alcoholic (Beer) Malt Beverages,Silver,No Medal Awarded,,,
 1999,Non-Alcoholic (Beer) Malt Beverages,Bronze,O'Doul's,Anheuser-Busch,St. Louis,MI
 1999,American Style Amber Lager,Gold,New South Oktoberfest,New South Brewing,Myrtle Beach,SC
 1999,American Style Amber Lager,Silver,Auburn,Mad Anthony Brewing,Ft. Wayne,IN
@@ -215,7 +215,7 @@ year,style,medal,beer,brewery,city,state
 2000,Belgian & French Style Specialty Ales,Gold,Cherry Lambic,Commonwealth Brewing,New York,NY
 2000,Belgian & French Style Specialty Ales,Silver,Saison L' Ete,Willoughby Brewing,Willoughby,OH
 2000,Belgian & French Style Specialty Ales,Bronze,La Folie,New Belgium Brewing,Fort Collins,CO
-2000,Bohemian Style Pilsener,Gold,,,,
+2000,Bohemian Style Pilsener,Gold,No Medal Awarded,,,
 2000,Bohemian Style Pilsener,Silver,Czech Mate Pils,Brew Moon,Needham,MA
 2000,Bohemian Style Pilsener,Bronze,Full Sail Pilsner,Full Sail Brewing,Hood River,OR
 2000,American Style Pale Ale,Gold,Telemark IPA,Backcountry Brewery,Frisco,CO
@@ -264,8 +264,8 @@ year,style,medal,beer,brewery,city,state
 2000,English Style Bitter,Silver,8th Street Ale,Four Peaks Brewing,Tempe,AZ
 2000,English Style Bitter,Bronze,Long Valley Best Bitter,Long Valley Pub,Long Valley,NJ
 2000,American Style Amber Lager,Gold,Steam Engine Steam,Steamworks Brewing,Durango,CO
-2000,American Style Amber Lager,Silver,,,,
-2000,American Style Amber Lager,Bronze,,,,
+2000,American Style Amber Lager,Silver,No Medal Awarded,,,
+2000,American Style Amber Lager,Bronze,No Medal Awarded,,,
 2000,Classic Irish Style Dry Stout,Gold,Murphy's Dry Stout,Humperdinks Big Horn Brewing,Lakewood,WA
 2000,Classic Irish Style Dry Stout,Silver,Black Magic Stout,Empire Brewing Co. of Rochester,Rochester,NY
 2000,Classic Irish Style Dry Stout,Bronze,Dark Starr Stout,Starr Hill Brewing,Charlottesville,VA
@@ -277,11 +277,11 @@ year,style,medal,beer,brewery,city,state
 2000,American Style Light Lager,Bronze,Schaefer Light,Schaefer Brewing,Fogelsville,PA
 2000,European Style Dark/Münchner,Gold,Black Forest,Valhalla Microbrewery,Pittsburgh,PA
 2000,European Style Dark/Münchner,Silver,Slam Dunkel,Great Basin Brewing,Sparks,NV
-2000,European Style Dark/Münchner,Bronze,,,,
+2000,European Style Dark/Münchner,Bronze,No Medal Awarded,,,
 2000,American Style Dark Lager,Gold,H. Saxer Dark Lager,Portland Brewing,Portland,OR
 2000,American Style Dark Lager,Silver,Henry Weinhard's Dark,Blitz-Weinhard Brewing,Tumwater,WA
 2000,American Style Dark Lager,Bronze,Michelob Amber Bock,Anheuser-Busch,St. Louis,MO
-2000,Non-Alcoholic (Beer) Malt Beverages,Gold,,,,
+2000,Non-Alcoholic (Beer) Malt Beverages,Gold,No Medal Awarded,,,
 2000,Non-Alcoholic (Beer) Malt Beverages,Silver,Pabst NA,Pabst Brewing,Fogelsville,PA
 2000,Non-Alcoholic (Beer) Malt Beverages,Bronze,O'Doul's Amber,Anheuser-Busch,St. Louis,MO
 2000,Fruit Beers (Other than Raspberry),Gold,Fuzzy Buzz Peach Ale,Copper Tank Brewing Co.,Dallas,TX
@@ -346,7 +346,7 @@ year,style,medal,beer,brewery,city,state
 2001,Herb and Spice Beer,Bronze,Cambridge Espresso Stout,John Harvard's Brew House,Braintree,MA
 2001,German Style Doppelbock,Gold,Scapegoat Doppelbock,Mickey Finn's Brewery,Libertyville,IL
 2001,German Style Doppelbock,Silver,Liberator Doppelbock,Angelic Brewing,Madison,WI
-2001,German Style Doppelbock,Bronze,Bell's Consecrator Dopplebock,Kalamazoo Brewing,Kalamazoo,MI
+2001,German Style Doppelbock,Bronze,Bell's Consecrator Doppelbock,Kalamazoo Brewing,Kalamazoo,MI
 2001,Belgian Style Ale,Gold,Trippel Belgian Style Ale,New Belgium Brewing,Fort Collins,CO
 2001,Belgian Style Ale,Silver,Damnation,Russian River Brewing,Guerneville,CA
 2001,Belgian Style Ale,Bronze,Abbey Belgian Style Ale,New Belgium Brewing,Fort Collins,CO
@@ -412,7 +412,7 @@ year,style,medal,beer,brewery,city,state
 2001,Chocolate/Cocoa Flavored Beer,Bronze,Oompa Loompa,Rocky River Brewing,Rocky River,OH
 2001,Oatmeal Stout,Gold,Lasto's Oatmeal Stout,BJ's Grill & Brewery,Portland,OR
 2001,Oatmeal Stout,Silver,Oatmeal Stout,SLO Brewing,San Luis Obispo,CA
-2001,Oatmeal Stout,Bronze,,,,
+2001,Oatmeal Stout,Bronze,No Medal Awarded,,,
 2001,Barley Wine Style Ale,Gold,Lost Coast Barleywine,Lost Coast Brewery,Eureka,CA
 2001,Barley Wine Style Ale,Silver,Bombshell Barleywine,Pizza Port,Carlsbad,CA
 2001,Barley Wine Style Ale,Bronze,Barley Wine,Rohrbach Brewing Co.,Rochester,NY
@@ -434,7 +434,7 @@ year,style,medal,beer,brewery,city,state
 2001,Munich Style Helles,Gold,Penn Gold,Pennsylvania Brewing,Pittsburgh,PA
 2001,Munich Style Helles,Silver,Lucknow Munich Style Lager,Castle Springs Brewing,Moultonborough,NH
 2001,Munich Style Helles,Bronze,Ghost Pony Helles,Trap Rock Restaurant and Brewery,Berkeley Heights,NJ
-2001,Smoke Beer,Gold,,,,
+2001,Smoke Beer,Gold,No Medal Awarded,,,
 2001,Smoke Beer,Silver,Smokey the Beer,Blind Tiger Brewery,Topeka,KS
 2001,Smoke Beer,Bronze,Stewart's Smoked Porter,Stewart's Brewing Co.,Bear,DE
 2001,Vienna Style Lager,Gold,Snake River Lager,Snake River Brewing,Jackson,WY
@@ -460,7 +460,7 @@ year,style,medal,beer,brewery,city,state
 2001,Fruit Beer,Bronze,Railway Razz,The Willoughby Brewing Co.,Willoughby,OH
 2001,Specialty Honey Beer,Gold,Countdown Honey Brown,Thunder Canyon Brewery,Tucson,AZ
 2001,Specialty Honey Beer,Silver,Jarre Creek Ranch Brewery Honey Brown Ale,Jarre Creek Ranch Brewery,Castle Rock,CO
-2001,Specialty Honey Beer,Bronze,Honey Rye Dopplebock,Flossmoor Station,Flossmoor,IL
+2001,Specialty Honey Beer,Bronze,Honey Rye Doppelbock,Flossmoor Station,Flossmoor,IL
 2001,American Style Lager/Ale or Cream Ale,Gold,Taps Cream Ale,Taps Fish House and Brewery,Brea,CA
 2001,American Style Lager/Ale or Cream Ale,Silver,Holy Cow's Cream Ale,Holy Cow! Casino Café & Brewery,Las Vegas,NV
 2001,American Style Lager/Ale or Cream Ale,Bronze,Iowa City Light,Fitzpatrick's,Iowa City,IA
@@ -479,7 +479,7 @@ year,style,medal,beer,brewery,city,state
 2001,American Style India Pale Ale,Gold,Tumbleweed IPA,Sleeping Giant Brewing Company,Billings,MT
 2001,American Style India Pale Ale,Silver,Wipeout IPA,Pizza Port,Carlsbad,CA
 2001,American Style India Pale Ale,Bronze,India Pelican Ale,Pelican Pub,Pacific City,OR
-2001,Strong Scotch Ale,Gold,,,,
+2001,Strong Scotch Ale,Gold,No Medal Awarded,,,
 2001,Strong Scotch Ale,Silver,Wee Heavy Ale,Capitol City Brewing,Arlington,VA
 2001,Strong Scotch Ale,Bronze,Wee Heavy,Iron Hill Brewery,Media,PA
 2001,German Style Kölsch/Köln Style Kölsch,Gold,Pete's Wicked Helles Lager,Pete's Brewing,San Antonio,TX
@@ -598,7 +598,7 @@ year,style,medal,beer,brewery,city,state
 2002,American Style India Pale Ale,Bronze,Scarlet Fire,Big Time Brewery,Seattle,WA
 2002,Non-Alcoholic (Beer) Malt Beverages,Gold,O'Doul's Amber,Anheuser-Busch,Fort Collins,CO
 2002,Non-Alcoholic (Beer) Malt Beverages,Silver,Old Milwaukee NA,Stroh Brewery,San Antonio,TX
-2002,Non-Alcoholic (Beer) Malt Beverages,Bronze,,,,
+2002,Non-Alcoholic (Beer) Malt Beverages,Bronze,No Medal Awarded,,,
 2002,Belgian Style Strong Specialty Ales,Gold,Temptation,Russian River Brewing,Guerneville,CA
 2002,Belgian Style Strong Specialty Ales,Silver,Millenium Grand Cru,BJ's Restaurant & Brewery,Portland,OR
 2002,Belgian Style Strong Specialty Ales,Bronze,Trouble,Rock Bottom,Bethesda,MD
@@ -622,7 +622,7 @@ year,style,medal,beer,brewery,city,state
 2002,American Style Lager,Bronze,Old Style,Heileman Brewing Company,San Antonio,TX
 2002,German Style Pilsener,Gold,Hops Pilsener,Hops Restaurant Bar and Brewery,Tampa,FL
 2002,German Style Pilsener,Silver,Goose Island Pils,Goose Island Beer Co.,Chicago,IL
-2002,German Style Pilsener,Bronze,,,,
+2002,German Style Pilsener,Bronze,No Medal Awarded,,,
 2002,Bohemian Style Pilsener,Gold,Cleveland Chophouse Bohemian Pilsener,Cleveland ChopHouse and Brewery,Cleveland,OH
 2002,Bohemian Style Pilsener,Silver,Barmen Pilsener,Sandlot Brewery,Denver,CO
 2002,Bohemian Style Pilsener,Bronze,BoHo Pilsner,Nodding Head Brewing,Philadelphia,PA
@@ -682,7 +682,7 @@ year,style,medal,beer,brewery,city,state
 2003,Belgian Style Strong Specialty Ale,Bronze,Bete Blanche,Elysian Brewery,Seattle,WA
 2003,Non-Alcoholic (Beer) Malt Beverages,Gold,O'Doul’s,Anheuser-Busch,Saint Louis,MO
 2003,Non-Alcoholic (Beer) Malt Beverages,Silver,O'Doul’s Amber,Anheuser-Busch,Saint Louis,MO
-2003,Non-Alcoholic (Beer) Malt Beverages,Bronze,,,,
+2003,Non-Alcoholic (Beer) Malt Beverages,Bronze,No Medal Awarded,,,
 2003,English Style India Pale Ale,Gold,E.J. Phair I.P.A.,E.J. Phair Brewing Co.,Concord,CA
 2003,English Style India Pale Ale,Silver,Man Beer,Bull & Bush Brewery,Denver,CO
 2003,English Style India Pale Ale,Bronze,Squatters IPA,Utah Brewers,Salt Lake City,UT
@@ -698,8 +698,8 @@ year,style,medal,beer,brewery,city,state
 2003,Specialty Beer,Gold,California Crisp,Thirsty Dog Brewing,Akron,OH
 2003,Specialty Beer,Silver,Ginger Shandy,McCoy's Public House,Kansas City,MO
 2003,Specialty Beer,Bronze,Maplenut Brown Ale,Tommyknocker Brewery,Idaho Springs,CO
-2003,German Style Schwarzbier,Gold,,,,
-2003,German Style Schwarzbier,Silver,,,,
+2003,German Style Schwarzbier,Gold,No Medal Awarded,,,
+2003,German Style Schwarzbier,Silver,No Medal Awarded,,,
 2003,German Style Schwarzbier,Bronze,Black Forest Schwarzbier,Squatters,Salt Lake City,UT
 2003,Old Ale or Strong Ale,Gold,Stewart's Barleywine,Stewart's Brewing Co.,Bear,DE
 2003,Old Ale or Strong Ale,Silver,Hibernation Ale,Great Divide Brewing,Denver,CO
@@ -731,9 +731,9 @@ year,style,medal,beer,brewery,city,state
 2003,British Stout,Gold,Cream Stout,Redwood Brewing,Flint,MI
 2003,British Stout,Silver,Sinners Stout,Angelic Brewing,Madison,WI
 2003,British Stout,Bronze,Cowabunga Cream Stout,Pizza Port,Solana Beach,CA
-2003,German Style Dopplebock,Gold,Sled Dog Trippelbock Reserve,Wagner Valley Brewing Co.,Lodi,NY
-2003,German Style Dopplebock,Silver,Incinerator Doppelbock,Pumphouse Brewery,Longmont,CO
-2003,German Style Dopplebock,Bronze,Broken Keg,Port Brewing Co. Pizza Port Carlsbad,Carlsbad,CA
+2003,German Style Doppelbock,Gold,Sled Dog Trippelbock Reserve,Wagner Valley Brewing Co.,Lodi,NY
+2003,German Style Doppelbock,Silver,Incinerator Doppelbock,Pumphouse Brewery,Longmont,CO
+2003,German Style Doppelbock,Bronze,Broken Keg,Port Brewing Co. Pizza Port Carlsbad,Carlsbad,CA
 2003,Munich Style Helles,Gold,Augsburger Golden,Stevens Point Brewery,Stevens Point,WI
 2003,Munich Style Helles,Silver,Saint Arnold Summer Pils,Saint Arnold Brewing,Houston,TX
 2003,Munich Style Helles,Bronze,Helles of a Play,SandLot Brewery at Coors Field,Denver,CO
@@ -755,7 +755,7 @@ year,style,medal,beer,brewery,city,state
 2003,"American Style ""Light"" Amber Lager",Gold,Leinenkugel's Amber Light,Jacob Leinenkugel Brewing,Chippewa Falls,WI
 2003,"American Style ""Light"" Amber Lager",Silver,Walker's Mild,Firestone Walker,Paso Robles,CA
 2003,"American Style ""Light"" Amber Lager",Bronze,Starr Hill Mojo,Starr Hill Brewing,Charlottesville,VA
-2003,Brown Porter,Gold,,,,
+2003,Brown Porter,Gold,No Medal Awarded,,,
 2003,Brown Porter,Silver,Sweetwater Exodus Porter,Sweetwater Brewing,Atlanta,GA
 2003,Brown Porter,Bronze,Prince William Porter,Moose's Tooth,Anchorage,AK
 2003,American Style Amber Lager,Gold,Extreme Amber,BJ's Restaurant & Brewery,Woodland Hills,CA
@@ -795,7 +795,7 @@ year,style,medal,beer,brewery,city,state
 2003,Other Strong Ale or Lager,Silver,Full Sail Capsize,Full Sail Brewing,Hood River,OR
 2003,Other Strong Ale or Lager,Bronze,Summit Oktoberfest,Summit Brewing,St Paul,MN
 2003,German Style Märzen/Oktoberfest,Gold,Oktoberfest,The Great Dane Pub,Madison,WI
-2003,German Style Märzen/Oktoberfest,Silver,,,,
+2003,German Style Märzen/Oktoberfest,Silver,No Medal Awarded,,,
 2003,German Style Märzen/Oktoberfest,Bronze,Stewart's Oktoberfest,Stewart's Brewing Co.,Bear,DE
 2003,American Dark Lager,Gold,Freidabrau Oktoberfest,RAM International/Humperdink's/Big Horn Brewing Co.,Lakewood,WA
 2003,American Dark Lager,Silver,Michelob Amber Bock,Anheuser-Busch,Saint Louis,MO
@@ -1069,7 +1069,7 @@ year,style,medal,beer,brewery,city,state
 2005,Belgian Style Sour Ale,Bronze,Gueuze-Lambic,Upstream Brewing,Omaha,NE
 2005,Smoke Beer,Gold,Alaskan Smoked Porter,Alaskan Brewing,Juneau,AK
 2005,Smoke Beer,Silver,Second Hand Smoke,SandLot Brewery at Coors Field,Denver,CO
-2005,Smoke Beer,Bronze,Rauchator Dopplebock,The Fort Collins Brewery,Fort Collins,CO
+2005,Smoke Beer,Bronze,Rauchator Doppelbock,The Fort Collins Brewery,Fort Collins,CO
 2005,Bock,Gold,Mad Brewer Maibock,Church Brew Works,Pittsburgh,PA
 2005,Bock,Silver,Goat Rancher,SandLot Brewery at Coors Field,Denver,CO
 2005,Bock,Bronze,J.W. Dundee's Pale Bock,High Falls Brewing,Rochester,NY
@@ -1251,7 +1251,7 @@ year,style,medal,beer,brewery,city,state
 2005,Specialty Beer,Silver,Neptune's Nemesis,Rocky River Brewing,Rocky River,OH
 2005,Specialty Beer,Bronze,Pullman Brown Ale,Flossmoor Station,Flossmoor,IL
 2005,American Style Low-Carbohydrate Light Lager,Gold,Pig's Eye Lean Light Beer,Pig's Eye Brewing Co.,St. Paul,MN
-2005,American Style Low-Carbohydrate Light Lager,Silver,,,,
+2005,American Style Low-Carbohydrate Light Lager,Silver,No Medal Awarded,,,
 2005,American Style Low-Carbohydrate Light Lager,Bronze,Mountain Light,Smoky Mountain Brewery,Knoxville,TN
 2005,American Style Light Lager,Gold,Old Milwaukee Light,Pabst Brewing,San Antonio,TX
 2005,American Style Light Lager,Silver,Coors Light,Coors Brewing,Golden,CO
@@ -1289,7 +1289,7 @@ year,style,medal,beer,brewery,city,state
 2006,American Style Amber Lager,Gold,Steam Engine Lager,Steamworks Brewing,Durango,CO
 2006,American Style Amber Lager,Silver,Toasted Lager,Blue Point Brewing Co.,Patchogue,NY
 2006,American Style Amber Lager,Bronze,Oktoberfist,Bluegrass Brewing Co.,Louisville,KY
-2006,European Style Dark/Münchner Dunkel,Gold,,,,
+2006,European Style Dark/Münchner Dunkel,Gold,No Medal Awarded,,,
 2006,European Style Dark/Münchner Dunkel,Silver,Storm King,Glenwood Canyon Brewing,Glenwood Springs,CO
 2006,European Style Dark/Münchner Dunkel,Bronze,Dunkel Rico,Stewart’s Brewing Co.,Bear,DE
 2006,Aged Beer,Gold,Triple Exultation 2004,Eel River Brewing,Fortuna,CA
@@ -1355,7 +1355,7 @@ year,style,medal,beer,brewery,city,state
 2006,Brown Porter,Gold,Molly Titanic,Rock Bottom,Denver,CO
 2006,Brown Porter,Silver,St. Charles Porter,Blackstone Brewing,Nashville,TN
 2006,Brown Porter,Bronze,Peter Brown Tribute Ale,Bear Republic Brewing,Healdsburg,CA
-2006,Belgian Style White (or Wit)/Belgian Style Wheatwine,Gold,,,,
+2006,Belgian Style White (or Wit)/Belgian Style Wheatwine,Gold,No Medal Awarded,,,
 2006,Belgian Style White (or Wit)/Belgian Style Wheatwine,Silver,Wits End,Great American Restaurants,Centreville,VA
 2006,Belgian Style White (or Wit)/Belgian Style Wheatwine,Bronze,35th Anniversary Ale,Bull & Bush Brewery,Denver,CO
 2006,American Style Specialty Lager,Gold,Mickey’s Malt Liquor,Miller Brewing,Milwaukee,WI
@@ -1373,7 +1373,7 @@ year,style,medal,beer,brewery,city,state
 2006,Experimental Beer,Gold,New Grist,Lakefront Brewery,Milwaukee,WI
 2006,Experimental Beer,Silver,Angry Mike’s Stoudt Creek,Flossmoor Station,Flossmoor,IL
 2006,Experimental Beer,Bronze,Samuel Adams Utopias 2003,The Boston Beer Co.,Boston,MA
-2006,Vienna Style Lager,Gold,,,,
+2006,Vienna Style Lager,Gold,No Medal Awarded,,,
 2006,Vienna Style Lager,Silver,Balto Marz Hon,Clipper City Brewing,Baltimore,MD
 2006,Vienna Style Lager,Bronze,Schild brau Amber,Millstream Brewing,Amana,IA
 2006,French & Belgian Style Saison,Gold,Organic Farmhouse Ale,Bison Brewing Co.,Berkeley,CA
@@ -1412,7 +1412,7 @@ year,style,medal,beer,brewery,city,state
 2006,Wood- and Barrel-Aged Strong Beer,Gold,Bourbon Cherry Stout,Central Waters Brewing Co.,Junction City,WI
 2006,Wood- and Barrel-Aged Strong Beer,Silver,Full Sail Black Gold Imperial Stout,Full Sail Brewing,Portland,OR
 2006,Wood- and Barrel-Aged Strong Beer,Bronze,Wooden Hell,Flossmoor Station,Flossmoor,IL
-2006,Baltic Style Porter,Gold,,,,
+2006,Baltic Style Porter,Gold,No Medal Awarded,,,
 2006,Baltic Style Porter,Silver,Raven,McKenzie Brew House,Glen Mills,PA
 2006,Baltic Style Porter,Bronze,Neptune’s Nemesis,Rocky River Brewing,Rocky River,OH
 2006,American Style Hefeweizen,Gold,Hefeweizen,Widmer Brothers Brewing,Portland,OR
@@ -1513,7 +1513,7 @@ year,style,medal,beer,brewery,city,state
 2007,Extra Special Bitter or Strong Bitter,Bronze,Big Sea ESB,Free State Brewing Co.,Lawrence,KS
 2007,German Style Schwarzbier,Gold,Gordon Biersch Schwarzbier,Gordon Biersch Brewery,Chattanooga,TN
 2007,German Style Schwarzbier,Silver,RedRock Black Bier,RedRock Brewing Co.,Salt Lake City,UT
-2007,German Style Schwarzbier,Bronze,,,,
+2007,German Style Schwarzbier,Bronze,No Medal Awarded,,,
 2007,Vienna Style Lager,Gold,Balto Märzhon,Clipper City Brewing,Baltimore,MD
 2007,Vienna Style Lager,Silver,Dos Rios,Glenwood Canyon Brewing,Glenwood Springs,CO
 2007,Vienna Style Lager,Bronze,Stoudts Ofest,Stoudts Brewing Co.,Adamstown,PA
@@ -1544,7 +1544,7 @@ year,style,medal,beer,brewery,city,state
 2007,Coffee Flavored Beer,Gold,Coffee Bender,Surly Brewing Co.,Brooklyn Center,MN
 2007,Coffee Flavored Beer,Silver,Java Porter,Blind Tiger Brewery,Topeka,KS
 2007,Coffee Flavored Beer,Bronze,Pipeline Porter,Kona Brewing,Kailua-Kona,HI
-2007,Sweet Stout,Gold,,,,
+2007,Sweet Stout,Gold,No Medal Awarded,,,
 2007,Sweet Stout,Silver,Double Cream Stout,Bell’s Brewery,Galesburg,MI
 2007,Sweet Stout,Bronze,Milkman Stout,Capitol City Brewing,Arlington,VA
 2007,American Style Sour Ale or German Style,Gold,Cuvee de Castleton,Captain Lawrence Brewing,Pleasantville,NY
@@ -1578,7 +1578,7 @@ year,style,medal,beer,brewery,city,state
 2007,Smoke Beer,Silver,Alaskan Smoked Porter 2006,Alaskan Brewing,Juneau,AK
 2007,Smoke Beer,Bronze,Smokin Willie Porter,Moose’s Tooth Brewing Co.,Anchorage,AK
 2007,Classic Irish Style Dry Stout,Gold,Moylan’s Irish Dry Stout,Moylan's Brewery,Novato,CA
-2007,Classic Irish Style Dry Stout,Silver,,,,
+2007,Classic Irish Style Dry Stout,Silver,No Medal Awarded,,,
 2007,Classic Irish Style Dry Stout,Bronze,Blarney Sisters Dry Irish Stout,Third Street Ale Works,Santa Rosa,CA
 2007,English Style India Pale Ale,Gold,Squatters IPA,Utah Brewers,Salt Lake City,UT
 2007,English Style India Pale Ale,Silver,India Pale Ale,Goose Island Beer Co.,Chicago,IL
@@ -1715,7 +1715,7 @@ year,style,medal,beer,brewery,city,state
 2008,Smoke Beer,Gold,Rauch Bier,Sly Fox Brewhouse,Royersford,PA
 2008,Smoke Beer,Silver,Alaskan Smoked Porter 2007,Alaskan Brewing,Juneau,AK
 2008,Smoke Beer,Bronze,Second Hand Smoke,The SandLot,Denver,CO
-2008,American Style Dark Lager,Gold,,,,
+2008,American Style Dark Lager,Gold,No Medal Awarded,,,
 2008,American Style Dark Lager,Silver,Leinenkugel’s Creamy Dark,Jacob Leinenkugel Brewing,Chippewa Falls,WI
 2008,American Style Dark Lager,Bronze,Henry Weinhard’s Classic Dark,MillerCoors,Milwaukee,WI
 2008,Wood- and Barrel-Aged Beer,Gold,Old Jack,RAM Restaurant & Brewery,Indianapolis,IN
@@ -1785,7 +1785,7 @@ year,style,medal,beer,brewery,city,state
 2008,Aged Beer,Silver,Vintage Speedway Stout,AleSmith Brewing,San Diego,CA
 2008,Aged Beer,Bronze,Samuel Adams Utopias 2003,Boston Beer Co.,Boston,MA
 2008,German Style Strong Bock,Gold,Capital Autumnal Fire,Capital Brewery,Middleton,WI
-2008,German Style Strong Bock,Silver,Deep Water Dopplebock,Thomas Creek Brewery,Greenville,SC
+2008,German Style Strong Bock,Silver,Deep Water Doppelbock,Thomas Creek Brewery,Greenville,SC
 2008,German Style Strong Bock,Bronze,Red Cock Doppel Bock,Maui Brewing,Lahaina,HI
 2008,Imperial or Double Red Ale,Gold,Rock Hopera Imperial IPA,Vino's Pizza Pub,Little Rock,AR
 2008,Imperial or Double Red Ale,Silver,Alpha Dog Double Red Ale,Big Dog’s Brewing Co.,Las Vegas,NV
@@ -1865,8 +1865,8 @@ year,style,medal,beer,brewery,city,state
 2008,Robust Porter,Gold,Nolan’s Porter,Barrio Brewing Co.,Tucson,AZ
 2008,Robust Porter,Silver,Sweet Sanderine Porter,Il Vicino Brewing,Albuquerque,NM
 2008,Robust Porter,Bronze,Pacemaker Porter,Flyers Restaurant and Brewery,Oak Harbor,WA
-2008,English Style India Pale Ale,Gold,,,,
-2008,English Style India Pale Ale,Silver,,,,
+2008,English Style India Pale Ale,Gold,No Medal Awarded,,,
+2008,English Style India Pale Ale,Silver,No Medal Awarded,,,
 2008,English Style India Pale Ale,Bronze,Hop Daddy IPA,Main Street Brewery,Corona,CA
 2008,Golden or Blonde Ale,Gold,Steelhead Extra Pale Ale,Mad River Brewing Co.,Blue Lake,CA
 2008,Golden or Blonde Ale,Silver,Alaskan Summer Ale,Alaskan Brewing,Juneau,AK
@@ -2301,7 +2301,7 @@ year,style,medal,beer,brewery,city,state
 2010,American Style Lager or Light Lager,Silver,Old Milwaukee,Pabst Brewing,Woodridge,IL
 2010,American Style Lager or Light Lager,Bronze,Miller Genuine Draft,Miller Brewing,Milwaukee,WI
 2010,American Style Dark Lager,Gold,Michelob AmberBock,Michelob Brewing Co.,St. Louis,MO
-2010,American Style Dark Lager,Silver,,,,
+2010,American Style Dark Lager,Silver,No Medal Awarded,,,
 2010,American Style Dark Lager,Bronze,Schwarzbier,AC Golden,Golden,CO
 2010,American Style Wheat Beer With Yeast,Gold,Point Horizon Wheat,Stevens Point Brewery,Stevens Point,WI
 2010,American Style Wheat Beer With Yeast,Silver,American Hefeweizen,Flat Branch Pub and Brewery,Columbia,MO
@@ -2377,7 +2377,7 @@ year,style,medal,beer,brewery,city,state
 2010,Session Beer,Bronze,King’s Peak Porter,Uinta Brewing,Salt Lake City,UT
 2010,German Style Doppelbock or Eisbock,Gold,Carbonator,Glenwood Canyon Brewing,Glenwood Springs,CO
 2010,German Style Doppelbock or Eisbock,Silver,Gordon Biersch Eisbock,Gordon Biersch Brewery,Chattanooga,TN
-2010,German Style Doppelbock or Eisbock,Bronze,Dominator Dopplebock,Sun King Brewery,Indianapolis,IN
+2010,German Style Doppelbock or Eisbock,Bronze,Dominator Doppelbock,Sun King Brewery,Indianapolis,IN
 2010,Munich Style Helles,Gold,What in the Helles?,Steamworks Brewing,Durango,CO
 2010,Munich Style Helles,Silver,Longboard Island Lager,Kona Brewing,Kailua-Kona,HI
 2010,Munich Style Helles,Bronze,Cowboy Lager,The Covey Restaurant & Brewery,Fort Worth,TX
@@ -2630,7 +2630,7 @@ year,style,medal,beer,brewery,city,state
 2011,Imperial Stout,Gold,BORIS The Crusher Oatmeal-Imperial Stout,Hoppin’ Frog Brewing Co.,Akron,OH
 2011,Imperial Stout,Silver,Russian Imperial Stout,Iron Hill Brewery,Wilmington,DE
 2011,Imperial Stout,Bronze,IMOS,Max Lager’s Wood-Fired Grill & Brewery,Atlanta,GA
-2011,Bohemian Style Pilsener,Gold,,,,
+2011,Bohemian Style Pilsener,Gold,No Medal Awarded,,,
 2011,Bohemian Style Pilsener,Silver,Mama’s Little Yella Pils,Oskar Blues,Longmont,CO
 2011,Bohemian Style Pilsener,Bronze,Pilsner,McCoy's Public House,Kansas City,MO
 2011,Belgian Style Strong Specialty Ale,Gold,Buffalo Slumber,Sun King Brewery,Indianapolis,IN
@@ -2666,7 +2666,7 @@ year,style,medal,beer,brewery,city,state
 2012,Classic English Style Pale Ale,Gold,Royal Scandal,Peticolas Brewing Co.,Dallas,TX
 2012,Classic English Style Pale Ale,Silver,Gayle Force Pale Ale,Wind River Brewing Co.,Pinedale,WY
 2012,Classic English Style Pale Ale,Bronze,Hurricane Reef Pale Ale,Florida Beer Co.,Melbourne,FL
-2012,Robust Porter,Gold,,,,
+2012,Robust Porter,Gold,No Medal Awarded,,,
 2012,Robust Porter,Silver,Coco Loco,NoDa Brewing Co.,Charlotte,NC
 2012,Robust Porter,Bronze,Black Sand Porter,Kona Brewing,Kailua-Kona,HI
 2012,Herb and Spice Beer,Gold,Sweet Heat,Burnside Brewing Co.,Portland,OR
@@ -2924,7 +2924,7 @@ year,style,medal,beer,brewery,city,state
 2013,American Style Sour Ale,Gold,Ching Ching,Bend Brewing,Bend,OR
 2013,American Style Sour Ale,Silver,Myrtle,The Commons Brewery,Portland,OR
 2013,American Style Sour Ale,Bronze,Red Poppy,The Lost Abbey,San Marcos,CA
-2013,American Style or International Style Pilsener,Gold,,,,
+2013,American Style or International Style Pilsener,Gold,No Medal Awarded,,,
 2013,American Style or International Style Pilsener,Silver,Gold Leaf Lager,Devils Backbone Brewing,Roseland,VA
 2013,American Style or International Style Pilsener,Bronze,Gold Country Pilsner,Auburn Alehouse,Auburn,CA
 2013,German Style Altbier,Gold,Tree Hugger,Terrapin Beer,Athens,GA
@@ -2939,7 +2939,7 @@ year,style,medal,beer,brewery,city,state
 2013,Fresh Hop Ale,Gold,Cent’s and Censability,Old Town Brewing,Portland,OR
 2013,Fresh Hop Ale,Silver,Trail Head,Fat Heads Brewery,Middleburg Heights,OH
 2013,Fresh Hop Ale,Bronze,Fresh Hop Pallet Jack,Barley Brothers Brewery,Baker City,OR
-2013,Imperial Red Ale,Gold,,,,
+2013,Imperial Red Ale,Gold,No Medal Awarded,,,
 2013,Imperial Red Ale,Silver,Rhino Chaser,Pizza Port,Ocean Beach,CA
 2013,Imperial Red Ale,Bronze,Bombay Rouge Red IPA,Third Street Ale Works,Santa Rosa,CA
 2013,Wood- and Barrel-Aged Strong Beer,Gold,Afternoon Delight,Sun King Brewery,Indianapolis,IN
@@ -3024,7 +3024,7 @@ year,style,medal,beer,brewery,city,state
 2013,Belgian Style Abbey Ale,Silver,AleSmith Decadence 2012 Quadrupel,AleSmith Brewing,San Diego,CA
 2013,Belgian Style Abbey Ale,Bronze,Ommegang Three Philosophers,Brewery Ommegang,Cooperstown,NY
 2013,American Style Amber/Red Ale,Gold,Prohibition Ale,Speakeasy Ales & Lagers,San Francisco,CA
-2013,American Style Amber/Red Ale,Silver,,,,
+2013,American Style Amber/Red Ale,Silver,No Medal Awarded,,,
 2013,American Style Amber/Red Ale,Bronze,Red Rock,Triple Rock Brewery,Berkeley,CA
 2013,Munich Style Helles,Gold,Helles Festbier,Hoppers Grill & Brewery,Midvale,UT
 2013,Munich Style Helles,Silver,Saint Arnold Summer Pils,Saint Arnold Brewing,Houston,TX
@@ -3165,7 +3165,7 @@ year,style,medal,beer,brewery,city,state
 2014,Irish Style Red Ale,Silver,Piper Down,Ballast Point Brewing,San Diego,CA
 2014,Irish Style Red Ale,Bronze,“Hydraulion” Red,Three Notch’d Brewing Co.,Charlottesville,VA
 2014,English Style Brown Ale,Gold,Sir William’s English Brown Ale,Grapevine Craft Brewery,Grapevine,TX
-2014,English Style Brown Ale,Silver,,,,
+2014,English Style Brown Ale,Silver,No Medal Awarded,,,
 2014,English Style Brown Ale,Bronze,Bonanza Brown Ale,Tenaya Creek Brewery,Las Vegas,NV
 2014,Historical Beer,Gold,Thurston,New Helvetia Brewing Co.,Sacramento,CA
 2014,Historical Beer,Silver,White Eagle Smoked Wheat,RAM Restaurant,Schaumburg,IL
@@ -3290,7 +3290,7 @@ year,style,medal,beer,brewery,city,state
 2014,Foreign Style Stout,Gold,Void of Light,Gun Hill Brewing Co.,Bronx,NY
 2014,Foreign Style Stout,Silver,Wooster New Stout,JAFB Wooster Brewery,Wooster,OH
 2014,Foreign Style Stout,Bronze,San Quentin’s Breakout Stout,Marin Brewing,Larkspur,CA
-2014,Golden or Blonde Ale,Gold,,,,
+2014,Golden or Blonde Ale,Gold,No Medal Awarded,,,
 2014,Golden or Blonde Ale,Silver,5 Rabbit Golden Ale,5 Rabbit Cerveceria,Bedford Park,IL
 2014,Golden or Blonde Ale,Bronze,Gold,Heavy Seas Beer,Baltimore,MD
 2014,Other Belgian Style Ale,Gold,Witty Moron,Stone Brewing,San Diego,CA
@@ -3509,7 +3509,7 @@ year,style,medal,beer,brewery,city,state
 2015,Rye Beer,Gold,Blitzkrieg Bock,Fat Head’s Brewery - Portland,Portland,OR
 2015,Rye Beer,Silver,Concrete Dinosaur,Right Brain Brewery,Traverse City,MI
 2015,Rye Beer,Bronze,Pt. Bonita Rustic Lager,Headlands Brewing Co.,Mill Valley,CA
-2015,Pumpkin Beer,Gold,,,,
+2015,Pumpkin Beer,Gold,No Medal Awarded,,,
 2015,Pumpkin Beer,Silver,Pumpkin Grinder,Mankato Brewery,Mankato,MN
 2015,Pumpkin Beer,Bronze,The Great Pumpkin Ale,Great Basin Brewing,Sparks,NV
 2015,Historical Beer,Gold,Black Eagle Gratzer,Platform Beer Co.,Cleveland,OH

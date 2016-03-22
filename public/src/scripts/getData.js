@@ -1,5 +1,7 @@
 var GetData = (function (runPage) {
-    
+  
+  var MISSING_AWARD = 'No Medal Awarded';
+  
   function pullData(dir, locFile, detLocFile, awardsFile, mapFile, geneFile) {
     var locReturn = new XMLHttpRequest(),
         awardsReturn = new XMLHttpRequest(),
@@ -81,7 +83,7 @@ var GetData = (function (runPage) {
         console.log('aborting due to insufficient length of awards data'); return;
       }
       
-      console.table(geneology);
+      //console.table(geneology);
       
       ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL' ];
 
@@ -91,7 +93,7 @@ var GetData = (function (runPage) {
             awardRow.LL = tempLL;
             awardRow.show = true;
             beerData.push(awardRow);
-          } else console.log('Record missing LL:', awardRow);
+          } else if (awardRow.beer !== MISSING_AWARD) console.log('Record missing LL:', awardRow);
       }
       
       [geneology, lineages] = treeify(geneology, awards);

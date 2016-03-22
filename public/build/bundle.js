@@ -114,14 +114,15 @@
 	    return {
 	      filters: this.props.initFilters,
 	      markers: this.props.initBeerData,
-	      mapMarkers: this._cleanseMarkers(),
-	      trimmedFilters: this.props.initFilters
+	      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
+	      trimmedFilters: this.props.initFilters,
+	      breweryToCenter: undefined
 	    };
 	  },
 
 	  _applyFilter: function _applyFilter(name, value, asGroup) {
 	    //Value will be an array if multiple objects are sent at once
-	    var nextFilters = this.state.filters,
+	    var nextFilters = JSON.parse(JSON.stringify(this.state.filters)),
 	        z,
 	        y,
 	        completed = false,
@@ -174,7 +175,19 @@
 	    console.log('About to update state, nextFilters:', nextFilters);
 	    console.log('About to update state, trimmedFilters:', trimmedFilters); */
 
-	    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers, trimmedFilters: trimmedFilters });
+	    this.setState({ filters: nextFilters, markers: nextMarkers, mapMarkers: nextMapMarkers,
+	      trimmedFilters: trimmedFilters, breweryToCenter: undefined });
+	  },
+
+	  resetMap: function resetMap(brewery) {
+	    var nextMapMarkers = this._cleanseMarkers(this.props.initBeerData);
+	    this.setState({
+	      filters: this.props.initFilters,
+	      markers: this.props.initBeerData,
+	      mapMarkers: nextMapMarkers,
+	      trimmedFilters: this.props.initFilters,
+	      breweryToCenter: brewery
+	    });
 	  },
 
 	  _filterMarkers: function _filterMarkers(nextFilters, filterName, filterVal, nameIndex, valueIndex) {
@@ -183,7 +196,7 @@
 	    var j,
 	        k,
 	        potentialShow,
-	        nextMarkers = this.state.markers,
+	        nextMarkers = JSON.parse(JSON.stringify(this.state.markers)),
 	        filterName,
 	        awardFilterValue,
 	        trimmedFilters = [],
@@ -321,7 +334,7 @@
 	    return tF;
 	  },
 
-	  _cleanseMarkers: function _cleanseMarkers() {
+	  _cleanseMarkers: function _cleanseMarkers(beerData) {
 	    //Takes a robust list of markers with ['show'] = T/F and pares it down to only the markers the map needs to know
 	    var markerCount = [],
 	        myLat,
@@ -335,7 +348,7 @@
 	    var _iteratorError3 = undefined;
 
 	    try {
-	      for (var _iterator3 = this.props.initBeerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	      for (var _iterator3 = beerData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var awardRecord = _step3.value;
 	        //Check each marker
 	        if (awardRecord.show === false) continue; //Not showing, skip it
@@ -380,7 +393,6 @@
 	      }
 	      cleansedMarkers[j + 1] = tempMarker;
 	    }
-
 	    return cleansedMarkers;
 	  },
 
@@ -413,7 +425,8 @@
 
 	  render: function render() {
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
-	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData, lineageData: this.props.lineageData }));
+	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData, lineageData: this.props.lineageData,
+	      resetMap: this.resetMap, breweryToCenter: this.state.breweryToCenter }));
 	  }
 	});
 	var Map = React.createClass({
@@ -424,9 +437,13 @@
 	  },
 
 	  componentDidMount: function componentDidMount() {
-	    this.lastZoomScale = 1;
 	    this._drawMap();
+	    this.centerD = this._findBrewery(this.props.destination);
 	    this._drawMarkers();
+	    if (this.props.destination !== undefined) {
+	      this._center(this.centerD);
+	      this._showDetails(this.centerD);
+	    }
 	    window.addEventListener('resize', this._handleResize);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
@@ -438,11 +455,63 @@
 	  },
 
 	  _handleResize: function _handleResize() {
-	    //ADD SOMETHING TO NOT SHIT BRICKS WHEN RESIZE WHILE ZOOMED
+
+	    //ADD SOMETHING TO NOT RESET WHEN RESIZE WHILE ZOOMED
 
 	    d3.select('svg').remove();
 	    this._drawMap();
 	    this._drawMarkers();
+	  },
+
+	  _findBrewery: function _findBrewery(brewery) {
+	    if (brewery == undefined) return;
+	    var i = 0,
+	        j = 0;
+	    while (i < this.props.markers.length) {
+	      j = 0;
+	      while (j < this.props.markers[i].myAwards.length) {
+	        if (this.props.markers[i].myAwards[j].brewery == brewery) return this.props.markers[i];
+	        j++;
+	      }
+	      i++;
+	    }
+	    console.log('BREWERY NOT FOUND');
+	  },
+	  _center: function _center(d) {
+	    //Currently only can center at zoom scale = 1
+	    if (this.zoom.scale() !== 1) return;
+
+	    var pointTrans = this.projection([d.lng, d.lat]);
+
+	    var myTrans = [this.width / 2 - pointTrans[0], //- zoom.translate()[0] / zoom.scale()
+	    this.height / 2 - pointTrans[1] //- zoom.translate()[1] / zoom.scale()
+	    ];
+
+	    //DO SOMETHING WITH ZOOM.TRANSLATE?
+	    //REFACTOR TO TRANSLATE/ZOOM VIA PROJECTION?
+
+	    /*
+	    console.log('zoom.translate():', zoom.translate());
+	    console.log('pointTrans[0]:', pointTrans[0], 'width/2', width/2, 'myTrans[0]:', myTrans[0]);
+	    console.log('zoom.scale():', zoom.scale());
+	    */
+	    this.zoom.translate(myTrans);
+
+	    this.g.transition().duration(750).attr("transform", "translate(" + myTrans + ")scale(" + this.zoom.scale() + ")");
+	  },
+	  _zoom: function _zoom() {
+	    this.g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+	    this.g.selectAll('.mark, .state').attr("stroke-width", function () {
+	      return (1 / d3.event.scale).toFixed(2) + "px";
+	    }).attr('r', function (d) {
+	      return calculateMarkerRadius(d.myCount, d3.event.scale);
+	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/d3.event.scale + 'px';
+	    });
+	  },
+	  _showDetails: function _showDetails(d) {
+	    var event = new CustomEvent('showDetails', { 'detail': { type: 'Awards', data: d.myAwards } });
+	    window.dispatchEvent(event);
 	  },
 
 	  _drawMap: function _drawMap() {
@@ -454,9 +523,9 @@
 
 	    this.path = d3.geo.path().projection(this.projection);
 
-	    var zoom = d3.behavior.zoom().scale(1).scaleExtent([1, MAX_ZOOM]).on("zoom", this._zoom);
+	    this.zoom = d3.behavior.zoom().scale(1).scaleExtent([1, MAX_ZOOM]).on("zoom", this._zoom);
 
-	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height).call(zoom);
+	    this.svg = d3.select("#" + this.state.myID).append("svg").attr("width", this.width).attr("height", this.height).call(this.zoom);
 
 	    this.g = this.svg.append("g");
 
@@ -467,34 +536,24 @@
 	    //INCLUDE CODE TO MAINTAIN MAP POSITION ON RESIZE WINDOW
 	  },
 
-	  _zoom: function _zoom() {
-	    this.lastZoomScale = d3.event.scale;
-
-	    this.g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-
-	    this.g.selectAll('.mark, .state')
-	    //.transition()
-	    //.duration(750)
-	    .attr("stroke-width", function () {
-	      return (1 / d3.event.scale).toFixed(2) + "px";
-	    }).attr('r', function (d) {
-	      return calculateMarkerRadius(d.myCount, d3.event.scale);
-	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/d3.event.scale + 'px';
-	    });
-	  },
-
 	  _drawMarkers: function _drawMarkers() {
 	    var svg = this.svg;
 	    var projection = this.projection;
 	    var tooltip = this.tooltip;
 	    var g = this.g;
-	    var lastZoomScale = this.lastZoomScale;
+	    var zoomParams = this.zoomParams;
+	    var zoom = this.zoom;
+	    var path = this.path;
+	    var width = this.width,
+	        height = this.height;
+	    var __centerMap = this._center;
+	    var __showDetails = this._showDetails;
+	    var clickThroughD = this.centerD;
 
 	    var markers = this.g.selectAll(".mark").data(this.props.markers)
 	    //Update existing markers
-	    .attr('class', 'mark').attr('r', function (d) {
-	      return calculateMarkerRadius(d.myCount, lastZoomScale);
-	      //return Math.max(MIN_NODE_R, Math.min(d.myCount/2, MAX_NODE_R) )/lastZoomScale + 'px';
+	    .classed('mark', true).attr('r', function (d) {
+	      return calculateMarkerRadius(d.myCount, zoom.scale());
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
@@ -509,33 +568,38 @@
 	    markers.exit().remove();
 
 	    //Create newly shown markers
-	    markers.enter().append("circle").attr('class', 'mark').attr('stroke', 'grey').attr('opacity', '0.75').attr("stroke-width", function () {
-	      return (1 / lastZoomScale).toFixed(2) + "px";
+	    markers.enter().append("circle").attr('class', function (d) {
+	      if (clickThroughD !== undefined && d == clickThroughD) return 'mark markRed';
+	      return 'mark';
+	    }).attr('opacity', '0.75').attr("stroke-width", function () {
+	      return (1 / zoom.scale()).toFixed(2) + "px";
 	    }).attr('r', function (d) {
-	      return calculateMarkerRadius(d.myCount, lastZoomScale);
+	      return calculateMarkerRadius(d.myCount, zoom.scale());
 	    }).attr("transform", function (d) {
 	      if (projection([d.lng, d.lat]) === null) {
 	        console.log('in a null circle, d:', d);
 	        return 'translate(0, 0)';
 	      }
 	      return "translate(" + projection([d.lng, d.lat]) + ")";
-	    }).on("click", __showDetails).on("mouseover", __showSummary).on("mouseout", __hideSummary);
-
-	    function __showDetails(d) {
-	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Awards', data: d.myAwards } });
-	      window.dispatchEvent(event);
-	    };
+	    }).on("click", function (d) {
+	      __showDetails(d);
+	      __centerMap(d);
+	    }).on("mouseover", __showSummary).on("mouseout", __hideSummary);
 
 	    function __showSummary(d) {
 	      //console.log('this:', this, 'd:', d);
-	      d3.select(this).attr("stroke", "red").attr('opacity', '0.95');
+	      d3.selectAll('.markRed').classed('markRed', false); //Removes any already red nodes
+
+	      d3.select(this).classed('markRed', true);
+
+	      //CLEAN UP ALL OF THIS LOGIC TO SHOW TOOLTIP ON CLICKTHROUGH
 
 	      tooltip.style("visibility", "visible").attr('class', 'summary').text(d.hoverContent).style("left", d3.event.pageX + 10 + "px").style("top", d3.event.pageY - 10 + "px");
 	    };
 
 	    function __hideSummary(d) {
 	      //console.log('Hiding summary for "this":', this);
-	      d3.select(this).attr('stroke', 'grey').attr('opacity', '0.75');
+	      d3.select(this).classed('markRed', false);
 
 	      var hideTT = tooltip.style('visibility', 'hidden').style("top", "0px").style("left", "0px");
 	    };
@@ -659,18 +723,16 @@
 	      d3.select('#' + myID).select('text').style('visibility', 'visible');
 	    }
 	    function maybeHideText(d) {
-	      if (d.children && d.children[0].style == d.style) {
-	        if (d.lineage !== d.id) {
-	          //You're not the root of your lineage
-	          if (linVal == undefined || linStyle !== d.style || linYear !== d.year) {
-	            //You're not the map click-through
-	            hideText(d.id);
-	            return true;
-	          } else {
-	            __showDetails(d);applyColor(d.id);
-	          } //You ARE the map-click-through, let's show them details!
-	        }
+	      if (d.children && d.children[0].style == d.style && //You have children with the same name
+	      d.lineage !== d.id //You're not the root of your lineage
+	       && (linVal == undefined || linStyle !== d.style || linYear !== d.year)) {
+	        //You're not the map click-through
+	        hideText(d.id);
+	        return true;
 	      }
+	      if (linVal !== undefined && linStyle == d.style && linYear == d.year) {
+	        __showDetails(d);applyColor(d.id);
+	      } //You ARE the map-click-through, let's show them details!
 	      return false;
 	    }
 	    function hideText(id) {
@@ -685,7 +747,7 @@
 	      });
 
 	      d3.select('#' + myID).select('circle').attr('class', function (d) {
-	        console.log('in d:', d);return 'node clicked';
+	        return 'node clicked';
 	      }).style("fill", function (d) {
 	        return 'pink';
 	      });
@@ -828,6 +890,7 @@
 	      __showDetails(d);
 	      applyColor(d.id);
 	    }
+
 	    function __showDetails(d) {
 	      var year = d.year,
 	          style = d.style,
@@ -881,16 +944,24 @@
 	  _changeGraph: function _changeGraph(e) {
 	    var myGraph = e.currentTarget.getAttribute('data-name'),
 	        myDestination = { year: e.currentTarget.getAttribute('data-year'),
-	      style: e.currentTarget.getAttribute('data-style') };
+	      style: e.currentTarget.getAttribute('data-style') },
+	        myBrewery = e.currentTarget.getAttribute('data-brewery');
 
-	    //console.log('e.currentTarget:', e.currentTarget);
+	    console.log('e.currentTarget:', e.currentTarget);
 	    //console.log('_changeGraph(), myDestination:', myDestination, 'year:', myDestination.year);
-	    this.setState({ graphShowing: myGraph,
-	      geneDestination: myDestination,
-	      trimmedGenes: this._trimGenes(myDestination, this.props.geneData) });
+	    if (myGraph !== this.state.graphShowing) {
+	      this.setState({ graphShowing: myGraph,
+	        geneDestination: myDestination,
+	        trimmedGenes: this._trimGenes(myDestination, this.props.geneData)
+	      });
 
-	    var event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
-	    window.dispatchEvent(event);
+	      var event = new CustomEvent('showDetails', { 'detail': { type: myGraph, data: [] } });
+	      window.dispatchEvent(event);
+	      if (myGraph == 'Awards') {
+	        console.log('brewery received:', myBrewery);
+	        this.props.resetMap(myBrewery); //Removes all existing filters from map, sending new center
+	      }
+	    }
 	  },
 
 	  _trimGenes: function _trimGenes(myDestination, geneData) {
@@ -931,12 +1002,14 @@
 	        myNonGraph;
 
 	    if (this.state.graphShowing === 'Awards') {
-	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData });
-	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toGenealogy: this._changeGraph }), ' ');
+
+	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData, destination: this.props.breweryToCenter });
+	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }), ' ');
 	    } else if (this.state.graphShowing === 'Genealogy') {
+
 	      myGraph = React.createElement(Genealogy, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
 	        destination: this.state.geneDestination });
-	      myNonGraph = React.createElement(DetailsBox, { type: this.state.graphShowing });
+	      myNonGraph = React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph });
 	    }
 
 	    return React.createElement('div', { id: 'multiGraph' }, React.createElement('div', { id: 'nonMapBoxes' }, myNonGraph), React.createElement('div', { id: 'graph-frame' }, myGraph, React.createElement('div', { id: 'tabBox' }, myTabs)));
@@ -965,7 +1038,7 @@
 
 	    switch (tabSwitch) {
 	      case 'Awards':
-	        var toGenes = this.props.toGenealogy;
+	        var toGenes = this.props.toOtherTab;
 	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
 	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Genealogy', 'data-year': award.year,
@@ -974,9 +1047,10 @@
 	      case 'Genealogy':
 	        var myContent;
 	        if (this.state.content.length === 0) myContent = React.createElement('div', { id: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
+	          var toAwards = this.props.toOtherTab;
 	          var myAwards = this.state.content.map(function (award, i) {
 	            var medalClass = award.medal;
-	            return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass }, React.createElement('span', { className: 'detailBeer' }, award.beer, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
+	            return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Awards', 'data-brewery': award.brewery, onClick: toAwards }, React.createElement('span', { className: 'detailBeer' }, award.beer, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
 	          }),
 	              myYear = this.state.content[0].year,
 	              myStyle = this.state.content[0].style;
@@ -1121,6 +1195,8 @@
 
 	var GetData = function GetData(runPage) {
 
+	  var MISSING_AWARD = 'No Medal Awarded';
+
 	  function pullData(dir, locFile, detLocFile, awardsFile, mapFile, geneFile) {
 	    var locReturn = new XMLHttpRequest(),
 	        awardsReturn = new XMLHttpRequest(),
@@ -1221,7 +1297,7 @@
 	        console.log('aborting due to insufficient length of awards data');return;
 	      }
 
-	      console.table(geneology);
+	      //console.table(geneology);
 
 	      ttl = ['show', 'year', 'style', 'medal', 'beer', 'brewery', 'city', 'state', 'LL'];
 
@@ -1238,7 +1314,7 @@
 	            awardRow.LL = tempLL;
 	            awardRow.show = true;
 	            beerData.push(awardRow);
-	          } else console.log('Record missing LL:', awardRow);
+	          } else if (awardRow.beer !== MISSING_AWARD) console.log('Record missing LL:', awardRow);
 	        }
 	      } catch (err) {
 	        _didIteratorError2 = true;

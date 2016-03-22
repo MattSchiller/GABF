@@ -99,6 +99,12 @@ body {
 .mark {
   fill: pink;
   cursor: pointer;
+  stroke: grey;
+  opacity: 0.75;
+}
+.markRed {
+  stroke: red;
+  opacity: 0.95;
 }
 .summary {
   background-color: pink;
@@ -140,6 +146,7 @@ svg {z-index: -2;}
 
 .geneDetailHeader {
   background-color: grey;
+  cursor: default;
 }
 
 .Gold { background: gold; }
@@ -192,6 +199,7 @@ svg {z-index: -2;}
   cursor: pointer;
   overflow-y: auto;
   min-width: 32vh;
+  z-index: 50;
 }
 .filterOn {
   font-style: normal;

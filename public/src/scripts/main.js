@@ -893,8 +893,11 @@ var MultiGraphBox = React.createClass({
     if (this.state.graphShowing === 'Awards') {
       
       myGraph = ( <Map markers={this.props.markers} mapData={this.props.mapData} destination={this.props.breweryToCenter} /> );
-      myNonGraph = ( <div> <FilterBox filters={this.props.filters} notify={this.props.notify} />
-                     <DetailsBox type={this.state.graphShowing} toOtherTab={this._changeGraph} /> </div>);
+      myNonGraph = ( <div>
+                      <FilterBox filters={this.props.filters} notify={this.props.notify} />
+                      <button onClick={this.props.resetMap}>Reset all filters</button>
+                      <DetailsBox type={this.state.graphShowing} toOtherTab={this._changeGraph} />
+                    </div>);
                      
     } else if (this.state.graphShowing === 'Style Trees') {
       
@@ -935,12 +938,14 @@ var DetailsBox = React.createClass({
   },
 
   render: function() {
-    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type;
+    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type,
+        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '';
 
     switch (tabSwitch) {
       case 'Awards':
         var toGenes = this.props.toOtherTab;
-        return ( <div id='detailsBox' >
+        console.log('clearnBorders:', clearBorders);
+        return ( <div className={'detailsBox'+ clearBorders} >
           {
             this.state.content.map(function(award, i) {
               let medalClass = award.medal;
@@ -960,7 +965,7 @@ var DetailsBox = React.createClass({
           </div> ); break;
       case 'Style Trees':
         var myContent;
-        if (this.state.content.length === 0) myContent = <div id='detailsBox' >Click a beer node to see awards for that year</div>
+        if (this.state.content.length === 0) myContent = <div className='detailsBox' >Click a beer node to see awards for that year</div>
         else {
           var toAwards = this.props.toOtherTab;
           let myAwards = this.state.content.map(function(award, i) {
@@ -977,7 +982,7 @@ var DetailsBox = React.createClass({
               myYear = this.state.content[0].year,
               myStyle = this.state.content[0].style;
               //console.log('this.state.content[0].year:', this.state.content[0].year);
-          myContent = ( <div id='detailsBox'>
+          myContent = ( <div className='detailsBox'>
                           <div className='detailBoxItem geneDetailHeader'>
                             <span className='detailStyle'> {myStyle} </span> <br/>
                             <span className='headerYear'> {myYear} </span>

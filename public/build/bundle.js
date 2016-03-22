@@ -448,6 +448,7 @@
 	    this._drawMarkers();
 	    if (this.props.destination !== undefined) {
 	      this._center(this.centerD);
+	      this.zoom.scale(2.5);
 	      this._showDetails(this.centerD);
 	    }
 	    window.addEventListener('resize', this._handleResize);
@@ -1010,7 +1011,7 @@
 	    if (this.state.graphShowing === 'Awards') {
 
 	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData, destination: this.props.breweryToCenter });
-	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }), ' ');
+	      myNonGraph = React.createElement('div', null, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement('button', { onClick: this.props.resetMap }, 'Reset all filters'), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }));
 	    } else if (this.state.graphShowing === 'Style Trees') {
 
 	      myGraph = React.createElement(Genealogy, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
@@ -1040,19 +1041,21 @@
 	  },
 
 	  render: function render() {
-	    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type;
+	    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type,
+	        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '';
 
 	    switch (tabSwitch) {
 	      case 'Awards':
 	        var toGenes = this.props.toOtherTab;
-	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
+	        console.log('clearnBorders:', clearBorders);
+	        return React.createElement('div', { className: 'detailsBox' + clearBorders }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
 	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Style Trees', 'data-year': award.year,
 	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
 	        }));break;
 	      case 'Style Trees':
 	        var myContent;
-	        if (this.state.content.length === 0) myContent = React.createElement('div', { id: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
+	        if (this.state.content.length === 0) myContent = React.createElement('div', { className: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
 	          var toAwards = this.props.toOtherTab;
 	          var myAwards = this.state.content.map(function (award, i) {
 	            var medalClass = award.medal;
@@ -1061,7 +1064,7 @@
 	              myYear = this.state.content[0].year,
 	              myStyle = this.state.content[0].style;
 	          //console.log('this.state.content[0].year:', this.state.content[0].year);
-	          myContent = React.createElement('div', { id: 'detailsBox' }, React.createElement('div', { className: 'detailBoxItem geneDetailHeader' }, React.createElement('span', { className: 'detailStyle' }, ' ', myStyle, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'headerYear' }, ' ', myYear, ' ')), myAwards);
+	          myContent = React.createElement('div', { className: 'detailsBox' }, React.createElement('div', { className: 'detailBoxItem geneDetailHeader' }, React.createElement('span', { className: 'detailStyle' }, ' ', myStyle, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'headerYear' }, ' ', myYear, ' ')), myAwards);
 	        }
 	        return myContent;break;
 	      default:

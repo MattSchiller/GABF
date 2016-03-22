@@ -105,6 +105,12 @@
 	    }
 	  });
 	};
+
+	//UNTESTED v v
+	d3.selection.prototype.moveToFront = function () {
+	  var lastChild = this.parentNode.lastChild;
+	  this.parentNode.insertBefore(this, lastChild);
+	};
 	//***********************************************************************
 
 	var ClientUI = React.createClass({
@@ -921,7 +927,7 @@
 	        }
 	      }
 
-	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Genealogy', data: myAwards } });
+	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Style Trees', data: myAwards } });
 	      window.dispatchEvent(event);
 	    }
 	  },
@@ -934,7 +940,7 @@
 	  displayName: 'MultiGraphBox',
 
 	  getInitialState: function getInitialState() {
-	    return { supportedGraphs: ['Awards', 'Genealogy'], //, 'Entries'],
+	    return { supportedGraphs: ['Awards', 'Style Trees'], //, 'Entries'],
 	      graphShowing: 'Awards',
 	      geneDestination: undefined,
 	      trimmedGenes: this._trimGenes({}, this.props.geneData)
@@ -1005,7 +1011,7 @@
 
 	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData, destination: this.props.breweryToCenter });
 	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }), ' ');
-	    } else if (this.state.graphShowing === 'Genealogy') {
+	    } else if (this.state.graphShowing === 'Style Trees') {
 
 	      myGraph = React.createElement(Genealogy, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
 	        destination: this.state.geneDestination });
@@ -1041,10 +1047,10 @@
 	        var toGenes = this.props.toOtherTab;
 	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
-	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Genealogy', 'data-year': award.year,
+	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Style Trees', 'data-year': award.year,
 	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
 	        }));break;
-	      case 'Genealogy':
+	      case 'Style Trees':
 	        var myContent;
 	        if (this.state.content.length === 0) myContent = React.createElement('div', { id: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
 	          var toAwards = this.props.toOtherTab;

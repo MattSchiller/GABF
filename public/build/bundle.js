@@ -546,11 +546,11 @@
 	    return React.createElement('div', { id: 'map-holder' }, React.createElement('div', { id: this.state.myID }), React.createElement('div', { id: 'markerCounter' }, this.props.markers.length, ' Breweries'));
 	  }
 	});
-	var Geneology = React.createClass({
-	  displayName: 'Geneology',
+	var Genealogy = React.createClass({
+	  displayName: 'Genealogy',
 
 	  getInitialState: function getInitialState() {
-	    return { myID: 'geneology',
+	    return { myID: 'genealogy',
 	      margin: { top: 5, right: 2, bottom: 5, left: 20 }
 	    };
 	  },
@@ -809,7 +809,7 @@
 	    function nodeScroll(d) {
 	      //Scroll to new node
 	      var scrollYear = (parseInt(d.year) - MIN_YEAR) * YEAR_WIDTH;
-	      d3.select("#geneology").transition().duration(YEAR_DELAY).tween("uniqueTweenName", scrollToNode(scrollYear));
+	      d3.select("#genealogy").transition().duration(YEAR_DELAY).tween("uniqueTweenName", scrollToNode(scrollYear));
 
 	      function scrollToNode(scrollLeft) {
 	        return function () {
@@ -858,7 +858,7 @@
 	        }
 	      }
 
-	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
+	      var event = new CustomEvent('showDetails', { 'detail': { type: 'Genealogy', data: myAwards } });
 	      window.dispatchEvent(event);
 	    }
 	  },
@@ -871,7 +871,7 @@
 	  displayName: 'MultiGraphBox',
 
 	  getInitialState: function getInitialState() {
-	    return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
+	    return { supportedGraphs: ['Awards', 'Genealogy'], //, 'Entries'],
 	      graphShowing: 'Awards',
 	      geneDestination: undefined,
 	      trimmedGenes: this._trimGenes({}, this.props.geneData)
@@ -932,9 +932,9 @@
 
 	    if (this.state.graphShowing === 'Awards') {
 	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData });
-	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toGeneology: this._changeGraph }), ' ');
-	    } else if (this.state.graphShowing === 'Geneology') {
-	      myGraph = React.createElement(Geneology, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
+	      myNonGraph = React.createElement('div', null, ' ', React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement(DetailsBox, { type: this.state.graphShowing, toGenealogy: this._changeGraph }), ' ');
+	    } else if (this.state.graphShowing === 'Genealogy') {
+	      myGraph = React.createElement(Genealogy, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
 	        destination: this.state.geneDestination });
 	      myNonGraph = React.createElement(DetailsBox, { type: this.state.graphShowing });
 	    }
@@ -965,13 +965,13 @@
 
 	    switch (tabSwitch) {
 	      case 'Awards':
-	        var toGenes = this.props.toGeneology;
+	        var toGenes = this.props.toGenealogy;
 	        return React.createElement('div', { id: 'detailsBox' }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
-	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Geneology', 'data-year': award.year,
+	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Genealogy', 'data-year': award.year,
 	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
 	        }));break;
-	      case 'Geneology':
+	      case 'Genealogy':
 	        var myContent;
 	        if (this.state.content.length === 0) myContent = React.createElement('div', { id: 'detailsBox' }, 'Click a beer node to see awards for that year');else {
 	          var myAwards = this.state.content.map(function (award, i) {

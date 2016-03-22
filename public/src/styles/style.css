@@ -48,17 +48,17 @@ body {
 .currTab {
   background-color: lime;
 }
-#geneology {
+#genealogy {
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
 /*CANNOT GET THIS TO WORK */
-#geneology::-webkit-scrollbar-track {
+#genealogy::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-#map, #geneology {
+#map, #genealogy {
   height: 100%;
   z-index: 20;
   border-style: solid;

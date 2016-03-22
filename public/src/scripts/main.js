@@ -430,9 +430,9 @@ var Map = React.createClass({
 		);
   }
 });
-var Geneology = React.createClass({
+var Genealogy = React.createClass({
   getInitialState: function() {
-    return { myID: 'geneology',
+    return { myID: 'genealogy',
              margin: {top: 5, right: 2, bottom: 5, left: 20}
             }
   },
@@ -711,7 +711,7 @@ var Geneology = React.createClass({
     function nodeScroll(d) {
     //Scroll to new node
       var scrollYear = ( parseInt(d.year) - MIN_YEAR ) * YEAR_WIDTH;
-      d3.select("#geneology")
+      d3.select("#genealogy")
           .transition()
           .duration(YEAR_DELAY)
           .tween("uniqueTweenName", scrollToNode(scrollYear));
@@ -740,7 +740,7 @@ var Geneology = React.createClass({
         if (award.year === year && award.style === style) myAwards.push(award);
       }
       
-      var event = new CustomEvent('showDetails', { 'detail': { type: 'Geneology', data: myAwards } });
+      var event = new CustomEvent('showDetails', { 'detail': { type: 'Genealogy', data: myAwards } });
         window.dispatchEvent(event);
     }
   },
@@ -755,7 +755,7 @@ var Geneology = React.createClass({
 });
 var MultiGraphBox = React.createClass({
   getInitialState: function() {
-    return { supportedGraphs: ['Awards', 'Geneology'], //, 'Entries'],
+    return { supportedGraphs: ['Awards', 'Genealogy'], //, 'Entries'],
              graphShowing: 'Awards',
              geneDestination: undefined,
              trimmedGenes: this._trimGenes( {}, this.props.geneData)
@@ -815,9 +815,9 @@ var MultiGraphBox = React.createClass({
     if (this.state.graphShowing === 'Awards') {
       myGraph = ( <Map markers={this.props.markers} mapData={this.props.mapData} /> );
       myNonGraph = ( <div> <FilterBox filters={this.props.filters} notify={this.props.notify} />
-                     <DetailsBox type={this.state.graphShowing} toGeneology={this._changeGraph} /> </div>);
-    } else if (this.state.graphShowing === 'Geneology') {
-      myGraph = <Geneology data={this.state.trimmedGenes} awardData={this.props.awardData} lineageData={this.props.lineageData}
+                     <DetailsBox type={this.state.graphShowing} toGenealogy={this._changeGraph} /> </div>);
+    } else if (this.state.graphShowing === 'Genealogy') {
+      myGraph = <Genealogy data={this.state.trimmedGenes} awardData={this.props.awardData} lineageData={this.props.lineageData}
           destination={this.state.geneDestination} />;
       myNonGraph = ( <DetailsBox type={this.state.graphShowing} /> );
     }
@@ -858,13 +858,13 @@ var DetailsBox = React.createClass({
 
     switch (tabSwitch) {
       case 'Awards':
-        var toGenes = this.props.toGeneology;
+        var toGenes = this.props.toGenealogy;
         return ( <div id='detailsBox' >
           {
             this.state.content.map(function(award, i) {
               let medalClass = award.medal;
               return (
-                <div key={i} className={"detailBoxItem "+medalClass} data-name={'Geneology'} data-year={award.year}
+                <div key={i} className={"detailBoxItem "+medalClass} data-name={'Genealogy'} data-year={award.year}
                     data-style={award.style} onClick={toGenes} >
                   
                   <span className='detailYear'> {"'"+award.year.slice(-2)} </span>
@@ -878,7 +878,7 @@ var DetailsBox = React.createClass({
             })
           }
           </div> ); break;
-      case 'Geneology':
+      case 'Genealogy':
         var myContent;
         if (this.state.content.length === 0) myContent = <div id='detailsBox' >Click a beer node to see awards for that year</div>
         else {

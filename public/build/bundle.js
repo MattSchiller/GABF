@@ -448,7 +448,6 @@
 	    this._drawMarkers();
 	    if (this.props.destination !== undefined) {
 	      this._center(this.centerD);
-	      this.zoom.scale(2.5);
 	      this._showDetails(this.centerD);
 	    }
 	    window.addEventListener('resize', this._handleResize);
@@ -595,7 +594,8 @@
 
 	    function __showSummary(d) {
 	      //console.log('this:', this, 'd:', d);
-	      d3.selectAll('.markRed').classed('markRed', false); //Removes any already red nodes
+	      //d3.selectAll('.markRed')
+	      //.classed('markRed', false)   //Removes any already red nodes
 
 	      d3.select(this).classed('markRed', true);
 

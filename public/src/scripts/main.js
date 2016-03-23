@@ -458,8 +458,8 @@ var Map = React.createClass({
     
     function __showSummary(d) {
       //console.log('this:', this, 'd:', d);
-      d3.selectAll('.markRed')
-        .classed('markRed', false)   //Removes any already red nodes
+      //d3.selectAll('.markRed')
+        //.classed('markRed', false)   //Removes any already red nodes
       
       d3.select(this)
   			.classed('markRed', true);

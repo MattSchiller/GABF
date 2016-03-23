@@ -622,7 +622,7 @@ year,style,id,parent_id
 2008,Imperial Stout,612,543
 2008,International Pilsener,607,541
 2008,Irish Red Ale,575,524
-2008,Kellerbier or Zwickelbier,641,
+2008,Kellerbier or Zwickelbier,641,555
 2008,Munich Helles,579,532
 2008,Oatmeal Stout,602,566
 2008,Old Ale or Strong Ale,630,556
@@ -1121,7 +1121,7 @@ year,style,id,parent_id
 2014,Oatmeal Stout,1119,1020
 2014,Old Ale or Strong Ale,1124,994
 2014,Ordinary or Special Bitter,1121,978
-2014,Other Belgian Ale,1099,
+2014,Other Belgian Ale,1099,1048
 2014,Other Strong Beer,1096,974
 2014,Pumpkin Beer,1128,1041
 2014,Robust Porter,1127,984

@@ -448,7 +448,7 @@
 	  displayName: 'AboutModal',
 
 	  render: function render() {
-	    return React.createElement('div', { id: 'aboutModal', className: this.props.myClass }, React.createElement('h3', null, 'ABOUT'), React.createElement('p', null, 'This webapp maps the breweries that have won gold, silver, and bronze medals at the Great American Beer Festival since 1999 and displays a "family tree" of how competition categories (for example, Classic Dry Irish Stout) have evolved over time. Data on winners was scraped from PDFs available at the GABF festival website. The PDFs had varying formats; the data was dirty. If you see something is missing or wrong, it is likely a data cleaning error--and we thank you in advance for bringing it to our attention (email: GoldPintMap@gmail.com). '), React.createElement('h4', null, 'Who We Are'), React.createElement('p', null, 'We\'re two aspiring programmers at New York City\'s Recurse Center, Jake Davis and Matt Schiller. Jake has a background in Philosophy, Editing, and Appreciation-for-Good-Beer, while Matt\'s background is in Data Analytics, Origami, and Neck-Bearding. The idea for this project and all data-munging (done in Python) can be credited to Jake, while the web app itself was Matt\'s concern and done in JavaScript (React + D3). '), React.createElement('span', { id: 'closeButton', onClick: this.props.closeMe }, '[X]'));
+	    return React.createElement('div', { id: 'aboutModal', className: this.props.myClass }, React.createElement('h3', null, 'About the project'), React.createElement('p', null, 'This webapp maps the breweries that have won gold, silver, and bronze medals at the Great American Beer Festival since 1999 and displays a "family tree" of how competition categories (for example, Classic Dry Irish Stout) have evolved over time. Data on winners was scraped from PDFs available at the GABF festival website. The PDFs had varying formats; the data was dirty. If you see something is missing or wrong, it is likely a data cleaning error--and we thank you in advance for bringing it to our attention (email: GoldPintMap@gmail.com). '), React.createElement('h3', null, 'About us'), React.createElement('p', null, 'We\'re two aspiring programmers at New York City\'s Recurse Center, Jake Davis and Matt Schiller. Jake has a background in Philosophy, Editing, and Appreciation-for-Good-Beer, while Matt\'s background is in Data Analytics, Origami, and Neck-Bearding. The idea for this project and all data-munging (done in Python) can be credited to Jake, while the web app itself was Matt\'s concern and done in JavaScript (React + D3). '), React.createElement('span', { id: 'closeButton', onClick: this.props.closeMe }, '[X]'));
 	  }
 	});
 	var Map = React.createClass({
@@ -825,7 +825,7 @@
 	        return d.style === 'root' || maybeHideText(d) ? 'hidden' : '';
 	      }).text(function (d) {
 	        return d.style;
-	      }).style('background-color', 'green');
+	      });
 	      //.style("fill-opacity", 1e-6);
 
 	      //to add: transparent text box behind all text with not root parents to 'hide' the green line behind it
@@ -1032,7 +1032,7 @@
 	    if (this.state.graphShowing === 'Awards') {
 
 	      myGraph = React.createElement(Map, { markers: this.props.markers, mapData: this.props.mapData, destination: this.props.breweryToCenter });
-	      myNonGraph = React.createElement('div', null, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement('button', { onClick: this.props.resetMap }, 'Reset all filters'), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }));
+	      myNonGraph = React.createElement('div', null, React.createElement(FilterBox, { filters: this.props.filters, notify: this.props.notify }), React.createElement('button', { onClick: this.props.resetMap, style: { marginBottom: '4px' } }, 'Reset all filters'), React.createElement(DetailsBox, { type: this.state.graphShowing, toOtherTab: this._changeGraph }));
 	    } else if (this.state.graphShowing === 'Style Trees') {
 
 	      myGraph = React.createElement(Genealogy, { data: this.state.trimmedGenes, awardData: this.props.awardData, lineageData: this.props.lineageData,
@@ -1063,12 +1063,13 @@
 
 	  render: function render() {
 	    var tabSwitch = this.state.type === '' ? this.props.type : this.state.type,
-	        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '';
+	        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '',
+	        bottomBorderFix = this.state.content.length > 0 ? ' noBottom' : '';
 
 	    switch (tabSwitch) {
 	      case 'Awards':
 	        var toGenes = this.props.toOtherTab;
-	        return React.createElement('div', { className: 'detailsBox' + clearBorders }, this.state.content.map(function (award, i) {
+	        return React.createElement('div', { className: 'detailsBox' + clearBorders + bottomBorderFix }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
 	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Style Trees', 'data-year': award.year,
 	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
@@ -1084,7 +1085,7 @@
 	              myYear = this.state.content[0].year,
 	              myStyle = this.state.content[0].style;
 	          //console.log('this.state.content[0].year:', this.state.content[0].year);
-	          myContent = React.createElement('div', { className: 'detailsBox' }, React.createElement('div', { className: 'detailBoxItem geneDetailHeader' }, React.createElement('span', { className: 'detailStyle' }, ' ', myStyle, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'headerYear' }, ' ', myYear, ' ')), myAwards);
+	          myContent = React.createElement('div', { className: 'detailsBox' + bottomBorderFix }, React.createElement('div', { className: 'detailBoxItem geneDetailHeader' }, React.createElement('span', { className: 'detailStyle' }, ' ', myStyle, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'headerYear' }, ' ', myYear, ' ')), myAwards);
 	        }
 	        return myContent;break;
 	      default:

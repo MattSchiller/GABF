@@ -713,7 +713,6 @@ var Genealogy = React.createClass({
           .attr('class', function(d) {
             return (d.style === 'root' || maybeHideText(d) ) ? 'hidden' : ''; })
           .text(function(d) { return d.style; })
-          .style('background-color', 'green')
           //.style("fill-opacity", 1e-6);
     
     
@@ -925,7 +924,7 @@ var MultiGraphBox = React.createClass({
       myGraph = ( <Map markers={this.props.markers} mapData={this.props.mapData} destination={this.props.breweryToCenter} /> );
       myNonGraph = ( <div>
                       <FilterBox filters={this.props.filters} notify={this.props.notify} />
-                      <button onClick={this.props.resetMap}>Reset all filters</button>
+                      <button onClick={this.props.resetMap} style={{marginBottom:'4px'}} >Reset all filters</button>
                       <DetailsBox type={this.state.graphShowing} toOtherTab={this._changeGraph} />
                     </div>);
                      
@@ -969,12 +968,13 @@ var DetailsBox = React.createClass({
 
   render: function() {
     var tabSwitch = this.state.type === '' ? this.props.type : this.state.type,
-        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '';
+        clearBorders = this.state.content.length == 0 ? ' clearBorders' : '',
+        bottomBorderFix = this.state.content.length > 0 ? ' noBottom' : '';
 
     switch (tabSwitch) {
       case 'Awards':
         var toGenes = this.props.toOtherTab;
-        return ( <div className={'detailsBox'+ clearBorders} >
+        return ( <div className={'detailsBox'+ clearBorders + bottomBorderFix} >
           {
             this.state.content.map(function(award, i) {
               let medalClass = award.medal;
@@ -1011,7 +1011,7 @@ var DetailsBox = React.createClass({
               myYear = this.state.content[0].year,
               myStyle = this.state.content[0].style;
               //console.log('this.state.content[0].year:', this.state.content[0].year);
-          myContent = ( <div className='detailsBox'>
+          myContent = ( <div className={'detailsBox' + bottomBorderFix}>
                           <div className='detailBoxItem geneDetailHeader'>
                             <span className='detailStyle'> {myStyle} </span> <br/>
                             <span className='headerYear'> {myYear} </span>

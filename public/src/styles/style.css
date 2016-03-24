@@ -48,6 +48,10 @@ body {
 .currTab {
   background-color: lime;
 }
+.aboutTab {
+  margin-left: auto;
+  margin-right: 3px;
+}
 #genealogy {
   overflow-x: scroll;
   overflow-y: hidden;
@@ -61,6 +65,8 @@ body {
 #map, #genealogy {
   height: 100%;
   z-index: 20;
+}
+#map, #genealogy, #aboutModal {
   border-style: solid;
   border-color: black;
   border-width: 2px;
@@ -84,6 +90,28 @@ body {
 }
 .hidden {
   visibility: hidden;
+}
+#aboutModal {
+  position:absolute;
+  top:50%;
+  left:50%;
+  z-index: 102;
+  background-color: azure;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+}
+#modalBlanket {
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  z-index: 101;
+  cursor: pointer;
+}
+#closeButton {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
 }
 #markerCounter {
   position: absolute;

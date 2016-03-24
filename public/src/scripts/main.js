@@ -39,7 +39,8 @@ var ClientUI = React.createClass({
       markers: this.props.initBeerData,
       mapMarkers: this._cleanseMarkers(this.props.initBeerData),
       trimmedFilters: this.props.initFilters,
-      breweryToCenter: undefined
+      breweryToCenter: undefined,
+      modalClass: 'hidden'
     });
   },
   
@@ -249,14 +250,38 @@ var ClientUI = React.createClass({
     return thisMarker;
 	},
   
+  _toggleModal: function() {
+    let myToggle = this.state.modalClass == 'hidden' ? '' : 'hidden';
+    this.setState({modalClass: myToggle});
+  },
+  
   render: function() {
+    let width = window.innerWidth * 2, height = window.innerHeight * 2;
     return (
       <div id='UI'>
         <MultiGraphBox mapData={this.props.mapData} markers={this.state.mapMarkers} filters={this.state.trimmedFilters}
             notify={this._applyFilter} geneData={this.props.geneData} awardData={this.props.awardData} lineageData={this.props.lineageData}
-            resetMap={this.resetMap} breweryToCenter={this.state.breweryToCenter} />
+            resetMap={this.resetMap} breweryToCenter={this.state.breweryToCenter} aboutToggle={this._toggleModal} />
+        <svg width={width} height={height} className={this.state.modalClass} id='modalBlanket' onClick={this._toggleModal}>
+          <rect width={width} height={height} onClick={this._toggleModal}
+              style={{fill: 'rgba(0, 0, 0, .8)'}} />
+        </svg>
+        <AboutModal myClass={this.state.modalClass} onClick={this._toggleModal} closeMe={this._toggleModal} />
       </div>
       );
+  }
+});
+var AboutModal = React.createClass({
+  render: function() {
+    return <div id='aboutModal' className={this.props.myClass} >
+      <h3>ABOUT</h3>
+      <p>This webapp maps the breweries that have won gold, silver, and bronze medals at the Great American Beer Festival since 1999 and displays a "family tree" of how competition categories (for example, Classic Dry Irish Stout) have evolved over time. Data on winners was scraped from PDFs available at the GABF festival website. The PDFs had varying formats; the data was dirty. If you see something is missing or wrong, it is likely a data cleaning error--and we thank you in advance for bringing it to our attention (email: GoldPintMap@gmail.com). </p>
+
+      <h4>Who We Are</h4>
+      
+      <p>We're two aspiring programmers at New York City's Recurse Center, Jake Davis and Matt Schiller. Jake has a background in Philosophy, Editing, and Appreciation-for-Good-Beer, while Matt's background is in Data Analytics, Origami, and Neck-Bearding. The idea for this project and all data-munging (done in Python) can be credited to Jake, while the web app itself was Matt's concern and done in JavaScript (React + D3). </p>
+      <span id='closeButton' onClick={this.props.closeMe} >[X]</span>
+      </div>
   }
 });
 var Map = React.createClass({
@@ -825,7 +850,7 @@ var Genealogy = React.createClass({
 });
 var MultiGraphBox = React.createClass({
   getInitialState: function() {
-    return { supportedGraphs: ['Awards', 'Style Trees'], //, 'Entries'],
+    return { supportedGraphs: ['Awards', 'Style Trees', 'About'], //, 'Entries'],
              graphShowing: 'Awards',
              geneDestination: undefined,
              trimmedGenes: this._trimGenes( {}, this.props.geneData)
@@ -855,6 +880,10 @@ var MultiGraphBox = React.createClass({
     }
   },
   
+  _showAbout: function() {
+    this.props.aboutToggle();
+  },
+  
   _trimGenes: function(myDestination, geneData) {
     if (myDestination.style == null) return geneData;
     
@@ -881,10 +910,11 @@ var MultiGraphBox = React.createClass({
   render: function() {
     var myTabs =this.state.supportedGraphs.map(function(graph, i) {
                     //console.log('drawing tabs, state:', this.state);
-                    let tabClass = '';
+                    let tabClass = graph == this.state.graphShowing ? ' currTab' : graph == 'About' ? ' aboutTab' : '',
+                        onClick = graph == 'About' ? this._showAbout : this._changeGraph;
                     if (graph===this.state.graphShowing) tabClass = ' currTab';
                     return (
-                      <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={this._changeGraph}>
+                      <div key={i} className={'graphTab'+tabClass} data-name={graph} onClick={onClick}>
                         {graph}
                       </div> );
                   }.bind(this) ),
@@ -944,7 +974,6 @@ var DetailsBox = React.createClass({
     switch (tabSwitch) {
       case 'Awards':
         var toGenes = this.props.toOtherTab;
-        console.log('clearnBorders:', clearBorders);
         return ( <div className={'detailsBox'+ clearBorders} >
           {
             this.state.content.map(function(award, i) {

@@ -122,7 +122,8 @@
 	      markers: this.props.initBeerData,
 	      mapMarkers: this._cleanseMarkers(this.props.initBeerData),
 	      trimmedFilters: this.props.initFilters,
-	      breweryToCenter: undefined
+	      breweryToCenter: undefined,
+	      modalClass: 'hidden'
 	    };
 	  },
 
@@ -429,10 +430,25 @@
 	    return thisMarker;
 	  },
 
+	  _toggleModal: function _toggleModal() {
+	    var myToggle = this.state.modalClass == 'hidden' ? '' : 'hidden';
+	    this.setState({ modalClass: myToggle });
+	  },
+
 	  render: function render() {
+	    var width = window.innerWidth * 2,
+	        height = window.innerHeight * 2;
 	    return React.createElement('div', { id: 'UI' }, React.createElement(MultiGraphBox, { mapData: this.props.mapData, markers: this.state.mapMarkers, filters: this.state.trimmedFilters,
 	      notify: this._applyFilter, geneData: this.props.geneData, awardData: this.props.awardData, lineageData: this.props.lineageData,
-	      resetMap: this.resetMap, breweryToCenter: this.state.breweryToCenter }));
+	      resetMap: this.resetMap, breweryToCenter: this.state.breweryToCenter, aboutToggle: this._toggleModal }), React.createElement('svg', { width: width, height: height, className: this.state.modalClass, id: 'modalBlanket', onClick: this._toggleModal }, React.createElement('rect', { width: width, height: height, onClick: this._toggleModal,
+	      style: { fill: 'rgba(0, 0, 0, .8)' } })), React.createElement(AboutModal, { myClass: this.state.modalClass, onClick: this._toggleModal, closeMe: this._toggleModal }));
+	  }
+	});
+	var AboutModal = React.createClass({
+	  displayName: 'AboutModal',
+
+	  render: function render() {
+	    return React.createElement('div', { id: 'aboutModal', className: this.props.myClass }, React.createElement('h3', null, 'ABOUT'), React.createElement('p', null, 'This webapp maps the breweries that have won gold, silver, and bronze medals at the Great American Beer Festival since 1999 and displays a "family tree" of how competition categories (for example, Classic Dry Irish Stout) have evolved over time. Data on winners was scraped from PDFs available at the GABF festival website. The PDFs had varying formats; the data was dirty. If you see something is missing or wrong, it is likely a data cleaning error--and we thank you in advance for bringing it to our attention (email: GoldPintMap@gmail.com). '), React.createElement('h4', null, 'Who We Are'), React.createElement('p', null, 'We\'re two aspiring programmers at New York City\'s Recurse Center, Jake Davis and Matt Schiller. Jake has a background in Philosophy, Editing, and Appreciation-for-Good-Beer, while Matt\'s background is in Data Analytics, Origami, and Neck-Bearding. The idea for this project and all data-munging (done in Python) can be credited to Jake, while the web app itself was Matt\'s concern and done in JavaScript (React + D3). '), React.createElement('span', { id: 'closeButton', onClick: this.props.closeMe }, '[X]'));
 	  }
 	});
 	var Map = React.createClass({
@@ -941,7 +957,7 @@
 	  displayName: 'MultiGraphBox',
 
 	  getInitialState: function getInitialState() {
-	    return { supportedGraphs: ['Awards', 'Style Trees'], //, 'Entries'],
+	    return { supportedGraphs: ['Awards', 'Style Trees', 'About'], //, 'Entries'],
 	      graphShowing: 'Awards',
 	      geneDestination: undefined,
 	      trimmedGenes: this._trimGenes({}, this.props.geneData)
@@ -969,6 +985,10 @@
 	        this.props.resetMap(myBrewery); //Removes all existing filters from map, sending new center
 	      }
 	    }
+	  },
+
+	  _showAbout: function _showAbout() {
+	    this.props.aboutToggle();
 	  },
 
 	  _trimGenes: function _trimGenes(myDestination, geneData) {
@@ -1001,9 +1021,10 @@
 	  render: function render() {
 	    var myTabs = this.state.supportedGraphs.map(function (graph, i) {
 	      //console.log('drawing tabs, state:', this.state);
-	      var tabClass = '';
+	      var tabClass = graph == this.state.graphShowing ? ' currTab' : graph == 'About' ? ' aboutTab' : '',
+	          onClick = graph == 'About' ? this._showAbout : this._changeGraph;
 	      if (graph === this.state.graphShowing) tabClass = ' currTab';
-	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: this._changeGraph }, graph);
+	      return React.createElement('div', { key: i, className: 'graphTab' + tabClass, 'data-name': graph, onClick: onClick }, graph);
 	    }.bind(this)),
 	        myGraph,
 	        myNonGraph;
@@ -1047,7 +1068,6 @@
 	    switch (tabSwitch) {
 	      case 'Awards':
 	        var toGenes = this.props.toOtherTab;
-	        console.log('clearnBorders:', clearBorders);
 	        return React.createElement('div', { className: 'detailsBox' + clearBorders }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
 	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Style Trees', 'data-year': award.year,

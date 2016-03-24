@@ -985,7 +985,8 @@ var DetailsBox = React.createClass({
                   <span className='detailYear'> {"'"+award.year.slice(-2)} </span>
                   <span className='detailStyle'>{award.style}</span> <br/>
                   <span className='detailBeer'>{award.beer}</span> <br/>
-                  <span className='detailBrewery'>{award.brewery}</span>
+                  <span className='detailBrewery'>{award.brewery}</span> <br />
+                  <span className='detailLoc'>{award.city}, {award.state}</span>
                   
                 </div>
               );

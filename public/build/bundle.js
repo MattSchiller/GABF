@@ -1072,7 +1072,7 @@
 	        return React.createElement('div', { className: 'detailsBox' + clearBorders + bottomBorderFix }, this.state.content.map(function (award, i) {
 	          var medalClass = award.medal;
 	          return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Style Trees', 'data-year': award.year,
-	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
+	            'data-style': award.style, onClick: toGenes }, React.createElement('span', { className: 'detailYear' }, ' ', "'" + award.year.slice(-2), ' '), React.createElement('span', { className: 'detailStyle' }, award.style), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBeer' }, award.beer), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailLoc' }, award.city, ', ', award.state));
 	        }));break;
 	      case 'Style Trees':
 	        var myContent;

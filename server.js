@@ -8,6 +8,7 @@ app.use(express.static(__dirname + '/public'));
   res.render('index.html');
 });*/
 
-app.listen(8000, function () {
-  console.log('GABF listening on port 8000...');
+var serverPath = process.env.PORT || 8000;
+app.listen(serverPath, function () {
+  console.log('GABF listening on port ',serverPath,'...');
 });

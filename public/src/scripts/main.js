@@ -1004,7 +1004,8 @@ var DetailsBox = React.createClass({
                   <div key={i} className={"detailBoxItem "+medalClass} data-name={'Awards'} data-brewery={award.brewery} onClick={toAwards}>
                     
                     <span className='detailBeer'>{award.beer} </span> <br/>
-                    <span className='detailBrewery'>{award.brewery}</span>
+                    <span className='detailBrewery'>{award.brewery}</span> <br />
+                    <span className='detailLoc'>{award.city}, {award.state}</span>
                   
                   </div>
                 );

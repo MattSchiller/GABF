@@ -1080,7 +1080,7 @@
 	          var toAwards = this.props.toOtherTab;
 	          var myAwards = this.state.content.map(function (award, i) {
 	            var medalClass = award.medal;
-	            return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Awards', 'data-brewery': award.brewery, onClick: toAwards }, React.createElement('span', { className: 'detailBeer' }, award.beer, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery));
+	            return React.createElement('div', { key: i, className: "detailBoxItem " + medalClass, 'data-name': 'Awards', 'data-brewery': award.brewery, onClick: toAwards }, React.createElement('span', { className: 'detailBeer' }, award.beer, ' '), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailBrewery' }, award.brewery), ' ', React.createElement('br', null), React.createElement('span', { className: 'detailLoc' }, award.city, ', ', award.state));
 	          }),
 	              myYear = this.state.content[0].year,
 	              myStyle = this.state.content[0].style;

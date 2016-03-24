@@ -274,10 +274,10 @@ var ClientUI = React.createClass({
 var AboutModal = React.createClass({
   render: function() {
     return <div id='aboutModal' className={this.props.myClass} >
-      <h3>ABOUT</h3>
+      <h3>About the project</h3>
       <p>This webapp maps the breweries that have won gold, silver, and bronze medals at the Great American Beer Festival since 1999 and displays a "family tree" of how competition categories (for example, Classic Dry Irish Stout) have evolved over time. Data on winners was scraped from PDFs available at the GABF festival website. The PDFs had varying formats; the data was dirty. If you see something is missing or wrong, it is likely a data cleaning error--and we thank you in advance for bringing it to our attention (email: GoldPintMap@gmail.com). </p>
 
-      <h4>Who We Are</h4>
+      <h3>About us</h3>
       
       <p>We're two aspiring programmers at New York City's Recurse Center, Jake Davis and Matt Schiller. Jake has a background in Philosophy, Editing, and Appreciation-for-Good-Beer, while Matt's background is in Data Analytics, Origami, and Neck-Bearding. The idea for this project and all data-munging (done in Python) can be credited to Jake, while the web app itself was Matt's concern and done in JavaScript (React + D3). </p>
       <span id='closeButton' onClick={this.props.closeMe} >[X]</span>

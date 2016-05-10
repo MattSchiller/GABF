@@ -1189,7 +1189,7 @@
 	    lineageData: lineageData }), document.getElementById('content'));
 	});
 
-	dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents.csv');
+	dataPull.pullData('public/json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv', 'US.json', 'year_style_id_parents.csv');
 
 /***/ },
 /* 2 */

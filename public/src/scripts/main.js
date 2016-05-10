@@ -1134,7 +1134,7 @@ var dataPull = new GetData(   //This is the runPage cb-function to start the pag
   }
 );
 
-dataPull.pullData('json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv'
+dataPull.pullData('public/json_data/', 'lat_long_20160223.csv', 'brewery_lat_long20160308.csv', 'awards.csv'
   , 'US.json', 'year_style_id_parents.csv');
 
 

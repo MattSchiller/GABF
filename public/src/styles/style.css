@@ -117,7 +117,7 @@ body {
   position: absolute;
   z-index: 100;
   top: 2px;
-  right: 2px;
+  right: 4%;
   margin-right: 6px;
 }
 .state {
